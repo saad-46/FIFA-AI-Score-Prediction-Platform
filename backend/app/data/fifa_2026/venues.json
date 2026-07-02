@@ -1,0 +1,26 @@
+{
+  "_comment": "Host cities and regions as printed on the official FIFA World Cup 2026 Match Schedule wallchart. The wallchart labels matches by CITY only, not by specific stadium name — exact stadium names are NOT present in the source PDF and are therefore intentionally omitted here rather than guessed. See KNOWN_ASSUMPTIONS.md.",
+  "regions": {
+    "Western Region": ["Vancouver", "Seattle", "San Francisco Bay Area", "Los Angeles"],
+    "Central Region": ["Guadalajara", "Mexico City", "Monterrey", "Houston", "Dallas", "Kansas City"],
+    "Eastern Region": ["Atlanta", "Miami", "Toronto", "Boston", "Philadelphia", "New York New Jersey"]
+  },
+  "countries": {
+    "Vancouver": "Canada",
+    "Seattle": "USA",
+    "San Francisco Bay Area": "USA",
+    "Los Angeles": "USA",
+    "Guadalajara": "Mexico",
+    "Mexico City": "Mexico",
+    "Monterrey": "Mexico",
+    "Houston": "USA",
+    "Dallas": "USA",
+    "Kansas City": "USA",
+    "Atlanta": "USA",
+    "Miami": "USA",
+    "Toronto": "Canada",
+    "Boston": "USA",
+    "Philadelphia": "USA",
+    "New York New Jersey": "USA"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "A": [
+    {"code": "MEX", "name": "Mexico"},
+    {"code": "RSA", "name": "South Africa"},
+    {"code": "KOR", "name": "Korea Republic"},
+    {"code": "CZE", "name": "Czechia"}
+  ],
+  "B": [
+    {"code": "CAN", "name": "Canada"},
+    {"code": "BIH", "name": "Bosnia & Herzegovina"},
+    {"code": "QAT", "name": "Qatar"},
+    {"code": "SUI", "name": "Switzerland"}
+  ],
+  "C": [
+    {"code": "BRA", "name": "Brazil"},
+    {"code": "MAR", "name": "Morocco"},
+    {"code": "HAI", "name": "Haiti"},
+    {"code": "SCO", "name": "Scotland"}
+  ],
+  "D": [
+    {"code": "USA", "name": "USA"},
+    {"code": "PAR", "name": "Paraguay"},
+    {"code": "AUS", "name": "Australia"},
+    {"code": "TUR", "name": "Türkiye"}
+  ],
+  "E": [
+    {"code": "GER", "name": "Germany"},
+    {"code": "CUW", "name": "Curaçao"},
+    {"code": "CIV", "name": "Côte d'Ivoire"},
+    {"code": "ECU", "name": "Ecuador"}
+  ],
+  "F": [
+    {"code": "NED", "name": "Netherlands"},
+    {"code": "JPN", "name": "Japan"},
+    {"code": "SWE", "name": "Sweden"},
+    {"code": "TUN", "name": "Tunisia"}
+  ],
+  "G": [
+    {"code": "BEL", "name": "Belgium"},
+    {"code": "EGY", "name": "Egypt"},
+    {"code": "IRN", "name": "IR Iran"},
+    {"code": "NZL", "name": "New Zealand"}
+  ],
+  "H": [
+    {"code": "ESP", "name": "Spain"},
+    {"code": "CPV", "name": "Cabo Verde"},
+    {"code": "KSA", "name": "Saudi Arabia"},
+    {"code": "URU", "name": "Uruguay"}
+  ],
+  "I": [
+    {"code": "FRA", "name": "France"},
+    {"code": "SEN", "name": "Senegal"},
+    {"code": "IRQ", "name": "Iraq"},
+    {"code": "NOR", "name": "Norway"}
+  ],
+  "J": [
+    {"code": "ARG", "name": "Argentina"},
+    {"code": "ALG", "name": "Algeria"},
+    {"code": "AUT", "name": "Austria"},
+    {"code": "JOR", "name": "Jordan"}
+  ],
+  "K": [
+    {"code": "POR", "name": "Portugal"},
+    {"code": "COD", "name": "Congo DR"},
+    {"code": "UZB", "name": "Uzbekistan"},
+    {"code": "COL", "name": "Colombia"}
+  ],
+  "L": [
+    {"code": "ENG", "name": "England"},
+    {"code": "CRO", "name": "Croatia"},
+    {"code": "GHA", "name": "Ghana"},
+    {"code": "PAN", "name": "Panama"}
+  ]
+}

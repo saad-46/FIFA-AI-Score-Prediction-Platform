@@ -1,0 +1,240 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import List, Optional
+
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
+from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.core.cache import async_ttl_cache
+from app.core.config import get_settings
+from app.core.security import get_optional_user
+from app.db.database import get_db
+from app.ml.data.loader import load_matches_dataframe
+from app.models.match import Match, SavedPrediction, Team
+from app.schemas.analytics import (
+    DashboardStatsResponse,
+    GlobalAnalyticsResponse,
+    ModelMetricsResponse,
+    TopTeamSummary,
+)
+from app.services.match_service import get_upcoming_matches
+from app.services.prediction_service import get_recent_predictions
+from app.services.team_service import get_top_teams
+
+router = APIRouter(prefix="/analytics", tags=["analytics"])
+settings = get_settings()
+
+
+class FeatureImportanceItem(BaseModel):
+    feature:    str
+    importance: float
+
+
+class FeatureImportanceResponse(BaseModel):
+    features:      List[FeatureImportanceItem]
+    model_version: str
+    total_features: int
+
+
+@router.get("/dashboard", response_model=DashboardStatsResponse)
+async def dashboard_stats(
+    db: AsyncSession = Depends(get_db),
+    user: Optional[dict] = Depends(get_optional_user),
+):
+    """Dashboard summary statistics."""
+    # Total matches
+    match_count_result = await db.execute(select(func.count()).select_from(Match))
+    total_matches = match_count_result.scalar() or 0
+
+    # Total teams
+    team_count_result = await db.execute(select(func.count()).select_from(Team))
+    total_teams = team_count_result.scalar() or 0
+
+    # User-specific stats
+    total_predictions = 0
+    accuracy_rate = 0.0
+    recent_predictions = []
+
+    if user:
+        user_id = user.get("sub")
+        pred_count_result = await db.execute(
+            select(func.count()).where(SavedPrediction.user_id == user_id)
+        )
+        total_predictions = pred_count_result.scalar() or 0
+
+        correct_result = await db.execute(
+            select(func.count()).where(
+                SavedPrediction.user_id == user_id,
+                SavedPrediction.was_correct == True,
+            )
+        )
+        correct = correct_result.scalar() or 0
+
+        verified_result = await db.execute(
+            select(func.count()).where(
+                SavedPrediction.user_id == user_id,
+                SavedPrediction.was_correct.is_not(None),
+            )
+        )
+        verified = verified_result.scalar() or 0
+        accuracy_rate = correct / verified if verified > 0 else 0.0
+
+        recent_predictions = await get_recent_predictions(db, user_id, limit=5)
+
+    # Top teams by win rate (min 10 matches played), capped to keep the payload small
+    top_teams_stats = await get_top_teams(db, limit=5)
+    top_teams = [
+        TopTeamSummary(
+            team_id=t.team_id,
+            team_name=t.team_name,
+            win_rate=t.win_rate,
+            matches_played=t.matches_played,
+        )
+        for t in top_teams_stats
+    ]
+
+    # Soonest scheduled fixtures
+    upcoming_matches = await get_upcoming_matches(db, limit=5)
+
+    return DashboardStatsResponse(
+        total_predictions=total_predictions,
+        accuracy_rate=accuracy_rate,
+        total_matches_analyzed=total_matches,
+        total_teams=total_teams,
+        recent_predictions=recent_predictions,
+        top_teams=top_teams,
+        upcoming_matches=upcoming_matches,
+    )
+
+
+@async_ttl_cache(ttl_seconds=60, max_size=4)
+async def _compute_global_analytics() -> GlobalAnalyticsResponse:
+    """
+    Global analytics overview (cached in-process for 60s).
+
+    This recomputes several full-history groupby aggregations on every call
+    but doesn't depend on the caller/session at all — it only reads the
+    (already 6h-TTL-cached) matches DataFrame. A short TTL cache here avoids
+    redoing that aggregation on every request from a busy dashboard without
+    risking meaningful staleness. No Redis in this stack, hence the
+    in-process cache instead of an external one.
+    """
+    df = await load_matches_dataframe()
+    valid = df.dropna(subset=["home_score", "away_score"])
+
+    total_goals = int(valid["home_score"].sum() + valid["away_score"].sum())
+    n = len(valid)
+    home_wins = int((valid["home_score"] > valid["away_score"]).sum())
+    draws = int((valid["home_score"] == valid["away_score"]).sum())
+    away_wins = int((valid["home_score"] < valid["away_score"]).sum())
+
+    # Goals by year
+    valid_copy = valid.copy()
+    valid_copy["year"] = valid_copy["date"].dt.year
+    goals_by_year = (
+        valid_copy.groupby("year")
+        .agg(goals=("home_score", lambda x: int(x.sum() + valid_copy.loc[x.index, "away_score"].sum())),
+             matches=("home_score", "count"))
+        .reset_index()
+        .rename(columns={"year": "year"})
+        .to_dict("records")
+    )
+
+    # Top tournaments
+    top_tournaments = (
+        valid_copy.groupby("tournament")
+        .size()
+        .sort_values(ascending=False)
+        .head(10)
+        .reset_index()
+        .rename(columns={0: "matches"})
+        .to_dict("records")
+    )
+
+    return GlobalAnalyticsResponse(
+        total_matches=n,
+        total_goals=total_goals,
+        avg_goals_per_match=round(total_goals / n, 3) if n > 0 else 0,
+        home_win_rate=round(home_wins / n, 4) if n > 0 else 0,
+        draw_rate=round(draws / n, 4) if n > 0 else 0,
+        away_win_rate=round(away_wins / n, 4) if n > 0 else 0,
+        goals_by_year=goals_by_year,
+        top_tournaments=top_tournaments,
+    )
+
+
+@router.get("/global", response_model=GlobalAnalyticsResponse)
+async def global_analytics(db: AsyncSession = Depends(get_db)):
+    """Global analytics overview."""
+    return await _compute_global_analytics()
+
+
+@router.get("/model-metrics", response_model=ModelMetricsResponse)
+async def model_metrics():
+    """ML model performance metrics. Reads from metrics.json generated by training pipeline."""
+    model_dir = Path(settings.MODEL_PATH).parent
+    metrics_path = model_dir / "metrics.json"
+    report_path = model_dir / "training_report.json"
+
+    accuracy = 0.0
+    mae = 0.0
+    rmse = 0.0
+    last_trained = "unknown"
+    training_samples = 0
+
+    if metrics_path.exists():
+        with open(metrics_path) as f:
+            data = json.load(f)
+        accuracy = data.get("classifier_adjusted_accuracy", data.get("classifier_raw_accuracy", 0.0))
+        mae = data.get("home_mae", 0.0)
+        rmse = data.get("home_rmse", 0.0)
+
+    if report_path.exists():
+        with open(report_path) as f:
+            report = json.load(f)
+        last_trained = report.get("trained_at", "unknown")
+        training_samples = report.get("n_training_samples", 0)
+
+    return ModelMetricsResponse(
+        accuracy=accuracy,
+        mae=mae,
+        rmse=rmse,
+        last_trained=last_trained,
+        training_samples=training_samples,
+        model_version=settings.MODEL_VERSION,
+    )
+
+
+@router.get("/feature-importance", response_model=FeatureImportanceResponse)
+async def feature_importance():
+    """
+    Return sorted feature importance from the last training run.
+    Reads feature_importance.json saved by the training pipeline.
+    """
+    fi_path = Path(settings.FEATURE_IMPORTANCE_PATH)
+    if not fi_path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail=(
+                "Feature importance file not found. "
+                "Run the training pipeline first: python -m app.ml.train"
+            ),
+        )
+
+    with open(fi_path) as fh:
+        data = json.load(fh)
+
+    features = [
+        FeatureImportanceItem(feature=item["feature"], importance=item["importance"])
+        for item in data
+    ]
+
+    return FeatureImportanceResponse(
+        features=features,
+        model_version=settings.MODEL_VERSION,
+        total_features=len(features),
+    )
