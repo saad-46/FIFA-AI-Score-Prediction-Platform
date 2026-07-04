@@ -22,13 +22,24 @@ All three share the same feature matrix and the same `StandardScaler`
 
 ## Data loading
 
-`train.py::load_data()` pulls **completed** matches directly from Postgres
-via a fresh async SQLAlchemy engine (independent of the app's request-time
-engine), joining `matches` to `teams` twice for home/away names:
+As of the 2026-07-03/04 WC2026 retrain, `train.py::load_data()` reads
+**completed** matches directly from
+`backend/app/data/processed/matches_historical.csv` (`encoding="utf-8-sig"`,
+419 rows: 330 real 2002-2022 WC matches + 89 real 2026 matches), filtering to
+`status == "Completed"` with non-null scores and sorting ascending by date.
+This is a deliberate change from the previous DB-backed default: the live
+Supabase DB was unreachable from the sandbox this retrain was done in, and
+`database/seed_wc2026.sql` (see `DATABASE_SCHEMA.md`, `DATA_PIPELINE.md`)
+loads this exact same CSV content into Postgres, so the two are expected to
+produce the same feature matrix once the DB is reachable.
+
+The previous DB-backed query is preserved as `train.py::load_data_from_db()`
+for environments where Postgres *is* reachable and for future
+parity/reconciliation checks, but is not called by `main()` by default:
 
 ```sql
 SELECT m.date, ht.name AS home_team, at.name AS away_team,
-       m.home_score, m.away_score, m.tournament, m.neutral_venue
+       m.home_score, m.away_score, m.tournament, m.neutral_venue, m.stage
 FROM matches m
 JOIN teams ht ON m.home_team_id = ht.id
 JOIN teams at ON m.away_team_id = at.id
@@ -37,9 +48,12 @@ WHERE m.status = 'completed'
 ORDER BY m.date ASC
 ```
 
-Rows with null scores are dropped and the frame is sorted ascending by date
-— this ordering matters for every downstream step (Elo, rolling windows,
-chronological split).
+Either way, rows with null scores are dropped and the frame is sorted
+ascending by date — this ordering matters for every downstream step (Elo,
+rolling windows, chronological split). Note this is the **training** data
+path only; the **inference** path (`app/ml/data/loader.py`, used by live
+predictions and the tournament simulator) still reads from Postgres directly
+— see `DATA_PIPELINE.md` §2 for the full split and why it matters.
 
 ## Feature engineering
 
@@ -195,9 +209,12 @@ Side-effect JSON reports, all in the same directory as `MODEL_PATH`:
 - Both present → both loaded, `SHAP` explainer initialized if `result_model`
   and `feature_columns` are both available, `is_loaded` becomes `True`.
 
-## Known limitation — Elo not populated at inference time
+## Elo populated at inference time — fixed 2026-07-03/04
 
-**Status: confirmed present in current code, not yet fixed.**
+**Status: fixed.** This section previously documented a live bug; it now
+records what the bug was and how it was closed, since the fix is a load-bearing
+part of understanding the current Elo data flow. Full write-up, including
+before/after SHAP verification: `ELO_SYSTEM.md`.
 
 `build_feature_vector()` computes `home_elo`/`away_elo` by calling
 `_latest_elo_for_team()`, which reads the `home_elo`/`away_elo` **columns**
@@ -208,28 +225,24 @@ columns/rows aren't present). Those columns only exist if
 - **At training time** (`train.py::build_training_dataset`), `df =
   compute_dynamic_elo(df)` is called explicitly before feature engineering
   — Elo columns exist, real values are used, and `home_model`/`away_model`/
-  `result_model` all learn genuine Elo-based signal.
+  `result_model` all learn genuine Elo-based signal. This was always correct.
 - **At inference time** (`app/ml/data/loader.py::load_matches_dataframe`,
   the function every API request path uses via `get_predictor()` /
-  `_get_simulator_dependencies()`), `compute_dynamic_elo()` is **never
-  called**. The cached DataFrame has no `home_elo`/`away_elo` columns, so
-  every live prediction's Elo lookup silently falls back to `BASE_ELO` for
+  `_get_simulator_dependencies()`), `compute_dynamic_elo()` used to **never
+  be called**. The cached DataFrame had no `home_elo`/`away_elo` columns, so
+  every live prediction's Elo lookup silently fell back to `BASE_ELO` for
   both teams, making `elo_difference` evaluate to `0.0` for every request
-  regardless of the actual teams involved.
+  regardless of the actual teams involved — a classic train/serve skew bug.
 
-Practical effect: the model still uses ~150+ other features (rolling form,
-head-to-head, rest days, etc.) so predictions aren't garbage, but a feature
-the model was trained to weight meaningfully (Elo gap ranks highly in
-`feature_importance.json` for most training runs) is a constant at serving
-time. SHAP explanations will never show Elo as a driver of any live
-prediction, even when the teams have a large real rating gap.
-
-**Suggested fix direction:** run `compute_dynamic_elo()` once inside (or
-immediately after) `load_matches_dataframe()`, before caching the result —
-it's a single full-history pass already paid for by the 6-hour TTL, not a
-per-request cost. Ensure the tournament simulator's `_df_cache` (module-level
-in `tournament.py`) picks up the same enriched frame rather than re-fetching
-a raw copy.
+**Fix applied:** `load_matches_dataframe()` now calls `df =
+compute_dynamic_elo(df)` immediately before caching the result (once per
+6-hour cache refresh, not per request). Both the predictor and the
+tournament simulator consume the same enriched, cached DataFrame, so both
+were fixed by this one change. Verified via SHAP: `elo_difference` now
+varies meaningfully across matchups (e.g. -24.49 to +59.35 across 5 sample
+pairs) instead of a constant `0.0`, and is confirmed as the **#3 most
+important feature overall** (`feature_importance.json`) and the #4 feature
+in the post-retrain evaluation (`MODEL_EVALUATION.md`).
 
 ## Training pipeline usage
 

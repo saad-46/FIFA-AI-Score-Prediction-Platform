@@ -1,0 +1,14 @@
+{
+  "home_mae": 1.21397,
+  "home_rmse": 1.68878,
+  "away_mae": 0.86496,
+  "away_rmse": 1.13587,
+  "regressor_result_accuracy": 0.42105,
+  "classifier_raw_accuracy": 0.47368,
+  "classifier_adjusted_accuracy": 0.28947,
+  "draw_boost": 1.05,
+  "draw_recall_raw": 0.5909090909090909,
+  "draw_f1_raw": 0.45614035087719296,
+  "draw_recall_adjusted": 1.0,
+  "draw_f1_adjusted": 0.4489795918367347
+}

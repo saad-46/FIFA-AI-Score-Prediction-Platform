@@ -45,40 +45,50 @@ from city name.
 
 ## c. NULL confederation / FIFA ranking / founding year / stadium for seeded 2026 teams
 
+**Partially superseded 2026-07-03/04 — see update below.** Originally:
 `database/seed_fifa_2026_teams.sql` inserts all 48 official 2026 teams with
 **only `name` and `country` populated**. The `teams` table also has
 `confederation`, `fifa_ranking`, `logo_url`, `founded_year`, and
 `home_stadium` columns (see `database/schema.sql`), but none of that data
 was present in the source wallchart, so all five columns are left `NULL` for
 every 2026-seed team rather than filled with plausible-looking guesses. The
-seed script's own header comment states this explicitly. Any UI or analytics
-code that assumes these fields are always populated for every team should
-handle `NULL` gracefully for the 2026 field specifically (pre-existing teams
-from `database/seed.sql`, sourced from the Kaggle historical results
-dataset, may or may not have these fields populated — check that seed
-separately if it matters).
+seed script's own header comment states this explicitly.
 
-## d. Elo not populated at inference time
+**Update:** the Database Engineering wave's `database/seed_wc2026.sql` (see
+`DATABASE_SCHEMA.md`, generated from `teams_reference.csv` by
+`database/generate_seed_wc2026.py`) now supersedes
+`seed_fifa_2026_teams.sql` for this purpose and **does** populate
+`confederation`, `fifa_ranking`, `elo_rating` (new column), `fifa_code` (new
+column), and `wc2026_group` (new column) for all 48 2026 teams via an
+`ON CONFLICT (name) DO UPDATE` upsert. `logo_url`, `founded_year`, and
+`home_stadium` remain `NULL` for every team (2026 or historical) — none of
+that data exists in any source file used by either seed script.
+`seed_fifa_2026_teams.sql` itself is unchanged and still only populates
+name/country if run standalone; run order matters (see `DATABASE_SCHEMA.md`).
+**Not yet applied to the live Supabase database** — see `DATA_PIPELINE.md`
+§5 and `DATABASE_SCHEMA.md`'s "Open questions."
 
-**Confirmed present, not yet fixed.** `app/ml/features/feature_engineering.
-py::compute_dynamic_elo()` — which populates the `home_elo`/`away_elo`
-columns that `build_feature_vector()`'s Elo lookup depends on — is called
-during offline training (`train.py::build_training_dataset`) but is **never
-called** in the request-time data path
-(`app/ml/data/loader.py::load_matches_dataframe`, used by every live
-prediction and by the tournament simulator). Without those columns present,
-every live Elo lookup falls back to the constant `BASE_ELO = 1500.0` for
-both teams, so `elo_difference` evaluates to `0.0` on every served
-prediction regardless of the real rating gap between the two teams — even
-though the model was trained on genuine Elo signal and weights it
-meaningfully.
+## d. Elo not populated at inference time — FIXED 2026-07-03/04
 
-This does not make predictions garbage (150+ other features still carry
-real signal), but it is a real accuracy gap and it means SHAP explanations
-will never surface Elo as a driver of any live prediction. See
-`MODEL_PIPELINE.md` for the suggested fix (run `compute_dynamic_elo()` once
-inside `load_matches_dataframe()`, before caching — a single full-history
-pass, already amortized by the existing 6-hour cache TTL).
+**Status: fixed, kept here as historical record.** `app/ml/features/
+feature_engineering.py::compute_dynamic_elo()` — which populates the
+`home_elo`/`away_elo` columns that `build_feature_vector()`'s Elo lookup
+depends on — was called during offline training
+(`train.py::build_training_dataset`) but was **never called** in the
+request-time data path (`app/ml/data/loader.py::load_matches_dataframe`,
+used by every live prediction and by the tournament simulator). Without
+those columns present, every live Elo lookup fell back to the constant
+`BASE_ELO = 1500.0` for both teams, so `elo_difference` evaluated to `0.0`
+on every served prediction regardless of the real rating gap between the
+two teams — even though the model was trained on genuine Elo signal and
+weighted it meaningfully.
+
+**Fix:** `load_matches_dataframe()` now calls `compute_dynamic_elo()` once
+per 6-hour cache refresh, immediately before caching the result — a single
+full-history pass, not a per-request cost. Verified via SHAP that
+`elo_difference` now varies meaningfully per matchup instead of being a
+constant `0.0`. Full detail, including before/after verification: see
+`ELO_SYSTEM.md` and `MODEL_PIPELINE.md`.
 
 ## e. Synthetic goal-distribution endpoint
 

@@ -88,7 +88,12 @@ async def simulate_tournament(payload: TournamentSimulationRequest):
     else:
         groups_dict = {group.name: group.teams for group in payload.groups}
 
-    simulator = TournamentSimulator(predictor, df)
+    # Real completed-match substitution only makes sense against the real
+    # FIFA 2026 bracket (team codes) — custom/hypothetical groups use
+    # caller-defined labels that can never coincide with a real fixture, so
+    # forcing it off there avoids doing pointless lookup work.
+    use_real_results = payload.use_real_results and payload.use_fifa_2026_groups
+    simulator = TournamentSimulator(predictor, df, use_real_results=use_real_results)
 
     # Run CPU bound simulation in a threadpool
     try:

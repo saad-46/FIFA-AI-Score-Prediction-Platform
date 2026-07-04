@@ -11,10 +11,12 @@ from sqlalchemy import select, func, and_, or_, desc
 from sqlalchemy.orm import selectinload, aliased
 import pandas as pd
 
-from app.models.match import Match, Team
+from app.models.match import Match, Team, TeamStatistics
 from app.schemas.analytics import UpcomingMatchSummary
 from app.schemas.match import (
     MatchResponse,
+    MatchDetailResponse,
+    TeamStatisticsResponse,
     TournamentStatsResponse,
     GoalDistributionPoint,
     ScorelineFrequency,
@@ -47,7 +49,12 @@ async def get_matches(
         away_alias = aliased(Team)
         stmt = (
             stmt.join(home_alias, Match.home_team_id == home_alias.id)
-            .join(away_alias, Match.away_team_id == away_alias.id)
+            # outerjoin: away_team_id is nullable (TBD knockout opponent —
+            # see DATABASE_SCHEMA.md). An inner join here would silently
+            # exclude every such match from a `team` search even when the
+            # *home* team matches the filter (e.g. searching "Canada" would
+            # drop the Canada-vs-TBD Round-of-16 fixture entirely).
+            .outerjoin(away_alias, Match.away_team_id == away_alias.id)
             .where(or_(home_alias.name.ilike(f"%{team}%"), away_alias.name.ilike(f"%{team}%")))
         )
     if tournament:
@@ -75,21 +82,34 @@ async def get_matches(
         home_team = m.home_team
         away_team = m.away_team
 
-        if home_team and away_team:
+        # home_team is always required (home_team_id is NOT NULL), but
+        # away_team can be genuinely absent (away_team_id is nullable — see
+        # DATABASE_SCHEMA.md, TBD knockout-stage opponents). Previously this
+        # required both to be truthy, which silently dropped every such
+        # match from the paginated list entirely (and skewed `total` vs.
+        # what was actually returned). Now only home_team is required.
+        if home_team:
             match_responses.append(MatchResponse(
                 id=m.id,
                 date=m.date,
                 home_team_id=m.home_team_id,
                 away_team_id=m.away_team_id,
                 home_team={"id": home_team.id, "name": home_team.name, "country": home_team.country},
-                away_team={"id": away_team.id, "name": away_team.name, "country": away_team.country},
+                away_team=(
+                    {"id": away_team.id, "name": away_team.name, "country": away_team.country}
+                    if away_team else None
+                ),
                 home_score=m.home_score,
                 away_score=m.away_score,
                 tournament=m.tournament,
                 stage=m.stage,
+                stage_id=m.stage_id,
+                tournament_year=m.tournament_year,
                 neutral_venue=m.neutral_venue,
                 city=m.city,
                 country=m.country,
+                home_xg=float(m.home_xg) if m.home_xg is not None else None,
+                away_xg=float(m.away_xg) if m.away_xg is not None else None,
                 status=m.status,
             ))
 
@@ -99,6 +119,74 @@ async def get_matches(
         page=page,
         page_size=page_size,
         total_pages=math.ceil(total / page_size),
+    )
+
+
+async def get_match_by_id(db: AsyncSession, match_id: str) -> Optional[MatchDetailResponse]:
+    """
+    Match detail, including per-team box-score stats from team_statistics
+    when available (see DATABASE_SCHEMA.md — 10 completed 2026 matches have
+    no stats rows, a documented source gap; team_statistics is simply empty
+    for those, never fabricated).
+    """
+    stmt = (
+        select(Match)
+        .options(selectinload(Match.home_team), selectinload(Match.away_team))
+        .where(Match.id == match_id)
+    )
+    result = await db.execute(stmt)
+    m = result.scalar_one_or_none()
+    if not m or not m.home_team:
+        return None
+
+    stats_stmt = (
+        select(TeamStatistics)
+        .options(selectinload(TeamStatistics.team))
+        .where(TeamStatistics.match_id == match_id)
+    )
+    stats_result = await db.execute(stats_stmt)
+    stats_rows = stats_result.scalars().all()
+
+    team_statistics = [
+        TeamStatisticsResponse(
+            team_id=s.team_id,
+            team_name=s.team.name if s.team else "",
+            possession_pct=s.possession_pct,
+            total_shots=s.total_shots,
+            shots_on_target=s.shots_on_target,
+            corners=s.corners,
+            fouls=s.fouls,
+            offsides=s.offsides,
+            saves=s.saves,
+            player_of_the_match=s.player_of_the_match,
+        )
+        for s in stats_rows
+    ]
+
+    away_team = m.away_team
+    return MatchDetailResponse(
+        id=m.id,
+        date=m.date,
+        home_team_id=m.home_team_id,
+        away_team_id=m.away_team_id,
+        home_team={"id": m.home_team.id, "name": m.home_team.name, "country": m.home_team.country},
+        away_team=(
+            {"id": away_team.id, "name": away_team.name, "country": away_team.country}
+            if away_team else None
+        ),
+        home_score=m.home_score,
+        away_score=m.away_score,
+        tournament=m.tournament,
+        stage=m.stage,
+        stage_id=m.stage_id,
+        tournament_year=m.tournament_year,
+        neutral_venue=m.neutral_venue,
+        city=m.city,
+        country=m.country,
+        home_xg=float(m.home_xg) if m.home_xg is not None else None,
+        away_xg=float(m.away_xg) if m.away_xg is not None else None,
+        status=m.status,
+        team_statistics=team_statistics,
     )
 
 

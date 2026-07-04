@@ -1,0 +1,133 @@
+﻿match_id,team_id,team_name,possession_pct,total_shots,shots_on_target,corners,fouls,offsides,saves,player_of_the_match
+1,1,Mexico,57,16,4,6,11,2,1,JuliÃ¡n AndrÃ©s Quinones
+1,2,South Africa,43,3,2,3,15,1,4,
+2,3,South Korea,54,12,5,4,10,1,2,Inbeom Hwang
+2,4,Czechia,46,10,3,3,13,2,4,
+3,5,Canada,52,13,4,9,12,2,3,IsmaÃ«l Kenneth Jordan Kone
+3,6,Bosnia and Herzegovina,29,8,3,4,15,1,5,
+4,13,USA,59,16,6,3,13,2,1,Folarin Jolaoluwa Balogun
+4,14,Paraguay,28,9,1,1,17,3,9,
+5,7,Qatar,28,6,3,3,12,1,4,Ibrahim Mahmoud Abunada
+5,8,Switzerland,58,26,7,10,11,0,2,
+6,9,Brazil,55,12,5,6,16,0,3,JosÃ© Vinicius
+6,10,Morocco,45,14,3,2,14,1,4,
+7,11,Haiti,44,14,1,5,12,2,5,
+7,12,Scotland,56,12,3,6,10,3,2,John McGinn
+8,15,Australia,27,9,4,5,12,1,2,Nestory Irankunda
+8,16,Türkiye,62,30,7,8,4,3,2,
+9,17,Germany,63,25,12,8,10,1,1,Kai Lukas Havertz
+9,18,Curaçao,37,8,1,1,12,2,5,
+10,21,Netherlands,61,10,5,5,7,2,3,Virgil Van Dijk
+10,22,Japan,39,9,5,4,7,1,3,
+11,19,Côte d'Ivoire,41,15,4,3,12,2,3,Yan Diomande
+11,20,Ecuador,49,12,1,5,14,3,3,
+12,23,Sweden,49,13,7,4,10,3,1,Alexander Isak
+12,24,Tunisia,51,6,2,2,8,1,6,
+13,29,Spain,74,23,8,11,10,2,6,
+13,30,Cabo Verde,26,6,1,1,1,3,7,JosÃ© Vozinha
+14,25,Belgium,57,15,3,2,15,0,2,
+14,26,Egypt,43,14,3,7,15,1,2,Ashour Metwaly Emam
+15,31,Saudi Arabia,27,7,3,4,11,2,8,Khalil Mohammed Alowais
+15,32,Uruguay,63,27,10,14,6,1,2,
+16,27,IR Iran,43,17,4,4,10,2,5,Ramin Rezaeian
+16,28,New Zealand,45,14,8,1,8,1,7,
+17,33,France,49,11,8,6,5,2,2,Michael Akpovie Olise
+17,34,Senegal,44,6,2,4,9,1,4,
+18,35,Iraq,34,11,1,5,12,1,7,
+18,36,Norway,57,11,5,4,13,0,1,Erling Braut Haaland
+19,37,Argentina,49,10,6,2,13,3,1,Lionel AndrÃ©s Messi
+19,38,Algeria,51,7,1,2,8,1,4,
+20,39,Austria,53,10,4,4,12,3,1,
+20,40,Jordan,33,11,3,3,7,1,6,Iyad Ali Ali Olwan
+21,41,Portugal,68,7,1,5,9,3,5,Pedro Joao Neves
+21,42,Congo DR,25,8,2,4,10,2,3,
+22,45,England,48,22,11,8,10,2,4,Harry Edward Kane
+22,46,Croatia,43,10,5,2,12,3,6,
+23,47,Ghana,35,7,2,2,9,1,5,Antoine Serlom Semenyo
+23,48,Panama,55,11,4,2,11,2,1,
+24,43,Uzbekistan,33,8,2,3,14,2,6,
+24,44,Colombia,56,15,4,4,11,1,2,Luis Fernando Diaz
+25,1,Mexico,49,8,4,0,9,1,2,Luis Francisco Romo
+25,3,South Korea,51,9,2,2,7,2,3,
+26,4,Czechia,32,14,3,5,12,1,3,Michal Sadilek
+26,2,South Africa,60,17,4,5,10,3,4,
+27,5,Canada,65,33,11,19,9,3,0,Jonathan Christian David
+27,7,Qatar,20,2,0,1,10,1,9,
+28,8,Switzerland,57,13,7,7,7,2,1,Johan Kula Manzambi
+28,6,Bosnia and Herzegovina,34,5,3,3,17,1,5,
+29,9,Brazil,59,14,6,5,10,2,0,Matheus Matheus Cunha
+29,11,Haiti,41,4,0,2,12,1,4,
+30,12,Scotland,41,6,0,2,12,1,2,
+30,10,Morocco,59,12,4,5,10,2,2,Ismael Saibari
+31,13,USA,55,10,2,7,12,1,1,Folarin Jolaoluwa Balogun
+31,15,Australia,30,5,2,4,16,0,2,
+32,16,Türkiye,67,32,5,12,14,2,2,
+32,14,Paraguay,19,7,2,0,15,1,4,Matias Galarza
+33,17,Germany,59,16,8,8,7,1,2,Deniz Undav
+33,19,Côte d'Ivoire,41,9,3,3,8,2,6,
+34,20,Ecuador,63,28,15,9,12,0,15,
+34,18,Curaçao,37,5,1,0,14,1,15,Eloy Victor Room
+35,21,Netherlands,48,10,7,7,11,2,2,Cody MathÃ¨s Gakpo
+35,23,Sweden,43,16,8,3,14,3,7,
+36,24,Tunisia,38,3,1,3,8,2,1,
+36,22,Japan,62,14,5,5,15,1,1,Ayase Ueda
+37,25,Belgium,59,23,8,4,7,1,2,
+37,27,IR Iran,30,7,2,2,9,3,8,Ali Reza Beiranvand
+38,28,New Zealand,39,11,3,4,14,2,4,
+38,26,Egypt,50,19,7,4,8,1,2,Hamed Mahrous Mohamed Salah
+39,29,Spain,67,18,8,6,6,3,1,Mikel Oyarzabal
+39,31,Saudi Arabia,33,5,1,1,10,2,4,
+40,32,Uruguay,65,17,7,11,11,2,2,
+40,30,Cabo Verde,35,12,4,4,4,1,5,JosÃ© Vozinha
+41,33,France,56,19,5,4,8,2,0,Kylian Mbappe
+41,35,Iraq,44,4,0,2,4,1,2,
+42,36,Norway,52,12,6,5,13,1,2,Erling Braut Haaland
+42,34,Senegal,48,10,4,4,5,2,3,
+43,37,Argentina,54,12,5,1,13,2,1,Lionel AndrÃ©s Messi
+43,39,Austria,46,6,1,3,13,1,3,
+44,40,Jordan,29,6,2,2,12,1,4,
+44,38,Algeria,71,18,6,7,9,2,1,Ibrahim Maza
+45,41,Portugal,62,18,8,7,10,1,1,Ronaldo Cristiano Ronaldo
+45,43,Uzbekistan,38,5,1,2,12,2,3,
+46,44,Colombia,58,14,4,5,11,2,2,Daniel Munoz
+46,42,Congo DR,42,8,2,3,14,1,3,
+47,45,England,59,11,3,6,8,2,2,Nico Oreilly
+47,47,Ghana,41,9,2,3,12,1,3,
+48,48,Panama,44,7,1,2,14,2,3,
+48,46,Croatia,56,15,4,5,10,1,1,Ante Budimir
+49,4,Czechia,50,13,1,5,9,2,2,
+49,1,Mexico,50,11,5,1,13,1,1,Mateo Chavez
+50,2,South Africa,32,13,4,3,12,1,3,Thapelo Maseko
+50,3,South Korea,68,8,3,6,9,2,3,
+51,8,Switzerland,55,6,4,2,15,0,6,Johan Kula Manzambi
+51,5,Canada,45,13,7,5,10,3,2,
+52,6,Bosnia and Herzegovina,54,14,5,5,9,1,2,Kerim Alajbegovic
+52,7,Qatar,46,9,3,5,14,3,3,
+56,14,Paraguay,44,8,2,1,9,0,6,Roberto Junior Fernandez
+56,15,Australia,56,12,5,3,6,0,3,
+64,30,Cabo Verde,51,15,3,4,10,2,3,JosÃ© Vozinha
+64,31,Saudi Arabia,49,6,3,2,16,0,6,
+65,36,Norway,47,9,5,3,8,0,4,
+65,33,France,53,17,9,5,7,2,4,Masour Ousmane Dembele
+66,34,Senegal,69,28,12,12,10,1,1,Iliman Cheikh Baroy Ndiaye
+66,35,Iraq,31,6,1,3,11,0,7,
+67,40,Jordan,27,5,1,2,13,1,1,
+67,37,Argentina,73,12,4,6,7,0,0,Lionel AndrÃ©s Messi
+68,38,Algeria,50,12,5,0,3,1,0,Riyad Karim Mahrez
+68,39,Austria,50,10,3,3,7,3,2,
+69,44,Colombia,55,24,6,5,12,3,2,
+69,41,Portugal,45,13,2,2,6,2,6,Diogo Diogo Costa
+70,42,Congo DR,64,19,4,2,6,3,1,Yoane Wissa
+70,43,Uzbekistan,36,3,1,4,16,1,1,
+71,48,Panama,33,13,2,3,16,4,4,
+71,45,England,67,17,6,7,13,4,2,Jude Victor William Bellingham
+72,46,Croatia,53,8,4,3,9,1,0,Petar Sucic
+72,47,Ghana,47,6,1,2,13,2,2,
+73,2,South Africa,58,6,1,1,10,1,6,
+73,5,Canada,42,12,7,4,16,0,1,Stephen Eustaquio
+74,9,Brazil,69,19,7,6,4,1,1,Henrique
+74,22,Japan,31,5,2,2,13,0,4,
+75,17,Germany,76,21,6,16,18,4,2,
+75,14,Paraguay,24,7,3,6,12,1,6,Orlando Daniel Gill
+76,21,Netherlands,30,6,2,5,18,3,5,
+76,10,Morocco,70,11,5,8,15,0,1,Issa Laye Lucas Jean Diop

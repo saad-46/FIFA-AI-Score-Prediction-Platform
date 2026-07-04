@@ -1,6 +1,16 @@
 -- ============================================================
 -- Seed script — imports FIFA match data from CSV
 -- Run after schema.sql
+--
+-- SUPERSEDED (WC2026 upgrade, 2026-07-03): this script seeds the old broad
+-- "all competitions 1872-2017" Kaggle-derived dataset (results.csv). For
+-- the WC-2026-focused platform, database/seed_wc2026.sql is now the
+-- source of truth for match history (WC 2002-2026 only: 330 real
+-- historical matches + 89 real 2026 matches, with rankings/elo/team-stats
+-- populated from the Data Engineering wave's processed CSVs). This file
+-- is left in place for reference / in case the broader historical dataset
+-- is wanted again in the future, but it is NOT run as part of the current
+-- WC2026 seed flow. See DATABASE_SCHEMA.md at the repo root for details.
 -- ============================================================
 
 -- The historical FIFA dataset (results.csv from Kaggle) has columns:

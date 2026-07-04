@@ -1,0 +1,420 @@
+﻿match_id,home_team,away_team,home_score,away_score,date,stage,tournament_year,venue,city,home_xg,away_xg,source,status
+hist_2f3095849f,France,Senegal,0.0,1.0,2002-05-31,group_stage,2002,"Seoul World Cup Stadium, Seoul",,,,wc_2002_2022_dataset,Completed
+hist_68cf5f5e93,Republic of Ireland,Cameroon,1.0,1.0,2002-06-01,group_stage,2002,"Niigata Stadium, Niigata",,,,wc_2002_2022_dataset,Completed
+hist_61c38adf6a,Uruguay,Denmark,1.0,2.0,2002-06-01,group_stage,2002,"Ulsan Munsu Football Stadium, Ulsan",,,,wc_2002_2022_dataset,Completed
+hist_0605ad42ea,Germany,Saudi Arabia,8.0,0.0,2002-06-01,group_stage,2002,"Sapporo Dome, Sapporo",,,,wc_2002_2022_dataset,Completed
+hist_347bfb357d,England,Sweden,1.0,1.0,2002-06-02,group_stage,2002,"Saitama Stadium, Saitama",,,,wc_2002_2022_dataset,Completed
+hist_28690172f3,Spain,Slovenia,3.0,1.0,2002-06-02,group_stage,2002,"Gwangju World Cup Stadium, Gwangju",,,,wc_2002_2022_dataset,Completed
+hist_1b378edfce,Argentina,Nigeria,1.0,0.0,2002-06-02,group_stage,2002,"Kashima Stadium, Ibaraki",,,,wc_2002_2022_dataset,Completed
+hist_d47af77e65,Italy,Ecuador,2.0,0.0,2002-06-03,group_stage,2002,"Sapporo Dome, Sapporo",,,,wc_2002_2022_dataset,Completed
+hist_f15ebfa568,Brazil,Türkiye,2.0,1.0,2002-06-03,group_stage,2002,"Ulsan Munsu Football Stadium, Ulsan",,,,wc_2002_2022_dataset,Completed
+hist_97ccfcbea0,Croatia,Mexico,0.0,1.0,2002-06-03,group_stage,2002,"Niigata Stadium, Niigata",,,,wc_2002_2022_dataset,Completed
+hist_48cd74133d,South Korea,Poland,2.0,0.0,2002-06-04,group_stage,2002,"Busan Asiad Stadium, Busan",,,,wc_2002_2022_dataset,Completed
+hist_1e40850a2e,Japan,Belgium,2.0,2.0,2002-06-04,group_stage,2002,"Saitama Stadium, Saitama",,,,wc_2002_2022_dataset,Completed
+hist_6a6120f755,Germany,Republic of Ireland,1.0,1.0,2002-06-05,group_stage,2002,"Kashima Stadium, Ibaraki",,,,wc_2002_2022_dataset,Completed
+hist_cc6c5daf38,Russia,Tunisia,2.0,0.0,2002-06-05,group_stage,2002,"Kobe Wing Stadium, Kobe",,,,wc_2002_2022_dataset,Completed
+hist_fa4b4f53cf,USA,Portugal,3.0,2.0,2002-06-05,group_stage,2002,"Suwon World Cup Stadium, Suwon",,,,wc_2002_2022_dataset,Completed
+hist_a2de724403,Cameroon,Saudi Arabia,1.0,0.0,2002-06-06,group_stage,2002,"Saitama Stadium, Saitama",,,,wc_2002_2022_dataset,Completed
+hist_f4fe1b3479,France,Uruguay,0.0,0.0,2002-06-06,group_stage,2002,"Busan Asiad Stadium, Busan",,,,wc_2002_2022_dataset,Completed
+hist_ac91db8d7d,Denmark,Senegal,1.0,1.0,2002-06-06,group_stage,2002,"Daegu World Cup Stadium, Daegu",,,,wc_2002_2022_dataset,Completed
+hist_3d0a4f3681,Sweden,Nigeria,2.0,1.0,2002-06-07,group_stage,2002,"Kobe Wing Stadium, Kobe",,,,wc_2002_2022_dataset,Completed
+hist_b1e5f6272b,Spain,Paraguay,3.0,1.0,2002-06-07,group_stage,2002,"Jeonju World Cup Stadium, Jeonju",,,,wc_2002_2022_dataset,Completed
+hist_8723f9988b,Italy,Croatia,1.0,2.0,2002-06-08,group_stage,2002,"Kashima Stadium, Ibaraki",,,,wc_2002_2022_dataset,Completed
+hist_cb5de962ec,Brazil,China,4.0,0.0,2002-06-08,group_stage,2002,"Jeju World Cup Stadium, Seogwipo",,,,wc_2002_2022_dataset,Completed
+hist_e0505ec384,South Africa,Slovenia,1.0,0.0,2002-06-08,group_stage,2002,"Daegu World Cup Stadium, Daegu",,,,wc_2002_2022_dataset,Completed
+hist_fda49899a5,Japan,Russia,1.0,0.0,2002-06-09,group_stage,2002,"International Stadium Yokohama, Yokohama",,,,wc_2002_2022_dataset,Completed
+hist_498d24b0d8,Mexico,Ecuador,2.0,1.0,2002-06-09,group_stage,2002,"Miyagi Stadium, Miyagi",,,,wc_2002_2022_dataset,Completed
+hist_2b03dded15,South Korea,USA,1.0,1.0,2002-06-10,group_stage,2002,"Daegu World Cup Stadium, Daegu",,,,wc_2002_2022_dataset,Completed
+hist_af7e1c4821,Tunisia,Belgium,1.0,1.0,2002-06-10,group_stage,2002,"Ōita Stadium, Ōita",,,,wc_2002_2022_dataset,Completed
+hist_3fc19521fb,Portugal,Poland,4.0,0.0,2002-06-10,group_stage,2002,"Jeonju World Cup Stadium, Jeonju",,,,wc_2002_2022_dataset,Completed
+hist_e51ba2e746,Denmark,France,2.0,0.0,2002-06-11,group_stage,2002,"Incheon Munhak Stadium, Incheon",,,,wc_2002_2022_dataset,Completed
+hist_5ae7968a16,Cameroon,Germany,0.0,2.0,2002-06-11,group_stage,2002,"Shizuoka Stadium ECOPA, Shizuoka",,,,wc_2002_2022_dataset,Completed
+hist_ff92b977e6,Saudi Arabia,Republic of Ireland,0.0,3.0,2002-06-11,group_stage,2002,"International Stadium Yokohama, Yokohama",,,,wc_2002_2022_dataset,Completed
+hist_62fe4ad123,Sweden,Argentina,1.0,1.0,2002-06-12,group_stage,2002,"Miyagi Stadium, Miyagi",,,,wc_2002_2022_dataset,Completed
+hist_9fbebd0d39,Nigeria,England,0.0,0.0,2002-06-12,group_stage,2002,"Nagai Stadium, Osaka",,,,wc_2002_2022_dataset,Completed
+hist_405d0be972,Slovenia,Paraguay,1.0,3.0,2002-06-12,group_stage,2002,"Jeju World Cup Stadium, Seogwipo",,,,wc_2002_2022_dataset,Completed
+hist_ae24749c74,South Africa,Spain,2.0,3.0,2002-06-12,group_stage,2002,"Daejeon World Cup Stadium, Daejeon",,,,wc_2002_2022_dataset,Completed
+hist_a3b1510b89,Costa Rica,Brazil,2.0,5.0,2002-06-13,group_stage,2002,"Suwon World Cup Stadium, Suwon",,,,wc_2002_2022_dataset,Completed
+hist_e9a16a6c06,Türkiye,China,3.0,0.0,2002-06-13,group_stage,2002,"Seoul World Cup Stadium, Seoul",,,,wc_2002_2022_dataset,Completed
+hist_88ff8ddc7e,Mexico,Italy,1.0,1.0,2002-06-13,group_stage,2002,"Ōita Stadium, Ōita",,,,wc_2002_2022_dataset,Completed
+hist_2d054bbb50,Belgium,Russia,3.0,2.0,2002-06-14,group_stage,2002,"Shizuoka Stadium ECOPA, Shizuoka",,,,wc_2002_2022_dataset,Completed
+hist_fb1570bc3a,Tunisia,Japan,0.0,2.0,2002-06-14,group_stage,2002,"Nagai Stadium, Osaka",,,,wc_2002_2022_dataset,Completed
+hist_a9db8c6088,Poland,USA,3.0,1.0,2002-06-14,group_stage,2002,"Daejeon World Cup Stadium, Daejeon",,,,wc_2002_2022_dataset,Completed
+hist_0e7c8dee88,Portugal,South Korea,0.0,1.0,2002-06-14,group_stage,2002,"Incheon Munhak Stadium, Incheon",,,,wc_2002_2022_dataset,Completed
+hist_d2c73f28c4,Germany,Paraguay,1.0,0.0,2002-06-15,round_of_16,2002,"Jeju World Cup Stadium, Seogwipo",,,,wc_2002_2022_dataset,Completed
+hist_b18db039b5,Sweden,Senegal,1.0,2.0,2002-06-16,round_of_16,2002,"Ōita Stadium, Ōita",,,,wc_2002_2022_dataset,Completed
+hist_0ff66ced81,Spain,Republic of Ireland,1.0,1.0,2002-06-16,round_of_16,2002,"Suwon World Cup Stadium, Suwon",,,,wc_2002_2022_dataset,Completed
+hist_c677cd0607,Brazil,Belgium,2.0,0.0,2002-06-17,round_of_16,2002,"Kobe Wing Stadium, Kobe",,,,wc_2002_2022_dataset,Completed
+hist_a32c573479,Mexico,USA,0.0,2.0,2002-06-17,round_of_16,2002,"Jeonju World Cup Stadium, Jeonju",,,,wc_2002_2022_dataset,Completed
+hist_e9030f6ed4,South Korea,Italy,2.0,1.0,2002-06-18,round_of_16,2002,"Daejeon World Cup Stadium, Daejeon",,,,wc_2002_2022_dataset,Completed
+hist_9a488d8928,Germany,USA,1.0,0.0,2002-06-21,quarter_final,2002,"Ulsan Munsu Football Stadium, Ulsan",,,,wc_2002_2022_dataset,Completed
+hist_c8058fc2ff,England,Brazil,1.0,2.0,2002-06-21,quarter_final,2002,"Shizuoka Stadium ECOPA, Shizuoka",,,,wc_2002_2022_dataset,Completed
+hist_d92070a585,Spain,South Korea,0.0,0.0,2002-06-22,quarter_final,2002,"Gwangju World Cup Stadium, Gwangju",,,,wc_2002_2022_dataset,Completed
+hist_f0e90d8c90,Senegal,Türkiye,0.0,1.0,2002-06-22,quarter_final,2002,"Nagai Stadium, Osaka",,,,wc_2002_2022_dataset,Completed
+hist_010c3a2282,Germany,South Korea,1.0,0.0,2002-06-25,semi_final,2002,"Seoul World Cup Stadium, Seoul",,,,wc_2002_2022_dataset,Completed
+hist_77bd860054,Brazil,Türkiye,1.0,0.0,2002-06-26,semi_final,2002,"Saitama Stadium, Saitama",,,,wc_2002_2022_dataset,Completed
+hist_d4b24ce86d,Germany,Brazil,0.0,2.0,2002-06-30,final,2002,"International Stadium Yokohama, Yokohama",,,,wc_2002_2022_dataset,Completed
+hist_c61dc3d9fc,Poland,Ecuador,0.0,2.0,2006-06-09,group_stage,2006,"Arena AufShalke, Gelsenkirchen",,,,wc_2002_2022_dataset,Completed
+hist_c519d67294,England,Paraguay,1.0,0.0,2006-06-10,group_stage,2006,"Waldstadion, Frankfurt",,,,wc_2002_2022_dataset,Completed
+hist_47394d7491,Trinidad and Tobago,Sweden,0.0,0.0,2006-06-10,group_stage,2006,"Westfalenstadion, Dortmund",,,,wc_2002_2022_dataset,Completed
+hist_21b6d12aa0,Argentina,Côte d'Ivoire,2.0,1.0,2006-06-10,group_stage,2006,"Volksparkstadion, Hamburg",,,,wc_2002_2022_dataset,Completed
+hist_b849350431,Angola,Portugal,0.0,1.0,2006-06-11,group_stage,2006,"RheinEnergieStadion, Cologne",,,,wc_2002_2022_dataset,Completed
+hist_adb4a8b4f8,Mexico,IR Iran,3.0,1.0,2006-06-11,group_stage,2006,"Frankenstadion, Nuremberg",,,,wc_2002_2022_dataset,Completed
+hist_83a103c43f,Serbia and Montenegro,Netherlands,0.0,1.0,2006-06-11,group_stage,2006,"Zentralstadion, Leipzig",,,,wc_2002_2022_dataset,Completed
+hist_4aae1dc50f,USA,Czechia,0.0,3.0,2006-06-12,group_stage,2006,"Arena AufShalke, Gelsenkirchen",,,,wc_2002_2022_dataset,Completed
+hist_9197f64c15,Australia,Japan,3.0,1.0,2006-06-12,group_stage,2006,"Fritz-Walter-Stadion, Kaiserslautern",,,,wc_2002_2022_dataset,Completed
+hist_7bebfcdaf1,Brazil,Croatia,1.0,0.0,2006-06-13,group_stage,2006,"Olympiastadion, Berlin",,,,wc_2002_2022_dataset,Completed
+hist_98b6ffe04e,South Korea,Togo,2.0,1.0,2006-06-13,group_stage,2006,"Waldstadion, Frankfurt",,,,wc_2002_2022_dataset,Completed
+hist_269a66aae3,France,Switzerland,0.0,0.0,2006-06-13,group_stage,2006,"Neckarstadion, Stuttgart",,,,wc_2002_2022_dataset,Completed
+hist_91ad56145e,Spain,Ukraine,4.0,0.0,2006-06-14,group_stage,2006,"Zentralstadion, Leipzig",,,,wc_2002_2022_dataset,Completed
+hist_00ec519744,Germany,Poland,1.0,0.0,2006-06-14,group_stage,2006,"Westfalenstadion, Dortmund",,,,wc_2002_2022_dataset,Completed
+hist_f6781dbdef,Ecuador,Costa Rica,3.0,0.0,2006-06-15,group_stage,2006,"Volksparkstadion, Hamburg",,,,wc_2002_2022_dataset,Completed
+hist_c024ca8db6,Sweden,Paraguay,1.0,0.0,2006-06-15,group_stage,2006,"Olympiastadion, Berlin",,,,wc_2002_2022_dataset,Completed
+hist_3634d4cc3b,England,Trinidad and Tobago,2.0,0.0,2006-06-15,group_stage,2006,"Frankenstadion, Nuremberg",,,,wc_2002_2022_dataset,Completed
+hist_e90bfc0e75,Netherlands,Côte d'Ivoire,2.0,1.0,2006-06-16,group_stage,2006,"Neckarstadion, Stuttgart",,,,wc_2002_2022_dataset,Completed
+hist_f567e06d77,Mexico,Angola,0.0,0.0,2006-06-16,group_stage,2006,"Niedersachsenstadion, Hanover",,,,wc_2002_2022_dataset,Completed
+hist_5c76316d0e,Italy,USA,1.0,1.0,2006-06-17,group_stage,2006,"Fritz-Walter-Stadion, Kaiserslautern",,,,wc_2002_2022_dataset,Completed
+hist_3e756058ba,Portugal,IR Iran,2.0,0.0,2006-06-17,group_stage,2006,"Waldstadion, Frankfurt",,,,wc_2002_2022_dataset,Completed
+hist_cb1d3fe963,Czechia,Ghana,0.0,2.0,2006-06-17,group_stage,2006,"RheinEnergieStadion, Cologne",,,,wc_2002_2022_dataset,Completed
+hist_e7ad849203,Japan,Croatia,0.0,0.0,2006-06-18,group_stage,2006,"Frankenstadion, Nuremberg",,,,wc_2002_2022_dataset,Completed
+hist_6b3dd43064,France,South Korea,1.0,1.0,2006-06-18,group_stage,2006,"Zentralstadion, Leipzig",,,,wc_2002_2022_dataset,Completed
+hist_5e24e24e48,Brazil,Australia,2.0,0.0,2006-06-18,group_stage,2006,"Allianz Arena, Munich",,,,wc_2002_2022_dataset,Completed
+hist_e51a0930a8,Saudi Arabia,Ukraine,0.0,4.0,2006-06-19,group_stage,2006,"Volksparkstadion, Hamburg",,,,wc_2002_2022_dataset,Completed
+hist_6bd02fd8da,Togo,Switzerland,0.0,2.0,2006-06-19,group_stage,2006,"Westfalenstadion, Dortmund",,,,wc_2002_2022_dataset,Completed
+hist_efb0a107a1,Costa Rica,Poland,1.0,2.0,2006-06-20,group_stage,2006,"Niedersachsenstadion, Hanover",,,,wc_2002_2022_dataset,Completed
+hist_57dd1c5a6b,Ecuador,Germany,0.0,3.0,2006-06-20,group_stage,2006,"Olympiastadion, Berlin",,,,wc_2002_2022_dataset,Completed
+hist_9875833f2d,Paraguay,Trinidad and Tobago,2.0,0.0,2006-06-20,group_stage,2006,"Fritz-Walter-Stadion, Kaiserslautern",,,,wc_2002_2022_dataset,Completed
+hist_dc7cd44482,Sweden,England,2.0,2.0,2006-06-20,group_stage,2006,"RheinEnergieStadion, Cologne",,,,wc_2002_2022_dataset,Completed
+hist_c8f525f39e,IR Iran,Angola,1.0,1.0,2006-06-21,group_stage,2006,"Zentralstadion, Leipzig",,,,wc_2002_2022_dataset,Completed
+hist_94267532b0,Côte d'Ivoire,Serbia and Montenegro,3.0,2.0,2006-06-21,group_stage,2006,"Allianz Arena, Munich",,,,wc_2002_2022_dataset,Completed
+hist_7b4ce9eab8,Portugal,Mexico,2.0,1.0,2006-06-21,group_stage,2006,"Arena AufShalke, Gelsenkirchen",,,,wc_2002_2022_dataset,Completed
+hist_7f8bf9e1a5,Croatia,Australia,2.0,2.0,2006-06-22,group_stage,2006,"Neckarstadion, Stuttgart",,,,wc_2002_2022_dataset,Completed
+hist_405287f07a,Japan,Brazil,1.0,4.0,2006-06-22,group_stage,2006,"Westfalenstadion, Dortmund",,,,wc_2002_2022_dataset,Completed
+hist_247efb111a,Ghana,USA,2.0,1.0,2006-06-22,group_stage,2006,"Frankenstadion, Nuremberg",,,,wc_2002_2022_dataset,Completed
+hist_d5f1649d8e,Saudi Arabia,Spain,0.0,1.0,2006-06-23,group_stage,2006,"Fritz-Walter-Stadion, Kaiserslautern",,,,wc_2002_2022_dataset,Completed
+hist_c49f962e83,Switzerland,South Korea,2.0,0.0,2006-06-23,group_stage,2006,"Niedersachsenstadion, Hanover",,,,wc_2002_2022_dataset,Completed
+hist_5db7796be4,Ukraine,Tunisia,1.0,0.0,2006-06-23,group_stage,2006,"Olympiastadion, Berlin",,,,wc_2002_2022_dataset,Completed
+hist_6ab25ec4f0,Togo,France,0.0,2.0,2006-06-23,group_stage,2006,"RheinEnergieStadion, Cologne",,,,wc_2002_2022_dataset,Completed
+hist_13f5a399d5,Argentina,Mexico,2.0,1.0,2006-06-24,round_of_16,2006,"Zentralstadion, Leipzig",,,,wc_2002_2022_dataset,Completed
+hist_c9d1598751,Germany,Sweden,2.0,0.0,2006-06-24,round_of_16,2006,"Allianz Arena, Munich",,,,wc_2002_2022_dataset,Completed
+hist_810025e046,England,Ecuador,1.0,0.0,2006-06-25,round_of_16,2006,"Neckarstadion, Stuttgart",,,,wc_2002_2022_dataset,Completed
+hist_6ad92412c3,Italy,Australia,1.0,0.0,2006-06-26,round_of_16,2006,"Fritz-Walter-Stadion, Kaiserslautern",,,,wc_2002_2022_dataset,Completed
+hist_d1caf0d72c,Switzerland,Ukraine,0.0,0.0,2006-06-26,round_of_16,2006,"RheinEnergieStadion, Cologne",,,,wc_2002_2022_dataset,Completed
+hist_ecfb1deb06,Brazil,Ghana,3.0,0.0,2006-06-27,round_of_16,2006,"Westfalenstadion, Dortmund",,,,wc_2002_2022_dataset,Completed
+hist_3f85e61e46,Spain,France,1.0,3.0,2006-06-27,round_of_16,2006,"Niedersachsenstadion, Hanover",,,,wc_2002_2022_dataset,Completed
+hist_5d8d2a622a,Italy,Ukraine,3.0,0.0,2006-06-30,quarter_final,2006,"Volksparkstadion, Hamburg",,,,wc_2002_2022_dataset,Completed
+hist_f42388e848,Brazil,France,0.0,1.0,2006-07-01,quarter_final,2006,"Waldstadion, Frankfurt",,,,wc_2002_2022_dataset,Completed
+hist_2421434b00,England,Portugal,0.0,0.0,2006-07-01,quarter_final,2006,"Arena AufShalke, Gelsenkirchen",,,,wc_2002_2022_dataset,Completed
+hist_4f62e1a4d4,Germany,Italy,0.0,2.0,2006-07-04,semi_final,2006,"Westfalenstadion, Dortmund",,,,wc_2002_2022_dataset,Completed
+hist_58b4cedc7a,Portugal,France,0.0,1.0,2006-07-05,semi_final,2006,"Allianz Arena, Munich",,,,wc_2002_2022_dataset,Completed
+hist_352352b420,Germany,Portugal,3.0,1.0,2006-07-08,third_place,2006,"Neckarstadion, Stuttgart",,,,wc_2002_2022_dataset,Completed
+hist_ec03f9e85a,Italy,France,1.0,1.0,2006-07-09,final,2006,"Olympiastadion, Berlin",,,,wc_2002_2022_dataset,Completed
+hist_e73704bdc7,Uruguay,France,0.0,0.0,2010-06-11,group_stage,2010,"Cape Town Stadium, Cape Town",,,,wc_2002_2022_dataset,Completed
+hist_7e614b6eeb,South Africa,Mexico,1.0,1.0,2010-06-11,group_stage,2010,"Soccer City, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_23a5c6ff8e,England,USA,1.0,1.0,2010-06-12,group_stage,2010,"Royal Bafokeng Stadium, Rustenburg",,,,wc_2002_2022_dataset,Completed
+hist_2f47293acc,South Korea,Greece,2.0,0.0,2010-06-12,group_stage,2010,"Nelson Mandela Bay Stadium, Port Elizabeth",,,,wc_2002_2022_dataset,Completed
+hist_5f19a8357e,Algeria,Slovenia,0.0,1.0,2010-06-13,group_stage,2010,"Peter Mokaba Stadium, Polokwane",,,,wc_2002_2022_dataset,Completed
+hist_b7383e5b03,Germany,Australia,4.0,0.0,2010-06-13,group_stage,2010,"Moses Mabhida Stadium, Durban",,,,wc_2002_2022_dataset,Completed
+hist_a03016ddd4,Serbia,Ghana,0.0,1.0,2010-06-13,group_stage,2010,"Loftus Versfeld Stadium, Pretoria",,,,wc_2002_2022_dataset,Completed
+hist_ed7a234bc7,Japan,Cameroon,1.0,0.0,2010-06-14,group_stage,2010,"Free State Stadium, Bloemfontein",,,,wc_2002_2022_dataset,Completed
+hist_a23083f51a,Italy,Paraguay,1.0,1.0,2010-06-14,group_stage,2010,"Cape Town Stadium, Cape Town",,,,wc_2002_2022_dataset,Completed
+hist_861b743b3f,New Zealand,Slovakia,1.0,1.0,2010-06-15,group_stage,2010,"Royal Bafokeng Stadium, Rustenburg",,,,wc_2002_2022_dataset,Completed
+hist_26ed3d62fa,Côte d'Ivoire,Portugal,0.0,0.0,2010-06-15,group_stage,2010,"Nelson Mandela Bay Stadium, Port Elizabeth",,,,wc_2002_2022_dataset,Completed
+hist_8874d324a1,Brazil,North Korea,2.0,1.0,2010-06-15,group_stage,2010,"Ellis Park Stadium, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_8f7bbcc481,Honduras,Chile,0.0,1.0,2010-06-16,group_stage,2010,"Mbombela Stadium, Nelspruit",,,,wc_2002_2022_dataset,Completed
+hist_44b097366e,South Africa,Uruguay,0.0,3.0,2010-06-16,group_stage,2010,"Loftus Versfeld Stadium, Pretoria",,,,wc_2002_2022_dataset,Completed
+hist_bd87d2fa7d,Spain,Switzerland,0.0,1.0,2010-06-16,group_stage,2010,"Moses Mabhida Stadium, Durban",,,,wc_2002_2022_dataset,Completed
+hist_5ade1ee80c,Argentina,South Korea,4.0,1.0,2010-06-17,group_stage,2010,"Soccer City, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_94e523a13c,Greece,Nigeria,2.0,1.0,2010-06-17,group_stage,2010,"Free State Stadium, Bloemfontein",,,,wc_2002_2022_dataset,Completed
+hist_027bb819a1,England,Algeria,0.0,0.0,2010-06-18,group_stage,2010,"Cape Town Stadium, Cape Town",,,,wc_2002_2022_dataset,Completed
+hist_0fe541883e,Germany,Serbia,0.0,1.0,2010-06-18,group_stage,2010,"Nelson Mandela Bay Stadium, Port Elizabeth",,,,wc_2002_2022_dataset,Completed
+hist_ea9ef035f1,Slovenia,USA,2.0,2.0,2010-06-18,group_stage,2010,"Ellis Park Stadium, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_17d74e37ef,Cameroon,Denmark,1.0,2.0,2010-06-19,group_stage,2010,"Loftus Versfeld Stadium, Pretoria",,,,wc_2002_2022_dataset,Completed
+hist_2afc1dbaa4,Netherlands,Japan,1.0,0.0,2010-06-19,group_stage,2010,"Moses Mabhida Stadium, Durban",,,,wc_2002_2022_dataset,Completed
+hist_04e86043a1,Brazil,Côte d'Ivoire,3.0,1.0,2010-06-20,group_stage,2010,"Soccer City, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_65c3a0490e,Italy,New Zealand,1.0,1.0,2010-06-20,group_stage,2010,"Mbombela Stadium, Nelspruit",,,,wc_2002_2022_dataset,Completed
+hist_ad73353d02,Slovakia,Paraguay,0.0,2.0,2010-06-20,group_stage,2010,"Free State Stadium, Bloemfontein",,,,wc_2002_2022_dataset,Completed
+hist_60095a0789,Spain,Honduras,2.0,0.0,2010-06-21,group_stage,2010,"Ellis Park Stadium, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_bea3a41a98,Chile,Switzerland,1.0,0.0,2010-06-21,group_stage,2010,"Nelson Mandela Bay Stadium, Port Elizabeth",,,,wc_2002_2022_dataset,Completed
+hist_ce92e04869,France,South Africa,1.0,2.0,2010-06-22,group_stage,2010,"Free State Stadium, Bloemfontein",,,,wc_2002_2022_dataset,Completed
+hist_f25831dc0a,Mexico,Uruguay,0.0,1.0,2010-06-22,group_stage,2010,"Royal Bafokeng Stadium, Rustenburg",,,,wc_2002_2022_dataset,Completed
+hist_5799bf1f17,Greece,Argentina,0.0,2.0,2010-06-22,group_stage,2010,"Peter Mokaba Stadium, Polokwane",,,,wc_2002_2022_dataset,Completed
+hist_078cb468a9,Nigeria,South Korea,2.0,2.0,2010-06-22,group_stage,2010,"Moses Mabhida Stadium, Durban",,,,wc_2002_2022_dataset,Completed
+hist_36e2a30d30,Slovenia,England,0.0,1.0,2010-06-23,group_stage,2010,"Nelson Mandela Bay Stadium, Port Elizabeth",,,,wc_2002_2022_dataset,Completed
+hist_52105c62fa,Australia,Serbia,2.0,1.0,2010-06-23,group_stage,2010,"Mbombela Stadium, Nelspruit",,,,wc_2002_2022_dataset,Completed
+hist_9de501a29e,Ghana,Germany,0.0,1.0,2010-06-23,group_stage,2010,"Soccer City, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_3b028ad6f8,Denmark,Japan,1.0,3.0,2010-06-24,group_stage,2010,"Royal Bafokeng Stadium, Rustenburg",,,,wc_2002_2022_dataset,Completed
+hist_d284751ce3,Paraguay,New Zealand,0.0,0.0,2010-06-24,group_stage,2010,"Peter Mokaba Stadium, Polokwane",,,,wc_2002_2022_dataset,Completed
+hist_c2780e54dd,Cameroon,Netherlands,1.0,2.0,2010-06-24,group_stage,2010,"Cape Town Stadium, Cape Town",,,,wc_2002_2022_dataset,Completed
+hist_30cf21d66a,Slovakia,Italy,3.0,2.0,2010-06-24,group_stage,2010,"Ellis Park Stadium, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_7988e34c92,North Korea,Côte d'Ivoire,0.0,3.0,2010-06-25,group_stage,2010,"Mbombela Stadium, Nelspruit",,,,wc_2002_2022_dataset,Completed
+hist_e9c4ac00f6,Portugal,Brazil,0.0,0.0,2010-06-25,group_stage,2010,"Moses Mabhida Stadium, Durban",,,,wc_2002_2022_dataset,Completed
+hist_5652ec2ac9,Switzerland,Honduras,0.0,0.0,2010-06-25,group_stage,2010,"Free State Stadium, Bloemfontein",,,,wc_2002_2022_dataset,Completed
+hist_02bc064a03,Uruguay,South Korea,2.0,1.0,2010-06-26,round_of_16,2010,"Nelson Mandela Bay Stadium, Port Elizabeth",,,,wc_2002_2022_dataset,Completed
+hist_1455d49ae9,USA,Ghana,1.0,2.0,2010-06-26,round_of_16,2010,"Royal Bafokeng Stadium, Rustenburg",,,,wc_2002_2022_dataset,Completed
+hist_db09d3e560,Germany,England,4.0,1.0,2010-06-27,round_of_16,2010,"Free State Stadium, Bloemfontein",,,,wc_2002_2022_dataset,Completed
+hist_b53486f418,Argentina,Mexico,3.0,1.0,2010-06-27,round_of_16,2010,"Soccer City, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_8ee2142b79,Netherlands,Slovakia,2.0,1.0,2010-06-28,round_of_16,2010,"Moses Mabhida Stadium, Durban",,,,wc_2002_2022_dataset,Completed
+hist_f39231bf50,Paraguay,Japan,0.0,0.0,2010-06-29,round_of_16,2010,"Loftus Versfeld Stadium, Pretoria",,,,wc_2002_2022_dataset,Completed
+hist_4108122b9f,Spain,Portugal,1.0,0.0,2010-06-29,round_of_16,2010,"Cape Town Stadium, Cape Town",,,,wc_2002_2022_dataset,Completed
+hist_c4fbdb85ab,Netherlands,Brazil,2.0,1.0,2010-07-02,quarter_final,2010,"Nelson Mandela Bay Stadium, Port Elizabeth",,,,wc_2002_2022_dataset,Completed
+hist_ee0fbf744d,Uruguay,Ghana,1.0,1.0,2010-07-02,quarter_final,2010,"Soccer City, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_06a91810b0,Paraguay,Spain,0.0,1.0,2010-07-03,quarter_final,2010,"Ellis Park Stadium, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_01d470d020,Uruguay,Netherlands,2.0,3.0,2010-07-06,semi_final,2010,"Cape Town Stadium, Cape Town",,,,wc_2002_2022_dataset,Completed
+hist_6d4ab4525b,Germany,Spain,0.0,1.0,2010-07-07,semi_final,2010,"Moses Mabhida Stadium, Durban",,,,wc_2002_2022_dataset,Completed
+hist_69245146ec,Uruguay,Germany,2.0,3.0,2010-07-10,third_place,2010,"Nelson Mandela Bay Stadium, Port Elizabeth",,,,wc_2002_2022_dataset,Completed
+hist_33de4904c9,Netherlands,Spain,0.0,1.0,2010-07-11,final,2010,"Soccer City, Johannesburg",,,,wc_2002_2022_dataset,Completed
+hist_ac34a2bae6,Brazil,Croatia,3.0,1.0,2014-06-12,group_stage,2014,"Arena Corinthians, São Paulo",,,,wc_2002_2022_dataset,Completed
+hist_2d6db6cd65,Chile,Australia,3.0,1.0,2014-06-13,group_stage,2014,"Arena Pantanal, Cuiabá",,,,wc_2002_2022_dataset,Completed
+hist_80ba67a844,Mexico,Cameroon,1.0,0.0,2014-06-13,group_stage,2014,"Arena das Dunas, Natal",,,,wc_2002_2022_dataset,Completed
+hist_e2bfb602a7,Spain,Netherlands,1.0,5.0,2014-06-13,group_stage,2014,"Arena Fonte Nova, Salvador",,,,wc_2002_2022_dataset,Completed
+hist_28a3c46019,Uruguay,Costa Rica,1.0,3.0,2014-06-14,group_stage,2014,"Estádio Castelão, Fortaleza",,,,wc_2002_2022_dataset,Completed
+hist_90171e4b6d,Colombia,Greece,3.0,0.0,2014-06-14,group_stage,2014,"Estádio Mineirão, Belo Horizonte",,,,wc_2002_2022_dataset,Completed
+hist_8094432790,Côte d'Ivoire,Japan,2.0,1.0,2014-06-14,group_stage,2014,"Arena Pernambuco, Recife",,,,wc_2002_2022_dataset,Completed
+hist_1b1715c1d6,Argentina,Bosnia and Herzegovina,2.0,1.0,2014-06-15,group_stage,2014,"Estádio do Maracanã, Rio de Janeiro",,,,wc_2002_2022_dataset,Completed
+hist_54b2ebea5b,France,Honduras,3.0,0.0,2014-06-15,group_stage,2014,"Estádio Beira-Rio, Porto Alegre",,,,wc_2002_2022_dataset,Completed
+hist_eee5c7be13,Switzerland,Ecuador,2.0,1.0,2014-06-15,group_stage,2014,"Estádio Nacional, Brasília",,,,wc_2002_2022_dataset,Completed
+hist_af415002aa,Ghana,USA,1.0,2.0,2014-06-16,group_stage,2014,"Arena das Dunas, Natal",,,,wc_2002_2022_dataset,Completed
+hist_f9a2b6008a,Germany,Portugal,4.0,0.0,2014-06-16,group_stage,2014,"Arena Fonte Nova, Salvador",,,,wc_2002_2022_dataset,Completed
+hist_b01b8aac59,Brazil,Mexico,0.0,0.0,2014-06-17,group_stage,2014,"Estádio Castelão, Fortaleza",,,,wc_2002_2022_dataset,Completed
+hist_7ca95b7372,Belgium,Algeria,2.0,1.0,2014-06-17,group_stage,2014,"Estádio Mineirão, Belo Horizonte",,,,wc_2002_2022_dataset,Completed
+hist_7a7004a619,Russia,South Korea,1.0,1.0,2014-06-17,group_stage,2014,"Arena Pantanal, Cuiabá",,,,wc_2002_2022_dataset,Completed
+hist_c01cc86eab,Spain,Chile,0.0,2.0,2014-06-18,group_stage,2014,"Estádio do Maracanã, Rio de Janeiro",,,,wc_2002_2022_dataset,Completed
+hist_b533de7923,Cameroon,Croatia,0.0,4.0,2014-06-18,group_stage,2014,"Arena da Amazônia, Manaus",,,,wc_2002_2022_dataset,Completed
+hist_c101f1d52a,Colombia,Côte d'Ivoire,2.0,1.0,2014-06-19,group_stage,2014,"Estádio Nacional, Brasília",,,,wc_2002_2022_dataset,Completed
+hist_21492e526f,Uruguay,England,2.0,1.0,2014-06-19,group_stage,2014,"Arena Corinthians, São Paulo",,,,wc_2002_2022_dataset,Completed
+hist_a46e0e9aa5,Japan,Greece,0.0,0.0,2014-06-19,group_stage,2014,"Arena das Dunas, Natal",,,,wc_2002_2022_dataset,Completed
+hist_fb4ae9c4f5,Honduras,Ecuador,1.0,2.0,2014-06-20,group_stage,2014,"Arena da Baixada, Curitiba",,,,wc_2002_2022_dataset,Completed
+hist_b50bbb5065,Switzerland,France,2.0,5.0,2014-06-20,group_stage,2014,"Arena Fonte Nova, Salvador",,,,wc_2002_2022_dataset,Completed
+hist_34fd3a2df8,Italy,Costa Rica,0.0,1.0,2014-06-20,group_stage,2014,"Arena Pernambuco, Recife",,,,wc_2002_2022_dataset,Completed
+hist_b985fca30c,Argentina,IR Iran,1.0,0.0,2014-06-21,group_stage,2014,"Estádio Mineirão, Belo Horizonte",,,,wc_2002_2022_dataset,Completed
+hist_fc3314d34b,Germany,Ghana,2.0,2.0,2014-06-21,group_stage,2014,"Estádio Castelão, Fortaleza",,,,wc_2002_2022_dataset,Completed
+hist_d635e846b7,Belgium,Russia,1.0,0.0,2014-06-22,group_stage,2014,"Estádio do Maracanã, Rio de Janeiro",,,,wc_2002_2022_dataset,Completed
+hist_e1425158dc,South Korea,Algeria,2.0,4.0,2014-06-22,group_stage,2014,"Estádio Beira-Rio, Porto Alegre",,,,wc_2002_2022_dataset,Completed
+hist_8f9d9d52c4,USA,Portugal,2.0,2.0,2014-06-22,group_stage,2014,"Arena da Amazônia, Manaus",,,,wc_2002_2022_dataset,Completed
+hist_25e79d622d,Netherlands,Chile,2.0,0.0,2014-06-23,group_stage,2014,"Arena Corinthians, São Paulo",,,,wc_2002_2022_dataset,Completed
+hist_2c318b3639,Australia,Spain,0.0,3.0,2014-06-23,group_stage,2014,"Arena da Baixada, Curitiba",,,,wc_2002_2022_dataset,Completed
+hist_070bfc8e71,Croatia,Mexico,1.0,3.0,2014-06-23,group_stage,2014,"Arena Pernambuco, Recife",,,,wc_2002_2022_dataset,Completed
+hist_5ce17c3ebd,Greece,Côte d'Ivoire,2.0,1.0,2014-06-24,group_stage,2014,"Estádio Castelão, Fortaleza",,,,wc_2002_2022_dataset,Completed
+hist_04e45c9359,Japan,Colombia,1.0,4.0,2014-06-24,group_stage,2014,"Arena Pantanal, Cuiabá",,,,wc_2002_2022_dataset,Completed
+hist_b48993ee24,Italy,Uruguay,0.0,1.0,2014-06-24,group_stage,2014,"Arena das Dunas, Natal",,,,wc_2002_2022_dataset,Completed
+hist_cf5f53f8d6,Costa Rica,England,0.0,0.0,2014-06-24,group_stage,2014,"Estádio Mineirão, Belo Horizonte",,,,wc_2002_2022_dataset,Completed
+hist_89eaf7a047,Honduras,Switzerland,0.0,3.0,2014-06-25,group_stage,2014,"Arena da Amazônia, Manaus",,,,wc_2002_2022_dataset,Completed
+hist_37caf8e213,Nigeria,Argentina,2.0,3.0,2014-06-25,group_stage,2014,"Estádio Beira-Rio, Porto Alegre",,,,wc_2002_2022_dataset,Completed
+hist_e49deff9f3,Bosnia and Herzegovina,IR Iran,3.0,1.0,2014-06-25,group_stage,2014,"Arena Fonte Nova, Salvador",,,,wc_2002_2022_dataset,Completed
+hist_5f5ef197c0,Algeria,Russia,1.0,1.0,2014-06-26,group_stage,2014,"Arena da Baixada, Curitiba",,,,wc_2002_2022_dataset,Completed
+hist_9025d0f288,USA,Germany,0.0,1.0,2014-06-26,group_stage,2014,"Arena Pernambuco, Recife",,,,wc_2002_2022_dataset,Completed
+hist_293e8de61f,South Korea,Belgium,0.0,1.0,2014-06-26,group_stage,2014,"Arena Corinthians, São Paulo",,,,wc_2002_2022_dataset,Completed
+hist_62d16e09cf,Colombia,Uruguay,2.0,0.0,2014-06-28,round_of_16,2014,"Estádio do Maracanã, Rio de Janeiro",,,,wc_2002_2022_dataset,Completed
+hist_b0f87bd429,Brazil,Chile,1.0,1.0,2014-06-28,round_of_16,2014,"Estádio Mineirão, Belo Horizonte",,,,wc_2002_2022_dataset,Completed
+hist_795a3e5cc3,Netherlands,Mexico,2.0,1.0,2014-06-29,round_of_16,2014,"Estádio Castelão, Fortaleza",,,,wc_2002_2022_dataset,Completed
+hist_7977f42b43,Costa Rica,Greece,1.0,1.0,2014-06-29,round_of_16,2014,"Arena Pernambuco, Recife",,,,wc_2002_2022_dataset,Completed
+hist_52450048ac,France,Nigeria,2.0,0.0,2014-06-30,round_of_16,2014,"Estádio Nacional, Brasília",,,,wc_2002_2022_dataset,Completed
+hist_2c36348686,Germany,Algeria,2.0,1.0,2014-06-30,round_of_16,2014,"Estádio Beira-Rio, Porto Alegre",,,,wc_2002_2022_dataset,Completed
+hist_f418e6268e,Argentina,Switzerland,1.0,0.0,2014-07-01,round_of_16,2014,"Arena Corinthians, São Paulo",,,,wc_2002_2022_dataset,Completed
+hist_7fcb73c5b4,France,Germany,0.0,1.0,2014-07-04,quarter_final,2014,"Estádio do Maracanã, Rio de Janeiro",,,,wc_2002_2022_dataset,Completed
+hist_78671715b7,Brazil,Colombia,2.0,1.0,2014-07-04,quarter_final,2014,"Estádio Castelão, Fortaleza",,,,wc_2002_2022_dataset,Completed
+hist_019e7dd9eb,Netherlands,Costa Rica,0.0,0.0,2014-07-05,quarter_final,2014,"Arena Fonte Nova, Salvador",,,,wc_2002_2022_dataset,Completed
+hist_4e2dfea5c6,Argentina,Belgium,1.0,0.0,2014-07-05,quarter_final,2014,"Estádio Nacional, Brasília",,,,wc_2002_2022_dataset,Completed
+hist_4f3b9b0d42,Brazil,Germany,1.0,7.0,2014-07-08,semi_final,2014,"Estádio Mineirão, Belo Horizonte",,,,wc_2002_2022_dataset,Completed
+hist_22b6af9c55,Brazil,Netherlands,0.0,3.0,2014-07-12,third_place,2014,"Estádio Nacional, Brasília",,,,wc_2002_2022_dataset,Completed
+hist_e332fb9fd8,Germany,Argentina,1.0,0.0,2014-07-13,final,2014,"Estádio do Maracanã, Rio de Janeiro",,,,wc_2002_2022_dataset,Completed
+hist_946b95be46,Russia,Saudi Arabia,5.0,0.0,2018-06-14,group_stage,2018,"Luzhniki Stadium, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_9a7e90f985,Morocco,IR Iran,0.0,1.0,2018-06-15,group_stage,2018,"Krestovsky Stadium, Saint Petersburg",,,,wc_2002_2022_dataset,Completed
+hist_1e7b91a9b3,Egypt,Uruguay,0.0,1.0,2018-06-15,group_stage,2018,"Central Stadium, Yekaterinburg",,,,wc_2002_2022_dataset,Completed
+hist_0c23ab5a2d,Croatia,Nigeria,2.0,0.0,2018-06-16,group_stage,2018,"Kaliningrad Stadium, Kaliningrad",,,,wc_2002_2022_dataset,Completed
+hist_847139c0dd,Peru,Denmark,0.0,1.0,2018-06-16,group_stage,2018,"Mordovia Arena, Saransk",,,,wc_2002_2022_dataset,Completed
+hist_41a9165c98,Argentina,Iceland,1.0,1.0,2018-06-16,group_stage,2018,"Otkritie Arena, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_c4954ac00e,France,Australia,2.0,1.0,2018-06-16,group_stage,2018,"Kazan Arena, Kazan",,,,wc_2002_2022_dataset,Completed
+hist_73ad5a9899,Costa Rica,Serbia,0.0,1.0,2018-06-17,group_stage,2018,"Samara Arena, Samara",,,,wc_2002_2022_dataset,Completed
+hist_a51a0171da,Germany,Mexico,0.0,1.0,2018-06-17,group_stage,2018,"Luzhniki Stadium, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_6fdd54c60f,Sweden,South Korea,1.0,0.0,2018-06-18,group_stage,2018,"Nizhny Novgorod Stadium, Nizhny Novgorod",,,,wc_2002_2022_dataset,Completed
+hist_045c421c4d,Tunisia,England,1.0,2.0,2018-06-18,group_stage,2018,"Volgograd Arena, Volgograd",,,,wc_2002_2022_dataset,Completed
+hist_1579cce848,Belgium,Panama,3.0,0.0,2018-06-18,group_stage,2018,"Fisht Olympic Stadium, Sochi",,,,wc_2002_2022_dataset,Completed
+hist_9e12d2646b,Colombia,Japan,1.0,2.0,2018-06-19,group_stage,2018,"Mordovia Arena, Saransk",,,,wc_2002_2022_dataset,Completed
+hist_d6a7b4d931,Russia,Egypt,3.0,1.0,2018-06-19,group_stage,2018,"Krestovsky Stadium, Saint Petersburg",,,,wc_2002_2022_dataset,Completed
+hist_4a931127e7,IR Iran,Spain,0.0,1.0,2018-06-20,group_stage,2018,"Kazan Arena, Kazan",,,,wc_2002_2022_dataset,Completed
+hist_d2bc47700f,Uruguay,Saudi Arabia,1.0,0.0,2018-06-20,group_stage,2018,"Rostov Arena, Rostov-on-Don",,,,wc_2002_2022_dataset,Completed
+hist_8f62901568,Portugal,Morocco,1.0,0.0,2018-06-20,group_stage,2018,"Luzhniki Stadium, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_849c34e76b,Argentina,Croatia,0.0,3.0,2018-06-21,group_stage,2018,"Nizhny Novgorod Stadium, Nizhny Novgorod",,,,wc_2002_2022_dataset,Completed
+hist_39a3565a84,France,Peru,1.0,0.0,2018-06-21,group_stage,2018,"Central Stadium, Yekaterinburg",,,,wc_2002_2022_dataset,Completed
+hist_bf8094d101,Brazil,Costa Rica,2.0,0.0,2018-06-22,group_stage,2018,"Krestovsky Stadium, Saint Petersburg",,,,wc_2002_2022_dataset,Completed
+hist_cc7b6fd0a4,Serbia,Switzerland,1.0,2.0,2018-06-22,group_stage,2018,"Kaliningrad Stadium, Kaliningrad",,,,wc_2002_2022_dataset,Completed
+hist_3d9b3f4205,Nigeria,Iceland,2.0,0.0,2018-06-22,group_stage,2018,"Volgograd Arena, Volgograd",,,,wc_2002_2022_dataset,Completed
+hist_705e87b12f,Belgium,Tunisia,5.0,2.0,2018-06-23,group_stage,2018,"Otkritie Arena, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_b85fcf9bc3,South Korea,Mexico,1.0,2.0,2018-06-23,group_stage,2018,"Rostov Arena, Rostov-on-Don",,,,wc_2002_2022_dataset,Completed
+hist_158fbaba82,Germany,Sweden,2.0,1.0,2018-06-23,group_stage,2018,"Fisht Olympic Stadium, Sochi",,,,wc_2002_2022_dataset,Completed
+hist_c3e4519067,Japan,Senegal,2.0,2.0,2018-06-24,group_stage,2018,"Central Stadium, Yekaterinburg",,,,wc_2002_2022_dataset,Completed
+hist_d1552571ec,England,Panama,6.0,1.0,2018-06-24,group_stage,2018,"Nizhny Novgorod Stadium, Nizhny Novgorod",,,,wc_2002_2022_dataset,Completed
+hist_42c26970b3,Saudi Arabia,Egypt,2.0,1.0,2018-06-25,group_stage,2018,"Volgograd Arena, Volgograd",,,,wc_2002_2022_dataset,Completed
+hist_e80f12da25,Uruguay,Russia,3.0,0.0,2018-06-25,group_stage,2018,"Samara Arena, Samara",,,,wc_2002_2022_dataset,Completed
+hist_2c92977c53,Spain,Morocco,2.0,2.0,2018-06-25,group_stage,2018,"Kaliningrad Stadium, Kaliningrad",,,,wc_2002_2022_dataset,Completed
+hist_19bb848ac5,IR Iran,Portugal,1.0,1.0,2018-06-25,group_stage,2018,"Mordovia Arena, Saransk",,,,wc_2002_2022_dataset,Completed
+hist_70d20e805a,Australia,Peru,0.0,2.0,2018-06-26,group_stage,2018,"Fisht Olympic Stadium, Sochi",,,,wc_2002_2022_dataset,Completed
+hist_be5d008f93,Denmark,France,0.0,0.0,2018-06-26,group_stage,2018,"Luzhniki Stadium, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_e104612719,Iceland,Croatia,1.0,2.0,2018-06-26,group_stage,2018,"Rostov Arena, Rostov-on-Don",,,,wc_2002_2022_dataset,Completed
+hist_6d5866037b,Switzerland,Costa Rica,2.0,2.0,2018-06-27,group_stage,2018,"Nizhny Novgorod Stadium, Nizhny Novgorod",,,,wc_2002_2022_dataset,Completed
+hist_0f76a30ca9,Mexico,Sweden,0.0,3.0,2018-06-27,group_stage,2018,"Central Stadium, Yekaterinburg",,,,wc_2002_2022_dataset,Completed
+hist_6a940a3021,Serbia,Brazil,0.0,2.0,2018-06-27,group_stage,2018,"Otkritie Arena, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_4691b266ab,Senegal,Colombia,0.0,1.0,2018-06-28,group_stage,2018,"Samara Arena, Samara",,,,wc_2002_2022_dataset,Completed
+hist_b34a9d4cf9,Panama,Tunisia,1.0,2.0,2018-06-28,group_stage,2018,"Mordovia Arena, Saransk",,,,wc_2002_2022_dataset,Completed
+hist_3a6bfd83e1,England,Belgium,0.0,1.0,2018-06-28,group_stage,2018,"Kaliningrad Stadium, Kaliningrad",,,,wc_2002_2022_dataset,Completed
+hist_8306b03036,Japan,Poland,0.0,1.0,2018-06-28,group_stage,2018,"Volgograd Arena, Volgograd",,,,wc_2002_2022_dataset,Completed
+hist_dac9095e3f,France,Argentina,4.0,3.0,2018-06-30,round_of_16,2018,"Kazan Arena, Kazan",,,,wc_2002_2022_dataset,Completed
+hist_d1ce8b157d,Uruguay,Portugal,2.0,1.0,2018-06-30,round_of_16,2018,"Fisht Olympic Stadium, Sochi",,,,wc_2002_2022_dataset,Completed
+hist_4128705c07,Spain,Russia,1.0,1.0,2018-07-01,round_of_16,2018,"Luzhniki Stadium, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_f53bfadd1f,Brazil,Mexico,2.0,0.0,2018-07-02,round_of_16,2018,"Samara Arena, Samara",,,,wc_2002_2022_dataset,Completed
+hist_61a349630b,Belgium,Japan,3.0,2.0,2018-07-02,round_of_16,2018,"Rostov Arena, Rostov-on-Don",,,,wc_2002_2022_dataset,Completed
+hist_35f4cbe67e,Sweden,Switzerland,1.0,0.0,2018-07-03,round_of_16,2018,"Krestovsky Stadium, Saint Petersburg",,,,wc_2002_2022_dataset,Completed
+hist_3ff926de07,Colombia,England,1.0,1.0,2018-07-03,round_of_16,2018,"Otkritie Arena, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_20a3265443,Brazil,Belgium,1.0,2.0,2018-07-06,quarter_final,2018,"Kazan Arena, Kazan",,,,wc_2002_2022_dataset,Completed
+hist_bdc7abbca6,Russia,Croatia,2.0,2.0,2018-07-07,quarter_final,2018,"Fisht Olympic Stadium, Sochi",,,,wc_2002_2022_dataset,Completed
+hist_260f53d708,Sweden,England,0.0,2.0,2018-07-07,quarter_final,2018,"Samara Arena, Samara",,,,wc_2002_2022_dataset,Completed
+hist_7e2bc3cac2,France,Belgium,1.0,0.0,2018-07-10,semi_final,2018,"Krestovsky Stadium, Saint Petersburg",,,,wc_2002_2022_dataset,Completed
+hist_1efb17a576,Croatia,England,2.0,1.0,2018-07-11,semi_final,2018,"Luzhniki Stadium, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_a8a1a9c05b,Belgium,England,2.0,0.0,2018-07-14,third_place,2018,"Krestovsky Stadium, Saint Petersburg",,,,wc_2002_2022_dataset,Completed
+hist_c65a6e5b22,France,Croatia,4.0,2.0,2018-07-15,final,2018,"Luzhniki Stadium, Moscow",,,,wc_2002_2022_dataset,Completed
+hist_dce696c1c8,Qatar,Ecuador,0.0,2.0,2022-11-20,group_stage,2022,"Al Bayt Stadium, Al Khor",,,,wc_2002_2022_dataset,Completed
+hist_b7f54353b0,USA,Wales,1.0,1.0,2022-11-21,group_stage,2022,"Ahmad bin Ali Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_7478249daa,Senegal,Netherlands,0.0,2.0,2022-11-21,group_stage,2022,"Al Thumama Stadium, Doha",,,,wc_2002_2022_dataset,Completed
+hist_b252613403,England,IR Iran,6.0,2.0,2022-11-21,group_stage,2022,"Khalifa International Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_85bcadf994,Mexico,Poland,0.0,0.0,2022-11-22,group_stage,2022,"Stadium 974, Doha",,,,wc_2002_2022_dataset,Completed
+hist_3c53cdd4ff,Denmark,Tunisia,0.0,0.0,2022-11-22,group_stage,2022,"Education City Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_16e551aac9,Argentina,Saudi Arabia,1.0,2.0,2022-11-22,group_stage,2022,"Lusail Stadium, Lusail",,,,wc_2002_2022_dataset,Completed
+hist_e991f564a2,Spain,Costa Rica,7.0,0.0,2022-11-23,group_stage,2022,"Al Thumama Stadium, Doha",,,,wc_2002_2022_dataset,Completed
+hist_f8b539d45f,Germany,Japan,1.0,2.0,2022-11-23,group_stage,2022,"Khalifa International Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_0d86bf0eae,Belgium,Canada,1.0,0.0,2022-11-23,group_stage,2022,"Ahmad bin Ali Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_e431814033,Brazil,Serbia,2.0,0.0,2022-11-24,group_stage,2022,"Lusail Stadium, Lusail",,,,wc_2002_2022_dataset,Completed
+hist_37969e62a9,Switzerland,Cameroon,1.0,0.0,2022-11-24,group_stage,2022,"Al Janoub Stadium, Al Wakrah",,,,wc_2002_2022_dataset,Completed
+hist_d530169518,Uruguay,South Korea,0.0,0.0,2022-11-24,group_stage,2022,"Education City Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_f40a872f8e,Portugal,Ghana,3.0,2.0,2022-11-24,group_stage,2022,"Stadium 974, Doha",,,,wc_2002_2022_dataset,Completed
+hist_57a5ac6ba1,England,USA,0.0,0.0,2022-11-25,group_stage,2022,"Al Bayt Stadium, Al Khor",,,,wc_2002_2022_dataset,Completed
+hist_50d1287f09,Wales,IR Iran,0.0,2.0,2022-11-25,group_stage,2022,"Ahmad bin Ali Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_1a6789aa5d,Netherlands,Ecuador,1.0,1.0,2022-11-25,group_stage,2022,"Khalifa International Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_3eedc468d3,Poland,Saudi Arabia,2.0,0.0,2022-11-26,group_stage,2022,"Education City Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_cc52f3629d,France,Denmark,2.0,1.0,2022-11-26,group_stage,2022,"Stadium 974, Doha",,,,wc_2002_2022_dataset,Completed
+hist_1935d2b739,Argentina,Mexico,2.0,0.0,2022-11-26,group_stage,2022,"Lusail Stadium, Lusail",,,,wc_2002_2022_dataset,Completed
+hist_77e04f2109,Tunisia,Australia,0.0,1.0,2022-11-26,group_stage,2022,"Al Janoub Stadium, Al Wakrah",,,,wc_2002_2022_dataset,Completed
+hist_8ab07c72b3,Japan,Costa Rica,0.0,1.0,2022-11-27,group_stage,2022,"Ahmad bin Ali Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_9ed0afce48,Belgium,Morocco,0.0,2.0,2022-11-27,group_stage,2022,"Al Thumama Stadium, Doha",,,,wc_2002_2022_dataset,Completed
+hist_0e78c93cdd,Spain,Germany,1.0,1.0,2022-11-27,group_stage,2022,"Al Bayt Stadium, Al Khor",,,,wc_2002_2022_dataset,Completed
+hist_f161807f80,Cameroon,Serbia,3.0,3.0,2022-11-28,group_stage,2022,"Al Janoub Stadium, Al Wakrah",,,,wc_2002_2022_dataset,Completed
+hist_615fb18377,South Korea,Ghana,2.0,3.0,2022-11-28,group_stage,2022,"Education City Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_6f1a566ed0,Brazil,Switzerland,1.0,0.0,2022-11-28,group_stage,2022,"Stadium 974, Doha",,,,wc_2002_2022_dataset,Completed
+hist_a8249d9957,Portugal,Uruguay,2.0,0.0,2022-11-28,group_stage,2022,"Lusail Stadium, Lusail",,,,wc_2002_2022_dataset,Completed
+hist_c229fa02ac,Ecuador,Senegal,1.0,2.0,2022-11-29,group_stage,2022,"Khalifa International Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_eb5359bdd6,Netherlands,Qatar,2.0,0.0,2022-11-29,group_stage,2022,"Al Bayt Stadium, Al Khor",,,,wc_2002_2022_dataset,Completed
+hist_50eddfe086,IR Iran,USA,0.0,1.0,2022-11-29,group_stage,2022,"Al Thumama Stadium, Doha",,,,wc_2002_2022_dataset,Completed
+hist_2bc1d83db0,Tunisia,France,1.0,0.0,2022-11-30,group_stage,2022,"Education City Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_1f61ebb074,Saudi Arabia,Mexico,1.0,2.0,2022-11-30,group_stage,2022,"Lusail Stadium, Lusail",,,,wc_2002_2022_dataset,Completed
+hist_58917f0803,Poland,Argentina,0.0,2.0,2022-11-30,group_stage,2022,"Stadium 974, Doha",,,,wc_2002_2022_dataset,Completed
+hist_ebd67ebdd9,Canada,Morocco,1.0,2.0,2022-12-01,group_stage,2022,"Al Thumama Stadium, Doha",,,,wc_2002_2022_dataset,Completed
+hist_851e9c1e05,Croatia,Belgium,0.0,0.0,2022-12-01,group_stage,2022,"Ahmad bin Ali Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_acba39093c,Costa Rica,Germany,2.0,4.0,2022-12-01,group_stage,2022,"Al Bayt Stadium, Al Khor",,,,wc_2002_2022_dataset,Completed
+hist_52fea2dfde,Japan,Spain,2.0,1.0,2022-12-01,group_stage,2022,"Khalifa International Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_f4ab2ad91f,Ghana,Uruguay,0.0,2.0,2022-12-02,group_stage,2022,"Al Janoub Stadium, Al Wakrah",,,,wc_2002_2022_dataset,Completed
+hist_b3dcaf44e4,Serbia,Switzerland,2.0,3.0,2022-12-02,group_stage,2022,"Stadium 974, Doha",,,,wc_2002_2022_dataset,Completed
+hist_191edb646a,Cameroon,Brazil,1.0,0.0,2022-12-02,group_stage,2022,"Lusail Stadium, Lusail",,,,wc_2002_2022_dataset,Completed
+hist_a87c8cdaec,Argentina,Australia,2.0,1.0,2022-12-03,round_of_16,2022,"Ahmad bin Ali Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_a8ddb4c0d9,Netherlands,USA,3.0,1.0,2022-12-03,round_of_16,2022,"Khalifa International Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_bb47e8ccae,England,Senegal,3.0,0.0,2022-12-04,round_of_16,2022,"Al Bayt Stadium, Al Khor",,,,wc_2002_2022_dataset,Completed
+hist_a24167d297,France,Poland,3.0,1.0,2022-12-04,round_of_16,2022,"Al Thumama Stadium, Doha",,,,wc_2002_2022_dataset,Completed
+hist_4d40f92b5f,Brazil,South Korea,4.0,1.0,2022-12-05,round_of_16,2022,"Stadium 974, Doha",,,,wc_2002_2022_dataset,Completed
+hist_bed7812015,Portugal,Switzerland,6.0,1.0,2022-12-06,round_of_16,2022,"Lusail Stadium, Lusail",,,,wc_2002_2022_dataset,Completed
+hist_66d086644a,Morocco,Spain,0.0,0.0,2022-12-06,round_of_16,2022,"Education City Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_acf3d93c43,Croatia,Brazil,1.0,1.0,2022-12-09,quarter_final,2022,"Education City Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_e41f236f7c,Netherlands,Argentina,2.0,2.0,2022-12-09,quarter_final,2022,"Lusail Stadium, Lusail",,,,wc_2002_2022_dataset,Completed
+hist_63dda93036,England,France,1.0,2.0,2022-12-10,quarter_final,2022,"Al Bayt Stadium, Al Khor",,,,wc_2002_2022_dataset,Completed
+hist_4a5665534c,Morocco,Portugal,1.0,0.0,2022-12-10,quarter_final,2022,"Al Thumama Stadium, Doha",,,,wc_2002_2022_dataset,Completed
+hist_0adb1b0cd7,France,Morocco,2.0,0.0,2022-12-14,semi_final,2022,"Al Bayt Stadium, Al Khor",,,,wc_2002_2022_dataset,Completed
+hist_5549e956d4,Croatia,Morocco,2.0,1.0,2022-12-17,third_place,2022,"Khalifa International Stadium, Al Rayyan",,,,wc_2002_2022_dataset,Completed
+hist_42878fab26,Argentina,France,3.0,3.0,2022-12-18,final,2022,"Lusail Stadium, Lusail",,,,wc_2002_2022_dataset,Completed
+1,Mexico,South Africa,2.0,0.0,2026-06-11,group_stage,2026,,,1.84,0.52,wc_2026_live,Completed
+2,South Korea,Czechia,2.0,1.0,2026-06-11,group_stage,2026,,,1.45,1.12,wc_2026_live,Completed
+3,Canada,Bosnia and Herzegovina,1.0,1.0,2026-06-12,group_stage,2026,,,1.35,0.98,wc_2026_live,Completed
+4,USA,Paraguay,4.0,1.0,2026-06-12,group_stage,2026,,,2.76,0.88,wc_2026_live,Completed
+5,Qatar,Switzerland,1.0,1.0,2026-06-13,group_stage,2026,,,0.78,1.54,wc_2026_live,Completed
+6,Brazil,Morocco,1.0,1.0,2026-06-13,group_stage,2026,,,1.62,1.1,wc_2026_live,Completed
+7,Haiti,Scotland,0.0,1.0,2026-06-13,group_stage,2026,,,1.25,0.65,wc_2026_live,Completed
+8,Australia,Türkiye,2.0,0.0,2026-06-13,group_stage,2026,,,1.48,0.72,wc_2026_live,Completed
+9,Germany,Curaçao,7.0,1.0,2026-06-14,group_stage,2026,,,4.82,0.44,wc_2026_live,Completed
+10,Netherlands,Japan,2.0,2.0,2026-06-14,group_stage,2026,,,1.95,1.82,wc_2026_live,Completed
+11,Côte d'Ivoire,Ecuador,1.0,0.0,2026-06-14,group_stage,2026,,,1.1,0.95,wc_2026_live,Completed
+12,Sweden,Tunisia,5.0,1.0,2026-06-14,group_stage,2026,,,3.12,0.78,wc_2026_live,Completed
+13,Spain,Cabo Verde,0.0,0.0,2026-06-15,group_stage,2026,,,2.15,0.35,wc_2026_live,Completed
+14,Belgium,Egypt,1.0,1.0,2026-06-15,group_stage,2026,,,1.58,1.12,wc_2026_live,Completed
+15,Saudi Arabia,Uruguay,1.0,1.0,2026-06-15,group_stage,2026,,,0.85,1.76,wc_2026_live,Completed
+16,IR Iran,New Zealand,2.0,2.0,2026-06-15,group_stage,2026,,,1.88,1.2,wc_2026_live,Completed
+17,France,Senegal,3.0,1.0,2026-06-16,group_stage,2026,,,2.44,1.05,wc_2026_live,Completed
+18,Iraq,Norway,1.0,4.0,2026-06-16,group_stage,2026,,,0.68,2.85,wc_2026_live,Completed
+19,Argentina,Algeria,3.0,0.0,2026-06-16,group_stage,2026,,,2.65,0.42,wc_2026_live,Completed
+20,Austria,Jordan,3.0,1.0,2026-06-16,group_stage,2026,,,1.98,0.88,wc_2026_live,Completed
+21,Portugal,Congo DR,1.0,1.0,2026-06-17,group_stage,2026,,,1.78,1.15,wc_2026_live,Completed
+22,England,Croatia,4.0,2.0,2026-06-17,group_stage,2026,,,2.92,1.64,wc_2026_live,Completed
+23,Ghana,Panama,1.0,0.0,2026-06-17,group_stage,2026,,,1.3,0.75,wc_2026_live,Completed
+24,Uzbekistan,Colombia,1.0,3.0,2026-06-17,group_stage,2026,,,0.95,2.1,wc_2026_live,Completed
+25,Mexico,South Korea,1.0,0.0,2026-06-18,group_stage,2026,,,1.62,0.58,wc_2026_live,Completed
+26,Czechia,South Africa,1.0,1.0,2026-06-18,group_stage,2026,,,1.35,1.15,wc_2026_live,Completed
+27,Canada,Qatar,6.0,0.0,2026-06-18,group_stage,2026,,,3.82,0.22,wc_2026_live,Completed
+28,Switzerland,Bosnia and Herzegovina,4.0,1.0,2026-06-18,group_stage,2026,,,2.45,0.88,wc_2026_live,Completed
+29,Brazil,Haiti,3.0,0.0,2026-06-19,group_stage,2026,,,1.16,0.9,wc_2026_live,Completed
+30,Scotland,Morocco,0.0,1.0,2026-06-19,group_stage,2026,,,0.97,0.54,wc_2026_live,Completed
+31,USA,Australia,2.0,0.0,2026-06-19,group_stage,2026,,,1.21,0.32,wc_2026_live,Completed
+32,Türkiye,Paraguay,0.0,1.0,2026-06-19,group_stage,2026,,,0.4,0.3,wc_2026_live,Completed
+33,Germany,Côte d'Ivoire,2.0,1.0,2026-06-20,group_stage,2026,,,1.85,0.72,wc_2026_live,Completed
+34,Ecuador,Curaçao,0.0,0.0,2026-06-20,group_stage,2026,,,1.92,0.08,wc_2026_live,Completed
+35,Netherlands,Sweden,5.0,1.0,2026-06-20,group_stage,2026,,,3.45,0.88,wc_2026_live,Completed
+36,Tunisia,Japan,0.0,4.0,2026-06-20,group_stage,2026,,,0.35,3.12,wc_2026_live,Completed
+37,Belgium,IR Iran,0.0,0.0,2026-06-21,group_stage,2026,,,1.45,0.62,wc_2026_live,Completed
+38,New Zealand,Egypt,1.0,3.0,2026-06-21,group_stage,2026,,,0.55,2.15,wc_2026_live,Completed
+39,Spain,Saudi Arabia,4.0,0.0,2026-06-21,group_stage,2026,,,3.28,0.25,wc_2026_live,Completed
+40,Uruguay,Cabo Verde,2.0,2.0,2026-06-21,group_stage,2026,,,1.65,1.1,wc_2026_live,Completed
+41,France,Iraq,3.0,0.0,2026-06-22,group_stage,2026,,,2.21,0.45,wc_2026_live,Completed
+42,Norway,Senegal,3.0,2.0,2026-06-22,group_stage,2026,,,1.95,1.48,wc_2026_live,Completed
+43,Argentina,Austria,2.0,0.0,2026-06-22,group_stage,2026,,,1.78,0.55,wc_2026_live,Completed
+44,Jordan,Algeria,1.0,2.0,2026-06-22,group_stage,2026,,,0.88,1.92,wc_2026_live,Completed
+45,Portugal,Uzbekistan,5.0,0.0,2026-06-23,group_stage,2026,,,3.54,0.42,wc_2026_live,Completed
+46,Colombia,Congo DR,1.0,0.0,2026-06-23,group_stage,2026,,,1.62,0.58,wc_2026_live,Completed
+47,England,Ghana,0.0,0.0,2026-06-23,group_stage,2026,,,1.12,0.89,wc_2026_live,Completed
+48,Panama,Croatia,0.0,1.0,2026-06-23,group_stage,2026,,,0.42,1.48,wc_2026_live,Completed
+49,Czechia,Mexico,0.0,3.0,2026-06-24,group_stage,2026,,,1.1,1.27,wc_2026_live,Completed
+50,South Africa,South Korea,1.0,0.0,2026-06-24,group_stage,2026,,,1.26,1.39,wc_2026_live,Completed
+51,Switzerland,Canada,2.0,1.0,2026-06-24,group_stage,2026,,,0.71,1.35,wc_2026_live,Completed
+52,Bosnia and Herzegovina,Qatar,3.0,1.0,2026-06-24,group_stage,2026,,,1.48,0.95,wc_2026_live,Completed
+53,Scotland,Brazil,0.0,3.0,2026-06-25,group_stage,2026,,,0.45,2.18,wc_2026_live,Completed
+54,Morocco,Haiti,4.0,2.0,2026-06-25,group_stage,2026,,,2.35,1.12,wc_2026_live,Completed
+55,Türkiye,USA,3.0,2.0,2026-06-25,group_stage,2026,,,1.62,1.45,wc_2026_live,Completed
+56,Paraguay,Australia,0.0,0.0,2026-06-25,group_stage,2026,,,0.55,0.48,wc_2026_live,Completed
+57,Ecuador,Germany,2.0,1.0,2026-06-26,group_stage,2026,,,1.28,1.55,wc_2026_live,Completed
+58,Curaçao,Côte d'Ivoire,0.0,2.0,2026-06-26,group_stage,2026,,,0.32,1.68,wc_2026_live,Completed
+59,Tunisia,Netherlands,1.0,3.0,2026-06-26,group_stage,2026,,,0.62,2.15,wc_2026_live,Completed
+60,Japan,Sweden,1.0,1.0,2026-06-26,group_stage,2026,,,1.12,0.95,wc_2026_live,Completed
+61,New Zealand,Belgium,1.0,5.0,2026-06-27,group_stage,2026,,,0.48,3.25,wc_2026_live,Completed
+62,Egypt,IR Iran,1.0,1.0,2026-06-27,group_stage,2026,,,0.85,0.92,wc_2026_live,Completed
+63,Uruguay,Spain,0.0,1.0,2026-06-27,group_stage,2026,,,0.78,1.35,wc_2026_live,Completed
+64,Cabo Verde,Saudi Arabia,0.0,0.0,2026-06-27,group_stage,2026,,,0.42,0.38,wc_2026_live,Completed
+65,Norway,France,1.0,4.0,2026-06-26,group_stage,2026,,,1.3,0.96,wc_2026_live,Completed
+66,Senegal,Iraq,5.0,0.0,2026-06-26,group_stage,2026,,,3.01,0.14,wc_2026_live,Completed
+67,Jordan,Argentina,1.0,3.0,2026-06-27,group_stage,2026,,,0.76,2.13,wc_2026_live,Completed
+68,Algeria,Austria,3.0,3.0,2026-06-27,group_stage,2026,,,1.62,1.44,wc_2026_live,Completed
+69,Colombia,Portugal,0.0,0.0,2026-06-28,group_stage,2026,,,1.62,0.73,wc_2026_live,Completed
+70,Congo DR,Uzbekistan,3.0,1.0,2026-06-28,group_stage,2026,,,2.35,0.2,wc_2026_live,Completed
+71,Panama,England,0.0,2.0,2026-06-28,group_stage,2026,,,0.69,1.39,wc_2026_live,Completed
+72,Croatia,Ghana,2.0,1.0,2026-06-28,group_stage,2026,,,0.42,0.74,wc_2026_live,Completed
+73,South Africa,Canada,0.0,1.0,2026-06-29,round_of_32,2026,,,0.13,1.32,wc_2026_live,Completed
+74,Brazil,Japan,2.0,1.0,2026-06-29,round_of_32,2026,,,1.69,0.23,wc_2026_live,Completed
+75,Germany,Paraguay,1.0,1.0,2026-06-30,round_of_32,2026,,,0.72,0.42,wc_2026_live,Completed
+76,Netherlands,Morocco,1.0,1.0,2026-06-30,round_of_32,2026,,,0.23,1.4,wc_2026_live,Completed
+77,Côte d'Ivoire,Norway,,,2026-06-30,round_of_32,2026,,,,,wc_2026_live,Scheduled
+78,France,Sweden,,,2026-07-01,round_of_32,2026,,,,,wc_2026_live,Scheduled
+79,Mexico,Ecuador,,,2026-07-01,round_of_32,2026,,,,,wc_2026_live,Scheduled
+80,England,Congo DR,,,2026-07-01,round_of_32,2026,,,,,wc_2026_live,Scheduled
+81,Belgium,Senegal,,,2026-07-02,round_of_32,2026,,,,,wc_2026_live,Scheduled
+82,USA,Bosnia and Herzegovina,,,2026-07-02,round_of_32,2026,,,,,wc_2026_live,Scheduled
+83,Spain,Austria,,,2026-07-03,round_of_32,2026,,,,,wc_2026_live,Scheduled
+84,Portugal,Croatia,,,2026-07-03,round_of_32,2026,,,,,wc_2026_live,Scheduled
+85,Switzerland,Algeria,,,2026-07-03,round_of_32,2026,,,,,wc_2026_live,Scheduled
+86,Australia,Egypt,,,2026-07-04,round_of_32,2026,,,,,wc_2026_live,Scheduled
+87,Argentina,Cabo Verde,,,2026-07-04,round_of_32,2026,,,,,wc_2026_live,Scheduled
+88,Colombia,Ghana,,,2026-07-04,round_of_32,2026,,,,,wc_2026_live,Scheduled
+89,Canada,Unknown,,,2026-07-04,round_of_16,2026,,,,,wc_2026_live,Scheduled

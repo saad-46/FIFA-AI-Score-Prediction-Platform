@@ -29,6 +29,7 @@ from app.models.match import SavedPrediction
 from app.schemas.analytics import RecentPredictionSummary
 from app.schemas.prediction import (
     HeadToHeadStats,
+    PredictionExplanation,
     PredictionInsight,
     PredictionResult,
     ScoреlineProb,
@@ -120,6 +121,21 @@ async def run_prediction(
     except (ValueError, AttributeError):
         h_score, a_score = 1, 1
 
+    # ── SHAP explanation ──────────────────────────────────────────────────────
+    # predictor.py's PredictionOutput.to_dict() always includes this key
+    # (falling back to {} when the explainer isn't ready — see
+    # explainability.py), but it was previously never read back out here, so
+    # every prediction response's `prediction_explanation` silently stayed
+    # None regardless of what SHAP actually computed. PredictionExplanation
+    # and FeatureImpact are both generic over feature name (no hardcoded
+    # feature list), so newly added features from the Feature Engineering
+    # wave (e.g. fifa_rank_diff, knockout_experience_diff) surface here
+    # automatically whenever SHAP ranks them among the top drivers.
+    raw_explanation = pred.get("prediction_explanation") or {}
+    prediction_explanation = (
+        PredictionExplanation(**raw_explanation) if raw_explanation else None
+    )
+
     result = PredictionResult(
         prediction_id=str(uuid.uuid4()),
         home_team=home_team,
@@ -133,6 +149,7 @@ async def run_prediction(
         away_win_probability=pred["away_win_probability"],
         most_likely_score=most_likely,
         top_scorelines=top_scorelines,
+        prediction_explanation=prediction_explanation,
         confidence_score=pred["confidence_score"],
         model_version=pred.get("model_version", settings.MODEL_VERSION),
         insights=insights,

@@ -166,3 +166,141 @@ These numbers describe the simulator itself; end-to-end `POST
 DataFrame initialization (cached at module level in `tournament.py` after
 the first call) and the Poisson-sampling cost of the actual Monte Carlo
 loop, which scales with `n_simulations`.
+
+## Tournament Engine audit — 2026-07-03 (in-progress tournament + new data wave)
+
+By 2026-07-03 the real World Cup is in progress: 89 real 2026 matches exist
+in `backend/app/data/processed/matches_historical.csv` (Data Engineering
+wave output), with the group stage and part of the Round of 32 already
+played. This pass verified the prior audit's automatic-sourcing fix still
+holds, and extended the simulator to actually use the real, in-progress
+results rather than blindly re-simulating matches that have already
+happened.
+
+### 1. No manual group/schedule input — confirmed, nothing to remove
+
+Re-verified `tournament_simulator.py` and `endpoints/tournament.py` end to
+end: there is no hardcoded/default team or group list anywhere in either
+file. The only two paths into `TournamentSimulator.simulate_tournament` are
+`get_groups_as_team_codes()` (official FIFA 2026 data, used when
+`use_fifa_2026_groups=true`, the common case) or explicit client-submitted
+groups validated by `TournamentSimulationRequest`'s Pydantic model (which
+422s if `groups` is missing/malformed/wrong-count — this is a legitimate
+"simulate a hypothetical bracket" feature, not a fallback default). No
+change was needed here.
+
+### 2. Completed-vs-simulated match handling — implemented
+
+Previously the simulator ran a blind Monte Carlo simulation of the *entire*
+tournament on every call, even for matches that have already been played in
+reality. Since the tournament is genuinely in progress, this was a real
+correctness gap: it treated known facts (e.g. "Canada beat South Africa
+1-0 in the Round of 32") as still-uncertain coin flips.
+
+**What changed** (`tournament_simulator.py`):
+
+- `_load_completed_2026_results()` reads
+  `backend/app/data/processed/matches_historical.csv`, filters to
+  `tournament_year == 2026 & status == "Completed"` (76 matches as of
+  2026-07-03: 72 group-stage + 4 Round-of-32), and translates team names
+  into FIFA codes via `teams_reference.csv`'s canonical_name → fifa_code
+  map (`_load_name_to_code_map()`) — matches_historical.csv uses display
+  names like "South Korea" / "Bosnia and Herzegovina", while the simulator
+  works entirely in groups.json/schedule.json's fifa_codes throughout, so
+  this translation step is required for the two to line up.
+- `_simulate_match_static()` now takes an optional `real_results` lookup: if
+  the requested matchup was already played, it returns the REAL score
+  instead of drawing from the Poisson model. Matches still `"Scheduled"`
+  (including the one still-undetermined Round-of-16 slot for Canada's
+  opponent, recorded as `"Unknown"` in the source data) are never in this
+  dict, so they always fall through to genuine Monte Carlo simulation —
+  the simulator never fabricates a result for an unplayed match.
+- **Knockout-draw subtlety (a real bug found and fixed during this pass):**
+  a completed Round-of-32 match can have a level regulation score in the
+  real data (e.g. Germany 1-1 Paraguay) — but a knockout match always has a
+  real winner (extra time / penalties), and `matches_historical.csv` only
+  records the regulation scoreline, not who actually won the shootout. The
+  first implementation naively returned `"Draw"` as the "winner" for such a
+  match, which then crashed downstream with `KeyError: 'Draw'` when the
+  bracket logic tried to advance `"Draw"` as if it were a team code. Fixed:
+  for a knockout match whose real recorded score is level, the REAL
+  regulation goals are used as the *starting* score, but extra
+  time/penalties are still genuinely simulated from there (since the real
+  shootout winner isn't data we have) — so e.g. Germany vs Paraguay now
+  correctly shows a probabilistic split between the two teams reaching the
+  Round of 16, instead of crashing or fabricating a winner.
+- **Round-of-32 bracket correction (a second real bug found and fixed):**
+  the group stage is now fully complete in reality, so every simulation's
+  standings should reproduce the same 12 winners / 12 runners-up / 8
+  best-thirds as real life — but the simulator's own Pot1/Pot2 pairing
+  heuristic (pair each Pot1 team with the first available different-group
+  Pot2 team, in list order) does **not** reliably reproduce FIFA's actual
+  seeded R32 pairings even when the qualified teams match exactly. This
+  meant real R32 results only got consulted in the fraction of simulations
+  where the heuristic pairing happened to coincide with reality (observed:
+  South Africa, who really lost to Canada, was incorrectly shown reaching
+  the Round of 16 in ~68% of simulations). Fixed by adding
+  `_load_real_r32_bracket()`, which reads the actual Round-of-32 pairings
+  straight from `schedule.json` (already resolved to real fifa_codes, not
+  `W##`/`L##` placeholders, and independently verified against real group
+  results by the Data Engineering wave). `_run_simulation_batch` now uses
+  this real bracket directly whenever a simulation's qualified teams exactly
+  match the real bracket's 32 teams, falling back to the heuristic pairing
+  otherwise (e.g. custom/hypothetical groups). After this fix, South Africa
+  (real, decided loss) shows `r16 = 0.0` deterministically, and Germany/
+  Paraguay (real draw, undecided shootout) show a genuine probabilistic
+  split summing to 1.0.
+- `TournamentSimulator.__init__` gained `use_real_results: bool = True`.
+  When enabled (the default), `self.real_results` and `self.real_r32_bracket`
+  are loaded once and threaded through every simulation batch. The API layer
+  (`POST /tournament/simulate`) exposes this as `use_real_results` on
+  `TournamentSimulationRequest` (default `true`), and forces it off whenever
+  `use_fifa_2026_groups` is `false` — custom/hypothetical team labels can
+  never coincide with a real fixture, so there's nothing to look up in that
+  case, and forcing it off avoids pointless lookup work.
+- Regression coverage added to `backend/tests/test_tournament.py`: real
+  group-stage draw substitution (order-independent), real knockout-draw
+  handling (never returns `"Draw"` as a final winner, shows genuine
+  variance), the full real-bracket-override integration path against the
+  actual `groups.json`/`schedule.json`/`matches_historical.csv` data
+  (asserting South Africa's real elimination is reproduced every time), and
+  the `use_real_results` flag's on/off plumbing.
+
+### 3. Team-strength ratings (`teams_reference.csv`) wired into the simulator
+
+`teams_reference.csv` (48 rows: canonical_name, fifa_code, group,
+confederation, fifa_ranking_pre_tournament, elo_rating) was previously
+unconsumed anywhere in the backend. In scope for the tournament simulator
+specifically: the **last-resort fallback** used when a matchup prediction
+call itself raises (inside `_precompute_matchups`'s per-pair retry loop,
+after the batched `predict_batch()` call has already failed for the whole
+tournament). This used to be a flat, team-agnostic guess (1.0/1.0 xG,
+33/33/34% probabilities) regardless of how mismatched the two teams
+actually are — the exact "sparse-data fallback ignores team strength" gap
+called out for this wave, most visible for first-time-qualified nations
+(Curaçao, Jordan, Iraq, Uzbekistan, Cabo Verde, Congo DR, Haiti — 3-4
+historical matches each, all from the 2026 tournament itself, per
+DATA_QUALITY_REPORT.md).
+
+`TournamentSimulator._elo_fallback_prediction()` now uses
+`teams_reference.csv`'s `elo_rating` (loaded once via
+`_load_team_elo_ratings()`, keyed by fifa_code — same name→code bridge as
+`real_results`) and the same Elo expected-score formula the feature
+pipeline itself uses (`_elo_expected` in
+`app/ml/features/feature_engineering.py`, replicated locally rather than
+imported, to avoid coupling the simulator to feature-engineering internals
+beyond this narrow read) to turn the rating gap into a win-probability
+estimate, splitting a neutral total-goals expectation proportionally. Falls
+back to the previous flat neutral guess only if either team's code isn't
+found in `teams_reference.csv`.
+
+This is deliberately narrow: it does **not** touch
+`feature_engineering.py`'s own `BASE_ELO = 1500.0` fallback (used inside
+`compute_dynamic_elo`/`_latest_elo_for_team` for the *trained model's*
+own Elo features when a team has no prior match in the DataFrame passed to
+it) — that fallback governs the model's actual feature vector at both
+training and inference time and is explicitly the Feature Engineering
+wave's scope, not the tournament simulator's. The `_elo_fallback_prediction`
+wired in here only ever fires when the model call itself errors out, i.e.
+it's a defensive fallback for a fallback path, not a change to how the
+trained model is normally consulted.

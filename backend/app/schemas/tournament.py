@@ -24,6 +24,17 @@ class TournamentSimulationRequest(BaseModel):
         ),
     )
     n_simulations: int = Field(10000, ge=100, le=100000, description="Number of Monte Carlo simulations to run")
+    use_real_results: bool = Field(
+        True,
+        description=(
+            "If true (default), matchups already played in the real, in-progress 2026 tournament "
+            "(per matches_historical.csv) use their real recorded score instead of being simulated; "
+            "matches not yet played are always genuinely Monte Carlo simulated regardless of this "
+            "flag. Only meaningful when use_fifa_2026_groups is true (custom team labels can never "
+            "match a real fixture); set false to simulate the full FIFA 2026 bracket hypothetically "
+            "from a blank slate."
+        ),
+    )
 
     @model_validator(mode="after")
     def _validate_groups(self) -> "TournamentSimulationRequest":

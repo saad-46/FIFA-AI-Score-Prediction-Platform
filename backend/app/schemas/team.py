@@ -15,6 +15,13 @@ class TeamBase(BaseModel):
 
 class TeamResponse(TeamBase):
     id: str
+    # WC2026 ranking/Elo fields — see DATABASE_SCHEMA.md / RANKINGS_INTEGRATION.md.
+    # NULL for historical-only teams not in the 2026 field (see teams_reference.csv
+    # coverage gap documented there); never fabricated.
+    elo_rating: Optional[int] = None
+    fifa_code: Optional[str] = None
+    wc2026_group: Optional[str] = None
+    ranking_updated_at: Optional[datetime] = None
     created_at: datetime
 
     model_config = {"from_attributes": True}

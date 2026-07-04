@@ -13,6 +13,13 @@ from pydantic import BaseModel, Field, field_validator
 
 class FeatureImpact(BaseModel):
     feature: str
+    # Human-readable label from PredictionExplainer._format_feature_name()
+    # (app/ml/explainability.py). That formatter has a generic fallback
+    # (split on '_', capitalize each part) for any feature name it doesn't
+    # special-case, so newly added features — e.g. fifa_rank_diff,
+    # knockout_experience_diff from the Feature Engineering wave — always
+    # get a readable label rather than being silently dropped or omitted.
+    readable_name: Optional[str] = None
     impact: float
 
 class PredictionExplanation(BaseModel):

@@ -10,6 +10,7 @@ from typing import Optional
 import asyncio
 from sqlalchemy import text
 from app.db.database import engine
+from app.ml.features.feature_engineering import compute_dynamic_elo
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +48,8 @@ async def load_matches_dataframe(force_refresh: bool = False) -> pd.DataFrame:
                     m.tournament,
                     m.neutral_venue,
                     m.city,
-                    m.country
+                    m.country,
+                    m.stage
                 FROM matches m
                 JOIN teams ht ON m.home_team_id = ht.id
                 JOIN teams at ON m.away_team_id = at.id
@@ -63,16 +65,30 @@ async def load_matches_dataframe(force_refresh: bool = False) -> pd.DataFrame:
             "date", "home_team", "away_team",
             "home_score", "away_score",
             "tournament", "neutral_venue",
-            "city", "country",
+            "city", "country", "stage",
         ],
     )
     df["date"] = pd.to_datetime(df["date"])
     df["home_score"] = pd.to_numeric(df["home_score"], errors="coerce")
     df["away_score"] = pd.to_numeric(df["away_score"], errors="coerce")
 
+    # ── Elo enrichment (bug fix) ──────────────────────────────────────────────
+    # Training (train.py::build_training_dataset) calls compute_dynamic_elo(df)
+    # before building features, so home_elo/away_elo/elo_difference columns
+    # exist and carry real signal at train time. The live request path used to
+    # skip this step entirely: build_feature_vector()'s Elo lookup reads those
+    # columns off the DataFrame it's given and silently falls back to
+    # BASE_ELO (1500.0) for both teams when the columns are absent, so
+    # elo_difference was a constant 0.0 for every served prediction even
+    # though the model was trained to weight real Elo gaps. Running the same
+    # compute_dynamic_elo() here — once per 6h cache refresh, not per request —
+    # closes that train/serve skew for both the predictor and the tournament
+    # simulator (both consume this same cached, function-enriched DataFrame).
+    df = compute_dynamic_elo(df)
+
     _cache = df
     _cache_time = now
-    logger.info(f"Loaded {len(df)} matches into cache")
+    logger.info(f"Loaded {len(df)} matches into cache (Elo ratings computed)")
     return df
 
 

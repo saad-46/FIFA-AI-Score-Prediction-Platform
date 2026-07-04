@@ -8,11 +8,16 @@ to validate a newly trained model bundle before deploying it. See
 
 - Python 3.12+, backend dependencies installed (`pip install -r
   backend/requirements.txt`).
-- A reachable Postgres database (`DATABASE_URL` in `backend/.env`) with the
-  schema from `database/schema.sql` applied and populated with **completed**
-  matches (`matches.status = 'completed'`, non-null `home_score`/
-  `away_score`). `train.py::load_data()` filters on exactly these
-  conditions.
+- **As of the 2026-07-03/04 WC2026 retrain, `train.py::load_data()` reads
+  training data directly from
+  `backend/app/data/processed/matches_historical.csv`** — no reachable
+  Postgres database is required to run training today. This is a deliberate
+  change (the live Supabase DB was unreachable from the sandbox this retrain
+  was done in); see `DATA_PIPELINE.md` §2 and `MODEL_PIPELINE.md`. A
+  DB-backed alternative, `train.py::load_data_from_db()`, is kept in the
+  same module for environments where Postgres *is* reachable, but is not
+  called by `main()` by default — swap it in manually if you need the live
+  DB as the source instead of the CSV.
 - Optuna installed if you intend to run hyperparameter search
   (`pip install optuna`) — `hyperparameter_search.py` raises `ImportError`
   with an install hint if it's missing; it is not a hard dependency of
@@ -20,16 +25,31 @@ to validate a newly trained model bundle before deploying it. See
 
 ## Data requirements
 
-- Training uses **only** matches with both scores present — scheduled or
-  live matches are excluded at the SQL level, not just filtered later.
-- `build_training_dataset()` skips the first 100 rows of the (date-sorted)
-  history (`MIN_HISTORY = 100`) because rolling-window features need prior
-  matches to compute anything meaningful — the very first matches in the
-  dataset have no history to draw on.
-- No explicit minimum total row count is enforced, but with `MIN_HISTORY =
-  100` skipped and a 70/15/15 chronological split, very small datasets will
-  produce a vanishingly small (or empty) validation/test split. Treat a few
-  thousand completed matches as a practical floor for meaningful splits.
+- Training uses **only** matches with `status == "Completed"` and both
+  scores present — scheduled/unplayed matches are excluded at load time
+  (13 such rows in the current `matches_historical.csv`), not just filtered
+  later. The DB-backed `load_data_from_db()` path enforces the equivalent
+  filter at the SQL level (`WHERE m.status = 'completed' AND ... IS NOT
+  NULL`).
+- `build_training_dataset()` skips the first `MIN_HISTORY` rows of the
+  (date-sorted) history because rolling-window features need prior matches
+  to compute anything meaningful — the very first matches in the dataset
+  have no history to draw on. **`MIN_HISTORY` is now `30`** (reduced from
+  the old broad-dataset default of 100) specifically because the WC-only
+  corpus (`matches_historical.csv`, 419 rows, starting at 2002 with no prior
+  history at all) is small enough that skipping 100 rows would silently
+  discard almost two entire World Cups (36% of the historical data) before
+  a single feature row is built.
+- No explicit minimum total row count is enforced. With the current
+  WC-only corpus (406 completed matches) this is a genuinely small dataset
+  for a 134-feature XGBoost model (163 before the empirical feature-pruning
+  pass — see `FEATURE_ENGINEERING.md` §5) — see `MODEL_EVALUATION.md`'s stated
+  caveat about wide standard errors on every reported metric. Training
+  also supports `expanding_window_splits()` (walk-forward CV by tournament
+  edition) alongside the single `chronological_split()`, specifically
+  because a single held-out slice of this size is too noisy to trust as
+  the sole evidence of generalization — see `MODEL_EVALUATION.md`'s
+  cross-validation table.
 
 ## Running training
 

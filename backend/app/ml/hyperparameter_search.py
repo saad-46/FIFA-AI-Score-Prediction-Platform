@@ -132,95 +132,101 @@ def _suggest_classifier_params(trial: optuna.Trial) -> dict:
 class HyperparamObjective:
     """
     Optuna objective that trains all three models with trial-suggested
-    hyperparameters and returns a composite score.
+    hyperparameters and returns a composite score, AVERAGED across the
+    walk-forward expanding-window CV folds produced by
+    ``train.expanding_window_splits()`` (one fold per World Cup boundary —
+    see ``train.py``'s module docstring for the full rationale).
 
-    The data splits are computed once and reused across all trials.
+    A single chronological validation slice on a 406-row dataset is noisy
+    enough that Optuna could easily overfit its hyperparameter choice to
+    whatever quirks happen to be in that one slice. Averaging the composite
+    score over all folds gives a materially more stable search signal at
+    the cost of ~5-6x more model fits per trial — negligible here since
+    each fold's train set tops out at 330 rows.
+
+    Data (X, per-row dates, targets) is precomputed once and reused across
+    trials; the fold plan is precomputed once via ``expanding_window_splits``.
     """
 
     def __init__(
         self,
-        X_train_s: np.ndarray,
-        X_val_s: np.ndarray,
-        y_home_train: np.ndarray,
-        y_home_val: np.ndarray,
-        y_away_train: np.ndarray,
-        y_away_val: np.ndarray,
-        y_result_train: np.ndarray,
-        y_result_val: np.ndarray,
+        X: np.ndarray,
+        y_home: np.ndarray,
+        y_away: np.ndarray,
+        y_result: np.ndarray,
+        folds: list[dict],
     ) -> None:
-        self.X_train_s = X_train_s
-        self.X_val_s = X_val_s
-        self.y_home_train = y_home_train
-        self.y_home_val = y_home_val
-        self.y_away_train = y_away_train
-        self.y_away_val = y_away_val
-        self.y_result_train = y_result_train
-        self.y_result_val = y_result_val
-
-        # Pre-compute base sample weights (class-balanced)
-        self._base_weights = compute_sample_weights(y_result_train)
+        self.X = X
+        self.y_home = y_home
+        self.y_away = y_away
+        self.y_result = y_result
+        self.folds = folds
 
     def __call__(self, trial: optuna.Trial) -> float:
-        # ── Regressor params ──────────────────────────────────────────────────
         reg_params = _suggest_regressor_params(trial)
-
-        # ── Home regressor ────────────────────────────────────────────────────
-        home_model = xgb.XGBRegressor(**reg_params)
-        home_model.fit(
-            self.X_train_s, self.y_home_train,
-            eval_set=[(self.X_val_s, self.y_home_val)],
-            verbose=0,
-        )
-        home_preds = np.clip(home_model.predict(self.X_val_s), 0, 10)
-        home_mae = mean_absolute_error(self.y_home_val, home_preds)
-
-        # ── Away regressor ────────────────────────────────────────────────────
-        away_model = xgb.XGBRegressor(**reg_params)
-        away_model.fit(
-            self.X_train_s, self.y_away_train,
-            eval_set=[(self.X_val_s, self.y_away_val)],
-            verbose=0,
-        )
-        away_preds = np.clip(away_model.predict(self.X_val_s), 0, 10)
-        away_mae = mean_absolute_error(self.y_away_val, away_preds)
-
-        # Prune early if regressors are very poor
-        trial.report(home_mae + away_mae, step=0)
-        if trial.should_prune():
-            raise optuna.TrialPruned()
-
-        # ── Classifier params ─────────────────────────────────────────────────
         clf_params = _suggest_classifier_params(trial)
-
-        # Draw weight multiplier — boosts draw-class samples further
         draw_weight_mult = trial.suggest_float("draw_weight_mult", 1.0, 5.0)
-        sample_weights = self._base_weights.copy()
-        draw_mask = self.y_result_train == 1
-        sample_weights[draw_mask] *= draw_weight_mult
 
-        # ── Classifier ────────────────────────────────────────────────────────
-        clf_model = xgb.XGBClassifier(**clf_params)
-        clf_model.fit(
-            self.X_train_s, self.y_result_train,
-            sample_weight=sample_weights,
-            eval_set=[(self.X_val_s, self.y_result_val)],
-            verbose=0,
-        )
+        # Early stopping needs an eval_set; walk-forward folds don't carve
+        # out a third split, so early stopping is disabled for the CV
+        # objective itself (n_estimators is a searched hyperparameter, so
+        # Optuna already controls tree count directly).
+        reg_params_no_es = {k: v for k, v in reg_params.items() if k != "early_stopping_rounds"}
+        clf_params_no_es = {k: v for k, v in clf_params.items() if k != "early_stopping_rounds"}
 
-        clf_proba = clf_model.predict_proba(self.X_val_s)
-        clf_preds = clf_proba.argmax(axis=1)
-        clf_acc = accuracy_score(self.y_result_val, clf_preds)
+        fold_accs, fold_draw_recalls, fold_draw_f1s = [], [], []
+        fold_home_maes, fold_away_maes = [], []
 
-        report = classification_report(
-            self.y_result_val, clf_preds, output_dict=True, zero_division=0,
-        )
-        draw_recall = report.get("1", {}).get("recall", 0.0)
-        draw_f1 = report.get("1", {}).get("f1-score", 0.0)
+        for fold_i, fold in enumerate(self.folds):
+            train_idx, val_idx = fold["train_idx"], fold["val_idx"]
 
-        # Prune if classifier is poor
-        trial.report(clf_acc, step=1)
-        if trial.should_prune():
-            raise optuna.TrialPruned()
+            scaler = StandardScaler()
+            X_tr_s = scaler.fit_transform(self.X[train_idx])
+            X_va_s = scaler.transform(self.X[val_idx])
+
+            y_home_tr, y_home_va = self.y_home[train_idx], self.y_home[val_idx]
+            y_away_tr, y_away_va = self.y_away[train_idx], self.y_away[val_idx]
+            y_res_tr, y_res_va = self.y_result[train_idx], self.y_result[val_idx]
+
+            home_model = xgb.XGBRegressor(**reg_params_no_es)
+            home_model.fit(X_tr_s, y_home_tr, verbose=0)
+            home_preds = np.clip(home_model.predict(X_va_s), 0, 10)
+            fold_home_maes.append(mean_absolute_error(y_home_va, home_preds))
+
+            away_model = xgb.XGBRegressor(**reg_params_no_es)
+            away_model.fit(X_tr_s, y_away_tr, verbose=0)
+            away_preds = np.clip(away_model.predict(X_va_s), 0, 10)
+            fold_away_maes.append(mean_absolute_error(y_away_va, away_preds))
+
+            base_weights = compute_sample_weights(y_res_tr)
+            sample_weights = base_weights.copy()
+            sample_weights[y_res_tr == 1] *= draw_weight_mult
+
+            clf_model = xgb.XGBClassifier(**clf_params_no_es)
+            clf_model.fit(X_tr_s, y_res_tr, sample_weight=sample_weights, verbose=0)
+
+            clf_proba = clf_model.predict_proba(X_va_s)
+            clf_preds = clf_proba.argmax(axis=1)
+            fold_accs.append(accuracy_score(y_res_va, clf_preds))
+
+            report = classification_report(
+                y_res_va, clf_preds, output_dict=True, zero_division=0,
+            )
+            fold_draw_recalls.append(report.get("1", {}).get("recall", 0.0))
+            fold_draw_f1s.append(report.get("1", {}).get("f1-score", 0.0))
+
+            # Prune after the first fold if things look clearly bad — saves
+            # time on obviously poor trials without needing all folds.
+            if fold_i == 0:
+                trial.report(fold_accs[0], step=0)
+                if trial.should_prune():
+                    raise optuna.TrialPruned()
+
+        clf_acc = float(np.mean(fold_accs))
+        draw_recall = float(np.mean(fold_draw_recalls))
+        draw_f1 = float(np.mean(fold_draw_f1s))
+        home_mae = float(np.mean(fold_home_maes))
+        away_mae = float(np.mean(fold_away_maes))
 
         # ── Composite objective (MAXIMISE) ────────────────────────────────────
         # Components (all in [0, 1] or scaled to be):
@@ -232,7 +238,6 @@ class HyperparamObjective:
         away_mae_score = max(0.0, (2.0 - away_mae) / 2.0)
 
         draw_penalty = 0.0
-
         if draw_recall > 0.75 and clf_acc < 0.50:
             draw_penalty = 0.10
 
@@ -251,6 +256,7 @@ class HyperparamObjective:
         trial.set_user_attr("draw_f1", round(draw_f1, 4))
         trial.set_user_attr("home_mae", round(home_mae, 4))
         trial.set_user_attr("away_mae", round(away_mae, 4))
+        trial.set_user_attr("n_folds", len(self.folds))
 
         return composite
 
@@ -262,6 +268,16 @@ class HyperparamObjective:
 def run_search(n_trials: int = 100) -> dict:
     """
     Run the full Optuna hyperparameter search.
+
+    The search objective is averaged over walk-forward expanding-window CV
+    folds (see ``train.expanding_window_splits()`` / ``HyperparamObjective``
+    docstring) rather than a single chronological validation slice — this
+    dataset (406 completed matches) is too small for a single slice to give
+    a trustworthy search signal. The best trial found this way is then
+    re-validated once on a genuinely held-out slice that was **never** seen
+    during the search: the 2026 World Cup's completed matches (via
+    ``train.chronological_split_by_date``), giving an honest final number
+    that isn't contaminated by the same folds Optuna optimised against.
 
     Parameters
     ----------
@@ -275,7 +291,8 @@ def run_search(n_trials: int = 100) -> dict:
     from app.ml.train import (
         load_data,
         build_training_dataset,
-        chronological_split,
+        chronological_split_by_date,
+        expanding_window_splits,
     )
 
     logger.info("=" * 60)
@@ -284,26 +301,29 @@ def run_search(n_trials: int = 100) -> dict:
 
     # ── Load & prepare data ───────────────────────────────────────────────────
     df = load_data()
-    X, y_home, y_away, y_result = build_training_dataset(df)
+    X, y_home, y_away, y_result, match_dates = build_training_dataset(df)
+    X_filled = X.fillna(0.0)
 
-    (
-        X_train, X_val, X_test,
-        (y_home_train, y_home_val, y_home_test),
-        (y_away_train, y_away_val, y_away_test),
-        (y_result_train, y_result_val, y_result_test),
-    ) = chronological_split(X, y_home, y_away, y_result)
+    # CV folds for the search itself (train-on-history WCs excluding 2026,
+    # i.e. folds 1-5: validate on 2006/2010/2014/2018/2022 in turn — 2026 is
+    # deliberately withheld from the search entirely, reserved as the final
+    # untouched test set).
+    all_folds = expanding_window_splits(X_filled, match_dates)
+    search_folds = [f for f in all_folds if f["val_year"] < 2026]
+    logger.info(
+        "Search CV folds (2026 withheld as final test): %d folds -> %s",
+        len(search_folds),
+        [(f["train_years"], f["val_year"]) for f in search_folds],
+    )
 
-    scaler = StandardScaler()
-    X_train_s = scaler.fit_transform(X_train.fillna(0.0))
-    X_val_s   = scaler.transform(X_val.fillna(0.0))
-    X_test_s  = scaler.transform(X_test.fillna(0.0))
+    X_arr = X_filled.values
+    y_home_arr = y_home.values
+    y_away_arr = y_away.values
+    y_result_arr = y_result.values
 
     # ── Create objective ──────────────────────────────────────────────────────
     objective = HyperparamObjective(
-        X_train_s, X_val_s,
-        y_home_train.values, y_home_val.values,
-        y_away_train.values, y_away_val.values,
-        y_result_train.values, y_result_val.values,
+        X_arr, y_home_arr, y_away_arr, y_result_arr, search_folds,
     )
 
     # ── Run Optuna study ──────────────────────────────────────────────────────
@@ -372,10 +392,31 @@ def run_search(n_trials: int = 100) -> dict:
         "best_metrics":       best.user_attrs,
         "n_trials":           n_trials,
         "n_completed":        len(study.trials),
+        "cv_scheme": {
+            "type": "expanding_window_walk_forward_by_world_cup",
+            "search_folds": [
+                {"train_years": f["train_years"], "val_year": f["val_year"],
+                 "n_train": f["n_train"], "n_val": f["n_val"]}
+                for f in search_folds
+            ],
+            "final_test": "2026 completed matches (never seen during search)",
+        },
     }
 
-    # ── Validate on held-out test set ─────────────────────────────────────────
-    logger.info("Validating best params on TEST set …")
+    # ── Validate on held-out test set (2026, never seen during search) ───────
+    logger.info("Validating best params on TEST set (2026 completed matches) …")
+    (
+        X_train, X_val, X_test,
+        (y_home_train, y_home_val, y_home_test),
+        (y_away_train, y_away_val, y_away_test),
+        (y_result_train, y_result_val, y_result_test),
+    ) = chronological_split_by_date(X_filled, match_dates, y_home, y_away, y_result)
+
+    scaler = StandardScaler()
+    X_train_s = scaler.fit_transform(X_train)
+    X_val_s   = scaler.transform(X_val)
+    X_test_s  = scaler.transform(X_test)
+
     test_metrics = _validate_on_test(
         best_regressor_params, best_classifier_params, draw_weight_mult,
         X_train_s, X_test_s,

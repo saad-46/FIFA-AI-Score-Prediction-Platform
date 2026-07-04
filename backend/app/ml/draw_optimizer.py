@@ -290,7 +290,7 @@ def main() -> None:
     from app.ml.train import (
         load_data,
         build_training_dataset,
-        chronological_split,
+        chronological_split_by_date,
         _CLASSIFIER_PARAMS,
     )
 
@@ -300,15 +300,15 @@ def main() -> None:
 
     # ── 1. Load data & features ───────────────────────────────────────────────
     df = load_data()
-    X, y_home, y_away, y_result = build_training_dataset(df)
+    X, y_home, y_away, y_result, match_dates = build_training_dataset(df)
 
-    # ── 2. Chronological split ────────────────────────────────────────────────
+    # ── 2. Chronological split (test = 2026 completed matches) ────────────────
     (
         X_train, X_val, X_test,
         (y_home_train, y_home_val, y_home_test),
         (y_away_train, y_away_val, y_away_test),
         (y_result_train, y_result_val, y_result_test),
-    ) = chronological_split(X, y_home, y_away, y_result)
+    ) = chronological_split_by_date(X, match_dates, y_home, y_away, y_result)
 
     scaler = StandardScaler()
     X_train_s = scaler.fit_transform(X_train.fillna(0.0))

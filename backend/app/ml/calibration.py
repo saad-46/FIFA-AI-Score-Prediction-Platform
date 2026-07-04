@@ -364,7 +364,7 @@ def main() -> None:
     from app.ml.train import (
         load_data,
         build_training_dataset,
-        chronological_split,
+        chronological_split_by_date,
     )
     from app.ml.draw_optimizer import compute_sample_weights
 
@@ -373,14 +373,14 @@ def main() -> None:
     logger.info("=" * 60)
 
     df = load_data()
-    X, y_home, y_away, y_result = build_training_dataset(df)
+    X, y_home, y_away, y_result, match_dates = build_training_dataset(df)
 
     (
         X_train, X_val, X_test,
         (_, _, _),
         (_, _, _),
         (y_result_train, y_result_val, y_result_test),
-    ) = chronological_split(X, y_home, y_away, y_result)
+    ) = chronological_split_by_date(X, match_dates, y_home, y_away, y_result)
 
     from sklearn.preprocessing import StandardScaler
     import xgboost as xgb

@@ -1,30 +1,30 @@
 {
   "regressor_params": {
-    "n_estimators": 700,
-    "max_depth": 7,
-    "learning_rate": 0.007593739613361234,
-    "subsample": 0.7168578594140873,
-    "colsample_bytree": 0.6831809216468459,
-    "min_child_weight": 5,
-    "gamma": 0.7851759613930136,
-    "alpha": 0.028804169778805514,
-    "lambda": 2.814054972861252,
-    "objective": "reg:squarederror",
+    "n_estimators": 1800,
+    "max_depth": 10,
+    "learning_rate": 0.06928240963408402,
+    "subsample": 0.9996681097856346,
+    "colsample_bytree": 0.9314493106341608,
+    "min_child_weight": 9,
+    "gamma": 0.2750507489096764,
+    "alpha": 0.058276063072072656,
+    "lambda": 1.3260091465429973,
+    "objective": "count:poisson",
     "eval_metric": "rmse",
     "random_state": 42,
     "n_jobs": -1,
     "early_stopping_rounds": 100
   },
   "classifier_params": {
-    "n_estimators": 1300,
+    "n_estimators": 300,
     "max_depth": 3,
-    "learning_rate": 0.030860579740535368,
-    "subsample": 0.6682096494749166,
-    "colsample_bytree": 0.5325257964926398,
-    "min_child_weight": 10,
-    "gamma": 0.9656320330745594,
-    "alpha": 0.7246804518258448,
-    "lambda": 1.870761961280168,
+    "learning_rate": 0.0118312441906701,
+    "subsample": 0.635242712209058,
+    "colsample_bytree": 0.6192445244968612,
+    "min_child_weight": 4,
+    "gamma": 0.5728575969744261,
+    "alpha": 0.036920167395854235,
+    "lambda": 1.533860019997479,
     "objective": "multi:softprob",
     "num_class": 3,
     "eval_metric": "mlogloss",
@@ -32,23 +32,80 @@
     "n_jobs": -1,
     "early_stopping_rounds": 100
   },
-  "draw_weight_mult": 1.391,
-  "best_trial_number": 1,
-  "best_composite": 0.4963,
+  "draw_weight_mult": 1.7,
+  "best_trial_number": 56,
+  "best_composite": 0.4117,
   "best_metrics": {
-    "accuracy": 0.4782,
-    "draw_recall": 0.6489,
-    "draw_f1": 0.3946,
-    "home_mae": 1.0342,
-    "away_mae": 0.87
+    "accuracy": 0.4109,
+    "draw_recall": 0.303,
+    "draw_f1": 0.2374,
+    "home_mae": 1.0027,
+    "away_mae": 0.8635,
+    "n_folds": 5
   },
-  "n_trials": 20,
-  "n_completed": 20,
+  "n_trials": 60,
+  "n_completed": 60,
+  "cv_scheme": {
+    "type": "expanding_window_walk_forward_by_world_cup",
+    "search_folds": [
+      {
+        "train_years": [
+          2002
+        ],
+        "val_year": 2006,
+        "n_train": 25,
+        "n_val": 55
+      },
+      {
+        "train_years": [
+          2002,
+          2006
+        ],
+        "val_year": 2010,
+        "n_train": 80,
+        "n_val": 55
+      },
+      {
+        "train_years": [
+          2002,
+          2006,
+          2010
+        ],
+        "val_year": 2014,
+        "n_train": 135,
+        "n_val": 55
+      },
+      {
+        "train_years": [
+          2002,
+          2006,
+          2010,
+          2014
+        ],
+        "val_year": 2018,
+        "n_train": 190,
+        "n_val": 55
+      },
+      {
+        "train_years": [
+          2002,
+          2006,
+          2010,
+          2014,
+          2018
+        ],
+        "val_year": 2022,
+        "n_train": 245,
+        "n_val": 55
+      }
+    ],
+    "final_test": "2026 completed matches (never seen during search)"
+  },
   "test_set_metrics": {
-    "accuracy": 0.5103,
-    "draw_recall": 0.598,
-    "draw_f1": 0.3839,
-    "home_mae": 1.0342,
-    "away_mae": 0.8382
+    "accuracy": 0.3684,
+    "draw_recall": 0.1818,
+    "draw_f1": 0.2222,
+    "home_mae": 1.2186,
+    "away_mae": 0.8548
   }
 }

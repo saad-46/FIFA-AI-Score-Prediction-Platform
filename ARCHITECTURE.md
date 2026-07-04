@@ -71,7 +71,12 @@ here only for completeness.
 │  PostgreSQL (Supabase)│
 │  teams, matches,       │
 │  saved_predictions,    │
-│  profiles              │
+│  profiles, plus        │
+│  team_statistics /      │
+│  tournament_stages      │
+│  (WC2026 upgrade, see   │
+│  DATABASE_SCHEMA.md —   │
+│  not yet applied live)  │
 └───────────────────────┘
 ```
 

@@ -54,6 +54,12 @@ Thumbs.db
 # Keep the shipped production model bundle tracked; ignore ad-hoc local retraining output.
 *.pkl.tmp
 
+# Local rollback safety nets from retraining sessions — the pre-upgrade model
+# is already preserved in git history, so these duplicate binaries/reports
+# don't need to be version-controlled.
+*.bak
+*.prepruning.bak
+
 # === Loose reference/source data files at repo root (not part of the tracked pipeline) ===
 /*.xlsx
 /*.csv

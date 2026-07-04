@@ -1,0 +1,30 @@
+{
+  "selected_method": "isotonic",
+  "isotonic": {
+    "brier_scores": {
+      "Away Win": 0.19229,
+      "Draw": 0.16335,
+      "Home Win": 0.24074
+    },
+    "ece": 0.08606,
+    "mean_brier": 0.19879
+  },
+  "platt": {
+    "brier_scores": {
+      "Away Win": 0.21432,
+      "Draw": 0.17284,
+      "Home Win": 0.24889
+    },
+    "ece": 4e-05,
+    "mean_brier": 0.21202
+  },
+  "raw": {
+    "brier_scores": {
+      "Away Win": 0.21447,
+      "Draw": 0.18533,
+      "Home Win": 0.2669
+    },
+    "ece": 0.10376,
+    "mean_brier": 0.22223
+  }
+}
