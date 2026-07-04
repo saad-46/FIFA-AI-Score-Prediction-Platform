@@ -8,6 +8,18 @@ Engineering / Database Engineering / ML retraining waves). See
 row-level version of section 1 below; this document is the map of how the
 pieces connect.
 
+**Update, later on 2026-07-04:** the live Supabase database became reachable
+from this dev environment for the first time today. Sections 2.2, 2.3, and 5
+below were originally written on the (accurate, at the time) assumption that
+the DB was unreachable and `seed_wc2026.sql` had never been run — that has
+since changed. The seed **has** been applied and verified (419 `matches`
+rows with `data_source` set, 132 `team_statistics` rows — see
+`DATABASE_SCHEMA.md`'s "Open questions" for the full verification), and the
+backend has been booted against the live DB and used to serve real
+predictions and tournament simulations. One real bug was found and fixed in
+the inference-time query described in §2.2 as a direct result of this — see
+the correction inline below and `CHANGELOG.md`.
+
 ---
 
 ## 1. Raw source files → processed CSVs
@@ -128,13 +140,20 @@ different purposes, and they currently read from **different sources**:
 ### 2.1 Training — `backend/app/ml/train.py::load_data()`
 
 Reads `backend/app/data/processed/matches_historical.csv` **directly**, not
-the Postgres `matches` table. This is a deliberate choice, not a fallback:
-the live Supabase DB was unreachable from the sandbox this retrain was done
-in (confirmed `ENOTFOUND` on the pooler host), and
-`database/seed_wc2026.sql` (§3) loads this exact same CSV content into
-Postgres, so CSV-based and DB-based training are expected to produce the
-same feature matrix once the DB is reachable — reading the CSV directly is
-not a lesser substitute for this dataset.
+the Postgres `matches` table. This was a deliberate choice at the time, not
+a fallback: the live Supabase DB was unreachable from the sandbox the
+2026-07-03/04 retrain was done in (confirmed `ENOTFOUND` on the pooler
+host), and `database/seed_wc2026.sql` (§3) loads this exact same CSV content
+into Postgres, so CSV-based and DB-based training were expected to produce
+the same feature matrix once the DB became reachable — reading the CSV
+directly was not a lesser substitute for this dataset.
+
+**Update 2026-07-04, later the same day:** the DB is now reachable and the
+seed has been applied and verified (§3, §5). Training still defaults to the
+CSV path described here — that has not changed — but the "once the DB is
+reachable" condition above has now actually been met, and `load_data_from_db()`
+is a genuine, usable alternative today, not just a placeholder for a future
+environment.
 
 - Reads with `encoding="utf-8-sig"`.
 - Filters to `status == "Completed"` (case-insensitive) with non-null scores
@@ -170,6 +189,7 @@ FROM matches m
 JOIN teams ht ON m.home_team_id = ht.id
 JOIN teams at ON m.away_team_id = at.id
 WHERE m.status = 'completed'
+  AND m.data_source IS NOT NULL
 ORDER BY m.date ASC
 ```
 
@@ -178,24 +198,40 @@ ORDER BY m.date ASC
 - `compute_dynamic_elo(df)` is run once here, immediately before caching
   (see `ELO_SYSTEM.md` for the bug this fixed) — both the predictor and the
   tournament simulator consume the same enriched, cached DataFrame.
-- **This means inference depends on the `matches`/`teams` tables actually
-  being populated** — i.e. on `database/seed_wc2026.sql` (§3) having been
-  run against the live database. Until that seed is applied, this path has
-  no WC2026 data to serve predictions from, independent of the fact that
-  `matches_historical.csv` already has it. See §3's "not yet applied" note.
+- **Fixed 2026-07-04 — `data_source IS NOT NULL` filter added.** Now that the
+  live DB is reachable, this query was found to omit a scope filter: the
+  live `matches` table holds 49,389 total rows, of which only 419 carry a
+  non-NULL `data_source` (the WC-only corpus this document describes — 330
+  `wc_2002_2022_dataset` + 89 `wc_2026_live`). Without the filter, this query
+  would have handed every live prediction and tournament simulation a
+  ~49k-row, non-WC-scoped DataFrame — a severe train/serve skew versus the
+  419-row corpus the shipped model was actually trained on (§2.1) — silently,
+  since nothing before today could exercise this query against real data to
+  notice. The filter is now in place; see `CHANGELOG.md`'s 2026-07-04
+  validation-pass entry.
+- **Live-verified 2026-07-04**: `database/seed_wc2026.sql` (§3) has been run
+  against the live database and confirmed — 419 WC-scoped `matches` rows, 132
+  `team_statistics` rows — and the backend was booted directly against this
+  live DB and used to serve real predictions (6 matchups) and tournament
+  simulations (100/1000/5000 iterations), all successful. Inference no
+  longer depends on a hypothetical future seed run; it is running against
+  live, seeded data today.
 
-### 2.3 Net effect: training and inference are on two different sources today
+### 2.3 Net effect: training and inference are on two different sources, now verified consistent
 
 Training (CSV) and inference (DB) reading from different places is
 consistent *only* as long as `seed_wc2026.sql` has been run against the
-target Postgres instance with matching content — which, as of this writing,
-it has not been (§3). Until it is, a freshly retrained model (from the CSV)
-is being served against whatever match data actually exists in the live
-`matches` table, which may not be the same WC-only corpus it was trained on.
-This is the same underlying "DB not reachable from the build sandbox"
-constraint noted throughout `DATABASE_SCHEMA.md` and `MODEL_EVALUATION.md`,
-not a newly discovered bug — flagging it here because it's easy to miss that
-training and serving currently have two independent data entry points.
+target Postgres instance with matching content, **and** the inference query
+is correctly scoped to the same WC-only rows. As of 2026-07-04, both
+conditions are confirmed true: the seed has been applied (§3, §5), and the
+`data_source IS NOT NULL` filter fixed in §2.2 keeps the inference query
+scoped to the same 419-row WC-only corpus training reads from the CSV.
+Before this filter was added, the two sources would *not* actually have
+matched even with the seed applied — the DB query would have returned the
+full ~49,389-row legacy table, not the 419-row WC-only slice. That gap is
+now closed for the ML pipeline specifically. It is **not** closed for the
+public API — `GET /api/v1/matches` and `/analytics/dashboard` still query
+the full unfiltered table; see `KNOWN_ASSUMPTIONS.md` for that open item.
 
 ---
 
@@ -274,16 +310,18 @@ resolves team names to rows via the same canonicalized names
 `matches` via `external_match_id` (the small-integer 2026 match ID space),
 and emits idempotent `INSERT ... ON CONFLICT` statements — safe to re-run.
 
-**This has NOT been applied to the live Supabase instance yet.** The
-database was unreachable from the sandbox this work was done in (see
-`DATABASE_SCHEMA.md`'s "Open questions" section) — `seed_wc2026.sql` and the
-migration are hand-reviewed, verified-by-inspection SQL waiting for someone
-with live Supabase access to run them (recommended: inside a transaction or
-staging branch first, checking the verification `SELECT COUNT(*)` statements
-at the bottom of `seed_wc2026.sql` — expect 72 teams, 419 matches with
-`external_match_id` set, 132 `team_statistics` rows — before applying to
-production). Until this is run, the live `matches`/`teams` tables do not yet
-reflect this session's WC-only corpus, which directly affects §2.3 above.
+**Applied and verified against the live Supabase instance, 2026-07-04.** The
+database became reachable from this dev environment for the first time
+today; `seed_wc2026.sql` and the migration (previously hand-reviewed,
+verified-by-inspection SQL waiting on live access — see `DATABASE_SCHEMA.md`'s
+"Open questions") have now actually been run. The verification counts were
+checked directly against the live database: 419 `matches` rows with
+`external_match_id`/`data_source` set (330 `wc_2002_2022_dataset` + 89
+`wc_2026_live`), 132 `team_statistics` rows, 48 teams with `elo_rating`/
+`wc2026_group` populated — all matching expectations. The live `matches`/
+`teams` tables now do reflect this WC-only corpus (alongside the
+pre-existing ~49,389-row legacy table, which was not purged — see §2.3 and
+`KNOWN_ASSUMPTIONS.md` for the resulting open item on API scope).
 
 ---
 
@@ -303,12 +341,13 @@ backend/app/data/processed/
         ▼ (direct CSV read)                 ▼ (pure text generator)
   Model training (train.py)          database/seed_wc2026.sql
         │                                   │
-        │ writes                            │ NOT YET RUN against
-        ▼                                   ▼ live Supabase
+        │ writes                            │ APPLIED 2026-07-04 to
+        ▼                                   ▼ live Supabase (verified)
   xgboost_model.pkl, scaler.pkl      matches / teams / team_statistics
                                             │
                                             │ loader.py::load_matches_dataframe()
-                                            ▼ (DB read, 6h TTL cache)
+                                            ▼ (DB read, WHERE data_source IS
+                                              NOT NULL, 6h TTL cache)
                                       Live prediction / tournament simulation
 
 app/data/fifa_2026/{groups,schedule,venues}.json

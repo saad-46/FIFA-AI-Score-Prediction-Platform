@@ -122,7 +122,7 @@ async def test_get_team_returns_wc2026_ranking_fields():
     these are new columns added in the DATABASE_SCHEMA.md / RANKINGS_INTEGRATION.md
     upgrade, not present on the old TeamBase schema."""
     team = _make_team(
-        "team-1", "Germany", country="Germany", confederation="UEFA",
+        "11111111-1111-1111-1111-111111111111", "Germany", country="Germany", confederation="UEFA",
         fifa_ranking=16, elo_rating=1950, fifa_code="GER", wc2026_group="A",
         ranking_updated_at=datetime(2026, 6, 1),
         created_at=datetime(2025, 1, 1),
@@ -138,7 +138,7 @@ async def test_get_team_returns_wc2026_ranking_fields():
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
     ) as client:
-        response = await client.get("/api/v1/teams/team-1")
+        response = await client.get("/api/v1/teams/11111111-1111-1111-1111-111111111111")
 
     assert response.status_code == 200
     data = response.json()
@@ -153,7 +153,7 @@ async def test_get_team_ranking_fields_null_for_non_2026_team():
     return null (not fabricated/zeroed) ranking fields — see
     RANKINGS_INTEGRATION.md's documented coverage gap."""
     team = _make_team(
-        "team-2", "Historical FC", country="Nowhere",
+        "22222222-2222-2222-2222-222222222222", "Historical FC", country="Nowhere",
         fifa_ranking=None, elo_rating=None, fifa_code=None, wc2026_group=None,
         ranking_updated_at=None,
         created_at=datetime(2025, 1, 1),
@@ -169,7 +169,7 @@ async def test_get_team_ranking_fields_null_for_non_2026_team():
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
     ) as client:
-        response = await client.get("/api/v1/teams/team-2")
+        response = await client.get("/api/v1/teams/22222222-2222-2222-2222-222222222222")
 
     assert response.status_code == 200
     data = response.json()
@@ -184,22 +184,22 @@ async def test_get_team_ranking_fields_null_for_non_2026_team():
 async def test_get_match_by_id_returns_team_statistics():
     """A completed match with rows in team_statistics for both teams must
     surface them on MatchDetailResponse.team_statistics."""
-    home = _make_team("home-1", "Brazil")
-    away = _make_team("away-1", "Argentina")
+    home = _make_team("44444444-4444-4444-4444-444444444444", "Brazil")
+    away = _make_team("55555555-5555-5555-5555-555555555555", "Argentina")
     match = _make_match(
-        "match-1", home, away,
+        "33333333-3333-3333-3333-333333333333", home, away,
         home_score=2, away_score=1, status="completed", stage="Final",
     )
 
     stat_home = TeamStatistics(
-        id="stat-h", match_id="match-1", team_id="home-1",
+        id="66666666-6666-6666-6666-666666666666", match_id="33333333-3333-3333-3333-333333333333", team_id="44444444-4444-4444-4444-444444444444",
         possession_pct=55, total_shots=14, shots_on_target=6,
         corners=6, fouls=10, offsides=2, saves=3,
         player_of_the_match="Player A",
     )
     stat_home.team = home
     stat_away = TeamStatistics(
-        id="stat-a", match_id="match-1", team_id="away-1",
+        id="77777777-7777-7777-7777-777777777777", match_id="33333333-3333-3333-3333-333333333333", team_id="55555555-5555-5555-5555-555555555555",
         possession_pct=45, total_shots=9, shots_on_target=4,
         corners=3, fouls=12, offsides=1, saves=4,
         player_of_the_match=None,
@@ -219,14 +219,14 @@ async def test_get_match_by_id_returns_team_statistics():
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
     ) as client:
-        response = await client.get("/api/v1/matches/match-1")
+        response = await client.get("/api/v1/matches/33333333-3333-3333-3333-333333333333")
 
     assert response.status_code == 200
     data = response.json()
     assert len(data["team_statistics"]) == 2
     team_ids = {s["team_id"] for s in data["team_statistics"]}
-    assert team_ids == {"home-1", "away-1"}
-    home_stat = next(s for s in data["team_statistics"] if s["team_id"] == "home-1")
+    assert team_ids == {"44444444-4444-4444-4444-444444444444", "55555555-5555-5555-5555-555555555555"}
+    home_stat = next(s for s in data["team_statistics"] if s["team_id"] == "44444444-4444-4444-4444-444444444444")
     assert home_stat["possession_pct"] == 55
     assert home_stat["player_of_the_match"] == "Player A"
 
@@ -236,10 +236,10 @@ async def test_get_match_by_id_with_no_stats_row_returns_empty_list_not_500():
     """One of the 10 documented gaps (DATABASE_SCHEMA.md): some completed
     2026 matches have zero rows in team_statistics. The endpoint must
     return team_statistics=[] gracefully, not 500."""
-    home = _make_team("home-2", "Morocco")
-    away = _make_team("away-2", "Portugal")
+    home = _make_team("99999999-9999-9999-9999-999999999999", "Morocco")
+    away = _make_team("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", "Portugal")
     match = _make_match(
-        "match-2", home, away,
+        "88888888-8888-8888-8888-888888888888", home, away,
         home_score=0, away_score=0, status="completed", stage="Group Stage",
     )
 
@@ -256,7 +256,7 @@ async def test_get_match_by_id_with_no_stats_row_returns_empty_list_not_500():
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
     ) as client:
-        response = await client.get("/api/v1/matches/match-2")
+        response = await client.get("/api/v1/matches/88888888-8888-8888-8888-888888888888")
 
     assert response.status_code == 200
     data = response.json()

@@ -7,7 +7,6 @@ import pandas as pd
 import logging
 from datetime import datetime, timedelta, timezone
 from typing import Optional
-import asyncio
 from sqlalchemy import text
 from app.db.database import engine
 from app.ml.features.feature_engineering import compute_dynamic_elo
@@ -35,6 +34,19 @@ async def load_matches_dataframe(force_refresh: bool = False) -> pd.DataFrame:
     ):
         return _cache
 
+    # ── WC-only scope (bug fix) ────────────────────────────────────────────────
+    # The `matches` table still holds ~49k rows from the superseded broad
+    # "all competitions 1872-2017" seed (source_dataset='kaggle_results',
+    # data_source IS NULL) alongside the ~100 WC2026-tagged rows
+    # (data_source='wc_2002_2022_dataset' / 'wc_2026_live'). The model was
+    # retrained exclusively on the WC-only corpus (matches_historical.csv, via
+    # train.py), so without this filter this function would feed live
+    # inference a completely different, ~500x larger, non-WC-focused dataset
+    # than the one the shipped model/features were tuned against -- a severe
+    # train/serve skew that was undetected all session because the live DB was
+    # unreachable from the dev sandbox until now. Filtering to rows tagged by
+    # the WC2026 data-engineering pipeline keeps this query's population
+    # aligned with training. See DATABASE_SCHEMA.md / DATA_PIPELINE.md.
     logger.info("Loading match data from database...")
     async with engine.connect() as conn:
         result = await conn.execute(
@@ -54,6 +66,7 @@ async def load_matches_dataframe(force_refresh: bool = False) -> pd.DataFrame:
                 JOIN teams ht ON m.home_team_id = ht.id
                 JOIN teams at ON m.away_team_id = at.id
                 WHERE m.status = 'completed'
+                  AND m.data_source IS NOT NULL
                 ORDER BY m.date ASC
             """)
         )

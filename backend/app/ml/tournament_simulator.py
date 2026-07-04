@@ -334,9 +334,6 @@ def _run_simulation_batch(
     non-2026 groups are being simulated).
     """
 
-    # We return a list of stats dictionaries per simulation to sum them up later.
-    # To save memory, we can just return an aggregated stats dict for this batch.
-    
     all_teams = []
     group_names_map = {}
     for g_name, g_teams in groups.items():

@@ -370,7 +370,6 @@ def compute_team_rolling_stats(
     # matchup precompute). Semantics are unchanged: same per-row values,
     # same order, same accumulation logic.
     home_teams  = recent["home_team"].to_numpy()
-    away_teams  = recent["away_team"].to_numpy()
     home_scores = recent["home_score"].to_numpy(dtype=float)
     away_scores = recent["away_score"].to_numpy(dtype=float)
     dates       = recent["date"].to_numpy()

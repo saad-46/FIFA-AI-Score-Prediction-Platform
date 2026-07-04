@@ -11,7 +11,11 @@ alembic==1.14.0
 psycopg2-binary==2.9.10
 
 # Auth & Security
-python-jose[cryptography]==3.3.0
+# NOTE: app/core/security.py does `import jwt` (PyJWT API), not python-jose.
+# PyJWT was previously an undeclared transitive dep (via supabase -> gotrue),
+# so pin it directly here for reproducible installs. python-jose was never
+# actually imported anywhere in this codebase and is dropped.
+PyJWT==2.12.1
 passlib[bcrypt]==1.7.4
 python-dotenv==1.0.1
 

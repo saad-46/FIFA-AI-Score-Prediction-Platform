@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Optional, List
-from datetime import date, datetime
+from datetime import date
 
 
 class MatchResponse(BaseModel):

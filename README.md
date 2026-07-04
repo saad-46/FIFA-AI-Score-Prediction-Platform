@@ -5,13 +5,50 @@ FIFA World Cup 2026 tournament. A FastAPI backend serves XGBoost-based match
 predictions (expected goals, win/draw/loss probabilities, SHAP explanations)
 trained on a dedicated World Cup-only corpus, plus a Monte Carlo tournament
 simulator built on the official 48-team, 12-group FIFA World Cup 2026 format
-that is aware of real, in-progress 2026 results. A Next.js frontend consumes
-the API for match prediction, team analytics, and tournament visualization.
+that is aware of real, in-progress 2026 results. A Next.js frontend is
+planned to consume the API for match prediction, team analytics, and
+tournament visualization — see "Current project status" below for exactly
+what is and isn't done yet.
 
 The 2026 tournament is genuinely in progress as this is written, and the
 simulator and training data reflect that: real completed 2026 matches are
 used as ground truth rather than re-simulated, and the model is trained on
 real match data through the current point in the tournament.
+
+## Current project status — `backend-v1.0.0`
+
+**The backend is complete and frozen as `backend-v1.0.0`; the frontend is a
+separate, not-yet-integrated track.** This session validated the backend
+end-to-end against live production infrastructure (not mocks, not a local
+sandbox):
+
+- **80/80 backend tests passing** (`cd backend && pytest -q`).
+- **Every headline API endpoint exercised live** against the real Supabase
+  Postgres project (`<project-ref>`), including `/health`, the
+  Swagger docs at `/docs`, `POST /predictions/predict`, and
+  `POST /tournament/simulate`.
+- **6 prediction matchups verified** end-to-end (expected goals, win/draw/loss
+  probabilities, SHAP explanations all returned correctly).
+- **Tournament simulations run at up to 5,000 iterations** (100 / 1,000 /
+  5,000 all completed successfully) against the live 48-team, 12-group
+  bracket.
+- Two real bugs that could only surface against a live, reachable database
+  were found and fixed this session (missing WC-only filter in the ML data
+  loader; a SQLAlchemy `uuid`/`String` column-type mismatch) — see "Live
+  database validation" below and `CHANGELOG.md`.
+
+On the strength of this validation, the backend is being frozen at
+`backend-v1.0.0` as **complete and ready for frontend integration**. The
+`frontend/` directory in this repo already contains Next.js scaffolding
+(pages, components, auth flow) from earlier exploratory work, but it has
+**not** been part of this validation pass and is **not** included in the
+`backend-v1.0.0` freeze — treat it as a separate, in-progress track to be
+picked up and finished after this release. One open item carried into the
+next phase, not resolved by this freeze: `GET /api/v1/matches` and
+`/analytics/dashboard` are not yet scoped to the WC-only dataset the same way
+the ML pipeline is — see "Live database validation" and
+`KNOWN_ASSUMPTIONS.md` item (h) for the current, unresolved state of that
+question.
 
 ## Features
 
@@ -31,11 +68,17 @@ real match data through the current point in the tournament.
   negative feature attributions behind it.
 - **Elo ratings + FIFA rankings** — a dynamic, tournament-weighted Elo system
   computed over full match history, complemented (not replaced) by official
-  FIFA pre-tournament rankings as separate model features.
+  FIFA pre-tournament rankings as separate model features. Fixed this session
+  so Elo is genuinely used at inference time, not just during training — see
+  `KNOWN_ASSUMPTIONS.md` item (d) and `ELO_SYSTEM.md` for the before/after.
 - **FastAPI backend** — async SQLAlchemy 2.0, Pydantic v2, in-process TTL
   caching (no Redis dependency).
-- **Supabase / PostgreSQL** database, with Row Level Security.
-- **Next.js 15 frontend** — TypeScript, App Router, Tailwind CSS.
+- **Supabase / PostgreSQL** database, with Row Level Security — confirmed
+  live and reachable this session (see "Live database validation" below).
+- **Next.js frontend (planned)** — TypeScript, App Router, Tailwind CSS.
+  Scaffolding already exists under `frontend/`, but it is a separate,
+  not-yet-integrated track: it hasn't been part of any backend validation
+  pass and is out of scope for the `backend-v1.0.0` freeze.
 
 ## Screenshots
 
@@ -51,21 +94,24 @@ asyncpg), Uvicorn
 **ML:** XGBoost 2.1, scikit-learn, pandas, NumPy, SciPy, SHAP, Optuna
 (hyperparameter search)
 
-**Frontend:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4,
-Radix UI, react-hook-form + zod, SWR, Recharts, Supabase JS client
+**Frontend (planned, not yet integrated):** Next.js 16 (App Router), React 19,
+TypeScript, Tailwind CSS 4, Radix UI, react-hook-form + zod, SWR, Recharts,
+Supabase JS client
 
 See `backend/requirements.txt` and `frontend/package.json` for exact pinned
 versions.
 
 ## Architecture
 
-Frontend (Next.js, Vercel) → FastAPI backend (Render) → services layer →
-SQLAlchemy async → PostgreSQL (Supabase), with a separate ML layer
+Frontend (Next.js, Vercel — planned) → FastAPI backend (Render) → services
+layer → SQLAlchemy async → PostgreSQL (Supabase), with a separate ML layer
 (predictor, feature engineering, Poisson engine, SHAP explainer) and a
 Monte Carlo tournament engine (`ProcessPoolExecutor`-based) sitting behind
 the API routers. See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the full
 component diagram, request lifecycles, and key design decisions — this
-section deliberately doesn't repeat it.
+section deliberately doesn't repeat it. As of `backend-v1.0.0`, only the
+backend half of this diagram has been built and validated end-to-end; the
+frontend box is the planned next phase.
 
 ## Installation
 
@@ -99,16 +145,19 @@ Provision the database (run in the Supabase SQL editor):
   place but marked superseded for the WC2026-only focus — it is optional and
   not required for the app to function.
 
-> **Note:** as of this writing, none of the WC2026 schema/seed changes above
-> have actually been applied to a live Supabase instance — the database was
-> unreachable from the environment this upgrade was developed in. The model
-> was retrained directly against the processed CSVs under
-> `backend/app/data/processed/` instead (see [`DATA_PIPELINE.md`](DATA_PIPELINE.md)).
-> If you're setting this up fresh, run the migration/seed above yourself and
-> verify the row counts documented in `DATABASE_SCHEMA.md` before relying on
-> live predictions matching the retrained model's training data.
+> **Update 2026-07-04:** the WC2026 schema migration and seed above have now
+> been applied to the live Supabase project (`<project-ref>`) and
+> verified — see the "Live database validation" section below for exactly
+> what was checked. If you're standing up a **new** instance, run the
+> migration/seed yourself as described above and confirm your own row counts
+> match what's documented in `DATABASE_SCHEMA.md`.
 
 ### Frontend setup
+
+> The frontend is planned/in-progress and not part of the validated
+> `backend-v1.0.0` release — see "Current project status" above. These
+> commands will install and run the existing scaffolding, but it has not
+> been tested against the validated backend this session.
 
 ```bash
 cd frontend
@@ -184,7 +233,7 @@ fifa-score-predictor/
 │   │   └── services/              # business logic layer
 │   └── tests/                    # pytest suite (80 tests)
 ├── database/                     # schema.sql, migrations/, seed*.sql, generate_seed_wc2026.py
-└── frontend/                     # Next.js 16 app (App Router, TypeScript)
+└── frontend/                     # Next.js 16 scaffolding — planned, not part of backend-v1.0.0
 ```
 
 ML models are versioned under `backend/app/ml/models/` (the current
@@ -194,6 +243,52 @@ WC2026 retrain). Processed training data lives under
 `scripts/` directory — documentation is individual Markdown files at the
 repo root, and one-off data/seed generation scripts live next to the data
 they produce (e.g. `database/generate_seed_wc2026.py`).
+
+## Live database validation (2026-07-04)
+
+Raw network access to the live Supabase Postgres project (`<project-ref>`)
+became reachable from this dev environment for the first time today. Prior
+revisions of this and other docs said the DB was unreachable and that the
+WC2026 migration/seed had never been run against a real instance — that was
+true when written and is **no longer true**. What was actually verified
+against the live database today:
+
+- The WC2026 migration (`database/migrations/002_wc2026_upgrade.sql`) is
+  applied: `team_statistics` and `tournament_stages` tables exist, and the
+  new `teams`/`matches` columns (`elo_rating`, `fifa_code`, `wc2026_group`,
+  `stage_id`, `tournament_year`, `home_xg`/`away_xg`, `external_match_id`,
+  `data_source`) are present.
+- The database is seeded: `matches` has 419 rows tagged with a non-NULL
+  `data_source` (330 `wc_2002_2022_dataset` + 89 `wc_2026_live`), and
+  `team_statistics` has 132 rows — matching `DATABASE_SCHEMA.md`'s expected
+  counts exactly. (The `matches` table also still holds ~49,389 rows total —
+  see the open item below on API scoping.)
+- Spot-checked against known football history: **Brazil 2-0 Germany**, 2002
+  final (2002-06-30, `stage='final'`), and **Brazil 1-7 Germany**, 2014
+  semi-final (2014-07-08, `stage='semi_final'`), are both present in the
+  live `matches` table with the correct scorelines, dates, and stages.
+- Team names are canonicalized per `teams_reference.csv`'s convention:
+  confirmed `Türkiye` (not "Turkey"), `Cabo Verde`, and `USA` (not "United
+  States") all exist as the canonical rows in the live `teams` table.
+- The backend was booted directly against this live database (not the
+  processed CSVs) and exercised end-to-end: `/health`, the Swagger/OpenAPI
+  docs at `/docs`, live `POST /predictions/predict` calls across 6 realistic
+  matchups, and `POST /tournament/simulate` Monte Carlo runs at 100, 1000,
+  and 5000 iterations — all completed successfully.
+- Two real bugs were found and fixed during this pass that could not have
+  been caught in any earlier session, because they only manifest with the
+  DB actually reachable: a missing `data_source IS NOT NULL` filter in
+  `backend/app/ml/data/loader.py` (without it, live inference silently pulls
+  in the ~49k superseded legacy rows alongside the 419 WC-only rows), and a
+  SQLAlchemy column-type mismatch in `backend/app/models/match.py` (id/FK
+  columns declared as `String` against native Postgres `uuid` columns,
+  which breaks joins with `operator does not exist: uuid = character
+  varying`). See `CHANGELOG.md`'s 2026-07-04 validation-pass entry for the
+  full list of fixes from this pass.
+
+See `KNOWN_ASSUMPTIONS.md` for one significant open question surfaced by
+this validation (public API endpoints not scoped to the WC-only dataset the
+way the ML pipeline is) that is a product decision, not a bug.
 
 ## Machine Learning Pipeline
 
@@ -267,18 +362,26 @@ Pulled from the honest gaps documented across `MODEL_EVALUATION.md`,
 `DATABASE_SCHEMA.md`, `DATA_PIPELINE.md`, and `KNOWN_ASSUMPTIONS.md` — not
 generic aspirations:
 
-- **Apply the WC2026 database migration and seed to a live Supabase
-  instance.** `database/migrations/002_wc2026_upgrade.sql` and
-  `database/seed_wc2026.sql` are hand-reviewed and verified by inspection
-  but have never been run against a real database — the sandbox this
-  upgrade was built in couldn't reach Supabase. Until this is applied, the
-  live `matches`/`teams` tables don't reflect the WC-only training corpus
-  the current model was actually trained on.
+- **Build out and integrate the Next.js frontend.** The backend is frozen at
+  `backend-v1.0.0` and validated end-to-end; the frontend under `frontend/`
+  has existing scaffolding (pages, components, auth flow) but has not been
+  wired up to the validated backend or exercised as part of any test pass.
+  This is the next major phase of work, not a same-release deliverable.
+- **Decide whether the public API should be WC-only-scoped.** Now that the
+  live database is reachable and verified, a real gap has surfaced: `GET
+  /api/v1/matches` and `/analytics/dashboard`'s `total_matches_analyzed`
+  still query the full `matches` table (~49,389 rows spanning 1872-2026)
+  rather than being scoped to `data_source IS NOT NULL` the way the ML
+  pipeline now is (`app/ml/data/loader.py`). Is browsing/counting the full
+  legacy history an intentional broader feature of the public API, or should
+  these endpoints be scoped to the same 419 WC-only rows the model is
+  trained on? See `KNOWN_ASSUMPTIONS.md` — flagged there as an open product
+  decision, not a bug.
 - **Reconcile training vs. inference data sources.** Training currently
   reads `backend/app/data/processed/matches_historical.csv` directly;
-  inference reads the Postgres `matches`/`teams` tables. These are only
-  consistent once the seed above has been applied — see `DATA_PIPELINE.md`
-  §2.3.
+  inference reads the Postgres `matches`/`teams` tables, now filtered to
+  `data_source IS NOT NULL` so both sides describe the same 419-row WC-only
+  corpus — see `DATA_PIPELINE.md` §2.3.
 - **Revisit the draw-boost trade-off.** The current `draw_boost` (1.05)
   pushes draw recall to 1.0 at only 0.222 precision — a real trade-off, not
   a clean win, and worth re-tuning once more tournament data exists.

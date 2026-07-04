@@ -1,4 +1,17 @@
-from sqlalchemy import Column, String, Integer, SmallInteger, Numeric, Float, Boolean, Date, DateTime, ForeignKey, Index, CheckConstraint
+from sqlalchemy import Column, String, Integer, SmallInteger, Numeric, Float, Boolean, Date, DateTime, ForeignKey, Index, CheckConstraint, Uuid
+
+# Postgres stores every id/foreign-key column below as native `uuid` (see
+# DATABASE_SCHEMA.md / `list_tables` against the live Supabase project) -- a
+# plain `Column(String, ...)` here would compare/join as `character varying`
+# against Postgres's `uuid` operator class and fail with
+# `operator does not exist: uuid = character varying` at query time (this was
+# undetected all session because the live DB was unreachable from the dev
+# sandbox until raw network access was restored). `Uuid(as_uuid=False)` maps
+# correctly to the native `uuid` column type while still returning plain
+# Python `str` values everywhere else in the codebase already expects them
+# (schemas, services, `default=lambda: str(uuid.uuid4())`), so no other file
+# needs to change.
+_UUID = Uuid(as_uuid=False)
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.db.database import Base
@@ -23,7 +36,7 @@ class TournamentStage(Base):
 class Team(Base):
     __tablename__ = "teams"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(_UUID, primary_key=True, default=lambda: str(uuid.uuid4()))
     name = Column(String(100), nullable=False, unique=True, index=True)
     country = Column(String(100), nullable=False)
     confederation = Column(String(50), nullable=True)
@@ -54,14 +67,14 @@ class Team(Base):
 class Match(Base):
     __tablename__ = "matches"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(_UUID, primary_key=True, default=lambda: str(uuid.uuid4()))
     date = Column(Date, nullable=False, index=True)
-    home_team_id = Column(String, ForeignKey("teams.id", ondelete="CASCADE"), nullable=False, index=True)
+    home_team_id = Column(_UUID, ForeignKey("teams.id", ondelete="CASCADE"), nullable=False, index=True)
     # Nullable: a small number of bracket-stage fixtures have a genuinely
     # unresolved opponent slot (e.g. WC2026 Round-of-16 TBD advancement,
     # matches_historical.csv match_id=89) represented as NULL rather than a
     # fabricated placeholder team.
-    away_team_id = Column(String, ForeignKey("teams.id", ondelete="CASCADE"), nullable=True, index=True)
+    away_team_id = Column(_UUID, ForeignKey("teams.id", ondelete="CASCADE"), nullable=True, index=True)
     home_score = Column(Integer, nullable=True)
     away_score = Column(Integer, nullable=True)
     tournament = Column(String(200), nullable=False, index=True)
@@ -117,9 +130,9 @@ class TeamStatistics(Base):
 
     __tablename__ = "team_statistics"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    match_id = Column(String, ForeignKey("matches.id", ondelete="RESTRICT"), nullable=False, index=True)
-    team_id = Column(String, ForeignKey("teams.id", ondelete="RESTRICT"), nullable=False, index=True)
+    id = Column(_UUID, primary_key=True, default=lambda: str(uuid.uuid4()))
+    match_id = Column(_UUID, ForeignKey("matches.id", ondelete="RESTRICT"), nullable=False, index=True)
+    team_id = Column(_UUID, ForeignKey("teams.id", ondelete="RESTRICT"), nullable=False, index=True)
     possession_pct = Column(SmallInteger, nullable=True)
     total_shots = Column(SmallInteger, nullable=True)
     shots_on_target = Column(SmallInteger, nullable=True)
@@ -154,13 +167,13 @@ class TeamStatistics(Base):
 class SavedPrediction(Base):
     __tablename__ = "saved_predictions"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(_UUID, primary_key=True, default=lambda: str(uuid.uuid4()))
     # NOTE: user_id references Supabase's auth.users(id) (ON DELETE CASCADE — see
     # database/schema.sql). No SQLAlchemy ForeignKey/relationship is declared here
     # because auth.users lives in Supabase's own "auth" schema, is managed by
     # Supabase Auth (not by this app's models/migrations), and is not mapped as an
     # ORM entity in this codebase. The FK constraint still exists at the DB level.
-    user_id = Column(String, nullable=False, index=True)
+    user_id = Column(_UUID, nullable=False, index=True)
     prediction_id = Column(String, nullable=False)
     home_team = Column(String(100), nullable=False)
     away_team = Column(String(100), nullable=False)
@@ -169,8 +182,16 @@ class SavedPrediction(Base):
     home_win_probability = Column(Float, nullable=False)
     draw_probability = Column(Float, nullable=False)
     away_win_probability = Column(Float, nullable=False)
-    expected_home_goals = Column(Float, nullable=False)
-    expected_away_goals = Column(Float, nullable=False)
+    # Python attribute name kept as `expected_home_goals`/`expected_away_goals`
+    # (matches every consumer in schemas/services/endpoints and database/schema.sql),
+    # but the live Supabase table's actual columns are named
+    # `home_expected_goals`/`away_expected_goals` (verified via
+    # information_schema.columns against the live Supabase project) --
+    # without this explicit name override every SavedPrediction query 500s
+    # with `UndefinedColumnError`. Found by the Code Review pass; this table
+    # predates this session's schema.sql fix and was never migrated to match it.
+    expected_home_goals = Column("home_expected_goals", Float, nullable=False)
+    expected_away_goals = Column("away_expected_goals", Float, nullable=False)
     confidence_score = Column(Float, nullable=False)
     tournament = Column(String(200), nullable=True)
     neutral_venue = Column(Boolean, default=False)

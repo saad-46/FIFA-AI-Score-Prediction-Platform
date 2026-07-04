@@ -31,15 +31,12 @@ Usage
 
 from __future__ import annotations
 
-import json
 import logging
 import sys
-from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Optional, Tuple
+from typing import Any, Tuple
 
 import numpy as np
-from sklearn.calibration import CalibratedClassifierCV
 from sklearn.isotonic import IsotonicRegression
 from sklearn.metrics import brier_score_loss
 
@@ -59,19 +56,6 @@ settings = get_settings()
 
 _CLASS_NAMES = ["Away Win", "Draw", "Home Win"]
 
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# DATA CLASSES
-# ═══════════════════════════════════════════════════════════════════════════════
-
-@dataclass
-class CalibrationResult:
-    """Holds calibrators and evaluation metrics for one method."""
-    method: str
-    calibrators: list[IsotonicRegression]  # one per class
-    brier_scores: dict[str, float] = field(default_factory=dict)
-    ece: float = 0.0
-    mean_brier: float = 0.0
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

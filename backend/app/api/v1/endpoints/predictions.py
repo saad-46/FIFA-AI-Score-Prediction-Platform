@@ -17,7 +17,6 @@ from app.models.match import SavedPrediction
 from sqlalchemy import select, func
 from sqlalchemy.exc import SQLAlchemyError
 import uuid
-from datetime import datetime
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/predictions", tags=["predictions"])
@@ -129,6 +128,15 @@ async def delete_saved_prediction(
     user: dict = Depends(get_current_user),
 ):
     """Delete a saved prediction."""
+    # SavedPrediction.id is a native Postgres uuid column; a malformed
+    # (non-UUID) prediction_id would otherwise reach asyncpg directly and
+    # raise a raw DataError, surfacing as an unhandled 500 (the same bug
+    # class already guarded against in team_service.py/match_service.py).
+    try:
+        uuid.UUID(str(prediction_id))
+    except (ValueError, AttributeError, TypeError):
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Prediction not found")
+
     user_id = user.get("sub")
     stmt = select(SavedPrediction).where(
         SavedPrediction.id == prediction_id,

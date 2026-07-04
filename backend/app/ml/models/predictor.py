@@ -35,7 +35,6 @@ import xgboost as xgb
 
 from app.core.config import get_settings
 from app.ml.features.feature_engineering import (
-    BASE_ELO,
     build_feature_vector,
     build_team_index,
 )

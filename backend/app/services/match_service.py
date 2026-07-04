@@ -4,12 +4,12 @@ Match service — queries match history and analytics.
 
 import logging
 import math
+import uuid as uuid_module
 from datetime import date
 from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func, and_, or_, desc
+from sqlalchemy import select, func, or_, desc
 from sqlalchemy.orm import selectinload, aliased
-import pandas as pd
 
 from app.models.match import Match, Team, TeamStatistics
 from app.schemas.analytics import UpcomingMatchSummary
@@ -23,10 +23,23 @@ from app.schemas.match import (
     PaginatedMatchResponse,
 )
 from app.ml.data.loader import load_matches_dataframe
+from app.core.cache import async_ttl_cache
 
 logger = logging.getLogger(__name__)
 
 
+def _is_valid_uuid(value: str) -> bool:
+    """See app.services.team_service._is_valid_uuid — same rationale: match_id
+    is a native Postgres uuid column, and an invalid-format string would
+    otherwise reach asyncpg and raise a raw DataError (unhandled 500)."""
+    try:
+        uuid_module.UUID(str(value))
+        return True
+    except (ValueError, AttributeError, TypeError):
+        return False
+
+
+@async_ttl_cache(ttl_seconds=60, max_size=256, ignore_args={0})
 async def get_matches(
     db: AsyncSession,
     page: int = 1,
@@ -34,10 +47,21 @@ async def get_matches(
     team: Optional[str] = None,
     tournament: Optional[str] = None,
     year: Optional[int] = None,
-    from_date: Optional[str] = None,
-    to_date: Optional[str] = None,
+    from_date: Optional[date] = None,
+    to_date: Optional[date] = None,
 ) -> PaginatedMatchResponse:
-    """Paginated match history with filters."""
+    """
+    Paginated match history with filters.
+
+    Cached in-process for 60s (keyed on page/filters, not the DB session) —
+    same rationale as ``get_top_teams`` below: this issues two sequential
+    round trips to the DB per call (count + select) with no query-plan cost
+    (~14ms server-side per EXPLAIN ANALYZE), so observed latency here is
+    almost entirely network RTT to the DB. A short in-process TTL avoids
+    paying that RTT twice per unique page/filter combo within a request
+    burst, without risking meaningful staleness (match data changes
+    infrequently; see load_matches_dataframe's own 6h refresh cadence).
+    """
     stmt = (
         select(Match)
         .options(selectinload(Match.home_team), selectinload(Match.away_team))
@@ -129,6 +153,9 @@ async def get_match_by_id(db: AsyncSession, match_id: str) -> Optional[MatchDeta
     no stats rows, a documented source gap; team_statistics is simply empty
     for those, never fabricated).
     """
+    if not _is_valid_uuid(match_id):
+        return None
+
     stmt = (
         select(Match)
         .options(selectinload(Match.home_team), selectinload(Match.away_team))

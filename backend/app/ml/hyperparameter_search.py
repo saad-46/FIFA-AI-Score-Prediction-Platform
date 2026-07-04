@@ -43,10 +43,8 @@ import json
 import logging
 import sys
 from pathlib import Path
-from typing import Any
 
 import numpy as np
-import pandas as pd
 import xgboost as xgb
 from sklearn.metrics import accuracy_score, classification_report, mean_absolute_error
 from sklearn.preprocessing import StandardScaler
@@ -65,7 +63,7 @@ except ImportError:
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 from app.core.config import get_settings
-from app.ml.draw_optimizer import compute_sample_weights, optimize_draw_threshold
+from app.ml.draw_optimizer import compute_sample_weights
 
 logging.basicConfig(
     level=logging.INFO,

@@ -3,17 +3,32 @@ Team service — queries and aggregates team statistics.
 """
 
 import logging
+import uuid as uuid_module
 from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func, or_, and_, text
+from sqlalchemy import select
 import pandas as pd
 
-from app.models.match import Team, Match
+from app.models.match import Team
 from app.schemas.team import TeamResponse, TeamStatsResponse, HeadToHeadResponse, PerformanceTrendPoint
 from app.ml.data.loader import load_matches_dataframe
 from app.core.cache import async_ttl_cache
 
 logger = logging.getLogger(__name__)
+
+
+def _is_valid_uuid(value: str) -> bool:
+    """
+    team_id/home_team_id/away_team_id are native Postgres uuid columns.
+    A non-UUID string (e.g. from a bad client request) would otherwise reach
+    asyncpg and raise a raw DataError, surfacing as an unhandled 500. Callers
+    should treat an invalid format the same as "not found".
+    """
+    try:
+        uuid_module.UUID(str(value))
+        return True
+    except (ValueError, AttributeError, TypeError):
+        return False
 
 
 async def search_teams(db: AsyncSession, query: str, limit: int = 10) -> list[TeamResponse]:
@@ -30,6 +45,8 @@ async def search_teams(db: AsyncSession, query: str, limit: int = 10) -> list[Te
 
 
 async def get_team_by_id(db: AsyncSession, team_id: str) -> Optional[TeamResponse]:
+    if not _is_valid_uuid(team_id):
+        return None
     stmt = select(Team).where(Team.id == team_id)
     result = await db.execute(stmt)
     team = result.scalar_one_or_none()
@@ -45,6 +62,9 @@ async def get_team_stats(
     years: Optional[int] = None,
 ) -> Optional[TeamStatsResponse]:
     """Compute team statistics from match history."""
+    if not _is_valid_uuid(team_id):
+        return None
+
     # Get team name
     team_result = await db.execute(select(Team).where(Team.id == team_id))
     team = team_result.scalar_one_or_none()
@@ -125,6 +145,12 @@ async def get_head_to_head(
     away_team_id: str,
 ) -> HeadToHeadResponse:
     """Head-to-head stats between two teams."""
+    if not _is_valid_uuid(home_team_id) or not _is_valid_uuid(away_team_id):
+        return HeadToHeadResponse(
+            total_matches=0, home_team_wins=0, away_team_wins=0,
+            draws=0, home_team_goals=0, away_team_goals=0,
+        )
+
     # Get team names
     home_result = await db.execute(select(Team).where(Team.id == home_team_id))
     away_result = await db.execute(select(Team).where(Team.id == away_team_id))
@@ -193,6 +219,9 @@ async def get_performance_trend(
     months: int = 24,
 ) -> list[PerformanceTrendPoint]:
     """Monthly performance trend."""
+    if not _is_valid_uuid(team_id):
+        return []
+
     team_result = await db.execute(select(Team).where(Team.id == team_id))
     team = team_result.scalar_one_or_none()
     if not team:
@@ -334,7 +363,14 @@ async def get_top_teams(
     stats_list = []
     for team in teams:
         s = stats_by_name.get(team.name)
-        if not s or s["matches_played"] < 10:
+        # Threshold lowered from 10 (calibrated for the old, superseded
+        # broad "all competitions" dataset, where 10+ matches per team was
+        # a low bar) to 2 -- the live matches table is now correctly scoped
+        # to the WC-only corpus (see loader.py's data_source filter), where
+        # a team playing in a single World Cup only has 3-7 matches total.
+        # A threshold of 10 was unreachable for every team post-fix, making
+        # this endpoint always return an empty list.
+        if not s or s["matches_played"] < 2:
             continue
         n = s["matches_played"]
         stats_list.append(

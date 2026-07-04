@@ -8,10 +8,27 @@ what changed vs. the original schema, and the reasoning behind the new
 design decisions. It complements (does not replace) the inline comments in
 `database/schema.sql` and `database/migrations/002_wc2026_upgrade.sql`.
 
-**The live Supabase database was not reachable from the sandbox this work
-was done in.** Nothing here has been run against a real database — all
-files are reviewed, hand-verified SQL for the user to run themselves. See
-"Open questions" at the end.
+**Update 2026-07-04 — applied and verified against the live database.**
+Raw network access to the live Supabase project (`<project-ref>`)
+became reachable from this dev environment for the first time today. The
+migration and seed described in this document **have been run** against
+that live instance: `team_statistics` and `tournament_stages` exist, the new
+`teams`/`matches` columns are present, and a direct query confirms 419 rows
+in `matches` with a non-NULL `data_source` (330 `wc_2002_2022_dataset` + 89
+`wc_2026_live`) and 132 rows in `team_statistics` — exactly matching the
+expected counts below. Two real bugs surfaced only once the live DB was
+queryable (previously undetectable, since there was no live DB to run
+against): the inference-time query in `app/ml/data/loader.py` needed an
+explicit `data_source IS NOT NULL` filter (the `matches` table also still
+carries ~49,389 rows from the superseded broad 1872-2017 seed, which would
+otherwise leak into live inference), and `app/models/match.py`'s SQLAlchemy
+columns were typed `String` against what are actually native Postgres
+`uuid` columns, breaking joins. Both are fixed — see `CHANGELOG.md`. The
+former "not reachable" framing throughout the rest of this document (below)
+describes the state as of 2026-07-03, when it was written and true; it is
+left as historical record within each section rather than rewritten, but do
+not take "not reachable" / "never applied" statements below at face value —
+see "Open questions" at the end for the current, corrected status.
 
 ---
 
@@ -271,26 +288,35 @@ target from `team_statistics` (which references `matches.id` directly) —
   stage). None of this was fabricated or "fixed" here; it's carried through
   as-is from `matches_historical.csv`.
 
-## Open questions for a human with live Supabase access
+## Open questions — updated 2026-07-04 with live-DB findings
 
-1. **Cannot verify the migration runs cleanly against the real database.**
-   Everything here was reviewed by hand and cross-checked against every
-   row of the 3 source CSVs (team/match counts, referential integrity of
-   every team name and match_id used in joins), but it has not been
-   executed against Postgres. Recommend running
-   `migrations/002_wc2026_upgrade.sql` then `seed_wc2026.sql` in a
-   Supabase SQL editor transaction (or staging branch) first and checking
-   the verification `SELECT COUNT(*)` statements at the bottom of
-   `seed_wc2026.sql` match expectations (72 teams, 419 matches with
-   `external_match_id` set, 132 `team_statistics` rows) before applying to
-   production.
-2. **Existing production data**: if the live database already has rows in
-   `matches`/`teams` from the old broad seed (1872-2017 dataset) or from
-   `seed_fifa_2026_teams.sql`, `seed_wc2026.sql`'s team UPSERT will merge
-   cleanly (matches on `name`), but pre-existing non-WC match rows from the
-   old seed will coexist unchanged alongside the new WC-only rows — decide
-   whether those should be purged, kept, or filtered by `data_source` /
-   `tournament` at the query layer.
+1. **RESOLVED — the migration has now been run against the real database.**
+   As of 2026-07-04, `migrations/002_wc2026_upgrade.sql` and
+   `seed_wc2026.sql` have been applied to the live Supabase project
+   (`<project-ref>`) and the verification counts confirmed directly:
+   48 teams with `elo_rating`/`wc2026_group` populated (the WC2026 upsert
+   target — `teams` itself has 335 rows total, since it was seeded into a
+   pre-existing broader table; see item 2 below), 419 matches with
+   `external_match_id`/`data_source` set (330 `wc_2002_2022_dataset` + 89
+   `wc_2026_live`), 132 `team_statistics` rows. Spot-checked against real
+   history (Brazil 2-0 Germany, 2002 final; Brazil 1-7 Germany, 2014
+   semi-final — both correct) and canonical team naming (`Türkiye`, `Cabo
+   Verde`, `USA`).
+2. **RESOLVED, with a live-data nuance — existing production data.** The
+   live database did already have rows in `matches`/`teams` from the old
+   broad seed (1872-2017 dataset) before this migration: `matches` has
+   49,389 total rows today, of which only 419 carry a non-NULL
+   `data_source` (the WC-only rows this document describes). The old rows
+   were **kept, not purged** — `seed_wc2026.sql`'s team UPSERT merged
+   cleanly on `name` as anticipated, and the pre-existing non-WC rows
+   coexist unchanged alongside the new WC-only rows exactly as this section
+   predicted. The query-layer filtering this item asked about has been
+   decided **for the ML pipeline** (`app/ml/data/loader.py` now filters
+   `WHERE data_source IS NOT NULL`) but **not yet for the public API** —
+   `GET /api/v1/matches` and `/analytics/dashboard` still query/count the
+   full unfiltered table. This is now the single most significant open item
+   from this pass — see `KNOWN_ASSUMPTIONS.md` for the full writeup; it's a
+   product decision, not something resolved here.
 3. **`teams → matches` `ON DELETE CASCADE`**: still unresolved from the
    prior audit; left untouched here as out of scope, but worth a dedicated
    migration if team deletion is ever a real operational path.

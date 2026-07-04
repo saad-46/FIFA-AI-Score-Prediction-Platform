@@ -1,4 +1,3 @@
-from datetime import datetime, timezone
 from typing import Optional
 import jwt
 from fastapi import Depends, HTTPException, status

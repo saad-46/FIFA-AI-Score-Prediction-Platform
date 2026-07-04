@@ -63,7 +63,7 @@ parameter.
 
 | Method | Path | Auth | Description |
 |---|---|---|---|
-| GET | `/matches` | none | Paginated match history. Query: `page`, `page_size` (≤100), `team`, `tournament`, `year`, `from_date`, `to_date`. Returns `PaginatedMatchResponse`. |
+| GET | `/matches` | none | Paginated match history. Query: `page`, `page_size` (≤100), `team`, `tournament`, `year`, `from_date`, `to_date`. Returns `PaginatedMatchResponse`. **Not WC-only scoped** — see note below. |
 | GET | `/matches/tournaments` | none | All distinct tournament names. Returns `list[str]`. |
 | GET | `/matches/tournaments/{tournament}/stats` | none | Stats for one tournament. Returns `TournamentStatsResponse`. |
 | GET | `/matches/analytics/goal-distribution?tournament=` | none | Goal counts by minute. **Synthetic** — see `GoalDistributionPoint.is_synthetic` (always `true` today; no goal-minute data exists in the schema). |
@@ -76,7 +76,7 @@ parameter.
 
 | Method | Path | Auth | Description |
 |---|---|---|---|
-| GET | `/analytics/dashboard` | optional | `DashboardStatsResponse`: total matches/teams, and — only if authenticated — the caller's prediction count/accuracy, 5 most recent saved predictions, top 5 teams by win rate, and next 5 upcoming fixtures. |
+| GET | `/analytics/dashboard` | optional | `DashboardStatsResponse`: total matches/teams, and — only if authenticated — the caller's prediction count/accuracy, 5 most recent saved predictions, top 5 teams by win rate, and next 5 upcoming fixtures. `total_matches_analyzed` is **not WC-only scoped** — see note below. |
 | GET | `/analytics/global` | none | `GlobalAnalyticsResponse`: total matches/goals, avg goals/match, home/draw/away rates, goals-by-year, top 10 tournaments by match count. Computed via full-history pandas aggregation, cached in-process 60s (`_compute_global_analytics`, `async_ttl_cache`). |
 | GET | `/analytics/model-metrics` | none | `ModelMetricsResponse`: accuracy/MAE/RMSE, last trained timestamp, training sample count, model version. Reads `metrics.json` / `training_report.json` from the model directory (produced by `train.py`); zeros/`"unknown"` if training hasn't been run yet. |
 | GET | `/analytics/feature-importance` | none | `FeatureImportanceResponse`: sorted `[{feature, importance}]` averaged across all three models, plus `model_version` and `total_features`. Reads `feature_importance.json` (`FEATURE_IMPORTANCE_PATH` setting). **404** with an actionable message if the file doesn't exist (training hasn't been run). Not listed in the root `README.md`'s endpoint table — confirmed present in the current code. |
@@ -95,6 +95,14 @@ parameter.
 when `use_fifa_2026_groups` is false, `groups` must be present, sum to
 exactly 48 teams, and contain no duplicate team names across groups —
 otherwise a 422 is returned.
+
+**Open item, flagged 2026-07-04 (see `KNOWN_ASSUMPTIONS.md`):** `GET
+/api/v1/matches` and `/analytics/dashboard`'s `total_matches_analyzed` query/
+count the full `matches` table (~49,389 rows, 1872-2026, all competitions),
+not just the 419-row WC-only corpus the ML pipeline is now scoped to
+(`app/ml/data/loader.py`'s `data_source IS NOT NULL` filter). This was only
+noticed once the live database became reachable and queryable. It is an open
+product decision, not a bug — see `KNOWN_ASSUMPTIONS.md` for detail.
 
 ---
 

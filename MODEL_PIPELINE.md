@@ -27,11 +27,22 @@ As of the 2026-07-03/04 WC2026 retrain, `train.py::load_data()` reads
 `backend/app/data/processed/matches_historical.csv` (`encoding="utf-8-sig"`,
 419 rows: 330 real 2002-2022 WC matches + 89 real 2026 matches), filtering to
 `status == "Completed"` with non-null scores and sorting ascending by date.
-This is a deliberate change from the previous DB-backed default: the live
-Supabase DB was unreachable from the sandbox this retrain was done in, and
+This was a deliberate change from the previous DB-backed default made at a
+time when the live Supabase DB was unreachable from the dev sandbox, and
 `database/seed_wc2026.sql` (see `DATABASE_SCHEMA.md`, `DATA_PIPELINE.md`)
 loads this exact same CSV content into Postgres, so the two are expected to
-produce the same feature matrix once the DB is reachable.
+produce the same feature matrix now that the DB is reachable.
+
+**Update 2026-07-04:** the live database became reachable this same day and
+has since been applied, seeded, and verified end-to-end (see
+`DATA_PIPELINE.md`'s top-of-file update and `CHANGELOG.md`'s "Live database
+validation pass" entry) — `load_data()` still defaults to the CSV path
+described above, but `load_data_from_db()` below is now a genuinely usable,
+verified alternative rather than a placeholder for a hypothetical future
+environment. Note also that the live-DB inference path
+(`app/ml/data/loader.py::load_matches_dataframe`, used at request time, not
+by this training module) required a `data_source IS NOT NULL` filter fix to
+stay scoped to this same 419-row WC-only corpus — see `CHANGELOG.md`.
 
 The previous DB-backed query is preserved as `train.py::load_data_from_db()`
 for environments where Postgres *is* reachable and for future

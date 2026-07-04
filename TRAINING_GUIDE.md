@@ -11,13 +11,18 @@ to validate a newly trained model bundle before deploying it. See
 - **As of the 2026-07-03/04 WC2026 retrain, `train.py::load_data()` reads
   training data directly from
   `backend/app/data/processed/matches_historical.csv`** — no reachable
-  Postgres database is required to run training today. This is a deliberate
-  change (the live Supabase DB was unreachable from the sandbox this retrain
-  was done in); see `DATA_PIPELINE.md` §2 and `MODEL_PIPELINE.md`. A
-  DB-backed alternative, `train.py::load_data_from_db()`, is kept in the
-  same module for environments where Postgres *is* reachable, but is not
-  called by `main()` by default — swap it in manually if you need the live
-  DB as the source instead of the CSV.
+  Postgres database is required to run training today. This was a
+  deliberate change made at a time when the live Supabase DB was
+  unreachable from the dev sandbox; see `DATA_PIPELINE.md` §2 and
+  `MODEL_PIPELINE.md`. **Update, later on 2026-07-04:** the live database
+  became reachable this same day and has since been verified (seeded,
+  booted against, and used to serve live predictions — see
+  `DATA_PIPELINE.md`'s top-of-file update note). `train.py::load_data()`
+  still defaults to the CSV path — that default has not been changed — but
+  `load_data_from_db()` is now a genuinely usable, verified alternative,
+  not just a placeholder for a hypothetical future environment; swap it in
+  manually if you want the live DB as the training source instead of the
+  CSV.
 - Optuna installed if you intend to run hyperparameter search
   (`pip install optuna`) — `hyperparameter_search.py` raises `ImportError`
   with an install hint if it's missing; it is not a hard dependency of

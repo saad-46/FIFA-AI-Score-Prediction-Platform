@@ -5,6 +5,60 @@ current codebase, as of the 2026-07-02 production audit. Nothing in this
 file is invented — each item is grounded in the actual source/data files
 cited.
 
+> **Open item, flagged 2026-07-04 — needs a product decision, not yet
+> resolved.** Now that the live database is reachable and verified (see item
+> (c) below and `DATABASE_SCHEMA.md`), a real scope inconsistency has
+> surfaced between the ML pipeline and the public API. See item **(h)**
+> below for the full writeup — this is the single most significant open
+> question from this validation pass.
+
+## h. Public API endpoints are not WC-only scoped, unlike the ML pipeline — OPEN, unresolved
+
+**This is a genuine open product decision, surfaced by today's live-database
+validation. It has not been fixed and no direction has been chosen yet —
+documented here so it isn't missed, not because a decision was made.**
+
+The live `matches` table currently holds 49,389 rows: 419 tagged with a
+non-NULL `data_source` (the WC-only corpus — 330 `wc_2002_2022_dataset` + 89
+`wc_2026_live` — this platform's model is trained on) and the remaining
+~48,970 from the older, superseded broad seed (friendlies, qualifiers, and
+other competitions spanning 1872-2026, `data_source IS NULL`).
+
+Today, `app/ml/data/loader.py::load_matches_dataframe()` — the function
+every live prediction and tournament simulation depends on — was fixed
+2026-07-04 to filter `WHERE data_source IS NOT NULL`, scoping the ML
+pipeline correctly to the 419-row WC-only corpus (see `CHANGELOG.md`).
+
+**`GET /api/v1/matches` (and its underlying `match_service.get_matches()`)
+and `GET /api/v1/analytics/dashboard` (specifically its
+`total_matches_analyzed` field) were not touched by that fix and still query
+or count the full, unfiltered `matches` table** — i.e. a caller browsing
+`/matches` or reading the dashboard's match count sees/counts the entire
+~49,389-row legacy dataset, not just the 419 WC-only rows the model actually
+knows about.
+
+This is deliberately **not** framed as a bug to fix reflexively, because
+there are two defensible products here and the right answer depends on
+intent that isn't written down anywhere in this codebase:
+
+1. **The public API should be WC-only-scoped**, matching the ML pipeline —
+   a user browsing match history should only ever see the 419 matches the
+   platform is actually about and the model is trained on. Under this view,
+   `get_matches()` and the dashboard count need the same
+   `data_source IS NOT NULL` filter `loader.py` just got.
+2. **Browsing/counting the full historical dataset is an intentional,
+   broader feature** — the API was arguably always meant to expose all
+   ~49k rows of match history (1872-2026, every competition) as a general
+   football-data browsing feature, independent of what the WC2026 model
+   happens to be trained on. Under this view, the current behavior is
+   correct and nothing should change.
+
+No prior doc or code comment states which of these was intended. Flagging
+this explicitly rather than guessing and silently picking one — this needs
+a human decision.
+
+
+
 ## a. FIFA 2026 schedule data provenance
 
 **Source:** the official FIFA World Cup 2026 Match Schedule wallchart PDF,
@@ -65,8 +119,15 @@ column), and `wc2026_group` (new column) for all 48 2026 teams via an
 that data exists in any source file used by either seed script.
 `seed_fifa_2026_teams.sql` itself is unchanged and still only populates
 name/country if run standalone; run order matters (see `DATABASE_SCHEMA.md`).
-**Not yet applied to the live Supabase database** — see `DATA_PIPELINE.md`
-§5 and `DATABASE_SCHEMA.md`'s "Open questions."
+
+**Applied and verified against the live Supabase database, 2026-07-04** —
+raw network access to the live project became available for the first time
+today; a direct query confirms 48 teams have `elo_rating`/`wc2026_group`
+populated, matching expectations. See `DATA_PIPELINE.md` §5 and
+`DATABASE_SCHEMA.md`'s "Open questions" (updated the same day) for the full
+verification, including the real-match head-to-head spot-check (Brazil 2-0
+Germany 2002 final, Brazil 1-7 Germany 2014 semi-final) and canonical
+team-name checks (`Türkiye`, `Cabo Verde`, `USA`).
 
 ## d. Elo not populated at inference time — FIXED 2026-07-03/04
 

@@ -1,3 +1,4 @@
+from datetime import date as date_type
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional
@@ -29,8 +30,8 @@ async def list_matches(
     team: Optional[str] = None,
     tournament: Optional[str] = None,
     year: Optional[int] = None,
-    from_date: Optional[str] = None,
-    to_date: Optional[str] = None,
+    from_date: Optional[date_type] = None,
+    to_date: Optional[date_type] = None,
     db: AsyncSession = Depends(get_db),
 ):
     """Get paginated match history."""

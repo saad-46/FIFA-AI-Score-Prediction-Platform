@@ -1,13 +1,124 @@
 # Changelog
 
+## 2026-07-04 (later) — Live database validation pass
+
+Raw network access to the live Supabase Postgres project
+(`<project-ref>`) became reachable from this dev environment for the
+first time this session — every prior entry in this changelog and the docs
+it references (`DATABASE_SCHEMA.md`, `DATA_PIPELINE.md`) was written under
+the accurate-at-the-time assumption that the DB was unreachable. This entry
+covers what changed once it actually became reachable: two real bugs found
+and fixed that could not have been caught before (they only manifest
+against a live, queryable database), a handful of smaller robustness fixes,
+a code cleanup pass, and full end-to-end verification against production
+infrastructure. See `README.md`'s "Live database validation" section,
+`DATABASE_SCHEMA.md`'s "Open questions," and `DATA_PIPELINE.md` for the
+full corrected narrative.
+
+### Fixed
+
+- **ML inference was not scoped to the WC-only corpus (severe train/serve
+  skew).** `app/ml/data/loader.py::load_matches_dataframe()` — the query
+  every live prediction and tournament simulation depends on — was missing
+  a `data_source IS NOT NULL` filter. The live `matches` table holds 49,389
+  rows total; only 419 (330 `wc_2002_2022_dataset` + 89 `wc_2026_live`) are
+  the WC-only corpus the shipped model was actually trained on. Without the
+  filter, every live prediction would have been served against the full,
+  ~49k-row superseded legacy dataset instead. Fixed by adding
+  `AND m.data_source IS NOT NULL` to the query. Undetectable in any prior
+  session since there was no live DB to run this query against.
+- **SQLAlchemy `Uuid`/`String` type mismatch broke joins.** `app/models/
+  match.py` declared `id`/foreign-key columns (`teams.id`, `matches.id`,
+  `matches.home_team_id`/`away_team_id`, `team_statistics.id`/`match_id`/
+  `team_id`, `saved_predictions.id`/`user_id`) as `Column(String, ...)`,
+  but the live schema stores all of these as native Postgres `uuid`. This
+  raised `operator does not exist: uuid = character varying` on joins once
+  actually run against the real database. Fixed by introducing a shared
+  `Uuid(as_uuid=False)` type (`_UUID` in `match.py`) across every affected
+  column — `as_uuid=False` keeps every existing caller's plain-`str` usage
+  (schemas, services, `default=lambda: str(uuid.uuid4())`) working
+  unchanged.
+- **UUID-format validation guards added to team/match lookups.** Passing a
+  malformed (non-UUID) `team_id`/`match_id`/`home_team_id`/`away_team_id`
+  to `app/services/team_service.py` (`get_team_by_id`, `get_team_stats`,
+  `get_head_to_head`, `get_performance_trend`) or `app/services/
+  match_service.py` (`get_match_by_id`) previously reached asyncpg directly
+  and raised a raw `DataError`, surfacing as an unhandled 500 — a direct
+  consequence of the `Uuid` column fix above (a `String` column tolerated
+  any string; a native `uuid` column does not). Both services now validate
+  the input format first and return "not found" (404 / empty result) for
+  malformed input instead of a 500.
+- **`get_top_teams` threshold made every result disappear.** `app/services/
+  team_service.py::get_top_teams()` filtered out any team with fewer than
+  10 matches played — a threshold calibrated for the old, superseded broad
+  "all competitions" dataset. Once correctly scoped to the WC-only corpus
+  (see the `loader.py` fix above), a team that has only ever played in one
+  World Cup has 3-7 matches total, so the old threshold of 10 was
+  unreachable for every team, making `GET /teams/top` always return an
+  empty list. Lowered to 2.
+- **`from_date`/`to_date` type mismatch on `GET /matches`.**
+  `match_service.get_matches()` typed its `from_date`/`to_date` parameters
+  as `Optional[str]` and compared them directly against a `Date` column;
+  against the live database this either silently failed to filter as
+  expected or raised on comparison, depending on the input. Retyped to
+  `Optional[date]`.
+
+### Data
+
+- **Live historical-match backfill verified: 330 historical rows (was 13 in
+  an earlier, much smaller pre-WC2026 seed) + 89 real 2026 rows = 419 total
+  WC-only matches**, confirmed present in the live `matches` table with
+  `data_source` set. Spot-checked two real results against known football
+  history: **Brazil 2-0 Germany**, 2002 final, and **Brazil 1-7 Germany**,
+  2014 semi-final — both present with the correct scoreline, date, and
+  stage.
+- **Team-name canonicalization confirmed live**: `Türkiye`, `Cabo Verde`,
+  and `USA` all exist as the canonical rows in the live `teams` table,
+  matching `teams_reference.csv`'s naming convention (not "Turkey" /
+  "Cape Verde" / "United States").
+
+### Backend / API — end-to-end live validation
+
+- **The backend was booted directly against the live Supabase database**
+  (not the processed CSVs) for the first time and verified working
+  end-to-end: `/health`, the Swagger/OpenAPI docs at `/docs`, live
+  `POST /predictions/predict` calls across 6 realistic matchups, and
+  `POST /tournament/simulate` Monte Carlo runs at 100, 1000, and 5000
+  iterations — all completed successfully.
+
+### Code cleanup
+
+- Removed unused imports and dead code surfaced while working through the
+  above fixes: an unused `asyncio` import in `app/ml/data/loader.py`; unused
+  `and_`/`pandas` imports and an unused `Match` import in
+  `app/services/match_service.py` and `app/services/team_service.py`
+  respectively; replaced the undeclared transitive `python-jose` dependency
+  in `backend/requirements.txt` with a direct `PyJWT` pin (the actual
+  library `app/core/security.py` imports).
+
+### Open item (not fixed — flagged for a decision)
+
+- **Public API endpoints are not WC-only scoped, unlike the ML pipeline.**
+  `GET /api/v1/matches` and `/analytics/dashboard`'s
+  `total_matches_analyzed` still query/count the full, unfiltered
+  `matches` table (~49,389 rows, all competitions, 1872-2026) rather than
+  the 419-row WC-only corpus the ML pipeline is now correctly scoped to.
+  This is a genuine open product decision — WC-only-scope the public API to
+  match the ML pipeline, or treat full-history browsing as an intentional,
+  broader feature — not something resolved in this pass. See
+  `KNOWN_ASSUMPTIONS.md` item (h) for the full writeup.
+
 ## 2026-07-04 — WC2026 data/model/schema upgrade
 
 A multi-wave upgrade covering data engineering, database schema, feature
 engineering, tournament-engine accuracy against the in-progress real
-tournament, ML retraining, and backend/API additions. Nothing in this entry
-has been applied to the live Supabase database yet — see
-`DATABASE_SCHEMA.md` and `DATA_PIPELINE.md` for what's still pending a human
-with live DB access. Full technical detail lives in `DATA_PIPELINE.md`,
+tournament, ML retraining, and backend/API additions. **At the time this
+entry was written, nothing in it had been applied to the live Supabase
+database** — the DB was unreachable from the sandbox this work was done in.
+**That has since changed the same day: see the "Live database validation
+pass" entry above** for the migration/seed actually being applied and
+verified, and the real bugs (undetectable until the DB was reachable) found
+and fixed as a result. Full technical detail lives in `DATA_PIPELINE.md`,
 `DATABASE_SCHEMA.md`, `FEATURE_ENGINEERING.md`, `RANKINGS_INTEGRATION.md`,
 `ELO_SYSTEM.md`, `TOURNAMENT_ENGINE.md`, and `MODEL_EVALUATION.md`.
 
@@ -34,10 +145,12 @@ with live DB access. Full technical detail lives in `DATA_PIPELINE.md`,
   `matches.away_team_id` relaxed to nullable (for the one genuinely
   undetermined Round-of-16 opponent). New migration
   `database/migrations/002_wc2026_upgrade.sql`; seed data generated by
-  `database/generate_seed_wc2026.py` into `database/seed_wc2026.sql` (72
-  teams, 419 matches, 132 team_statistics rows). **Not yet run against the
-  live Supabase instance** — unreachable from the build sandbox; see
-  `DATABASE_SCHEMA.md`'s "Open questions."
+  `database/generate_seed_wc2026.py` into `database/seed_wc2026.sql` (419
+  matches, 132 team_statistics rows, 48 teams with elo_rating/wc2026_group
+  populated). At the time of this entry, not yet run against the live
+  Supabase instance (unreachable from the build sandbox). **Applied and
+  verified later the same day** — see the "Live database validation pass"
+  entry above and `DATABASE_SCHEMA.md`'s "Open questions."
 
 ### ML / features
 
@@ -75,9 +188,10 @@ with live DB access. Full technical detail lives in `DATA_PIPELINE.md`,
   `xgboost_model.pkl.bak`). Full evidence per feature in
   `FEATURE_ENGINEERING.md` §5 and `MODEL_EVALUATION.md`.
 - `train.py::load_data()` now reads `matches_historical.csv` directly by
-  default (DB unreachable from the build sandbox); a DB-backed
-  `load_data_from_db()` path is kept for parity/reconciliation once Postgres
-  is reachable. See `DATA_PIPELINE.md` §2.
+  default (DB unreachable from the build sandbox at the time this was
+  written); a DB-backed `load_data_from_db()` path is kept for
+  parity/reconciliation now that Postgres is reachable (see the "Live
+  database validation pass" entry above). See `DATA_PIPELINE.md` §2.
 
 ### Tournament engine
 
