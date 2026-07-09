@@ -1,6 +1,7 @@
 import { apiClient } from "./client";
 import type {
   Match,
+  MatchDetail,
   TournamentStats,
   GoalDistribution,
   ScorelineFrequency,
@@ -9,7 +10,9 @@ import type {
 
 export const matchesApi = {
   /**
-   * Get paginated match history
+   * Get paginated match history. NOTE: `total` reflects the full historical
+   * dataset (~49k rows across all competitions), not just the WC-only corpus
+   * the ML pipeline uses — surface this honestly, don't be surprised by it.
    */
   async getHistory(
     page = 1,
@@ -30,25 +33,15 @@ export const matchesApi = {
   },
 
   /**
-   * Get a single match by ID
+   * Get a single match by ID, including box-score team statistics when available.
    */
-  async getById(id: string): Promise<Match> {
-    const { data } = await apiClient.get<Match>(`/matches/${id}`);
+  async getById(id: string): Promise<MatchDetail> {
+    const { data } = await apiClient.get<MatchDetail>(`/matches/${id}`);
     return data;
   },
 
   /**
-   * Get upcoming scheduled matches
-   */
-  async getUpcoming(limit = 10): Promise<Match[]> {
-    const { data } = await apiClient.get<Match[]>("/matches/upcoming", {
-      params: { limit },
-    });
-    return data;
-  },
-
-  /**
-   * Get tournament statistics
+   * Get tournament statistics for a named tournament.
    */
   async getTournamentStats(tournament: string): Promise<TournamentStats> {
     const { data } = await apiClient.get<TournamentStats>(
@@ -58,7 +51,7 @@ export const matchesApi = {
   },
 
   /**
-   * Get all available tournaments
+   * Get every distinct tournament name in the dataset.
    */
   async getTournaments(): Promise<string[]> {
     const { data } = await apiClient.get<string[]>("/matches/tournaments");
@@ -66,7 +59,8 @@ export const matchesApi = {
   },
 
   /**
-   * Get goal distribution by minute
+   * Get goal distribution by minute. Every point is currently synthetic
+   * placeholder data (is_synthetic: true) — always badge it in the UI.
    */
   async getGoalDistribution(tournament?: string): Promise<GoalDistribution[]> {
     const { data } = await apiClient.get<GoalDistribution[]>(
@@ -77,7 +71,7 @@ export const matchesApi = {
   },
 
   /**
-   * Get most common scorelines
+   * Get most common scorelines (real data, not synthetic).
    */
   async getScorelineFrequency(
     tournament?: string

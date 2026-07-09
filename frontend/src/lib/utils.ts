@@ -24,27 +24,27 @@ export function formatGoals(value: number): string {
 export function getResultColor(result: "W" | "D" | "L"): string {
   switch (result) {
     case "W":
-      return "text-emerald-400";
+      return "text-win";
     case "D":
-      return "text-amber-400";
+      return "text-draw";
     case "L":
-      return "text-red-400";
+      return "text-loss";
   }
 }
 
 export function getResultBg(result: "W" | "D" | "L"): string {
   switch (result) {
     case "W":
-      return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
+      return "bg-win/20 text-win border-win/30";
     case "D":
-      return "bg-amber-500/20 text-amber-400 border-amber-500/30";
+      return "bg-draw/20 text-draw border-draw/30";
     case "L":
-      return "bg-red-500/20 text-red-400 border-red-500/30";
+      return "bg-loss/20 text-loss border-loss/30";
   }
 }
 
 export function getProbabilityColor(prob: number): string {
-  if (prob >= 0.6) return "text-emerald-400";
-  if (prob >= 0.4) return "text-amber-400";
-  return "text-red-400";
+  if (prob >= 0.6) return "text-win";
+  if (prob >= 0.4) return "text-draw";
+  return "text-loss";
 }

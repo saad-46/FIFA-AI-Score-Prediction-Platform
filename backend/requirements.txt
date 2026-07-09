@@ -16,6 +16,10 @@ psycopg2-binary==2.9.10
 # so pin it directly here for reproducible installs. python-jose was never
 # actually imported anywhere in this codebase and is dropped.
 PyJWT==2.12.1
+# Required by PyJWT for ES256/RS256 verification (Supabase's asymmetric
+# signing-key JWTs) — PyJWT keeps crypto backends optional, so this must be
+# declared explicitly.
+cryptography==49.0.0
 passlib[bcrypt]==1.7.4
 python-dotenv==1.0.1
 

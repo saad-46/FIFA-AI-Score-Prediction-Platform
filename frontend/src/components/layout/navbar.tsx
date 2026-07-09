@@ -4,32 +4,20 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  BarChart3,
-  Brain,
-  Home,
-  Menu,
-  Trophy,
-  Users,
-  X,
-  BookmarkCheck,
-  LogOut,
-  User,
-  ChevronDown,
-  Activity,
-} from "lucide-react";
+import { Menu, X, LogOut, User, Search, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
-const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: Home },
-  { href: "/predict", label: "Predict", icon: Brain },
-  { href: "/analytics", label: "Analytics", icon: BarChart3 },
-  { href: "/teams", label: "Teams", icon: Users },
-  { href: "/matches", label: "Matches", icon: Activity },
-  { href: "/tournaments", label: "Tournaments", icon: Trophy },
-  { href: "/saved", label: "Saved", icon: BookmarkCheck },
-];
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { CommandPalette } from "@/components/ui/command-palette";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { navItems } from "@/lib/nav-items";
 
 interface NavbarProps {
   user?: { email: string; full_name?: string } | null;
@@ -38,10 +26,11 @@ interface NavbarProps {
 export function Navbar({ user }: NavbarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const signOutFormRef = React.useRef<HTMLFormElement>(null);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-800 bg-slate-950/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -49,8 +38,8 @@ export function Navbar({ user }: NavbarProps) {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500">
               <Trophy className="h-4 w-4 text-white" />
             </div>
-            <span className="text-lg font-bold text-white">
-              FIFA<span className="text-emerald-400">AI</span>
+            <span className="text-lg font-bold text-foreground">
+              FIFA<span className="text-primary">AI</span>
             </span>
           </Link>
 
@@ -66,8 +55,8 @@ export function Navbar({ user }: NavbarProps) {
                   className={cn(
                     "flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                     active
-                      ? "bg-emerald-500/10 text-emerald-400"
-                      : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+                      ? "bg-primary/10 text-primary"
+                      : "text-fg-muted hover:bg-surface-2 hover:text-foreground"
                   )}
                 >
                   <Icon className="h-4 w-4" />
@@ -79,49 +68,48 @@ export function Navbar({ user }: NavbarProps) {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
+            <Button
+              variant="outline"
+              size="sm"
+              className="hidden md:inline-flex text-fg-muted font-normal"
+              onClick={() => setPaletteOpen(true)}
+            >
+              <Search className="h-3.5 w-3.5" />
+              Search
+              <kbd className="ml-2 rounded border border-border px-1.5 text-[10px]">⌘K</kbd>
+            </Button>
+            <ThemeToggle />
             {user ? (
-              <div className="relative hidden md:block">
-                <button
-                  onClick={() => setProfileOpen(!profileOpen)}
-                  className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-300 hover:bg-slate-800 transition-colors"
-                >
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">
-                    {(user.full_name || user.email)[0].toUpperCase()}
-                  </div>
-                  <span className="max-w-[120px] truncate">
-                    {user.full_name || user.email}
-                  </span>
-                  <ChevronDown className="h-3.5 w-3.5 opacity-60" />
-                </button>
-                <AnimatePresence>
-                  {profileOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      className="absolute right-0 mt-1 w-48 rounded-xl border border-slate-700 bg-slate-900 shadow-xl py-1"
-                    >
-                      <Link
-                        href="/profile"
-                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-300 hover:bg-slate-800"
-                        onClick={() => setProfileOpen(false)}
-                      >
-                        <User className="h-4 w-4" />
-                        Profile
-                      </Link>
-                      <form action="/auth/signout" method="post">
-                        <button
-                          type="submit"
-                          className="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-400 hover:bg-slate-800"
-                        >
-                          <LogOut className="h-4 w-4" />
-                          Sign out
-                        </button>
-                      </form>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="hidden md:flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-foreground hover:bg-surface-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                    <Avatar className="h-7 w-7">
+                      <AvatarFallback>
+                        {(user.full_name || user.email)[0].toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="max-w-[120px] truncate">
+                      {user.full_name || user.email}
+                    </span>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem asChild>
+                    <Link href="/profile" className="flex items-center gap-2 cursor-pointer">
+                      <User className="h-4 w-4" />
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    className="text-loss focus:text-loss cursor-pointer"
+                    onSelect={() => signOutFormRef.current?.requestSubmit()}
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <div className="hidden md:flex items-center gap-2">
                 <Button variant="ghost" size="sm" asChild>
@@ -135,7 +123,7 @@ export function Navbar({ user }: NavbarProps) {
 
             {/* Mobile menu toggle */}
             <button
-              className="md:hidden rounded-lg p-2 text-slate-400 hover:bg-slate-800"
+              className="md:hidden rounded-lg p-2 text-fg-muted hover:bg-surface-2"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -152,7 +140,7 @@ export function Navbar({ user }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-slate-800 bg-slate-950"
+            className="md:hidden border-t border-border bg-background"
           >
             <nav className="flex flex-col gap-1 p-4">
               {navItems.map((item) => {
@@ -176,7 +164,7 @@ export function Navbar({ user }: NavbarProps) {
                 );
               })}
               {!user && (
-                <div className="mt-2 flex flex-col gap-2 border-t border-slate-800 pt-4">
+                <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
                   <Button variant="outline" size="sm" asChild>
                     <Link href="/auth/login">Sign in</Link>
                   </Button>
@@ -189,6 +177,12 @@ export function Navbar({ user }: NavbarProps) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <CommandPalette items={navItems} open={paletteOpen} onOpenChange={setPaletteOpen} />
+
+      {/* Submitted imperatively by the "Sign out" menu item — kept outside the
+          DropdownMenuItem so Radix can focus the item itself, not a form. */}
+      <form ref={signOutFormRef} action="/auth/signout" method="post" className="hidden" />
     </header>
   );
 }

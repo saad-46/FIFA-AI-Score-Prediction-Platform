@@ -30,7 +30,10 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const protectedRoutes = ["/dashboard", "/predictions", "/saved", "/profile"];
+  // "/predict" is intentionally NOT protected — POST /predictions/predict is a
+  // public backend endpoint; only saving/listing/deleting predictions requires auth,
+  // which is enforced by the relevant components/pages themselves.
+  const protectedRoutes = ["/dashboard", "/saved", "/profile"];
   const isProtected = protectedRoutes.some((route) =>
     request.nextUrl.pathname.startsWith(route)
   );

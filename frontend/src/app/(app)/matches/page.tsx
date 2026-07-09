@@ -1,40 +1,23 @@
 import type { Metadata } from "next";
-import { Activity, Filter } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Activity } from "lucide-react";
+import { MatchesView } from "@/components/matches/matches-view";
 
-export const metadata: Metadata = { title: "Match History" };
+export const metadata: Metadata = {
+  title: "Match History",
+  description: "Browse historical FIFA match results and filter by team or tournament.",
+};
 
 export default function MatchesPage() {
   return (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Activity className="h-6 w-6 text-emerald-400" />
-            Match History
-          </h1>
-          <p className="text-slate-400 text-sm mt-1">
-            Browse 44,000+ historical FIFA matches
-          </p>
-        </div>
-        <Button variant="outline" size="sm">
-          <Filter className="h-4 w-4" />
-          Filters
-        </Button>
+      <div>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground">
+          <Activity className="h-6 w-6 text-primary" aria-hidden="true" />
+          Match History
+        </h1>
+        <p className="mt-1 text-sm text-fg-muted">Browse historical FIFA match results</p>
       </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Matches</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-center h-64 text-slate-600">
-            Connect API to load match history
-          </div>
-        </CardContent>
-      </Card>
+      <MatchesView />
     </div>
   );
 }

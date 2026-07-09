@@ -1,20 +1,15 @@
 import { apiClient } from "./client";
-import type { DashboardStats } from "@/types";
-
-export interface GlobalAnalytics {
-  total_matches: number;
-  total_goals: number;
-  avg_goals_per_match: number;
-  home_win_rate: number;
-  draw_rate: number;
-  away_win_rate: number;
-  goals_by_year: Array<{ year: number; goals: number; matches: number }>;
-  top_tournaments: Array<{ tournament: string; matches: number }>;
-}
+import type {
+  DashboardStats,
+  FeatureImportanceResponse,
+  GlobalAnalytics,
+  ModelMetrics,
+} from "@/types";
 
 export const analyticsApi = {
   /**
-   * Get dashboard summary stats
+   * Get dashboard summary stats. Richer response (recent predictions, etc.)
+   * when authenticated.
    */
   async getDashboardStats(): Promise<DashboardStats> {
     const { data } = await apiClient.get<DashboardStats>(
@@ -24,7 +19,8 @@ export const analyticsApi = {
   },
 
   /**
-   * Get global analytics overview
+   * Get global analytics overview (server-cached 60s). NOTE: figures reflect
+   * the full historical dataset, not just the WC-only corpus.
    */
   async getGlobalAnalytics(): Promise<GlobalAnalytics> {
     const { data } = await apiClient.get<GlobalAnalytics>("/analytics/global");
@@ -32,17 +28,22 @@ export const analyticsApi = {
   },
 
   /**
-   * Get model performance metrics
+   * Get model performance metrics from the training pipeline's saved reports.
    */
-  async getModelMetrics(): Promise<{
-    accuracy: number;
-    mae: number;
-    rmse: number;
-    last_trained: string;
-    training_samples: number;
-    model_version: string;
-  }> {
-    const { data } = await apiClient.get("/analytics/model-metrics");
+  async getModelMetrics(): Promise<ModelMetrics> {
+    const { data } = await apiClient.get<ModelMetrics>(
+      "/analytics/model-metrics"
+    );
+    return data;
+  },
+
+  /**
+   * Get sorted feature importance for the current model.
+   */
+  async getFeatureImportance(): Promise<FeatureImportanceResponse> {
+    const { data } = await apiClient.get<FeatureImportanceResponse>(
+      "/analytics/feature-importance"
+    );
     return data;
   },
 };

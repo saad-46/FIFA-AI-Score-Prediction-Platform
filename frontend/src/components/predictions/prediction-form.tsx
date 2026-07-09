@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
-import { motion } from "framer-motion";
-import { Brain, Loader2, ArrowRight, RefreshCw } from "lucide-react";
+import React, { useState } from "react";
+import { Brain, ArrowRight, RefreshCw } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Combobox } from "@/components/ui/combobox";
 import {
   Select,
   SelectContent,
@@ -18,10 +18,10 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { predictionsApi } from "@/lib/api/predictions";
-import { teamsApi } from "@/lib/api/teams";
-import type { PredictionResult, Team } from "@/types";
+import { getApiErrorMessage } from "@/lib/api/client";
+import type { PredictionResult } from "@/types";
 import { toast } from "@/hooks/use-toast";
-import { useDebounce } from "@/hooks/use-debounce";
+import { useTeamSearch } from "@/hooks/use-team-search";
 
 const schema = z.object({
   home_team: z.string().min(1, "Select a home team"),
@@ -59,13 +59,10 @@ export function PredictionForm({ onResult }: PredictionFormProps) {
   const [loading, setLoading] = useState(false);
   const [homeSearch, setHomeSearch] = useState("");
   const [awaySearch, setAwaySearch] = useState("");
-  const [homeTeams, setHomeTeams] = useState<Team[]>([]);
-  const [awayTeams, setAwayTeams] = useState<Team[]>([]);
-  const [homeSearching, setHomeSearching] = useState(false);
-  const [awaySearching, setAwaySearching] = useState(false);
+  const { results: homeTeams, loading: homeSearching } = useTeamSearch(homeSearch);
+  const { results: awayTeams, loading: awaySearching } = useTeamSearch(awaySearch);
 
   const {
-    register,
     handleSubmit,
     setValue,
     watch,
@@ -78,35 +75,8 @@ export function PredictionForm({ onResult }: PredictionFormProps) {
 
   const homeTeamValue = watch("home_team");
   const awayTeamValue = watch("away_team");
-
-  const debouncedHomeSearch = useDebounce(homeSearch, 300);
-  const debouncedAwaySearch = useDebounce(awaySearch, 300);
-
-  React.useEffect(() => {
-    if (!debouncedHomeSearch || debouncedHomeSearch.length < 2) {
-      setHomeTeams([]);
-      return;
-    }
-    setHomeSearching(true);
-    teamsApi
-      .search(debouncedHomeSearch)
-      .then(setHomeTeams)
-      .catch(() => setHomeTeams([]))
-      .finally(() => setHomeSearching(false));
-  }, [debouncedHomeSearch]);
-
-  React.useEffect(() => {
-    if (!debouncedAwaySearch || debouncedAwaySearch.length < 2) {
-      setAwayTeams([]);
-      return;
-    }
-    setAwaySearching(true);
-    teamsApi
-      .search(debouncedAwaySearch)
-      .then(setAwayTeams)
-      .catch(() => setAwayTeams([]))
-      .finally(() => setAwaySearching(false));
-  }, [debouncedAwaySearch]);
+  const neutralVenue = watch("neutral_venue");
+  const tournamentValue = watch("tournament");
 
   const onSubmit = async (values: FormValues) => {
     if (values.home_team === values.away_team) {
@@ -122,9 +92,7 @@ export function PredictionForm({ onResult }: PredictionFormProps) {
       const result = await predictionsApi.predict(values);
       onResult(result);
     } catch (err: unknown) {
-      const message =
-        err instanceof Error ? err.message : "Prediction failed. Try again.";
-      toast({ title: "Error", description: message, variant: "destructive" });
+      toast({ title: "Error", description: getApiErrorMessage(err), variant: "destructive" });
     } finally {
       setLoading(false);
     }
@@ -134,108 +102,51 @@ export function PredictionForm({ onResult }: PredictionFormProps) {
     <Card glow>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Brain className="h-5 w-5 text-emerald-400" />
+          <Brain className="h-5 w-5 text-primary" aria-hidden="true" />
           AI Match Prediction
         </CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Home Team */}
             <div className="space-y-2">
-              <Label htmlFor="home_team">Home Team</Label>
-              <div className="relative">
-                <Input
-                  id="home_team_search"
-                  placeholder="Search team..."
-                  value={homeSearch}
-                  onChange={(e) => setHomeSearch(e.target.value)}
-                  autoComplete="off"
-                />
-                {homeSearching && (
-                  <Loader2 className="absolute right-3 top-2.5 h-4 w-4 animate-spin text-slate-400" />
-                )}
-                {homeTeams.length > 0 && (
-                  <div className="absolute z-10 mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 shadow-xl max-h-48 overflow-y-auto">
-                    {homeTeams.map((team) => (
-                      <button
-                        key={team.id}
-                        type="button"
-                        className="flex w-full items-center gap-2 px-3 py-2 text-sm text-slate-200 hover:bg-slate-800 transition-colors"
-                        onClick={() => {
-                          setValue("home_team", team.name);
-                          setHomeSearch(team.name);
-                          setHomeTeams([]);
-                        }}
-                      >
-                        <span className="font-medium">{team.name}</span>
-                        <span className="text-slate-500 text-xs ml-auto">
-                          {team.country}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              {homeTeamValue && (
-                <p className="text-xs text-emerald-400">✓ {homeTeamValue}</p>
-              )}
-              {errors.home_team && (
-                <p className="text-xs text-red-400">{errors.home_team.message}</p>
-              )}
-              <input type="hidden" {...register("home_team")} />
+              <Label htmlFor="home_team_combobox">Home Team</Label>
+              <Combobox
+                id="home_team_combobox"
+                aria-label="Search for a home team"
+                value={homeTeamValue}
+                onValueChange={(v) => setValue("home_team", v, { shouldValidate: true })}
+                onSearchChange={setHomeSearch}
+                loading={homeSearching}
+                placeholder="Search team…"
+                searchPlaceholder="Type at least 2 characters…"
+                emptyMessage={homeSearch.length < 2 ? "Keep typing…" : "No teams found."}
+                options={homeTeams.map((t) => ({ value: t.name, label: t.name, description: t.country }))}
+              />
+              {errors.home_team && <p className="text-xs text-loss">{errors.home_team.message}</p>}
             </div>
 
-            {/* Away Team */}
             <div className="space-y-2">
-              <Label htmlFor="away_team">Away Team</Label>
-              <div className="relative">
-                <Input
-                  id="away_team_search"
-                  placeholder="Search team..."
-                  value={awaySearch}
-                  onChange={(e) => setAwaySearch(e.target.value)}
-                  autoComplete="off"
-                />
-                {awaySearching && (
-                  <Loader2 className="absolute right-3 top-2.5 h-4 w-4 animate-spin text-slate-400" />
-                )}
-                {awayTeams.length > 0 && (
-                  <div className="absolute z-10 mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 shadow-xl max-h-48 overflow-y-auto">
-                    {awayTeams.map((team) => (
-                      <button
-                        key={team.id}
-                        type="button"
-                        className="flex w-full items-center gap-2 px-3 py-2 text-sm text-slate-200 hover:bg-slate-800 transition-colors"
-                        onClick={() => {
-                          setValue("away_team", team.name);
-                          setAwaySearch(team.name);
-                          setAwayTeams([]);
-                        }}
-                      >
-                        <span className="font-medium">{team.name}</span>
-                        <span className="text-slate-500 text-xs ml-auto">
-                          {team.country}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              {awayTeamValue && (
-                <p className="text-xs text-emerald-400">✓ {awayTeamValue}</p>
-              )}
-              {errors.away_team && (
-                <p className="text-xs text-red-400">{errors.away_team.message}</p>
-              )}
-              <input type="hidden" {...register("away_team")} />
+              <Label htmlFor="away_team_combobox">Away Team</Label>
+              <Combobox
+                id="away_team_combobox"
+                aria-label="Search for an away team"
+                value={awayTeamValue}
+                onValueChange={(v) => setValue("away_team", v, { shouldValidate: true })}
+                onSearchChange={setAwaySearch}
+                loading={awaySearching}
+                placeholder="Search team…"
+                searchPlaceholder="Type at least 2 characters…"
+                emptyMessage={awaySearch.length < 2 ? "Keep typing…" : "No teams found."}
+                options={awayTeams.map((t) => ({ value: t.name, label: t.name, description: t.country }))}
+              />
+              {errors.away_team && <p className="text-xs text-loss">{errors.away_team.message}</p>}
             </div>
           </div>
 
-          {/* Tournament */}
           <div className="space-y-2">
             <Label>Tournament (optional)</Label>
-            <Select onValueChange={(v) => setValue("tournament", v)}>
+            <Select value={tournamentValue ?? ""} onValueChange={(v) => setValue("tournament", v)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select tournament..." />
               </SelectTrigger>
@@ -249,13 +160,11 @@ export function PredictionForm({ onResult }: PredictionFormProps) {
             </Select>
           </div>
 
-          {/* Neutral venue */}
           <div className="flex items-center gap-3">
-            <input
-              type="checkbox"
+            <Switch
               id="neutral_venue"
-              {...register("neutral_venue")}
-              className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-emerald-500 focus:ring-emerald-500"
+              checked={neutralVenue}
+              onCheckedChange={(checked) => setValue("neutral_venue", checked)}
             />
             <Label htmlFor="neutral_venue" className="cursor-pointer">
               Neutral venue
@@ -263,25 +172,10 @@ export function PredictionForm({ onResult }: PredictionFormProps) {
           </div>
 
           <div className="flex gap-3">
-            <Button
-              type="submit"
-              disabled={loading}
-              className="flex-1"
-              variant="gradient"
-              size="lg"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Predicting...
-                </>
-              ) : (
-                <>
-                  <Brain className="h-4 w-4" />
-                  Predict Match
-                  <ArrowRight className="h-4 w-4" />
-                </>
-              )}
+            <Button type="submit" loading={loading} className="flex-1" variant="gradient" size="lg">
+              {!loading && <Brain className="h-4 w-4" />}
+              {loading ? "Predicting..." : "Predict Match"}
+              {!loading && <ArrowRight className="h-4 w-4" />}
             </Button>
             <Button
               type="button"

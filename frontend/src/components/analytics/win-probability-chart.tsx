@@ -12,10 +12,10 @@ import {
   Legend,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { PerformanceTrend } from "@/types";
+import type { PerformanceTrendPoint } from "@/types";
 
 interface WinProbabilityChartProps {
-  data: PerformanceTrend[];
+  data: PerformanceTrendPoint[];
   teamName: string;
 }
 

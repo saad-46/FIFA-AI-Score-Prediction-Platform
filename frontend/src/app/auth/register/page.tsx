@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Trophy, Loader2, Eye, EyeOff } from "lucide-react";
+import { Trophy, Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -65,15 +65,15 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+    <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md">
-        <div className="flex justify-center mb-8">
+        <div className="mb-8 flex justify-center">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500">
               <Trophy className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-white">
-              FIFA<span className="text-emerald-400">AI</span>
+            <span className="text-xl font-bold text-foreground">
+              FIFA<span className="text-primary">AI</span>
             </span>
           </Link>
         </div>
@@ -94,7 +94,7 @@ export default function RegisterPage() {
                   {...register("full_name")}
                 />
                 {errors.full_name && (
-                  <p className="text-xs text-red-400">{errors.full_name.message}</p>
+                  <p className="text-xs text-loss">{errors.full_name.message}</p>
                 )}
               </div>
 
@@ -108,7 +108,7 @@ export default function RegisterPage() {
                   {...register("email")}
                 />
                 {errors.email && (
-                  <p className="text-xs text-red-400">{errors.email.message}</p>
+                  <p className="text-xs text-loss">{errors.email.message}</p>
                 )}
               </div>
 
@@ -124,7 +124,7 @@ export default function RegisterPage() {
                   />
                   <button
                     type="button"
-                    className="absolute right-3 top-2.5 text-slate-500 hover:text-slate-300"
+                    className="absolute right-3 top-2.5 text-fg-muted hover:text-foreground"
                     onClick={() => setShowPassword(!showPassword)}
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
@@ -132,7 +132,7 @@ export default function RegisterPage() {
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-xs text-red-400">{errors.password.message}</p>
+                  <p className="text-xs text-loss">{errors.password.message}</p>
                 )}
               </div>
 
@@ -146,27 +146,18 @@ export default function RegisterPage() {
                   {...register("confirm_password")}
                 />
                 {errors.confirm_password && (
-                  <p className="text-xs text-red-400">{errors.confirm_password.message}</p>
+                  <p className="text-xs text-loss">{errors.confirm_password.message}</p>
                 )}
               </div>
 
-              <Button
-                type="submit"
-                className="w-full"
-                variant="gradient"
-                size="lg"
-                disabled={loading}
-              >
-                {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Create account"}
+              <Button type="submit" className="w-full" variant="gradient" size="lg" loading={loading}>
+                Create account
               </Button>
             </form>
 
-            <p className="mt-4 text-center text-sm text-slate-500">
+            <p className="mt-4 text-center text-sm text-fg-muted">
               Already have an account?{" "}
-              <Link
-                href="/auth/login"
-                className="text-emerald-400 hover:text-emerald-300 font-medium"
-              >
+              <Link href="/auth/login" className="font-medium text-primary hover:opacity-80">
                 Sign in
               </Link>
             </p>

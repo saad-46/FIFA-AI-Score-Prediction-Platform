@@ -4,22 +4,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-emerald-600 text-white shadow hover:bg-emerald-500 active:bg-emerald-700",
-        destructive:
-          "bg-red-600 text-white shadow-sm hover:bg-red-500",
+          "bg-primary text-white shadow hover:bg-primary-hover active:bg-primary-hover",
+        destructive: "bg-loss text-white shadow-sm hover:opacity-90",
         outline:
-          "border border-slate-700 bg-transparent text-slate-200 shadow-sm hover:bg-slate-800 hover:text-white",
-        secondary:
-          "bg-slate-800 text-slate-200 shadow-sm hover:bg-slate-700",
-        ghost:
-          "text-slate-400 hover:bg-slate-800 hover:text-slate-200",
-        link:
-          "text-emerald-400 underline-offset-4 hover:underline",
+          "border border-border bg-transparent text-foreground shadow-sm hover:bg-surface-2",
+        secondary: "bg-surface-2 text-foreground shadow-sm hover:opacity-80",
+        ghost: "text-fg-muted hover:bg-surface-2 hover:text-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
         gradient:
           "bg-gradient-to-r from-emerald-600 to-cyan-600 text-white shadow hover:from-emerald-500 hover:to-cyan-500",
       },
@@ -38,21 +34,46 @@ const buttonVariants = cva(
   }
 );
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-}
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+    loading?: boolean;
+  };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, loading = false, disabled, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
+
+    // Slot (asChild) requires exactly one child element to clone props onto,
+    // so the loading spinner can only be injected in non-asChild mode.
+    if (asChild) {
+      return (
+        <Comp
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref}
+          {...props}
+        >
+          {children}
+        </Comp>
+      );
+    }
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        disabled={disabled || loading}
+        aria-busy={loading || undefined}
         {...props}
-      />
+      >
+        {loading && (
+          <svg className="size-4 shrink-0 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+          </svg>
+        )}
+        {children}
+      </Comp>
     );
   }
 );

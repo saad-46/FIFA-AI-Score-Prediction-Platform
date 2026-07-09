@@ -1,4 +1,5 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
+import axios, { type AxiosInstance } from "axios";
+import { createClient } from "@/lib/supabase/client";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
@@ -11,42 +12,40 @@ export const apiClient: AxiosInstance = axios.create({
   },
 });
 
-// Request interceptor — attach auth token
-apiClient.interceptors.request.use(
-  (config) => {
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("access_token");
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// Lazily-created singleton so we don't spin up a new Supabase client per request.
+let supabaseBrowserClient: ReturnType<typeof createClient> | null = null;
 
-// Response interceptor — normalise errors
-apiClient.interceptors.response.use(
-  (response) => response,
-  (error: AxiosError) => {
-    if (error.response?.status === 401) {
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("access_token");
-        window.location.href = "/auth/login";
-      }
-    }
-    return Promise.reject(error);
-  }
-);
-
-export function setAuthToken(token: string) {
+// Auth is Supabase-session-based everywhere in this app (see lib/supabase/*).
+// The token is read fresh from the current session on every request rather
+// than cached, since Supabase transparently refreshes it in the background.
+apiClient.interceptors.request.use(async (config) => {
   if (typeof window !== "undefined") {
-    localStorage.setItem("access_token", token);
+    if (!supabaseBrowserClient) {
+      supabaseBrowserClient = createClient();
+    }
+    const {
+      data: { session },
+    } = await supabaseBrowserClient.auth.getSession();
+    if (session?.access_token) {
+      config.headers.Authorization = `Bearer ${session.access_token}`;
+    }
   }
-}
+  return config;
+});
 
-export function clearAuthToken() {
-  if (typeof window !== "undefined") {
-    localStorage.removeItem("access_token");
+/**
+ * Extracts a human-readable message from an API error, matching FastAPI's
+ * `{"detail": "..."}` error shape. Use this at every call site instead of
+ * reading error.message directly.
+ */
+export function getApiErrorMessage(error: unknown): string {
+  if (axios.isAxiosError(error)) {
+    const detail = (error.response?.data as { detail?: string } | undefined)
+      ?.detail;
+    if (typeof detail === "string" && detail.length > 0) return detail;
+    if (error.code === "ECONNABORTED") return "The request timed out. Please try again.";
+    if (!error.response) return "Could not reach the server. Check your connection.";
   }
+  if (error instanceof Error && error.message) return error.message;
+  return "Something went wrong. Please try again.";
 }

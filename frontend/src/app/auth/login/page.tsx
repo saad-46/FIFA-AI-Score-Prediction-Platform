@@ -3,7 +3,7 @@
 import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Trophy, Loader2, Eye, EyeOff } from "lucide-react";
+import { Trophy, Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -72,7 +72,7 @@ function LoginForm() {
           {...register("email")}
         />
         {errors.email && (
-          <p className="text-xs text-red-400">{errors.email.message}</p>
+          <p className="text-xs text-loss">{errors.email.message}</p>
         )}
       </div>
 
@@ -88,7 +88,7 @@ function LoginForm() {
           />
           <button
             type="button"
-            className="absolute right-3 top-2.5 text-slate-500 hover:text-slate-300"
+            className="absolute right-3 top-2.5 text-fg-muted hover:text-foreground"
             onClick={() => setShowPassword(!showPassword)}
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
@@ -100,18 +100,12 @@ function LoginForm() {
           </button>
         </div>
         {errors.password && (
-          <p className="text-xs text-red-400">{errors.password.message}</p>
+          <p className="text-xs text-loss">{errors.password.message}</p>
         )}
       </div>
 
-      <Button
-        type="submit"
-        className="w-full"
-        variant="gradient"
-        size="lg"
-        disabled={loading}
-      >
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Sign in"}
+      <Button type="submit" className="w-full" variant="gradient" size="lg" loading={loading}>
+        Sign in
       </Button>
     </form>
   );
@@ -119,15 +113,15 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+    <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md">
-        <div className="flex justify-center mb-8">
+        <div className="mb-8 flex justify-center">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500">
               <Trophy className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-white">
-              FIFA<span className="text-emerald-400">AI</span>
+            <span className="text-xl font-bold text-foreground">
+              FIFA<span className="text-primary">AI</span>
             </span>
           </Link>
         </div>
@@ -138,20 +132,13 @@ export default function LoginPage() {
             <CardDescription>Sign in to your account</CardDescription>
           </CardHeader>
           <CardContent>
-            <Suspense
-              fallback={
-                <div className="h-48 animate-pulse bg-slate-800 rounded-lg" />
-              }
-            >
+            <Suspense fallback={<div className="h-48 animate-pulse rounded-lg bg-surface-2" />}>
               <LoginForm />
             </Suspense>
 
-            <p className="mt-4 text-center text-sm text-slate-500">
+            <p className="mt-4 text-center text-sm text-fg-muted">
               Don&apos;t have an account?{" "}
-              <Link
-                href="/auth/register"
-                className="text-emerald-400 hover:text-emerald-300 font-medium"
-              >
+              <Link href="/auth/register" className="font-medium text-primary hover:opacity-80">
                 Sign up free
               </Link>
             </p>

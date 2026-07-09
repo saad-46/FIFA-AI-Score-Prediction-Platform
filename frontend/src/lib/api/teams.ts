@@ -1,15 +1,9 @@
 import { apiClient } from "./client";
-import type {
-  Team,
-  TeamStats,
-  HeadToHeadStats,
-  PerformanceTrend,
-  PaginatedResponse,
-} from "@/types";
+import type { Team, TeamStats, HeadToHeadStats, PerformanceTrendPoint } from "@/types";
 
 export const teamsApi = {
   /**
-   * Search teams by name
+   * Search teams by name (case-insensitive substring match). Min 2 chars.
    */
   async search(query: string): Promise<Team[]> {
     const { data } = await apiClient.get<Team[]>("/teams/search", {
@@ -19,21 +13,7 @@ export const teamsApi = {
   },
 
   /**
-   * Get all teams with optional pagination
-   */
-  async getAll(
-    page = 1,
-    pageSize = 50,
-    confederation?: string
-  ): Promise<PaginatedResponse<Team>> {
-    const { data } = await apiClient.get<PaginatedResponse<Team>>("/teams", {
-      params: { page, page_size: pageSize, confederation },
-    });
-    return data;
-  },
-
-  /**
-   * Get a single team by ID
+   * Get a single team by ID.
    */
   async getById(id: string): Promise<Team> {
     const { data } = await apiClient.get<Team>(`/teams/${id}`);
@@ -41,7 +21,7 @@ export const teamsApi = {
   },
 
   /**
-   * Get team statistics
+   * Get team statistics for a given team.
    */
   async getStats(
     teamId: string,
@@ -55,7 +35,7 @@ export const teamsApi = {
   },
 
   /**
-   * Get head-to-head stats between two teams
+   * Get head-to-head stats between two teams.
    */
   async getHeadToHead(
     homeTeamId: string,
@@ -69,13 +49,13 @@ export const teamsApi = {
   },
 
   /**
-   * Get performance trend over time
+   * Get monthly-aggregated performance trend over time.
    */
   async getPerformanceTrend(
     teamId: string,
     months = 24
-  ): Promise<PerformanceTrend[]> {
-    const { data } = await apiClient.get<PerformanceTrend[]>(
+  ): Promise<PerformanceTrendPoint[]> {
+    const { data } = await apiClient.get<PerformanceTrendPoint[]>(
       `/teams/${teamId}/trend`,
       { params: { months } }
     );
@@ -83,7 +63,7 @@ export const teamsApi = {
   },
 
   /**
-   * Get top teams by win rate
+   * Get top teams by win rate (minimum 2 matches played to qualify).
    */
   async getTopTeams(limit = 10, tournament?: string): Promise<TeamStats[]> {
     const { data } = await apiClient.get<TeamStats[]>("/teams/top", {

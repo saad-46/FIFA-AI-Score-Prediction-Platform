@@ -1,14 +1,14 @@
 import { apiClient } from "./client";
 import type {
+  AccuracyStats,
   PredictionRequest,
   PredictionResult,
   SavedPrediction,
-  PaginatedResponse,
 } from "@/types";
 
 export const predictionsApi = {
   /**
-   * Run AI prediction for a match
+   * Run AI prediction for a match. Public endpoint — no auth required.
    */
   async predict(payload: PredictionRequest): Promise<PredictionResult> {
     const { data } = await apiClient.post<PredictionResult>(
@@ -19,7 +19,7 @@ export const predictionsApi = {
   },
 
   /**
-   * Save a prediction to the user's account
+   * Save a prediction to the user's account. Requires auth.
    */
   async save(predictionId: string): Promise<SavedPrediction> {
     const { data } = await apiClient.post<SavedPrediction>(
@@ -29,13 +29,12 @@ export const predictionsApi = {
   },
 
   /**
-   * Get all saved predictions for the authenticated user
+   * Get all saved predictions for the authenticated user.
+   * Returns a plain array — this endpoint is NOT paginated despite taking
+   * page/page_size params (they just control offset/limit server-side).
    */
-  async getSaved(
-    page = 1,
-    pageSize = 20
-  ): Promise<PaginatedResponse<SavedPrediction>> {
-    const { data } = await apiClient.get<PaginatedResponse<SavedPrediction>>(
+  async getSaved(page = 1, pageSize = 20): Promise<SavedPrediction[]> {
+    const { data } = await apiClient.get<SavedPrediction[]>(
       "/predictions/saved",
       { params: { page, page_size: pageSize } }
     );
@@ -43,21 +42,19 @@ export const predictionsApi = {
   },
 
   /**
-   * Delete a saved prediction
+   * Delete a saved prediction. Requires auth.
    */
   async deleteSaved(id: string): Promise<void> {
     await apiClient.delete(`/predictions/saved/${id}`);
   },
 
   /**
-   * Get prediction accuracy stats for the authenticated user
+   * Get prediction accuracy stats for the authenticated user.
    */
-  async getAccuracyStats(): Promise<{
-    total: number;
-    correct: number;
-    accuracy: number;
-  }> {
-    const { data } = await apiClient.get("/predictions/accuracy");
+  async getAccuracyStats(): Promise<AccuracyStats> {
+    const { data } = await apiClient.get<AccuracyStats>(
+      "/predictions/accuracy"
+    );
     return data;
   },
 };
