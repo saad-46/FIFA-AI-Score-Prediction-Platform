@@ -13,6 +13,7 @@ import { TeamCard } from "@/components/teams/team-card";
 import { ErrorState } from "@/components/ui/error-state";
 import { EmptyState } from "@/components/ui/empty-state";
 import { CardGridSkeleton } from "@/components/ui/page-skeletons";
+import { getCountryFlag } from "@/components/football/team-identity";
 
 export function TeamsView() {
   const [query, setQuery] = useState("");
@@ -40,11 +41,11 @@ export function TeamsView() {
       </div>
 
       {isSearching ? (
-        <Card>
-          <CardHeader>
-            <CardTitle>Search results</CardTitle>
+        <Card className="border-border/40">
+          <CardHeader className="pb-2 border-b border-border/20">
+            <CardTitle className="font-mono text-xs tracking-wider uppercase text-foreground">Query Results</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-4">
             {searching ? (
               <CardGridSkeleton count={4} />
             ) : searchResults.length === 0 ? (
@@ -57,8 +58,11 @@ export function TeamsView() {
                       href={`/teams/${team.id}`}
                       className="flex items-center justify-between rounded-lg border border-border px-4 py-3 text-sm transition-colors hover:border-primary/30 hover:bg-surface-2/50"
                     >
-                      <span className="font-medium text-foreground">{team.name}</span>
-                      <span className="text-fg-muted">{team.country}</span>
+                      <span className="font-medium text-foreground flex items-center gap-2">
+                        <span className="text-base select-none">{getCountryFlag(team.name, team.fifa_code)}</span>
+                        {team.name}
+                      </span>
+                      <span className="text-fg-muted font-mono text-xs uppercase">{team.fifa_code ?? team.country}</span>
                     </Link>
                   </li>
                 ))}
@@ -67,11 +71,11 @@ export function TeamsView() {
           </CardContent>
         </Card>
       ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle>Top Teams by Win Rate</CardTitle>
+        <Card className="border-border/40">
+          <CardHeader className="pb-2 border-b border-border/20">
+            <CardTitle className="font-mono text-xs tracking-wider uppercase text-foreground">Leaderboard // Win Rate Density</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-4">
             {topLoading ? (
               <CardGridSkeleton count={6} />
             ) : topError ? (

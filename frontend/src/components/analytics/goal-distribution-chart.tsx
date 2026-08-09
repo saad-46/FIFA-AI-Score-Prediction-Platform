@@ -25,46 +25,50 @@ export function GoalDistributionChart({ data }: GoalDistributionChartProps) {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0">
-        <CardTitle>Goal Distribution by Minute</CardTitle>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 border-b border-border/20">
+        <CardTitle className="font-mono text-xs tracking-wider uppercase text-foreground">
+          Goal Distribution Vector
+        </CardTitle>
         {isSynthetic && (
           <Badge variant="synthetic" title="No goal-minute-level data exists yet — this chart uses placeholder data.">
             Sample data
           </Badge>
         )}
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-6">
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={data} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.4} vertical={false} />
             <XAxis
               dataKey="minute"
               tickFormatter={(v) => MINUTE_LABELS[v] ?? `${v}'`}
-              tick={{ fill: "var(--fg-muted)", fontSize: 11 }}
+              tick={{ fill: "var(--fg-muted)", fontSize: 10, fontFamily: "monospace" }}
               axisLine={{ stroke: "var(--border)" }}
               tickLine={false}
             />
-            <YAxis tick={{ fill: "var(--fg-muted)", fontSize: 11 }} axisLine={false} tickLine={false} />
+            <YAxis tick={{ fill: "var(--fg-muted)", fontSize: 10, fontFamily: "monospace" }} axisLine={false} tickLine={false} />
             <Tooltip
               contentStyle={{
                 backgroundColor: "var(--surface)",
                 border: "1px solid var(--border)",
-                borderRadius: "8px",
+                borderRadius: "4px",
                 color: "var(--foreground)",
+                fontFamily: "monospace",
+                fontSize: "11px",
               }}
-              formatter={(value) => [value as number, "Goals"]}
-              labelFormatter={(label) => `Minute: ${MINUTE_LABELS[label] ?? label}`}
+              formatter={(value) => [value as number, "GOALS"]}
+              labelFormatter={(label) => `INTERVAL: ${MINUTE_LABELS[label] ?? label}`}
             />
-            <Bar dataKey="goals" radius={[4, 4, 0, 0]}>
+            <Bar dataKey="goals" radius={[2, 2, 0, 0]}>
               {data.map((entry, index) => (
                 <Cell
                   key={index}
                   fill={
                     entry.goals === maxGoals
-                      ? "var(--win)"
+                      ? "var(--primary)"
                       : entry.goals > maxGoals * 0.7
-                      ? "var(--accent)"
-                      : "var(--surface-2)"
+                      ? "color-mix(in srgb, var(--primary) 60%, transparent)"
+                      : "var(--border)"
                   }
                 />
               ))}

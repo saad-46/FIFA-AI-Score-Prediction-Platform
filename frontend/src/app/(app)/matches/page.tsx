@@ -3,19 +3,19 @@ import { Activity } from "lucide-react";
 import { MatchesView } from "@/components/matches/matches-view";
 
 export const metadata: Metadata = {
-  title: "Match History",
-  description: "Browse historical FIFA match results and filter by team or tournament.",
+  title: "Historical Registry",
+  description: "Browse historical FIFA match results and performance records.",
 };
 
 export default function MatchesPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground">
+        <h1 className="flex items-center gap-2.5 text-2xl font-bold tracking-tight text-foreground font-mono uppercase">
           <Activity className="h-6 w-6 text-primary" aria-hidden="true" />
-          Match History
+          Historical Registry
         </h1>
-        <p className="mt-1 text-sm text-fg-muted">Browse historical FIFA match results</p>
+        <p className="mt-1 text-sm text-fg-muted">Archive of historical matches, scorelines, and tournament results</p>
       </div>
       <MatchesView />
     </div>

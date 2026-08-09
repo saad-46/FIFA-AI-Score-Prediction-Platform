@@ -32,10 +32,10 @@ export function WinProbabilityCard({
 
   return (
     <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2">
-          <TrendingUp className="h-4 w-4 text-primary" aria-hidden="true" />
-          Win Probability
+      <CardHeader className="pb-2 border-b border-border/20">
+        <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
+          <TrendingUp className="h-4.5 w-4.5 text-primary" aria-hidden="true" />
+          Outcome Probability Vector
         </CardTitle>
       </CardHeader>
       <CardContent>

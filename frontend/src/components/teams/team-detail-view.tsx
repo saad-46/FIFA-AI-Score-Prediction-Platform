@@ -9,7 +9,7 @@ import { getApiErrorMessage } from "@/lib/api/client";
 import { useTeamSearch } from "@/hooks/use-team-search";
 import { StatsCard } from "@/components/analytics/stats-card";
 import { WinProbabilityChart } from "@/components/analytics/win-probability-chart";
-import { TeamIdentity } from "@/components/football/team-identity";
+import { TeamIdentity, getCountryFlag } from "@/components/football/team-identity";
 import { HeadToHeadCard } from "@/components/football/head-to-head-card";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -45,13 +45,40 @@ export function TeamDetailView({ teamId }: { teamId: string }) {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-        <TeamIdentity name={team.name} fifaCode={team.fifa_code} size="lg" />
-        <div className="flex flex-wrap gap-2 sm:ml-auto">
-          {team.fifa_ranking != null && <Badge variant="secondary">FIFA #{team.fifa_ranking}</Badge>}
-          {team.elo_rating != null && <Badge variant="secondary">Elo {team.elo_rating}</Badge>}
-          {team.wc2026_group && <Badge variant="default">Group {team.wc2026_group}</Badge>}
-          {team.confederation && <Badge variant="outline">{team.confederation}</Badge>}
+      <div className="relative border border-border/40 bg-zinc-950/20 rounded-xl p-6 md:p-8 overflow-hidden shadow-2xl flex flex-col md:flex-row items-center gap-6">
+        <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-cyan-500/5 blur-[40px] rounded-full pointer-events-none" />
+        
+        {/* Large Flag Crest container */}
+        <div className="flex shrink-0 items-center justify-center rounded border border-border bg-surface-2/65 h-20 w-20 md:h-24 md:w-24 shadow-md font-sans text-4xl md:text-5xl select-none">
+          {getCountryFlag(team.name, team.fifa_code)}
+        </div>
+
+        <div className="space-y-2 text-center md:text-left flex-1 min-w-0">
+          <div className="flex flex-col md:flex-row md:items-center justify-center md:justify-start gap-2.5">
+            <h1 className="text-3xl font-extrabold tracking-tight text-foreground font-sans uppercase">{team.name}</h1>
+            <span className="self-center md:self-auto font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-surface-2/80 border border-border text-fg-muted uppercase tracking-wider">
+              {team.fifa_code}
+            </span>
+          </div>
+          <p className="text-sm text-fg-muted font-mono uppercase tracking-wider">Seeded Contestant // {team.confederation ?? "Global"} Confederation</p>
+          
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1">
+            {team.fifa_ranking != null && (
+              <Badge variant="outline" className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 border-border bg-zinc-950/40">
+                Rank: #{team.fifa_ranking}
+              </Badge>
+            )}
+            {team.elo_rating != null && (
+              <Badge variant="outline" className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 border-primary/20 text-cyan-400 bg-zinc-950/40">
+                Elo Rating: {team.elo_rating}
+              </Badge>
+            )}
+            {team.wc2026_group && (
+              <Badge variant="outline" className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 border-accent/20 text-accent bg-zinc-950/40">
+                Group: {team.wc2026_group}
+              </Badge>
+            )}
+          </div>
         </div>
       </div>
 

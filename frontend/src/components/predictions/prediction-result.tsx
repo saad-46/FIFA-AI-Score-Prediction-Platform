@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { BookmarkPlus, CheckCircle, Loader2, AlertTriangle, Info, TrendingUp } from "lucide-react";
+import { BookmarkPlus, CheckCircle, Loader2, AlertTriangle, Info, TrendingUp, FileText, Lock } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,6 +14,7 @@ import { WinProbabilityCard } from "@/components/football/win-probability-card";
 import { ScorelineDistribution } from "@/components/football/scoreline-distribution";
 import { ShapExplanation } from "@/components/football/shap-explanation";
 import { HeadToHeadCard } from "@/components/football/head-to-head-card";
+import { getCountryFlag } from "@/components/football/team-identity";
 import type { PredictionResult } from "@/types";
 
 interface PredictionResultCardProps {
@@ -22,9 +23,9 @@ interface PredictionResultCardProps {
 }
 
 const INSIGHT_STYLE = {
-  advantage: { icon: TrendingUp, className: "text-win bg-win/10 border-win/20" },
-  warning: { icon: AlertTriangle, className: "text-draw bg-draw/10 border-draw/20" },
-  neutral: { icon: Info, className: "text-accent bg-accent/10 border-accent/20" },
+  advantage: { icon: TrendingUp, className: "text-win bg-win/5 border-win/20" },
+  warning: { icon: AlertTriangle, className: "text-draw bg-draw/5 border-draw/20" },
+  neutral: { icon: Info, className: "text-primary bg-primary/5 border-primary/20" },
 } as const;
 
 export function PredictionResultCard({ result, isAuthenticated }: PredictionResultCardProps) {
@@ -34,8 +35,8 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
   const handleSave = async () => {
     if (!isAuthenticated) {
       toast({
-        title: "Sign in required",
-        description: "Create an account to save predictions.",
+        title: "Sign In Required",
+        description: "Authenticate to persist predictions within your dashboard directory.",
         variant: "destructive",
       });
       return;
@@ -44,142 +45,224 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
     try {
       await predictionsApi.save(result.prediction_id);
       setSaved(true);
-      toast({ title: "Saved!", description: "Prediction saved to your account.", variant: "success" });
+      toast({ title: "Dossier Saved", description: "Prediction saved to database registry.", variant: "success" });
     } catch (err) {
-      toast({ title: "Error", description: getApiErrorMessage(err), variant: "destructive" });
+      toast({ title: "Save Failed", description: getApiErrorMessage(err), variant: "destructive" });
     } finally {
       setSaving(false);
     }
   };
 
   const confidenceColor =
-    result.confidence_score >= 0.7 ? "text-win" : result.confidence_score >= 0.5 ? "text-draw" : "text-loss";
+    result.confidence_score >= 0.7 ? "text-win" : result.confidence_score >= 0.5 ? "text-primary" : "text-loss";
+
+  // Calculate high-level summary outcome
+  const getVerdict = () => {
+    const homeProb = result.home_win_probability;
+    const awayProb = result.away_win_probability;
+    const drawProb = result.draw_probability;
+    
+    if (Math.abs(homeProb - awayProb) < 0.05) {
+      return `STOCHASTIC EQUILIBRIUM (DRAW OUTLOOK)`;
+    }
+    return homeProb > awayProb 
+      ? `${result.home_team.toUpperCase()} OUTCOME ADVANTAGE` 
+      : `${result.away_team.toUpperCase()} OUTCOME ADVANTAGE`;
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="space-y-4"
-    >
-      {/* Score prediction */}
-      <Card glow>
-        <CardHeader className="pb-2">
-          <div className="flex items-center justify-between">
-            <CardTitle>Predicted Score</CardTitle>
-            <div className="flex items-center gap-2">
-              <span className={cn("text-sm font-medium", confidenceColor)}>
-                {formatPercent(result.confidence_score)} confidence
-              </span>
-              <Button size="sm" variant={saved ? "secondary" : "default"} onClick={handleSave} disabled={saving || saved}>
-                {saving ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : saved ? (
-                  <CheckCircle className="h-4 w-4 text-win" />
-                ) : (
-                  <BookmarkPlus className="h-4 w-4" />
-                )}
-                {saved ? "Saved" : "Save"}
-              </Button>
+    <div className="space-y-6">
+      {/* SECTION 1: EXECUTIVE VERDICT (Immediate Reveal) */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Card className="border-border/60 bg-black/40 backdrop-blur-md shadow-2xl overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-[120px] h-[120px] bg-cyan-500/5 blur-[30px] rounded-full pointer-events-none" />
+          
+          <CardHeader className="pb-3 border-b border-border/40">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-zinc-500 uppercase">
+                <FileText className="h-3.5 w-3.5 text-primary" />
+                INTELLIGENCE DOSSIER // SECURE_REPORT
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <span className={cn("font-mono text-xs font-bold", confidenceColor)}>
+                  {formatPercent(result.confidence_score)} CONFIDENCE
+                </span>
+                <Button 
+                  size="sm" 
+                  variant={saved ? "secondary" : "outline"} 
+                  onClick={handleSave} 
+                  disabled={saving || saved}
+                  className="font-mono text-[10px] uppercase tracking-wider h-8"
+                >
+                  {saving ? (
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                  ) : saved ? (
+                    <CheckCircle className="h-3 w-3 text-win" />
+                  ) : (
+                    <BookmarkPlus className="h-3 w-3" />
+                  )}
+                  {saved ? "Archived" : "Archive"}
+                </Button>
+              </div>
             </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-center gap-8 py-6">
-            <div className="text-center">
-              <p className="text-sm font-medium text-fg-muted mb-2">{result.home_team}</p>
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", delay: 0.2 }}
-                className="font-mono text-6xl font-black text-foreground"
-              >
-                {result.predicted_home_score}
-              </motion.span>
-            </div>
-            <div className="text-center">
-              <span className="text-3xl font-bold text-fg-muted">—</span>
-            </div>
-            <div className="text-center">
-              <p className="text-sm font-medium text-fg-muted mb-2">{result.away_team}</p>
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", delay: 0.3 }}
-                className="font-mono text-6xl font-black text-foreground"
-              >
-                {result.predicted_away_score}
-              </motion.span>
-            </div>
-          </div>
-          {result.most_likely_score && (
-            <p className="text-center text-xs text-fg-muted -mt-2 mb-2">
-              Most likely scoreline: <span className="font-mono font-semibold text-foreground">{result.most_likely_score}</span>
-            </p>
-          )}
-
-          <div className="grid grid-cols-2 gap-4 mt-2">
-            <div className="rounded-lg bg-surface-2/50 p-3 text-center">
-              <p className="text-xs text-fg-muted mb-1">xG {result.home_team}</p>
-              <p className="font-mono text-xl font-bold text-accent">{formatGoals(result.expected_home_goals)}</p>
-            </div>
-            <div className="rounded-lg bg-surface-2/50 p-3 text-center">
-              <p className="text-xs text-fg-muted mb-1">xG {result.away_team}</p>
-              <p className="font-mono text-xl font-bold text-accent">{formatGoals(result.expected_away_goals)}</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      <WinProbabilityCard
-        homeTeam={result.home_team}
-        awayTeam={result.away_team}
-        homeWinProbability={result.home_win_probability}
-        drawProbability={result.draw_probability}
-        awayWinProbability={result.away_win_probability}
-      />
-
-      {result.top_scorelines.length > 0 && (
-        <ScorelineDistribution scorelines={result.top_scorelines} mostLikelyScore={result.most_likely_score} />
-      )}
-
-      {result.prediction_explanation && <ShapExplanation explanation={result.prediction_explanation} />}
-
-      {result.insights && result.insights.length > 0 && (
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center gap-2">
-              <Info className="h-4 w-4 text-draw" aria-hidden="true" />
-              AI Insights
-            </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
-            {result.insights.map((insight, i) => {
-              const { icon: Icon, className } = INSIGHT_STYLE[insight.type];
-              return (
-                <div key={i} className={cn("flex gap-3 rounded-lg border p-3", className)}>
-                  <Icon className="h-4 w-4 mt-0.5 shrink-0" aria-hidden="true" />
-                  <div>
-                    <p className="text-sm font-medium">{insight.title}</p>
-                    <p className="text-xs opacity-80 mt-0.5">{insight.description}</p>
-                  </div>
-                  <Badge variant="outline" className="ml-auto self-start text-xs border-current opacity-60">
-                    {insight.impact}
-                  </Badge>
-                </div>
-              );
-            })}
+          
+          <CardContent className="pt-6 space-y-6">
+            {/* Target Verdict */}
+            <div className="text-center space-y-1">
+              <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">Prototypal Outturn Verdict</span>
+              <h2 className="text-lg md:text-xl font-bold font-mono tracking-wide text-foreground">
+                {getVerdict()}
+              </h2>
+            </div>
+
+            {/* Score Projection Display */}
+            <div className="flex items-center justify-center gap-8 py-4 border-y border-border/20 bg-zinc-950/25 rounded-lg">
+              <div className="text-center w-24">
+                <span className="text-2xl select-none mr-1.5">{getCountryFlag(result.home_team)}</span>
+                <p className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 mt-1 truncate">{result.home_team}</p>
+                <motion.span
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.2, type: "spring" }}
+                  className="block font-mono text-5xl font-black text-foreground mt-2"
+                >
+                  {result.predicted_home_score}
+                </motion.span>
+              </div>
+              <div className="text-center font-mono text-zinc-600 text-2xl font-bold">
+                :
+              </div>
+              <div className="text-center w-24">
+                <span className="text-2xl select-none ml-1.5">{getCountryFlag(result.away_team)}</span>
+                <p className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 mt-1 truncate">{result.away_team}</p>
+                <motion.span
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.3, type: "spring" }}
+                  className="block font-mono text-5xl font-black text-foreground mt-2"
+                >
+                  {result.predicted_away_score}
+                </motion.span>
+              </div>
+            </div>
+
+            {/* Sub-Metrics details */}
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-surface/30 p-2.5 rounded text-center border border-border/10">
+                <span className="block text-[9px] font-mono text-fg-muted uppercase">Home xG</span>
+                <span className="block font-mono text-sm font-bold text-cyan-400 mt-0.5">{formatGoals(result.expected_home_goals)}</span>
+              </div>
+              <div className="bg-surface/30 p-2.5 rounded text-center border border-border/10">
+                <span className="block text-[9px] font-mono text-fg-muted uppercase">Away xG</span>
+                <span className="block font-mono text-sm font-bold text-cyan-400 mt-0.5">{formatGoals(result.expected_away_goals)}</span>
+              </div>
+              <div className="bg-surface/30 p-2.5 rounded text-center border border-border/10">
+                <span className="block text-[9px] font-mono text-fg-muted uppercase">Distribution</span>
+                <span className="block font-mono text-xs font-bold text-foreground mt-1.5">{result.most_likely_score}</span>
+              </div>
+            </div>
           </CardContent>
         </Card>
+      </motion.div>
+
+      {/* SECTION 2: PROBABILITY FLOW (Staggered Reveal) */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        <WinProbabilityCard
+          homeTeam={result.home_team}
+          awayTeam={result.away_team}
+          homeWinProbability={result.home_win_probability}
+          drawProbability={result.draw_probability}
+          awayWinProbability={result.away_win_probability}
+        />
+      </motion.div>
+
+      {/* SECTION 3: POISSON SCORELINE DISTRIBUTION (Staggered Reveal) */}
+      {result.top_scorelines.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
+          <ScorelineDistribution scorelines={result.top_scorelines} mostLikelyScore={result.most_likely_score} />
+        </motion.div>
       )}
 
+      {/* SECTION 4: SHAP REASONING (Staggered Reveal) */}
+      {result.prediction_explanation && (
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+        >
+          <ShapExplanation explanation={result.prediction_explanation} />
+        </motion.div>
+      )}
+
+      {/* SECTION 5: TACTICAL INSIGHTS (Staggered Reveal) */}
+      {result.insights && result.insights.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+        >
+          <Card className="border-border/60 bg-black/40">
+            <CardHeader className="pb-2 border-b border-border/20">
+              <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
+                <Info className="h-4 w-4 text-cyan-400" aria-hidden="true" />
+                Strategic Risk Factors
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 pt-4">
+              {result.insights.map((insight, i) => {
+                const { icon: Icon, className } = INSIGHT_STYLE[insight.type];
+                return (
+                  <div key={i} className={cn("flex gap-3 rounded-lg border p-3 items-start", className)}>
+                    <Icon className="h-4 w-4 mt-0.5 shrink-0" aria-hidden="true" />
+                    <div className="space-y-0.5">
+                      <p className="text-xs font-semibold font-mono tracking-wide uppercase">{insight.title}</p>
+                      <p className="text-xs text-zinc-400 leading-normal">{insight.description}</p>
+                    </div>
+                    <Badge variant="outline" className="ml-auto shrink-0 text-[9px] font-mono uppercase tracking-wider border-current opacity-70">
+                      {insight.impact} IMPACT
+                    </Badge>
+                  </div>
+                );
+              })}
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
+
+      {/* SECTION 6: HISTORICAL H2H MATRIX (Staggered Reveal) */}
       {result.head_to_head && (
-        <HeadToHeadCard stats={result.head_to_head} homeTeam={result.home_team} awayTeam={result.away_team} />
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0, duration: 0.5 }}
+        >
+          <HeadToHeadCard stats={result.head_to_head} homeTeam={result.home_team} awayTeam={result.away_team} />
+        </motion.div>
       )}
 
-      <p className="text-center text-xs text-fg-muted/60">
-        Model v{result.model_version} · Prediction ID: {result.prediction_id}
-      </p>
-    </motion.div>
+      {/* Footer Info */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
+        transition={{ delay: 1.2 }}
+        className="text-center font-mono text-[9px] tracking-widest text-zinc-600 uppercase"
+      >
+        Calculation version {result.model_version} · RUN_ID: {result.prediction_id.slice(0, 8)}
+      </motion.p>
+    </div>
   );
 }

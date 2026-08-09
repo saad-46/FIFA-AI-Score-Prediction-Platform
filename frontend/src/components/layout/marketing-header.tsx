@@ -9,12 +9,16 @@ export function MarketingHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500">
-            <Trophy className="h-4 w-4 text-white" aria-hidden="true" />
+        <Link href="/" className="flex items-center gap-3">
+          <div className="flex h-8 w-8 items-center justify-center rounded border border-border bg-surface-2/80 shadow-lg shadow-cyan-500/5">
+            <svg className="h-4.5 w-4.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+              <path d="M2 12h20" />
+            </svg>
           </div>
-          <span className="text-lg font-bold text-foreground">
-            FIFA<span className="text-primary">AI</span>
+          <span className="text-sm font-bold tracking-[0.15em] text-foreground font-mono uppercase">
+            FIFA // <span className="text-primary">INTELLIGENCE</span>
           </span>
         </Link>
         <div className="flex items-center gap-2">

@@ -13,10 +13,10 @@ interface HeadToHeadCardProps {
 export function HeadToHeadCard({ stats, homeTeam, awayTeam }: HeadToHeadCardProps) {
   return (
     <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2">
-          <Shield className="h-4 w-4 text-accent" aria-hidden="true" />
-          Head to Head
+      <CardHeader className="pb-2 border-b border-border/20">
+        <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
+          <Shield className="h-4.5 w-4.5 text-primary" aria-hidden="true" />
+          Historical Head-to-Head Matrix
         </CardTitle>
       </CardHeader>
       <CardContent>

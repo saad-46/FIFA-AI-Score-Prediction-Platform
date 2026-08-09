@@ -29,7 +29,7 @@ export function ProbabilityBar({
   const pct = Math.round(value * 100);
   return (
     <div className={cn("space-y-1", className)}>
-      <div className="flex justify-between text-sm">
+      <div className="flex justify-between text-xs font-mono uppercase tracking-wider">
         <span className="text-foreground">{label}</span>
         {showValue && <span className="font-semibold text-fg-muted">{pct}%</span>}
       </div>

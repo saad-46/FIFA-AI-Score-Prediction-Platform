@@ -59,7 +59,7 @@ export function StageProbabilityTable({ probabilities, teamNames }: StageProbabi
                 type="button"
                 onClick={() => setSortKey(s.key)}
                 className={cn(
-                  "h-10 w-full px-2 text-center font-medium transition-colors hover:text-foreground",
+                  "h-10 w-full px-2 text-center font-mono text-[10px] tracking-wider uppercase font-semibold transition-colors hover:text-foreground",
                   sortKey === s.key && "text-primary"
                 )}
               >

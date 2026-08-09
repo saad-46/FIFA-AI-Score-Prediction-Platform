@@ -30,16 +30,16 @@ const CustomTooltip = ({
 }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-lg border border-slate-700 bg-slate-900 p-3 shadow-xl text-sm">
-      <p className="font-medium text-slate-300 mb-2">{label}</p>
+    <div className="rounded border border-border bg-surface/90 backdrop-blur-md p-3 shadow-2xl text-xs font-mono">
+      <p className="font-semibold text-foreground mb-2">{label}</p>
       {payload.map((entry, i) => (
-        <div key={i} className="flex items-center gap-2">
+        <div key={i} className="flex items-center gap-2 mt-1">
           <div
             className="h-2 w-2 rounded-full"
             style={{ backgroundColor: entry.color }}
           />
-          <span className="text-slate-400">{entry.name}:</span>
-          <span className="font-semibold text-slate-200">{entry.value}</span>
+          <span className="text-fg-muted uppercase tracking-wider">{entry.name}:</span>
+          <span className="font-bold text-foreground">{entry.value}</span>
         </div>
       ))}
     </div>
@@ -52,41 +52,43 @@ export function WinProbabilityChart({
 }: WinProbabilityChartProps) {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>{teamName} — Performance Trend</CardTitle>
+      <CardHeader className="pb-2 border-b border-border/20">
+        <CardTitle className="font-mono text-xs tracking-wider uppercase text-foreground">
+          {teamName} // Historical Performance Vector
+        </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-6">
         <ResponsiveContainer width="100%" height={280}>
           <AreaChart data={data} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="winsGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
+                <stop offset="5%" stopColor="#10b981" stopOpacity={0.2} />
                 <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
               </linearGradient>
               <linearGradient id="drawsGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
+                <stop offset="5%" stopColor="#475569" stopOpacity={0.15} />
+                <stop offset="95%" stopColor="#475569" stopOpacity={0} />
               </linearGradient>
               <linearGradient id="lossesGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#ef4444" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
+                <stop offset="5%" stopColor="#f43f5e" stopOpacity={0.15} />
+                <stop offset="95%" stopColor="#f43f5e" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.4} />
             <XAxis
               dataKey="date"
-              tick={{ fill: "#64748b", fontSize: 11 }}
-              axisLine={{ stroke: "#1e293b" }}
+              tick={{ fill: "var(--fg-muted)", fontSize: 10, fontFamily: "monospace" }}
+              axisLine={{ stroke: "var(--border)" }}
               tickLine={false}
             />
             <YAxis
-              tick={{ fill: "#64748b", fontSize: 11 }}
+              tick={{ fill: "var(--fg-muted)", fontSize: 10, fontFamily: "monospace" }}
               axisLine={false}
               tickLine={false}
             />
             <Tooltip content={<CustomTooltip />} />
             <Legend
-              wrapperStyle={{ fontSize: "12px", color: "#94a3b8" }}
+              wrapperStyle={{ fontSize: "10px", fontFamily: "monospace", color: "var(--fg-muted)", textTransform: "uppercase", letterSpacing: "1px" }}
             />
             <Area
               type="monotone"
@@ -100,7 +102,7 @@ export function WinProbabilityChart({
               type="monotone"
               dataKey="draws"
               name="Draws"
-              stroke="#f59e0b"
+              stroke="#475569"
               strokeWidth={2}
               fill="url(#drawsGrad)"
             />
@@ -108,7 +110,7 @@ export function WinProbabilityChart({
               type="monotone"
               dataKey="losses"
               name="Losses"
-              stroke="#ef4444"
+              stroke="#f43f5e"
               strokeWidth={2}
               fill="url(#lossesGrad)"
             />

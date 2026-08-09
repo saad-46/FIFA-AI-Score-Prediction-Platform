@@ -34,12 +34,16 @@ export function Navbar({ user }: NavbarProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/dashboard" className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500">
-              <Trophy className="h-4 w-4 text-white" />
+          <Link href="/dashboard" className="flex items-center gap-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded border border-border bg-surface-2/80 shadow-lg shadow-cyan-500/5">
+              <svg className="h-4.5 w-4.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                <path d="M2 12h20" />
+              </svg>
             </div>
-            <span className="text-lg font-bold text-foreground">
-              FIFA<span className="text-primary">AI</span>
+            <span className="text-sm font-bold tracking-[0.15em] text-foreground font-mono uppercase">
+              FIFA // <span className="text-primary">INTELLIGENCE</span>
             </span>
           </Link>
 
@@ -154,8 +158,8 @@ export function Navbar({ user }: NavbarProps) {
                     className={cn(
                       "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                       active
-                        ? "bg-emerald-500/10 text-emerald-400"
-                        : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+                      ? "bg-primary/10 text-primary"
+                      : "text-fg-muted hover:bg-surface-2 hover:text-foreground"
                     )}
                   >
                     <Icon className="h-4 w-4" />

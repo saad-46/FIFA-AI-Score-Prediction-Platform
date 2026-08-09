@@ -22,6 +22,7 @@ import { predictionsApi } from "@/lib/api/predictions";
 import { getApiErrorMessage } from "@/lib/api/client";
 import { toast } from "@/hooks/use-toast";
 import { formatPercent } from "@/lib/utils";
+import { getCountryFlag } from "@/components/football/team-identity";
 import type { SavedPrediction } from "@/types";
 
 export function SavedPredictionsList() {
@@ -84,16 +85,16 @@ export function SavedPredictionsList() {
   return (
     <div className="space-y-6">
       {accuracy && accuracy.total > 0 && (
-        <Card>
+        <Card className="border-border/40 bg-zinc-950/20 shadow-md">
           <CardContent className="flex items-center justify-between p-5">
             <div>
-              <p className="text-sm text-fg-muted">Accuracy so far</p>
-              <p className="font-mono text-2xl font-bold text-foreground">
+              <p className="text-[10px] font-mono tracking-widest text-fg-muted uppercase">Calibration Convergence Accuracy</p>
+              <p className="font-mono text-2xl font-bold text-foreground mt-1">
                 {formatPercent(accuracy.accuracy)}
               </p>
             </div>
-            <p className="text-sm text-fg-muted">
-              {accuracy.correct} / {accuracy.total} correct
+            <p className="text-xs font-mono text-fg-muted uppercase tracking-wider">
+              {accuracy.correct} / {accuracy.total} successful projections
             </p>
           </CardContent>
         </Card>
@@ -101,39 +102,53 @@ export function SavedPredictionsList() {
 
       <div className="space-y-3">
         {predictions.map((pred) => (
-          <Card key={pred.id}>
+          <Card key={pred.id} className="border-border/40 hover:border-primary/20 bg-surface/30">
             <CardContent className="p-4">
               <div className="flex items-center justify-between gap-4">
-                <div className="flex flex-1 items-center gap-4 min-w-0">
-                  <p className="flex-1 truncate text-right font-semibold text-foreground">
-                    {pred.home_team}
-                  </p>
-                  <div className="text-center shrink-0">
-                    <p className="font-mono text-xl font-black text-foreground">
+                <div className="flex flex-1 items-center gap-4 min-w-0 justify-between">
+                  <div className="flex-1 flex items-center justify-end gap-2.5 min-w-0">
+                    <span className="truncate font-semibold text-foreground text-sm">
+                      {pred.home_team}
+                    </span>
+                    <span className="text-xl select-none shrink-0" aria-hidden="true">
+                      {getCountryFlag(pred.home_team)}
+                    </span>
+                  </div>
+
+                  <div className="text-center shrink-0 min-w-[70px]">
+                    <p className="font-mono text-base font-bold text-foreground">
                       {pred.predicted_home_score} – {pred.predicted_away_score}
                     </p>
                     {pred.was_correct !== null && pred.was_correct !== undefined && (
-                      <Badge variant={pred.was_correct ? "win" : "loss"} className="mt-1">
-                        {pred.was_correct ? "Correct" : "Incorrect"}
+                      <Badge variant={pred.was_correct ? "win" : "loss"} className="mt-1 text-[9px] font-mono uppercase tracking-wider h-5 px-2">
+                        {pred.was_correct ? "Success" : "Deviation"}
                       </Badge>
                     )}
                   </div>
-                  <p className="flex-1 truncate text-left font-semibold text-foreground">
-                    {pred.away_team}
-                  </p>
+
+                  <div className="flex-1 flex items-center justify-start gap-2.5 min-w-0">
+                    <span className="text-xl select-none shrink-0" aria-hidden="true">
+                      {getCountryFlag(pred.away_team)}
+                    </span>
+                    <span className="truncate font-semibold text-foreground text-sm">
+                      {pred.away_team}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex shrink-0 items-center gap-3">
-                  <div className="text-right">
-                    <p className="text-sm font-medium text-win">
-                      {formatPercent(pred.home_win_probability)} home win
+                
+                <div className="flex shrink-0 items-center gap-3 pl-4 border-l border-border/20">
+                  <div className="text-right font-mono">
+                    <p className="text-[10px] font-bold text-cyan-400 uppercase tracking-tight">
+                      {formatPercent(pred.home_win_probability)} Vector
                     </p>
-                    <p className="text-xs text-fg-muted">
+                    <p className="text-[9px] text-fg-muted mt-0.5">
                       {new Date(pred.created_at).toLocaleDateString()}
                     </p>
                   </div>
                   <Button
                     variant="ghost"
                     size="icon"
+                    className="h-8 w-8 hover:bg-surface-2"
                     aria-label={`Delete prediction for ${pred.home_team} vs ${pred.away_team}`}
                     onClick={() => setPendingDelete(pred)}
                   >

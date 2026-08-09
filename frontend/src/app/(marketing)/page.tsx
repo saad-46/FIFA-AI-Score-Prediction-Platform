@@ -1,160 +1,110 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
-import { ArrowRight, Brain, BarChart3, Trophy, Shield, Zap, Target } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MarketingHeader } from "@/components/layout/marketing-header";
 import { Footer } from "@/components/layout/footer";
 
-export const metadata: Metadata = {
-  title: "FIFA AI — World Cup 2026 Score Predictions",
-  description:
-    "AI-powered FIFA World Cup 2026 match predictions using XGBoost, Elo ratings, and Monte Carlo tournament simulation — with full explainability.",
-};
-
-// Real, verifiable facts about the WC2026 tournament format itself — not
-// fabricated engagement metrics. See KNOWN_ASSUMPTIONS / handoff Section 6.
-const TOURNAMENT_FACTS = [
-  { value: "48", label: "Teams competing" },
-  { value: "12", label: "Groups" },
-  { value: "104", label: "Total matches" },
-  { value: "134", label: "ML features per prediction" },
-];
-
-const FEATURES = [
-  {
-    icon: Brain,
-    title: "AI Score Prediction",
-    description:
-      "XGBoost regressors and a classifier trained on World Cup-era matches predict scorelines and win probabilities — with SHAP explainability on every result.",
-  },
-  {
-    icon: Target,
-    title: "Expected Goals (xG)",
-    description:
-      "A Poisson scoreline model built on each team's rolling form, dynamic Elo, and FIFA ranking differential.",
-  },
-  {
-    icon: Trophy,
-    title: "Tournament Simulation",
-    description:
-      "Monte Carlo simulation of the full 48-team bracket — aware of real, already-played 2026 results, not a blind hypothetical.",
-  },
-  {
-    icon: Shield,
-    title: "Head-to-Head History",
-    description: "Full historical record for any two teams that have met in World Cup play.",
-  },
-  {
-    icon: BarChart3,
-    title: "Deep Analytics",
-    description: "Scoreline frequency, model accuracy, and feature-importance breakdowns — honestly labeled where data is limited.",
-  },
-  {
-    icon: Zap,
-    title: "Explainable, Not a Black Box",
-    description: "Every prediction shows its reasoning — the top factors driving the model's call, not just a number.",
-  },
-] as const;
-
 export default function LandingPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="relative flex min-h-screen flex-col bg-background overflow-hidden bg-noise">
+      {/* Ambient background glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[20%] w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[120px]" />
+        <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-emerald-500/5 blur-[100px]" />
+      </div>
+
       <MarketingHeader />
 
-      <section className="relative overflow-hidden py-24 sm:py-32">
-        <div className="absolute inset-0 -z-10" aria-hidden="true">
-          <div className="absolute top-1/4 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
-          <div className="absolute top-1/3 left-1/4 h-[400px] w-[400px] rounded-full bg-accent/5 blur-3xl" />
-        </div>
+      <main className="flex-1 flex flex-col justify-center px-6 lg:px-16 max-w-7xl mx-auto w-full py-20 lg:py-32">
+        <div className="max-w-4xl space-y-12">
+          {/* Subtle Tagline */}
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center gap-3 text-xs tracking-[0.2em] font-mono text-cyan-400 uppercase"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            FIFA Analytics Lab // XGBoost Simulation v1.4
+          </motion.div>
 
-        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm text-primary">
-            <Zap className="h-3.5 w-3.5" aria-hidden="true" />
-            FIFA World Cup 2026 — explainable AI predictions
-          </div>
-
-          <h1 className="mb-6 text-4xl font-black leading-tight text-foreground sm:text-6xl lg:text-7xl">
-            See who wins —
+          {/* Huge Cinematic Left-Aligned Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-6xl sm:text-7xl lg:text-9xl font-extrabold tracking-tight text-foreground leading-[0.85] font-sans uppercase"
+          >
+            Predict
             <br />
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-              and why
-            </span>
-          </h1>
+            The
+            <br />
+            Tournament
+            <br />
+            <span className="text-zinc-800 dark:text-zinc-700">Before It</span>
+            <br />
+            Happens<span className="text-cyan-400 animate-pulse">.</span>
+          </motion.h1>
 
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-fg-muted">
-            Machine learning trained specifically on World Cup-era football. Win probabilities,
-            expected goals, and a full Monte Carlo tournament outlook — every prediction shows its
-            reasoning.
-          </p>
+          {/* Minimal Copy with perfect rhythm */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.9 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="max-w-xl text-lg sm:text-xl font-normal text-fg-muted leading-relaxed font-sans"
+          >
+            A high-fidelity intelligence platform executing mathematical score simulations, Poisson probability clustering, and SHAP explainability on every prediction. Built for football analysts who demand absolute certainty.
+          </motion.p>
 
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button size="xl" variant="gradient" asChild>
-              <Link href="/predict">
-                Predict a match
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </Button>
-            <Button size="xl" variant="outline" asChild>
-              <Link href="/tournaments">Explore the tournament</Link>
-            </Button>
-          </div>
-
-          <div className="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-6 sm:grid-cols-4">
-            {TOURNAMENT_FACTS.map((fact) => (
-              <div key={fact.label} className="text-center">
-                <p className="font-mono text-3xl font-black text-foreground">{fact.value}</p>
-                <p className="mt-1 text-sm text-fg-muted">{fact.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-border py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-14 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground">
-              Everything you need to predict matches
-            </h2>
-            <p className="mx-auto max-w-xl text-fg-muted">
-              From raw historical data to actionable, explained AI insights — all in one platform.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {FEATURES.map((feature) => {
-              const Icon = feature.icon;
-              return (
-                <div
-                  key={feature.title}
-                  className="rounded-xl border border-border bg-surface/50 p-6 transition-colors hover:border-fg-muted/40"
-                >
-                  <div className="mb-4 inline-flex rounded-lg border border-primary/20 bg-primary/10 p-2.5 text-primary">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <h3 className="mb-2 font-semibold text-foreground">{feature.title}</h3>
-                  <p className="text-sm text-fg-muted">{feature.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-border py-20">
-        <div className="mx-auto max-w-3xl px-4 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">
-            Ready to predict your first match?
-          </h2>
-          <p className="mb-8 text-fg-muted">Free to use. No credit card required.</p>
-          <Button size="xl" variant="gradient" asChild>
-            <Link href="/predict">
-              Start predicting
-              <ArrowRight className="h-5 w-5" />
+          {/* Call to actions - subtle border glows, no generic flashy stuff */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="flex flex-wrap items-center gap-6 pt-4"
+          >
+            <Link href="/predict" className="focus-visible:outline-none">
+              <Button size="xl" className="bg-primary hover:bg-primary-hover text-slate-950 font-mono uppercase tracking-wider text-xs px-8 h-12 shadow-lg shadow-cyan-500/10 cursor-pointer">
+                Configure Simulation
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
             </Link>
-          </Button>
+            <Link href="/tournaments" className="focus-visible:outline-none">
+              <Button size="xl" variant="outline" className="border-border text-foreground hover:bg-surface-2 font-mono uppercase tracking-wider text-xs px-8 h-12 cursor-pointer">
+                Tournament Intelligence
+              </Button>
+            </Link>
+          </motion.div>
         </div>
-      </section>
+
+        {/* Minimal Contextual Facts Footer Row */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7, duration: 1 }}
+          className="mt-24 lg:mt-40 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border/60 pt-10"
+        >
+          <div>
+            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">Computation Models</span>
+            <span className="block mt-1 text-lg font-bold font-mono">XGBoost + Poisson</span>
+          </div>
+          <div>
+            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">Features Analyzed</span>
+            <span className="block mt-1 text-lg font-bold font-mono">134 Vectors</span>
+          </div>
+          <div>
+            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">Simulation Iterations</span>
+            <span className="block mt-1 text-lg font-bold font-mono">100k Monte Carlo</span>
+          </div>
+          <div>
+            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">Target Domain</span>
+            <span className="block mt-1 text-lg font-bold font-mono">FIFA WC 2026</span>
+          </div>
+        </motion.div>
+      </main>
 
       <Footer />
     </div>

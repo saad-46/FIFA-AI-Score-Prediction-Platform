@@ -15,10 +15,10 @@ export function ScorelineDistribution({ scorelines, mostLikelyScore }: Scoreline
 
   return (
     <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2">
-          <Target className="h-4 w-4 text-accent" aria-hidden="true" />
-          Most Likely Scorelines
+      <CardHeader className="pb-2 border-b border-border/20">
+        <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
+          <Target className="h-4.5 w-4.5 text-primary" aria-hidden="true" />
+          Poisson Scoreline Probability Cluster
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-2">

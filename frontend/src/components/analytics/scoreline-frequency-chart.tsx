@@ -11,10 +11,12 @@ export function ScorelineFrequencyChart({ data }: ScorelineFrequencyChartProps) 
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Most Common Scorelines</CardTitle>
+      <CardHeader className="pb-2 border-b border-border/20">
+        <CardTitle className="font-mono text-xs tracking-wider uppercase text-foreground">
+          Historical Scoreline Frequency Cluster
+        </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-2">
+      <CardContent className="space-y-2 pt-4">
         {data.map((s) => (
           <div key={s.scoreline} className="flex items-center gap-3">
             <span className="w-10 shrink-0 font-mono text-sm font-semibold text-foreground">{s.scoreline}</span>

@@ -8,10 +8,10 @@ import { SimulateView } from "@/components/tournament/simulate-view";
 export function TournamentTabs() {
   return (
     <Tabs defaultValue="groups">
-      <TabsList>
+      <TabsList className="font-mono text-xs uppercase tracking-wider">
         <TabsTrigger value="groups">Groups</TabsTrigger>
         <TabsTrigger value="schedule">Schedule</TabsTrigger>
-        <TabsTrigger value="simulator">Simulator</TabsTrigger>
+        <TabsTrigger value="simulator">Simulation Matrix</TabsTrigger>
       </TabsList>
       <TabsContent value="groups">
         <GroupsView />

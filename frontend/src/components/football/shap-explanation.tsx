@@ -21,25 +21,25 @@ export function ShapExplanation({ explanation }: ShapExplanationProps) {
 
   return (
     <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2">
-          <Zap className="h-4 w-4 text-draw" aria-hidden="true" />
-          Why this prediction
+      <CardHeader className="pb-2 border-b border-border/20">
+        <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
+          <Zap className="h-4.5 w-4.5 text-primary" aria-hidden="true" />
+          SHAP Feature Attribution Influence
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 pt-4">
         <TooltipProvider delayDuration={200}>
           {top_positive_features.length > 0 && (
             <div className="space-y-1.5">
-              <p className="text-xs font-medium text-win">Favors this outcome</p>
+              <p className="text-[10px] font-mono tracking-wider text-win uppercase">Positive Feature Drivers</p>
               {top_positive_features.map((f) => (
                 <FeatureRow key={f.feature} feature={f} maxImpact={maxImpact} tone="win" />
               ))}
             </div>
           )}
           {top_negative_features.length > 0 && (
-            <div className="space-y-1.5">
-              <p className="text-xs font-medium text-loss">Works against it</p>
+            <div className="space-y-1.5 pt-2">
+              <p className="text-[10px] font-mono tracking-wider text-loss uppercase">Negative Feature Constraints</p>
               {top_negative_features.map((f) => (
                 <FeatureRow key={f.feature} feature={f} maxImpact={maxImpact} tone="loss" />
               ))}
