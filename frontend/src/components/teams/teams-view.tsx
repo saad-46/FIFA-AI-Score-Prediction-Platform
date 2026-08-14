@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { ErrorState } from "@/components/ui/error-state";
 import { EmptyState } from "@/components/ui/empty-state";
 import { CardGridSkeleton } from "@/components/ui/page-skeletons";
-import { getCountryFlag } from "@/components/football/team-identity";
+import { TeamFlag } from "@/components/football/team-flag";
 import { cn } from "@/lib/utils";
 import type { Team } from "@/types";
 
@@ -105,7 +105,6 @@ export function TeamsView() {
 }
 
 function Wc2026TeamCard({ team }: { team: Team }) {
-  const flag = getCountryFlag(team.name, team.fifa_code ?? undefined);
   return (
     <Link
       href={`/teams/${team.id}`}
@@ -117,12 +116,12 @@ function Wc2026TeamCard({ team }: { team: Team }) {
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <span
-            className="select-none text-2xl leading-none transition-transform duration-200 group-hover:scale-110"
-            aria-hidden="true"
-          >
-            {flag}
-          </span>
+          <TeamFlag
+            name={team.name}
+            fifaCode={team.fifa_code}
+            size="lg"
+            className="transition-transform duration-200 group-hover:scale-110"
+          />
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold text-foreground">{team.name}</p>
             <p className="font-mono text-[11px] uppercase tracking-wider text-fg-muted">

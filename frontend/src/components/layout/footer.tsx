@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Trophy } from "lucide-react";
+import { FeedbackWidget } from "@/components/feedback/feedback-widget";
 
 export function Footer() {
   return (
@@ -18,6 +19,9 @@ export function Footer() {
             AI-powered football score predictions. For entertainment purposes only.
           </p>
           <div className="flex items-center gap-4 text-xs text-fg-muted">
+            {/* Anonymous feedback lives here rather than in a popup: findable
+                when someone wants it, invisible otherwise. */}
+            <FeedbackWidget />
             <Link href="/about" className="hover:text-foreground transition-colors">
               About
             </Link>

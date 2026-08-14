@@ -6,6 +6,7 @@ import { PredictionForm } from "@/components/predictions/prediction-form";
 import { PredictionResultCard } from "@/components/predictions/prediction-result";
 import { ReasoningLoader } from "@/components/predictions/reasoning-loader";
 import { EmptyState } from "@/components/ui/empty-state";
+import { cn } from "@/lib/utils";
 import { useUser } from "@/hooks/use-user";
 import type { PredictionResult } from "@/types";
 
@@ -14,9 +15,21 @@ export function PredictView() {
   const [loading, setLoading] = useState(false);
   const { isAuthenticated } = useUser();
 
+  // 12-column split rather than a 50/50 one: the parameter form is a fixed,
+  // compact control and does not grow with the viewport, whereas the results
+  // carry two charts, SHAP bars and H2H. Giving both halves equal width forced
+  // every result section into one narrow column on desktop. Before a result
+  // exists the form gets more room, so the empty state does not look stranded.
+  const resultsShown = loading || result !== null;
+
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 items-start">
-      <div>
+    <div
+      className={cn(
+        "grid grid-cols-1 items-start gap-8",
+        resultsShown ? "lg:grid-cols-12" : "lg:grid-cols-2"
+      )}
+    >
+      <div className={cn(resultsShown && "lg:col-span-4 xl:col-span-3")}>
         <PredictionForm
           onResult={(res) => {
             setResult(res);
@@ -31,7 +44,7 @@ export function PredictView() {
           }}
         />
       </div>
-      <div className="sticky top-24">
+      <div className={cn(resultsShown ? "lg:col-span-8 xl:col-span-9" : "sticky top-24")}>
         {loading ? (
           <ReasoningLoader />
         ) : result ? (

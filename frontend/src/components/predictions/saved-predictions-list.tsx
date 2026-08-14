@@ -22,7 +22,7 @@ import { predictionsApi } from "@/lib/api/predictions";
 import { getApiErrorMessage } from "@/lib/api/client";
 import { toast } from "@/hooks/use-toast";
 import { formatPercent } from "@/lib/utils";
-import { getCountryFlag } from "@/components/football/team-identity";
+import { TeamFlag } from "@/components/football/team-flag";
 import type { SavedPrediction } from "@/types";
 
 export function SavedPredictionsList() {
@@ -111,7 +111,7 @@ export function SavedPredictionsList() {
                       {pred.home_team}
                     </span>
                     <span className="text-xl select-none shrink-0" aria-hidden="true">
-                      {getCountryFlag(pred.home_team)}
+                      <TeamFlag name={pred.home_team} size="sm" />
                     </span>
                   </div>
 
@@ -128,7 +128,7 @@ export function SavedPredictionsList() {
 
                   <div className="flex-1 flex items-center justify-start gap-2.5 min-w-0">
                     <span className="text-xl select-none shrink-0" aria-hidden="true">
-                      {getCountryFlag(pred.away_team)}
+                      <TeamFlag name={pred.away_team} size="sm" />
                     </span>
                     <span className="truncate font-semibold text-foreground text-sm">
                       {pred.away_team}

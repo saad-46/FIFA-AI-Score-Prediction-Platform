@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn, getResultBg } from "@/lib/utils";
 import type { TeamStats } from "@/types";
-import { getCountryFlag } from "@/components/football/team-identity";
+import { TeamFlag } from "@/components/football/team-flag";
 
 interface TeamCardProps {
   stats: TeamStats;
@@ -26,7 +26,7 @@ export function TeamCard({ stats, rank, delay = 0 }: TeamCardProps) {
           <div className="flex items-center gap-3">
             {rank && <span className="w-6 text-center text-lg font-black text-fg-muted/60">{rank}</span>}
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded border border-border bg-surface-2/60 text-lg font-bold text-foreground">
-              <span className="leading-none select-none">{getCountryFlag(stats.team_name)}</span>
+              <TeamFlag name={stats.team_name} size="sm" />
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate font-semibold text-foreground group-hover:text-primary transition-colors">

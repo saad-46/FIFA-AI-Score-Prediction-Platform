@@ -12,7 +12,7 @@ import { ErrorState } from "@/components/ui/error-state";
 import { EmptyState } from "@/components/ui/empty-state";
 import { StatsGridSkeleton } from "@/components/ui/page-skeletons";
 import { formatPercent } from "@/lib/utils";
-import { getCountryFlag } from "@/components/football/team-identity";
+import { TeamFlag } from "@/components/football/team-flag";
 
 const QUICK_ACTIONS = [
   { href: "/predict", icon: Brain, title: "Simulation Engine", description: "Configure and run high-fidelity match simulations" },
@@ -67,10 +67,10 @@ export function DashboardView() {
               {stats.recent_predictions.map((p) => (
                 <li key={p.id} className="flex items-center justify-between text-sm py-2.5 border-b border-border/20 last:border-0">
                   <span className="text-foreground flex items-center gap-2">
-                    <span className="text-base select-none">{getCountryFlag(p.home_team)}</span>
+                    <TeamFlag name={p.home_team} size="xs" />
                     <span className="font-medium text-xs tracking-tight">{p.home_team}</span>
                     <span className="text-zinc-600 font-mono text-[9px] mx-1">VS</span>
-                    <span className="text-base select-none">{getCountryFlag(p.away_team)}</span>
+                    <TeamFlag name={p.away_team} size="xs" />
                     <span className="font-medium text-xs tracking-tight">{p.away_team}</span>
                   </span>
                   <span className="font-mono text-xs font-bold text-cyan-400 bg-surface-2/65 px-2 py-0.5 rounded border border-border/40 shadow-sm">

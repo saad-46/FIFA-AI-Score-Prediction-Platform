@@ -9,7 +9,8 @@ import { getApiErrorMessage } from "@/lib/api/client";
 import { useTeamSearch } from "@/hooks/use-team-search";
 import { StatsCard } from "@/components/analytics/stats-card";
 import { WinProbabilityChart } from "@/components/analytics/win-probability-chart";
-import { TeamIdentity, getCountryFlag } from "@/components/football/team-identity";
+import { TeamIdentity } from "@/components/football/team-identity";
+import { TeamFlag } from "@/components/football/team-flag";
 import { HeadToHeadCard } from "@/components/football/head-to-head-card";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -50,7 +51,7 @@ export function TeamDetailView({ teamId }: { teamId: string }) {
         
         {/* Large Flag Crest container */}
         <div className="flex shrink-0 items-center justify-center rounded border border-border bg-surface-2/65 h-20 w-20 md:h-24 md:w-24 shadow-md font-sans text-4xl md:text-5xl select-none">
-          {getCountryFlag(team.name, team.fifa_code)}
+          <TeamFlag name={team.name} fifaCode={team.fifa_code} size="lg" />
         </div>
 
         <div className="space-y-2 text-center md:text-left flex-1 min-w-0">

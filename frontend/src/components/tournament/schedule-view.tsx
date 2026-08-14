@@ -12,7 +12,7 @@ import { ErrorState } from "@/components/ui/error-state";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ListSkeleton } from "@/components/ui/page-skeletons";
 import { formatDate } from "@/lib/utils";
-import { getCountryFlag } from "@/components/football/team-identity";
+import { TeamFlag } from "@/components/football/team-flag";
 
 export function ScheduleView() {
   const { data: schedule, error, isLoading, mutate } = useSWR("tournament-schedule", () =>
@@ -87,13 +87,13 @@ export function ScheduleView() {
                       {m.home_team}
                     </span>
                     <span className="text-base select-none shrink-0" aria-hidden="true">
-                      {m.home_team.length === 3 ? getCountryFlag("", m.home_team) : "⚽"}
+                      <TeamFlag name={m.home_team} fifaCode={m.home_team.length === 3 ? m.home_team : null} size="sm" />
                     </span>
                   </div>
                   <span className="text-fg-muted/40 font-normal text-xs">vs</span>
                   <div className="flex items-center gap-1.5 min-w-[70px] justify-start">
                     <span className="text-base select-none shrink-0" aria-hidden="true">
-                      {m.away_team.length === 3 ? getCountryFlag("", m.away_team) : "⚽"}
+                      <TeamFlag name={m.away_team} fifaCode={m.away_team.length === 3 ? m.away_team : null} size="sm" />
                     </span>
                     <span className={m.away_team.length > 3 ? "text-fg-muted" : "font-semibold"}>
                       {m.away_team}

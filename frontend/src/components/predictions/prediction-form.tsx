@@ -22,7 +22,7 @@ import { getApiErrorMessage } from "@/lib/api/client";
 import type { PredictionResult, Team } from "@/types";
 import { toast } from "@/hooks/use-toast";
 import { useTeamSearch } from "@/hooks/use-team-search";
-import { getCountryFlag } from "@/components/football/team-identity";
+import { TeamFlag } from "@/components/football/team-flag";
 
 const schema = z.object({
   home_team: z.string().min(1, "Select a home team"),
@@ -155,7 +155,7 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
                 <div className="pt-2 border-t border-border/20 grid grid-cols-3 gap-2 text-center">
                   <div className="bg-surface/30 p-2 rounded">
                     <span className="block text-[9px] font-mono text-fg-muted uppercase">Flag</span>
-                    <span className="block text-xl mt-0.5">{getCountryFlag(selectedHome.name, selectedHome.fifa_code)}</span>
+                    <TeamFlag name={selectedHome.name} fifaCode={selectedHome.fifa_code} size="md" className="mt-0.5" />
                   </div>
                   <div className="bg-surface/30 p-2 rounded">
                     <span className="block text-[9px] font-mono text-fg-muted uppercase">FIFA Rank</span>
@@ -210,7 +210,7 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
                 <div className="pt-2 border-t border-border/20 grid grid-cols-3 gap-2 text-center">
                   <div className="bg-surface/30 p-2 rounded">
                     <span className="block text-[9px] font-mono text-fg-muted uppercase">Flag</span>
-                    <span className="block text-xl mt-0.5">{getCountryFlag(selectedAway.name, selectedAway.fifa_code)}</span>
+                    <TeamFlag name={selectedAway.name} fifaCode={selectedAway.fifa_code} size="md" className="mt-0.5" />
                   </div>
                   <div className="bg-surface/30 p-2 rounded">
                     <span className="block text-[9px] font-mono text-fg-muted uppercase">FIFA Rank</span>

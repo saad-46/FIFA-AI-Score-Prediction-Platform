@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn, formatDate } from "@/lib/utils";
 import type { Match } from "@/types";
-import { getCountryFlag } from "@/components/football/team-identity";
+import { TeamFlag } from "@/components/football/team-flag";
 
 interface MatchCardProps {
   match: Match;
@@ -54,9 +54,11 @@ export function MatchCard({ match, delay = 0 }: MatchCardProps) {
               <p className="truncate font-semibold text-foreground group-hover:text-primary transition-colors text-sm md:text-base">
                 {match.home_team.name}
               </p>
-              <span className="text-xl select-none shrink-0" aria-hidden="true">
-                {getCountryFlag(match.home_team.name, match.home_team.fifa_code)}
-              </span>
+              <TeamFlag
+                name={match.home_team.name}
+                fifaCode={match.home_team.fifa_code}
+                size="md"
+              />
             </div>
 
             {/* Score Center */}
@@ -81,9 +83,15 @@ export function MatchCard({ match, delay = 0 }: MatchCardProps) {
 
             {/* Away Team */}
             <div className="flex-1 flex items-center justify-start gap-2.5 min-w-0">
-              <span className="text-xl select-none shrink-0" aria-hidden="true">
-                {match.away_team ? getCountryFlag(match.away_team.name, match.away_team.fifa_code) : "⚽"}
-              </span>
+              {match.away_team ? (
+                <TeamFlag
+                  name={match.away_team.name}
+                  fifaCode={match.away_team.fifa_code}
+                  size="md"
+                />
+              ) : (
+                <TeamFlag name="Undecided" size="md" />
+              )}
               {/* An unresolved opponent is a property of a *scheduled* fixture.
                   Rendering the literal "TBD" on a completed match would read as
                   a team name, so that case says the opponent is missing. */}

@@ -14,7 +14,7 @@ import { WinProbabilityCard } from "@/components/football/win-probability-card";
 import { ScorelineDistribution } from "@/components/football/scoreline-distribution";
 import { ShapExplanation } from "@/components/football/shap-explanation";
 import { HeadToHeadCard } from "@/components/football/head-to-head-card";
-import { getCountryFlag } from "@/components/football/team-identity";
+import { TeamFlag } from "@/components/football/team-flag";
 import type { PredictionResult } from "@/types";
 
 interface PredictionResultCardProps {
@@ -124,7 +124,7 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
             {/* Score Projection Display */}
             <div className="flex items-center justify-center gap-8 py-4 border-y border-border/20 bg-zinc-950/25 rounded-lg">
               <div className="text-center w-24">
-                <span className="text-2xl select-none mr-1.5">{getCountryFlag(result.home_team)}</span>
+                <TeamFlag name={result.home_team} size="lg" className="mr-1.5 inline-block align-middle" />
                 <p className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 mt-1 truncate">{result.home_team}</p>
                 <motion.span
                   initial={{ scale: 0.9, opacity: 0 }}
@@ -139,7 +139,7 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
                 :
               </div>
               <div className="text-center w-24">
-                <span className="text-2xl select-none ml-1.5">{getCountryFlag(result.away_team)}</span>
+                <TeamFlag name={result.away_team} size="lg" className="ml-1.5 inline-block align-middle" />
                 <p className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 mt-1 truncate">{result.away_team}</p>
                 <motion.span
                   initial={{ scale: 0.9, opacity: 0 }}
@@ -171,7 +171,11 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
         </Card>
       </motion.div>
 
-      {/* SECTION 2: PROBABILITY FLOW (Staggered Reveal) */}
+      {/* SECTIONS 2-4: analytics. On wide screens these sit two-up rather
+          than stacking — each is a self-contained chart and the old single
+          column left most of the viewport empty. Collapses to one column
+          below xl so nothing is cramped on tablet/mobile. */}
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2 xl:items-start">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -207,6 +211,8 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
           <ShapExplanation explanation={result.prediction_explanation} />
         </motion.div>
       )}
+
+      </div>
 
       {/* SECTION 5: TACTICAL INSIGHTS (Staggered Reveal) */}
       {result.insights && result.insights.length > 0 && (
