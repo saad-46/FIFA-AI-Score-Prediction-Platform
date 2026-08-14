@@ -442,6 +442,32 @@ export interface BacktestMatch {
   actual_score: string | null;
 }
 
+/** The shipped model's headline evaluation.
+ *
+ * `evaluation_name` exists so a UI can never render a bare "Model Accuracy"
+ * percentage — the number is only meaningful with the evaluation it came from.
+ * `legacy` carries the superseded v1 training metrics for provenance. */
+export interface ModelEvaluation {
+  model_version: string;
+  evaluation_name: string;
+  evaluation_description: string;
+  accuracy: number | null;
+  correct: number | null;
+  total: number | null;
+  is_out_of_sample: boolean;
+  by_stage: BacktestStageAccuracy[];
+  legacy: {
+    model_version?: string;
+    label?: string;
+    classifier_raw_accuracy?: number | null;
+    classifier_adjusted_accuracy?: number | null;
+    home_mae?: number | null;
+    training_samples?: number | null;
+    trained_at?: string | null;
+    note?: string;
+  } | null;
+}
+
 /** Historical evaluation of a model frozen before any 2026 result was seen.
  * Never render this as a forecast. */
 export interface BacktestResponse {

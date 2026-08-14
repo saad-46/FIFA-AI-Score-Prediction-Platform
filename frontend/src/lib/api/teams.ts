@@ -13,6 +13,24 @@ export const teamsApi = {
   },
 
   /**
+   * The 48 teams at the 2026 World Cup, alphabetically.
+   *
+   * Use this for the team directory rather than `getTopTeams`, which returns a
+   * win-rate leaderboard capped at `limit` (the directory used to render 20 of
+   * 48) and draws from a table that also contains non-national entities from
+   * the legacy data seed.
+   *
+   * The server orders with Postgres' locale collation, which sorts accents
+   * naturally ("Côte d'Ivoire" between Congo DR and Croatia). Re-sorting on the
+   * client with a default comparator would push accented names to the end, so
+   * preserve this order or re-sort with `localeCompare`.
+   */
+  async getWc2026Teams(): Promise<Team[]> {
+    const { data } = await apiClient.get<Team[]>("/teams/wc2026");
+    return data;
+  },
+
+  /**
    * Get a single team by ID.
    */
   async getById(id: string): Promise<Team> {

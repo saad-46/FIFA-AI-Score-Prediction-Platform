@@ -25,6 +25,9 @@ const FLAG_MAP: Record<string, string> = {
   SEN: "🇸🇳", MAR: "🇲🇦", TUN: "🇹🇳", ALG: "🇩🇿", EGY: "🇪🇬", NGA: "🇳🇬", CMR: "🇨🇲", GHA: "🇬🇭", CIV: "🇨🇮", MLI: "🇲🇱",
   RSA: "🇿🇦", COD: "🇨🇩", ANG: "🇦🇴", JPN: "🇯🇵", KOR: "🇰🇷", AUS: "🇦🇺", IRN: "🇮🇷", KSA: "🇸🇦", QAT: "🇶🇦", UAE: "🇦🇪",
   IRQ: "🇮🇶", UZB: "🇺🇿", OMA: "🇴🇲", CHN: "🇨🇳", NZL: "🇳🇿",
+  // Completes coverage of the 48 WC2026 qualifiers — these five had no entry,
+  // so their cards fell back to the name heuristic and rendered no flag.
+  BIH: "🇧🇦", CPV: "🇨🇻", CUW: "🇨🇼", HAI: "🇭🇹", JOR: "🇯🇴",
 };
 
 export function getCountryFlag(name: string, code?: string): string {

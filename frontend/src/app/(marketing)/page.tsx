@@ -28,7 +28,7 @@ export default function LandingPage() {
             className="flex items-center gap-3 text-xs tracking-[0.2em] font-mono text-cyan-400 uppercase"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            FIFA Analytics Lab // XGBoost Simulation v1.4
+            FIFA Analytics Lab // World Cup 2026 — Complete
           </motion.div>
 
           {/* Huge Cinematic Left-Aligned Headline */}
@@ -38,15 +38,15 @@ export default function LandingPage() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-6xl sm:text-7xl lg:text-9xl font-extrabold tracking-tight text-foreground leading-[0.85] font-sans uppercase"
           >
-            Predict
+            Relive
             <br />
             The
             <br />
             Tournament
             <br />
-            <span className="text-zinc-800 dark:text-zinc-700">Before It</span>
+            <span className="text-zinc-800 dark:text-zinc-700">Understand Every</span>
             <br />
-            Happens<span className="text-cyan-400 animate-pulse">.</span>
+            Prediction<span className="text-cyan-400 animate-pulse">.</span>
           </motion.h1>
 
           {/* Minimal Copy with perfect rhythm */}
@@ -56,7 +56,9 @@ export default function LandingPage() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="max-w-xl text-lg sm:text-xl font-normal text-fg-muted leading-relaxed font-sans"
           >
-            A high-fidelity intelligence platform executing mathematical score simulations, Poisson probability clustering, and SHAP explainability on every prediction. Built for football analysts who demand absolute certainty.
+            Every match of the 2026 World Cup, scored against a model frozen before a
+            ball was kicked. Poisson scorelines, calibrated probabilities and SHAP
+            explanations — with the misses shown alongside the hits.
           </motion.p>
 
           {/* Call to actions - subtle border glows, no generic flashy stuff */}
@@ -91,17 +93,20 @@ export default function LandingPage() {
             <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">Computation Models</span>
             <span className="block mt-1 text-lg font-bold font-mono">XGBoost + Poisson</span>
           </div>
+          {/* Every figure here is checkable against the canonical dataset or
+              the published backtest. The old "134 Vectors" was the legacy
+              model's feature count and read as a claim about the current one. */}
           <div>
-            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">Features Analyzed</span>
-            <span className="block mt-1 text-lg font-bold font-mono">134 Vectors</span>
+            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">World Cup Matches</span>
+            <span className="block mt-1 text-lg font-bold font-mono">1,069 · 1930—2026</span>
           </div>
           <div>
             <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">Simulation Iterations</span>
-            <span className="block mt-1 text-lg font-bold font-mono">100k Monte Carlo</span>
+            <span className="block mt-1 text-lg font-bold font-mono">Up to 100k Monte Carlo</span>
           </div>
           <div>
-            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">Target Domain</span>
-            <span className="block mt-1 text-lg font-bold font-mono">FIFA WC 2026</span>
+            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">WC2026 Backtest</span>
+            <span className="block mt-1 text-lg font-bold font-mono">70.2% · 73 of 104</span>
           </div>
         </motion.div>
       </main>

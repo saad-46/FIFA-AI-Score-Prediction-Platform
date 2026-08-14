@@ -3,6 +3,7 @@ import type {
   DashboardStats,
   FeatureImportanceResponse,
   GlobalAnalytics,
+  ModelEvaluation,
   ModelMetrics,
 } from "@/types";
 
@@ -33,6 +34,22 @@ export const analyticsApi = {
   async getModelMetrics(): Promise<ModelMetrics> {
     const { data } = await apiClient.get<ModelMetrics>(
       "/analytics/model-metrics"
+    );
+    return data;
+  },
+
+  /**
+   * The shipped model's headline evaluation, with its legacy predecessor
+   * labelled rather than hidden.
+   *
+   * Prefer this over `getModelMetrics` for anything user-facing:
+   * `/analytics/model-metrics` reports the **legacy v1** training metrics
+   * (a 28.9% draw-boosted holdout on 376 samples), which the UI was rendering
+   * as a bare "Model Accuracy".
+   */
+  async getModelEvaluation(): Promise<ModelEvaluation> {
+    const { data } = await apiClient.get<ModelEvaluation>(
+      "/analytics/model-evaluation"
     );
     return data;
   },

@@ -325,6 +325,102 @@ def build_standings() -> List[Dict[str, Any]]:
 
 
 @lru_cache(maxsize=1)
+def _all_canonical_matches() -> List[Dict[str, Any]]:
+    """Every canonical World Cup match, 1930-2026 (all 1,069 rows)."""
+    with open(_MATCHES_PATH, "r", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def world_cup_head_to_head(team_a: str, team_b: str) -> Dict[str, Any]:
+    """
+    World Cup meetings between two teams across the full canonical corpus.
+
+    Why this exists: the head-to-head shown next to a prediction was computed
+    from ``load_matches_dataframe()``, whose WC-tagged rows only start in
+    **2002**. Spain v Argentina therefore reported "No previous meetings"
+    despite meeting at the 1966 World Cup — factually wrong, not merely
+    unhelpful. This reads the canonical 1930-2026 corpus instead, so the
+    answer covers the whole tournament history.
+
+    Scope is World Cup matches only, and the response says so explicitly via
+    ``scope``/``scope_label`` — the canonical dataset contains no friendlies or
+    qualifiers, so a bare "no meetings" would be misleading for two teams who
+    have played each other many times outside the finals.
+
+    ``load_matches_dataframe()`` is deliberately left untouched: it feeds model
+    inference, and changing its population would be a train/serve skew.
+    """
+    rows = [
+        row
+        for row in _all_canonical_matches()
+        if {row.get("home_team"), row.get("away_team")} == {team_a, team_b}
+        and _to_int(row.get("home_score_ft")) is not None
+    ]
+    rows.sort(key=lambda r: r.get("date") or "")
+
+    a_wins = b_wins = draws = a_goals = b_goals = 0
+    meetings: List[Dict[str, Any]] = []
+    for row in rows:
+        home, away = row["home_team"], row["away_team"]
+        # Score the tie on the phase that actually decided it, matching what
+        # _display_score renders. A match won in extra time is a win, not a
+        # draw (the 2026 final finished 1-0 aet); only a shootout leaves the
+        # match itself drawn, with the winner recorded separately.
+        decided_on_penalties = (
+            _to_int(row.get("home_penalties")) is not None
+            and _to_int(row.get("away_penalties")) is not None
+        )
+        home_et, away_et = _to_int(row.get("home_score_et")), _to_int(row.get("away_score_et"))
+        if not decided_on_penalties and home_et is not None and away_et is not None:
+            home_score, away_score = home_et, away_et
+        else:
+            home_score = _to_int(row.get("home_score_ft")) or 0
+            away_score = _to_int(row.get("away_score_ft")) or 0
+
+        # Orient every meeting from team_a's perspective so the tallies are
+        # comparable regardless of which side was nominally at home.
+        a_score, b_score = (home_score, away_score) if home == team_a else (away_score, home_score)
+        a_goals += a_score
+        b_goals += b_score
+
+        if a_score > b_score:
+            a_wins += 1
+        elif b_score > a_score:
+            b_wins += 1
+        else:
+            draws += 1
+
+        meetings.append(
+            {
+                "date": row.get("date"),
+                "year": _to_int(row.get("year")),
+                "stage": row.get("stage"),
+                "home_team": home,
+                "away_team": away,
+                "home_score": home_score,
+                "away_score": away_score,
+                "display_score": _display_score(row),
+                "winner_team": row.get("winner_team") or None,
+                "result_method": row.get("result_method") or None,
+            }
+        )
+
+    return {
+        "team_a": team_a,
+        "team_b": team_b,
+        "scope": "fifa_world_cup_1930_2026",
+        "scope_label": "FIFA World Cup meetings, 1930-2026",
+        "total_matches": len(meetings),
+        "team_a_wins": a_wins,
+        "team_b_wins": b_wins,
+        "draws": draws,
+        "team_a_goals": a_goals,
+        "team_b_goals": b_goals,
+        "meetings": meetings,
+    }
+
+
+@lru_cache(maxsize=1)
 def build_backtest() -> Dict[str, Any]:
     """The frozen model's WC2026 scorecard, broken down by stage.
 

@@ -44,6 +44,37 @@ async def search_teams(db: AsyncSession, query: str, limit: int = 10) -> list[Te
     return [TeamResponse.model_validate(t) for t in teams]
 
 
+async def get_wc2026_teams(db: AsyncSession) -> list[TeamResponse]:
+    """
+    The 48 teams competing at the 2026 World Cup, alphabetically.
+
+    Scoped on ``wc2026_group IS NOT NULL``, which is populated for exactly
+    those 48 and NULL for everyone else. This is the fix for two real defects
+    rather than a cosmetic filter:
+
+    1. The ``teams`` table holds 335 rows carried over from the broad Kaggle
+       "all international results" seed. Alongside real national sides that
+       simply did not qualify (Italy, Hungary, Poland, Denmark...) it contains
+       regional/unrecognised entities — "Central Spain", "Asturias", "Ticino",
+       "Yoruba Nation" — which are not national teams and must never appear in
+       a WC2026 team picker. They are *kept* in the table because they own real
+       historical match rows; scoping the query is correct, deleting them would
+       corrupt those matches.
+    2. The directory previously rendered ``get_top_teams(20)``, so users saw 20
+       of 48 and no way to tell the rest existed.
+
+    Ordering is alphabetical by name and deliberately not by rank/Elo/win rate:
+    this is a directory to look a team up in, not a leaderboard.
+    """
+    stmt = (
+        select(Team)
+        .where(Team.wc2026_group.isnot(None))
+        .order_by(Team.name)
+    )
+    result = await db.execute(stmt)
+    return [TeamResponse.model_validate(t) for t in result.scalars().all()]
+
+
 async def get_team_by_id(db: AsyncSession, team_id: str) -> Optional[TeamResponse]:
     if not _is_valid_uuid(team_id):
         return None

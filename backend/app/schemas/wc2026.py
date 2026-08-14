@@ -142,6 +142,66 @@ class BacktestResponse(BaseModel):
     model_config = {"protected_namespaces": ()}
 
 
+class WorldCupMeeting(BaseModel):
+    date: Optional[str] = None
+    year: Optional[int] = None
+    stage: Optional[str] = None
+    home_team: str
+    away_team: str
+    home_score: int
+    away_score: int
+    display_score: Optional[str] = Field(
+        None, description="Score annotated with (aet) / (x-y pens) where applicable"
+    )
+    winner_team: Optional[str] = None
+    result_method: Optional[str] = None
+
+
+class WorldCupHeadToHeadResponse(BaseModel):
+    """World Cup meetings between two teams over the full canonical corpus.
+
+    ``scope_label`` is not decoration: the corpus is World Cup matches only, so
+    a client showing a bare "no previous meetings" for two sides who have met
+    often in friendlies would be stating something false. Render the label.
+    """
+
+    team_a: str
+    team_b: str
+    scope: str
+    scope_label: str
+    total_matches: int
+    team_a_wins: int
+    team_b_wins: int
+    draws: int
+    team_a_goals: int
+    team_b_goals: int
+    meetings: List[WorldCupMeeting]
+
+
+class ModelEvaluationResponse(BaseModel):
+    """What the shipped model is actually known to score, and on what.
+
+    Split into a headline evaluation and the dataset it was measured on so the
+    UI cannot render a bare "Model Accuracy" percentage — the previous card did
+    exactly that with a stale legacy number.
+    """
+
+    model_version: str
+    evaluation_name: str = Field(..., description="e.g. 'WC2026 Backtest'")
+    evaluation_description: str
+    accuracy: Optional[float] = None
+    correct: Optional[int] = None
+    total: Optional[int] = None
+    is_out_of_sample: bool
+    by_stage: List[BacktestStageAccuracy] = []
+    legacy: Optional[Dict[str, Any]] = Field(
+        None,
+        description="Superseded legacy v1 training metrics, retained and labelled rather than shown as current",
+    )
+
+    model_config = {"protected_namespaces": ()}
+
+
 class TeamMetaResponse(BaseModel):
     """Per-team WC2026 reference data, keyed by canonical team name."""
 

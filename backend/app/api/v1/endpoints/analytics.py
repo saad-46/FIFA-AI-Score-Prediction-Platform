@@ -21,9 +21,11 @@ from app.schemas.analytics import (
     ModelMetricsResponse,
     TopTeamSummary,
 )
+from app.schemas.wc2026 import ModelEvaluationResponse
 from app.services.match_service import get_upcoming_matches
 from app.services.prediction_service import get_recent_predictions
 from app.services.team_service import get_top_teams
+from app.data import wc2026 as wc2026_data
 
 router = APIRouter(prefix="/analytics", tags=["analytics"])
 settings = get_settings()
@@ -206,6 +208,66 @@ async def model_metrics():
         last_trained=last_trained,
         training_samples=training_samples,
         model_version=settings.MODEL_VERSION,
+    )
+
+
+@router.get("/model-evaluation", response_model=ModelEvaluationResponse)
+async def model_evaluation():
+    """
+    What the shipped V2 model actually scored, and on which evaluation.
+
+    Replaces `/model-metrics` as the number a UI should headline. That endpoint
+    reads `app/ml/models/metrics.json` — the **legacy v1.0.0** model trained
+    2026-07-03 on 376 samples, whose `classifier_adjusted_accuracy` of 0.289 is
+    a draw-boosted holdout figure (raw accuracy was 0.474; a 1.05 draw boost
+    pushed draw recall to 1.0 and destroyed accuracy). Rendering that as
+    "Model Accuracy" materially misstates the product.
+
+    The honest headline is the frozen v2.1.0 WC2026 backtest: an out-of-sample
+    evaluation of a model frozen before any 2026 result was compared against
+    it. The legacy numbers are still returned, under `legacy`, so the UI can
+    label them as superseded rather than silently dropping them.
+    """
+    backtest = wc2026_data.build_backtest()
+
+    legacy: Optional[dict] = None
+    model_dir = Path(settings.MODEL_PATH).parent
+    metrics_path = model_dir / "metrics.json"
+    report_path = model_dir / "training_report.json"
+    if metrics_path.exists():
+        with open(metrics_path) as f:
+            data = json.load(f)
+        legacy = {
+            "model_version": "1.0.0",
+            "label": "Legacy v1 model (superseded)",
+            "classifier_raw_accuracy": data.get("classifier_raw_accuracy"),
+            "classifier_adjusted_accuracy": data.get("classifier_adjusted_accuracy"),
+            "home_mae": data.get("home_mae"),
+            "note": (
+                "Holdout metrics from the pre-V2 model. The adjusted accuracy is "
+                "depressed by a draw-boost that forced draw recall to 1.0. Retained "
+                "for provenance; not representative of the current model."
+            ),
+        }
+        if report_path.exists():
+            with open(report_path) as f:
+                report = json.load(f)
+            legacy["training_samples"] = report.get("n_training_samples")
+            legacy["trained_at"] = report.get("trained_at")
+
+    return ModelEvaluationResponse(
+        model_version=backtest.get("model_version") or "v2.1.0-historical-optimized",
+        evaluation_name="WC2026 Backtest",
+        evaluation_description=(
+            "Out-of-sample evaluation on all 104 WC2026 matches. The model was frozen "
+            "before any 2026 result was compared against it."
+        ),
+        accuracy=backtest.get("accuracy"),
+        correct=backtest.get("correct"),
+        total=backtest.get("n_matches_scored"),
+        is_out_of_sample=True,
+        by_stage=backtest.get("by_stage", []),
+        legacy=legacy,
     )
 
 

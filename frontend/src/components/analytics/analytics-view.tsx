@@ -21,7 +21,13 @@ export function AnalyticsView() {
     "analytics-global",
     analyticsApi.getGlobalAnalytics
   );
-  const { data: metrics, isLoading: metricsLoading } = useSWR("model-metrics", analyticsApi.getModelMetrics);
+  // The honest headline: the frozen V2 model's out-of-sample WC2026 backtest,
+  // not the legacy v1 training metrics that /model-metrics returns.
+  const { data: evaluation, isLoading: evaluationLoading } = useSWR(
+    "model-evaluation",
+    analyticsApi.getModelEvaluation,
+    { revalidateOnFocus: false }
+  );
   const { data: goalDist, isLoading: goalDistLoading } = useSWR("goal-distribution", () =>
     matchesApi.getGoalDistribution()
   );
@@ -116,19 +122,91 @@ export function AnalyticsView() {
         </TabsContent>
 
         <TabsContent value="model">
-          {metricsLoading ? (
+          {evaluationLoading ? (
             <StatsGridSkeleton count={3} />
-          ) : metrics ? (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <ModelStat label="Model Accuracy" value={`${(metrics.accuracy * 100).toFixed(1)}%`} desc="Correct result predictions" />
-              <ModelStat label="Mean Abs Error" value={metrics.mae.toFixed(2)} desc="Average goal prediction error" />
-              <ModelStat label="Training Samples" value={metrics.training_samples.toLocaleString()} desc="Matches used for training" />
+          ) : evaluation ? (
+            <div className="space-y-5">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <ModelStat
+                  label={`${evaluation.evaluation_name} Accuracy`}
+                  value={
+                    evaluation.accuracy != null
+                      ? `${(evaluation.accuracy * 100).toFixed(1)}%`
+                      : "N/A"
+                  }
+                  desc={
+                    evaluation.correct != null && evaluation.total != null
+                      ? `${evaluation.correct} of ${evaluation.total} match results correct`
+                      : "Out-of-sample evaluation"
+                  }
+                />
+                <ModelStat
+                  label="Matches Evaluated"
+                  value={evaluation.total != null ? evaluation.total.toLocaleString() : "N/A"}
+                  desc="Every WC2026 fixture, none excluded"
+                />
+                <ModelStat
+                  label="Model Version"
+                  value={evaluation.model_version.replace(/^v/, "v")}
+                  desc="Frozen before the tournament"
+                />
+              </div>
+
+              <p className="text-sm text-fg-muted">{evaluation.evaluation_description}</p>
+
+              {/* The legacy figure is kept visible but explicitly dated and
+                  labelled. Silently dropping it would hide that the number
+                  users saw yesterday came from a different model entirely. */}
+              {evaluation.legacy && (
+                <details className="rounded-lg border border-border bg-surface-2/40 px-4 py-3">
+                  <summary className="cursor-pointer font-mono text-[11px] uppercase tracking-wider text-fg-muted">
+                    {evaluation.legacy.label ?? "Legacy model metrics"}
+                  </summary>
+                  <div className="pt-3 space-y-1.5 text-xs text-fg-muted">
+                    <p>{evaluation.legacy.note}</p>
+                    <dl className="grid grid-cols-2 gap-x-4 gap-y-1 pt-1 font-mono text-[11px] sm:grid-cols-4">
+                      <LegacyStat
+                        label="Raw accuracy"
+                        value={pct(evaluation.legacy.classifier_raw_accuracy)}
+                      />
+                      <LegacyStat
+                        label="Draw-boosted"
+                        value={pct(evaluation.legacy.classifier_adjusted_accuracy)}
+                      />
+                      <LegacyStat
+                        label="Training samples"
+                        value={evaluation.legacy.training_samples?.toLocaleString() ?? "N/A"}
+                      />
+                      <LegacyStat
+                        label="Version"
+                        value={evaluation.legacy.model_version ?? "N/A"}
+                      />
+                    </dl>
+                  </div>
+                </details>
+              )}
             </div>
           ) : (
-            <EmptyState icon={TrendingUp} title="Model metrics unavailable" />
+            <EmptyState icon={TrendingUp} title="Model evaluation unavailable" />
           )}
         </TabsContent>
       </Tabs>
+    </div>
+  );
+}
+
+/** Formats a 0–1 metric as a percentage, or "N/A" when genuinely absent —
+ * never a fabricated zero. */
+function pct(value: number | null | undefined): string {
+  if (value === null || value === undefined) return "N/A";
+  return `${(value * 100).toFixed(1)}%`;
+}
+
+function LegacyStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <dt className="text-fg-muted">{label}</dt>
+      <dd className="text-foreground/80 tabular-nums">{value}</dd>
     </div>
   );
 }

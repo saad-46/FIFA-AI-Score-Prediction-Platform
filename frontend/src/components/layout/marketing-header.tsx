@@ -21,13 +21,12 @@ export function MarketingHeader() {
             FIFA // <span className="text-primary">INTELLIGENCE</span>
           </span>
         </Link>
+        {/* No account CTAs — the platform is open. The primary action is to
+            go straight into the tournament rather than to sign up. */}
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/auth/login">Sign in</Link>
-          </Button>
-          <Button size="sm" variant="gradient" asChild>
-            <Link href="/auth/register">Get started free</Link>
+          <Button size="sm" asChild>
+            <Link href="/tournaments">Explore WC2026</Link>
           </Button>
         </div>
       </div>

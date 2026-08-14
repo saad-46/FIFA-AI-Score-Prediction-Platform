@@ -114,16 +114,12 @@ export function Navbar({ user }: NavbarProps) {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
-              <div className="hidden md:flex items-center gap-2">
-                <Button variant="ghost" size="sm" asChild>
-                  <Link href="/auth/login">Sign in</Link>
-                </Button>
-                <Button size="sm" asChild>
-                  <Link href="/auth/register">Get started</Link>
-                </Button>
-              </div>
-            )}
+            ) : null}
+            {/* No sign-in / sign-up prompts: the site is fully browsable
+                anonymously. The account menu above still renders for anyone
+                with an existing session — auth infrastructure is intact, it
+                just isn't advertised. Feedback is collected without an
+                account instead (see FeedbackWidget in the footer). */}
 
             {/* Mobile menu toggle */}
             <button
@@ -167,16 +163,6 @@ export function Navbar({ user }: NavbarProps) {
                   </Link>
                 );
               })}
-              {!user && (
-                <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href="/auth/login">Sign in</Link>
-                  </Button>
-                  <Button size="sm" asChild>
-                    <Link href="/auth/register">Get started</Link>
-                  </Button>
-                </div>
-              )}
             </nav>
           </motion.div>
         )}
