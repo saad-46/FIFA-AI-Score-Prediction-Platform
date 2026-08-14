@@ -15,10 +15,17 @@ from app.schemas.tournament import (
     Fifa2026Group,
     Fifa2026ScheduleResponse,
 )
+from app.schemas.wc2026 import (
+    BacktestResponse,
+    BracketResponse,
+    StandingsResponse,
+    TeamMetaResponse,
+)
 from app.ml.tournament_simulator import TournamentSimulator, TournamentSimulationError
 from app.ml.models.predictor import MatchPredictor
 from app.ml.data.loader import load_matches_dataframe
 from app.data.fifa_2026 import load_groups, get_groups_as_team_codes, filter_schedule
+from app.data import wc2026 as wc2026_data
 import asyncio
 
 logger = logging.getLogger(__name__)
@@ -69,6 +76,57 @@ async def get_fifa_2026_schedule(
     """
     matches = filter_schedule(stage=stage, venue_city=venue_city)
     return Fifa2026ScheduleResponse(matches=matches)
+
+
+@router.get("/2026/bracket", response_model=BracketResponse, status_code=status.HTTP_200_OK)
+async def get_fifa_2026_bracket():
+    """
+    Full WC2026 bracket: all 104 matches with real results, the frozen model's
+    pre-tournament prediction for each, and the progression wiring
+    (`home_source`/`away_source`/`feeds_winner_to`/`feeds_loser_to`) from the
+    canonical tournament graph.
+
+    Public, read-only. The graph is the source of truth for bracket shape — a
+    client should never hardcode these relationships. Not rate limited: this
+    is a cached file read, unlike `/simulate`.
+    """
+    return wc2026_data.build_bracket()
+
+
+@router.get("/2026/standings", response_model=StandingsResponse, status_code=status.HTTP_200_OK)
+async def get_fifa_2026_standings():
+    """
+    Final group tables (A-L) computed from the canonical group-stage results.
+
+    Public, read-only. Ordered by points, goal difference, then goals for; see
+    ``app/data/wc2026`` for why the full FIFA tiebreak chain is not reproduced.
+    """
+    return {"groups": wc2026_data.build_standings()}
+
+
+@router.get("/2026/teams", response_model=TeamMetaResponse, status_code=status.HTTP_200_OK)
+async def get_fifa_2026_team_meta():
+    """
+    Pre-tournament reference data for the 48 WC2026 teams (code, confederation,
+    group, FIFA ranking, Elo), keyed by canonical team name.
+
+    These are the values the frozen model actually saw, so they are consistent
+    with the predictions served alongside them.
+    """
+    return {"teams": wc2026_data.load_wc2026_teams()}
+
+
+@router.get("/2026/backtest", response_model=BacktestResponse, status_code=status.HTTP_200_OK)
+async def get_fifa_2026_backtest():
+    """
+    How the frozen model (`v2.1.0-historical-optimized`) actually did across
+    all 104 WC2026 matches, broken down by stage.
+
+    This is a **historical evaluation**, not a forecast: the model was frozen
+    before any 2026 result was compared against it, and this scorecard never
+    fed back into it. Clients must label it as a backtest.
+    """
+    return wc2026_data.build_backtest()
 
 
 @router.post("/simulate", response_model=TournamentSimulationResponse, status_code=status.HTTP_200_OK)

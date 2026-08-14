@@ -291,6 +291,171 @@ export interface Fifa2026ScheduleResponse {
   matches: Fifa2026Match[];
 }
 
+// ─── WC2026 bracket / standings / backtest (V2 canonical data) ────────────────
+// Backed by GET /tournament/2026/{bracket,standings,teams,backtest}. Distinct
+// from the Fifa2026* wallchart types above: those describe what was *scheduled*
+// (with W53/L101 placeholders); these describe the real bracket, its
+// progression wiring, and what actually happened.
+
+/** Stage identifiers, in playing order. */
+export type WcStage =
+  | "group_stage"
+  | "round_of_32"
+  | "round_of_16"
+  | "quarter_final"
+  | "semi_final"
+  | "third_place"
+  | "final";
+
+export const WC_STAGE_ORDER: WcStage[] = [
+  "group_stage",
+  "round_of_32",
+  "round_of_16",
+  "quarter_final",
+  "semi_final",
+  "third_place",
+  "final",
+];
+
+export const WC_STAGE_LABELS: Record<WcStage, string> = {
+  group_stage: "Group Stage",
+  round_of_32: "Round of 32",
+  round_of_16: "Round of 16",
+  quarter_final: "Quarter-Finals",
+  semi_final: "Semi-Finals",
+  third_place: "Third Place",
+  final: "Final",
+};
+
+/** Where a fixture's participant comes from. Drives bracket connectors — the
+ * frontend must never hardcode these relationships. */
+export interface MatchSource {
+  type: "group_fixture" | "group_qualification" | "winner_of" | "loser_of";
+  match_number?: number | null;
+}
+
+export interface BracketMatchPrediction {
+  predicted_winner: string | null;
+  home_win_probability: number | null;
+  draw_probability: number | null;
+  away_win_probability: number | null;
+  predicted_home_goals: number | null;
+  predicted_away_goals: number | null;
+  most_likely_score: string | null;
+  model_version: string | null;
+}
+
+export interface BracketNodeData {
+  match_number: number;
+  stage: WcStage;
+  is_knockout: boolean;
+  group: string | null;
+  date: string | null;
+  kickoff_time_et: string | null;
+  venue: string | null;
+  city: string | null;
+  home_team: string | null;
+  away_team: string | null;
+  /** Full-time score. For ties decided later, see *_score_et / *_penalties. */
+  home_score: number | null;
+  away_score: number | null;
+  /** Score after extra time — the running total, not ET-only goals. */
+  home_score_et: number | null;
+  away_score_et: number | null;
+  home_penalties: number | null;
+  away_penalties: number | null;
+  result_method: string | null;
+  winner_team: string | null;
+  status: "completed" | "scheduled";
+  home_source: MatchSource | null;
+  away_source: MatchSource | null;
+  feeds_winner_to: number | null;
+  feeds_loser_to: number | null;
+  prediction: BracketMatchPrediction | null;
+}
+
+export interface StageRange {
+  stage: WcStage;
+  first: number;
+  last: number;
+}
+
+export interface BracketResponse {
+  format: string | null;
+  stage_ranges: StageRange[];
+  nodes: BracketNodeData[];
+}
+
+export interface StandingRow {
+  team: string;
+  played: number;
+  won: number;
+  drawn: number;
+  lost: number;
+  goals_for: number;
+  goals_against: number;
+  goal_difference: number;
+  points: number;
+  position: number;
+}
+
+export interface GroupStanding {
+  group: string;
+  standings: StandingRow[];
+}
+
+export interface StandingsResponse {
+  groups: GroupStanding[];
+}
+
+export interface Wc2026TeamMeta {
+  team_name: string;
+  fifa_code: string | null;
+  confederation: string | null;
+  group: string | null;
+  fifa_ranking: number | null;
+  elo_rating: number | null;
+}
+
+export interface Wc2026TeamsResponse {
+  teams: Record<string, Wc2026TeamMeta>;
+}
+
+export interface BacktestStageAccuracy {
+  stage: WcStage;
+  correct: number;
+  total: number;
+  accuracy: number;
+}
+
+export interface BacktestMatch {
+  match_number: number | null;
+  match: string | null;
+  stage: WcStage;
+  predicted: string | null;
+  actual: string | null;
+  correct: boolean;
+  home_win_probability: number | null;
+  draw_probability: number | null;
+  away_win_probability: number | null;
+  predicted_score: string | null;
+  actual_score: string | null;
+}
+
+/** Historical evaluation of a model frozen before any 2026 result was seen.
+ * Never render this as a forecast. */
+export interface BacktestResponse {
+  model_version: string | null;
+  n_matches_scored: number | null;
+  accuracy: number | null;
+  correct: number;
+  by_stage: BacktestStageAccuracy[];
+  actual_champion: string | null;
+  predicted_champion: string | null;
+  note: string | null;
+  matches: BacktestMatch[];
+}
+
 export interface TournamentSimulationRequest {
   use_fifa_2026_groups?: boolean;
   groups?: Record<string, string[]>;
