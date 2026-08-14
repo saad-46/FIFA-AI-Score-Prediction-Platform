@@ -1,0 +1,1530 @@
+{
+  "format": "FIFA World Cup 2026 — 48 teams, 12 groups of 4, 104 matches",
+  "stage_ranges": [
+    {
+      "stage": "group_stage",
+      "first": 1,
+      "last": 72
+    },
+    {
+      "stage": "round_of_32",
+      "first": 73,
+      "last": 88
+    },
+    {
+      "stage": "round_of_16",
+      "first": 89,
+      "last": 96
+    },
+    {
+      "stage": "quarter_final",
+      "first": 97,
+      "last": 100
+    },
+    {
+      "stage": "semi_final",
+      "first": 101,
+      "last": 102
+    },
+    {
+      "stage": "third_place",
+      "first": 103,
+      "last": 103
+    },
+    {
+      "stage": "final",
+      "first": 104,
+      "last": 104
+    }
+  ],
+  "nodes": [
+    {
+      "match_number": 1,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 2,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 3,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 4,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 5,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 6,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 7,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 8,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 9,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 10,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 11,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 12,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 13,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 14,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 15,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 16,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 17,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 18,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 19,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 20,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 21,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 22,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 23,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 24,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 25,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 26,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 27,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 28,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 29,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 30,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 31,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 32,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 33,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 34,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 35,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 36,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 37,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 38,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 39,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 40,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 41,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 42,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 43,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 44,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 45,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 46,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 47,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 48,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 49,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 50,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 51,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 52,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 53,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 54,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 55,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 56,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 57,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 58,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 59,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 60,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 61,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 62,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 63,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 64,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 65,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 66,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 67,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 68,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 69,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 70,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 71,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 72,
+      "stage": "group_stage",
+      "is_knockout": false,
+      "home_source": {
+        "type": "group_fixture"
+      },
+      "away_source": {
+        "type": "group_fixture"
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "group_fixture"
+    },
+    {
+      "match_number": 73,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 90,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 74,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 89,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 75,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 90,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 76,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 91,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 77,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 89,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 78,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 91,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 79,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 92,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 80,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 92,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 81,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 94,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 82,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 94,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 83,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 93,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 84,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 93,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 85,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 96,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 86,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 95,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 87,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 96,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 88,
+      "stage": "round_of_32",
+      "is_knockout": true,
+      "home_source": {
+        "type": "group_qualification"
+      },
+      "away_source": {
+        "type": "group_qualification"
+      },
+      "feeds_winner_to": 95,
+      "feeds_loser_to": null,
+      "dependency_source": "group_qualification"
+    },
+    {
+      "match_number": 89,
+      "stage": "round_of_16",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 74
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 77
+      },
+      "feeds_winner_to": 97,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 90,
+      "stage": "round_of_16",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 73
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 75
+      },
+      "feeds_winner_to": 97,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 91,
+      "stage": "round_of_16",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 76
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 78
+      },
+      "feeds_winner_to": 99,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 92,
+      "stage": "round_of_16",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 79
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 80
+      },
+      "feeds_winner_to": 99,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 93,
+      "stage": "round_of_16",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 83
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 84
+      },
+      "feeds_winner_to": 98,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 94,
+      "stage": "round_of_16",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 81
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 82
+      },
+      "feeds_winner_to": 98,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 95,
+      "stage": "round_of_16",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 86
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 88
+      },
+      "feeds_winner_to": 100,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 96,
+      "stage": "round_of_16",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 85
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 87
+      },
+      "feeds_winner_to": 100,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 97,
+      "stage": "quarter_final",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 89
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 90
+      },
+      "feeds_winner_to": 101,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 98,
+      "stage": "quarter_final",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 93
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 94
+      },
+      "feeds_winner_to": 101,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 99,
+      "stage": "quarter_final",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 91
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 92
+      },
+      "feeds_winner_to": 102,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 100,
+      "stage": "quarter_final",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 95
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 96
+      },
+      "feeds_winner_to": 102,
+      "feeds_loser_to": null,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 101,
+      "stage": "semi_final",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 97
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 98
+      },
+      "feeds_winner_to": 104,
+      "feeds_loser_to": 103,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 102,
+      "stage": "semi_final",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 99
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 100
+      },
+      "feeds_winner_to": 104,
+      "feeds_loser_to": 103,
+      "dependency_source": "pdf"
+    },
+    {
+      "match_number": 103,
+      "stage": "third_place",
+      "is_knockout": true,
+      "home_source": {
+        "type": "loser_of",
+        "match_number": 101
+      },
+      "away_source": {
+        "type": "loser_of",
+        "match_number": 102
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "derived_from_semi_finals"
+    },
+    {
+      "match_number": 104,
+      "stage": "final",
+      "is_knockout": true,
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 101
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 102
+      },
+      "feeds_winner_to": null,
+      "feeds_loser_to": null,
+      "dependency_source": "derived_from_semi_finals"
+    }
+  ]
+}

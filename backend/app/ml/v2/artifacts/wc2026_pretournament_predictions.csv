@@ -1,0 +1,105 @@
+match_number,date,stage,home_team,away_team,predicted_winner,home_win_probability,draw_probability,away_win_probability,predicted_home_goals,predicted_away_goals,most_likely_score,model_version
+1.0,2026-06-24,group_stage,Czechia,Mexico,Mexico,0.1751,0.3091,0.5158,0.838,2.027,0-2,v2.1.0-historical-optimized
+2.0,2026-06-13,group_stage,Australia,Türkiye,Australia,0.4531,0.2259,0.3211,1.237,1.047,1-1,v2.1.0-historical-optimized
+3.0,2026-06-18,group_stage,Switzerland,Bosnia and Herzegovina,Switzerland,0.5378,0.2766,0.1856,2.092,0.912,2-0,v2.1.0-historical-optimized
+4.0,2026-06-13,group_stage,Brazil,Morocco,Brazil,0.4449,0.3521,0.2031,1.538,0.792,1-0,v2.1.0-historical-optimized
+5.0,2026-06-13,group_stage,Qatar,Switzerland,Switzerland,0.1466,0.3529,0.5005,0.75,1.751,0-1,v2.1.0-historical-optimized
+6.0,2026-06-20,group_stage,Netherlands,Sweden,Netherlands,0.4081,0.4037,0.1881,1.553,0.804,1-0,v2.1.0-historical-optimized
+7.0,2026-06-13,group_stage,Haiti,Scotland,Scotland,0.1483,0.2421,0.6096,0.81,2.029,0-2,v2.1.0-historical-optimized
+8.0,2026-06-14,group_stage,Germany,Curaçao,Germany,0.6642,0.1953,0.1405,3.186,0.633,3-0,v2.1.0-historical-optimized
+9.0,2026-06-15,group_stage,Saudi Arabia,Uruguay,Uruguay,0.1223,0.3556,0.522,0.734,1.654,0-1,v2.1.0-historical-optimized
+10.0,2026-06-14,group_stage,Netherlands,Japan,Draw,0.3738,0.4645,0.1617,1.565,0.789,1-0,v2.1.0-historical-optimized
+11.0,2026-06-14,group_stage,Côte d'Ivoire,Ecuador,Draw,0.3544,0.3635,0.2821,1.167,1.27,1-1,v2.1.0-historical-optimized
+12.0,2026-06-11,group_stage,Mexico,South Africa,Mexico,0.5804,0.2447,0.1749,1.85,0.687,1-0,v2.1.0-historical-optimized
+13.0,2026-06-15,group_stage,Spain,Cabo Verde,Spain,0.6291,0.2321,0.1388,2.431,0.667,2-0,v2.1.0-historical-optimized
+14.0,2026-06-16,group_stage,Austria,Jordan,Austria,0.57,0.2433,0.1867,2.442,0.744,2-0,v2.1.0-historical-optimized
+15.0,2026-06-11,group_stage,South Korea,Czechia,South Korea,0.4164,0.3117,0.2719,1.401,1.155,1-1,v2.1.0-historical-optimized
+16.0,2026-06-15,group_stage,IR Iran,New Zealand,Draw,0.3601,0.3979,0.242,1.884,1.165,1-1,v2.1.0-historical-optimized
+17.0,2026-06-17,group_stage,Ghana,Panama,Ghana,0.5901,0.241,0.1689,1.601,0.788,1-0,v2.1.0-historical-optimized
+18.0,2026-06-25,group_stage,Türkiye,USA,USA,0.3309,0.3259,0.3432,1.442,1.289,1-1,v2.1.0-historical-optimized
+19.0,2026-06-16,group_stage,France,Senegal,France,0.641,0.1976,0.1614,1.93,0.708,1-0,v2.1.0-historical-optimized
+20.0,2026-06-16,group_stage,Argentina,Algeria,Argentina,0.6489,0.2141,0.137,2.262,0.741,2-0,v2.1.0-historical-optimized
+21.0,2026-06-17,group_stage,England,Croatia,England,0.5158,0.2714,0.2128,1.53,0.983,1-0,v2.1.0-historical-optimized
+22.0,2026-06-17,group_stage,Uzbekistan,Colombia,Colombia,0.2576,0.1552,0.5872,0.988,1.601,0-1,v2.1.0-historical-optimized
+23.0,2026-06-23,group_stage,Colombia,Congo DR,Colombia,0.6091,0.2833,0.1076,2.651,0.509,2-0,v2.1.0-historical-optimized
+24.0,2026-06-18,group_stage,Canada,Qatar,Canada,0.4547,0.2901,0.2551,2.838,1.01,2-1,v2.1.0-historical-optimized
+25.0,2026-06-19,group_stage,Türkiye,Paraguay,Türkiye,0.3618,0.3087,0.3295,1.564,1.163,1-1,v2.1.0-historical-optimized
+26.0,2026-06-12,group_stage,USA,Paraguay,USA,0.4862,0.2919,0.2219,1.663,1.023,1-1,v2.1.0-historical-optimized
+27.0,2026-06-18,group_stage,Mexico,South Korea,Mexico,0.4507,0.3194,0.2299,1.276,0.839,1-0,v2.1.0-historical-optimized
+28.0,2026-06-19,group_stage,Brazil,Haiti,Brazil,0.6536,0.2185,0.1279,2.787,0.501,2-0,v2.1.0-historical-optimized
+29.0,2026-06-19,group_stage,Scotland,Morocco,Morocco,0.228,0.3282,0.4439,0.84,1.491,0-1,v2.1.0-historical-optimized
+30.0,2026-06-19,group_stage,USA,Australia,USA,0.5016,0.3081,0.1903,1.522,0.767,1-0,v2.1.0-historical-optimized
+31.0,2026-06-14,group_stage,Sweden,Tunisia,Sweden,0.4539,0.3298,0.2163,1.914,0.786,1-0,v2.1.0-historical-optimized
+32.0,2026-06-20,group_stage,Tunisia,Japan,Japan,0.2561,0.3046,0.4392,0.9,1.457,0-1,v2.1.0-historical-optimized
+33.0,2026-06-22,group_stage,Norway,Senegal,Senegal,0.2222,0.3346,0.4432,1.038,1.583,1-1,v2.1.0-historical-optimized
+34.0,2026-06-20,group_stage,Germany,Côte d'Ivoire,Germany,0.5666,0.2834,0.15,1.941,0.709,1-0,v2.1.0-historical-optimized
+35.0,2026-06-17,group_stage,Portugal,Congo DR,Portugal,0.6083,0.3026,0.0891,2.824,0.512,2-0,v2.1.0-historical-optimized
+36.0,2026-06-20,group_stage,Ecuador,Curaçao,Ecuador,0.5511,0.2988,0.1501,2.488,0.898,2-0,v2.1.0-historical-optimized
+37.0,2026-06-21,group_stage,Spain,Saudi Arabia,Spain,0.5481,0.3252,0.1267,2.179,0.578,2-0,v2.1.0-historical-optimized
+38.0,2026-06-22,group_stage,Argentina,Austria,Argentina,0.6326,0.2325,0.1349,1.959,0.704,1-0,v2.1.0-historical-optimized
+39.0,2026-06-21,group_stage,New Zealand,Egypt,Egypt,0.2437,0.3379,0.4184,1.117,1.764,1-1,v2.1.0-historical-optimized
+40.0,2026-06-22,group_stage,Jordan,Algeria,Algeria,0.3123,0.1699,0.5178,1.22,1.375,1-1,v2.1.0-historical-optimized
+41.0,2026-06-23,group_stage,England,Ghana,England,0.5673,0.2944,0.1383,1.908,0.745,1-0,v2.1.0-historical-optimized
+42.0,2026-06-26,group_stage,Senegal,Iraq,Senegal,0.6052,0.2625,0.1323,2.659,0.686,2-0,v2.1.0-historical-optimized
+43.0,2026-06-21,group_stage,Belgium,IR Iran,Belgium,0.4075,0.3574,0.2351,1.726,0.841,1-0,v2.1.0-historical-optimized
+44.0,2026-06-24,group_stage,Switzerland,Canada,Switzerland,0.5978,0.2203,0.1819,2.404,0.754,2-0,v2.1.0-historical-optimized
+45.0,2026-06-23,group_stage,Panama,Croatia,Croatia,0.1375,0.2248,0.6377,0.76,1.853,0-1,v2.1.0-historical-optimized
+46.0,2026-06-21,group_stage,Uruguay,Cabo Verde,Uruguay,0.5691,0.2812,0.1497,2.324,0.707,2-0,v2.1.0-historical-optimized
+47.0,2026-06-24,group_stage,Morocco,Haiti,Morocco,0.4553,0.3998,0.1449,2.171,0.757,2-0,v2.1.0-historical-optimized
+48.0,2026-06-22,group_stage,France,Iraq,France,0.6887,0.1565,0.1548,3.059,0.567,3-0,v2.1.0-historical-optimized
+49.0,2026-06-25,group_stage,Ecuador,Germany,Germany,0.1777,0.2835,0.5388,0.986,1.86,0-1,v2.1.0-historical-optimized
+50.0,2026-06-24,group_stage,Scotland,Brazil,Brazil,0.2037,0.1988,0.5974,0.751,1.97,0-1,v2.1.0-historical-optimized
+51.0,2026-06-24,group_stage,South Africa,South Korea,South Korea,0.2484,0.3627,0.3889,0.839,1.335,0-1,v2.1.0-historical-optimized
+52.0,2026-06-16,group_stage,Iraq,Norway,Norway,0.1953,0.3302,0.4745,1.129,1.794,1-1,v2.1.0-historical-optimized
+53.0,2026-06-18,group_stage,Czechia,South Africa,Draw,0.3582,0.3832,0.2586,1.773,1.22,1-1,v2.1.0-historical-optimized
+54.0,2026-06-23,group_stage,Portugal,Uzbekistan,Portugal,0.6968,0.1893,0.1139,2.677,0.67,2-0,v2.1.0-historical-optimized
+55.0,2026-06-25,group_stage,Tunisia,Netherlands,Netherlands,0.1782,0.2112,0.6107,0.794,1.747,0-1,v2.1.0-historical-optimized
+56.0,2026-06-25,group_stage,Curaçao,Côte d'Ivoire,Côte d'Ivoire,0.3824,0.1906,0.427,1.181,1.214,1-1,v2.1.0-historical-optimized
+57.0,2026-06-12,group_stage,Canada,Bosnia and Herzegovina,Draw,0.2984,0.4101,0.2914,1.531,1.245,1-1,v2.1.0-historical-optimized
+58.0,2026-06-25,group_stage,Paraguay,Australia,Draw,0.3374,0.4148,0.2478,0.982,0.858,0-0,v2.1.0-historical-optimized
+59.0,2026-06-24,group_stage,Bosnia and Herzegovina,Qatar,Bosnia and Herzegovina,0.4986,0.2697,0.2317,2.207,0.966,2-0,v2.1.0-historical-optimized
+60.0,2026-06-26,group_stage,New Zealand,Belgium,Belgium,0.1351,0.266,0.5989,0.744,2.706,0-2,v2.1.0-historical-optimized
+61.0,2026-06-27,group_stage,Panama,England,England,0.1798,0.2257,0.5945,0.719,2.022,0-2,v2.1.0-historical-optimized
+62.0,2026-06-25,group_stage,Japan,Sweden,Sweden,0.1836,0.3742,0.4422,0.976,1.352,0-1,v2.1.0-historical-optimized
+63.0,2026-06-27,group_stage,Congo DR,Uzbekistan,Congo DR,0.3891,0.3119,0.299,1.74,1.175,1-1,v2.1.0-historical-optimized
+64.0,2026-06-26,group_stage,Cabo Verde,Saudi Arabia,Saudi Arabia,0.3738,0.2158,0.4103,1.372,1.07,1-1,v2.1.0-historical-optimized
+65.0,2026-06-26,group_stage,Uruguay,Spain,Spain,0.2567,0.2695,0.4738,0.996,1.297,0-1,v2.1.0-historical-optimized
+66.0,2026-06-26,group_stage,Norway,France,France,0.1477,0.2349,0.6174,0.684,2.23,0-2,v2.1.0-historical-optimized
+67.0,2026-06-27,group_stage,Croatia,Ghana,Croatia,0.515,0.3035,0.1815,1.837,0.763,1-0,v2.1.0-historical-optimized
+68.0,2026-06-27,group_stage,Colombia,Portugal,Portugal,0.3377,0.3222,0.3401,1.1,1.25,1-1,v2.1.0-historical-optimized
+69.0,2026-06-27,group_stage,Jordan,Argentina,Argentina,0.2246,0.2139,0.5615,0.863,1.854,0-1,v2.1.0-historical-optimized
+70.0,2026-06-26,group_stage,Egypt,IR Iran,IR Iran,0.1977,0.3548,0.4475,1.018,1.546,1-1,v2.1.0-historical-optimized
+71.0,2026-06-27,group_stage,Algeria,Austria,Austria,0.1973,0.3896,0.413,0.99,1.448,0-1,v2.1.0-historical-optimized
+72.0,2026-06-15,group_stage,Belgium,Egypt,Belgium,0.5231,0.3279,0.1491,2.129,0.673,2-0,v2.1.0-historical-optimized
+73.0,2026-06-28,round_of_32,South Africa,Canada,South Africa,0.4508,0.2785,0.2706,1.441,1.065,1-1,v2.1.0-historical-optimized
+74.0,2026-06-29,round_of_32,Brazil,Japan,Brazil,0.5415,0.2926,0.1658,1.755,0.764,1-0,v2.1.0-historical-optimized
+75.0,2026-06-29,round_of_32,Netherlands,Morocco,Draw,0.3728,0.4436,0.1836,1.588,0.817,1-0,v2.1.0-historical-optimized
+76.0,2026-06-29,round_of_32,Germany,Paraguay,Germany,0.5186,0.3241,0.1573,1.984,0.713,1-0,v2.1.0-historical-optimized
+77.0,2026-06-30,round_of_32,Côte d'Ivoire,Norway,Côte d'Ivoire,0.4049,0.3155,0.2796,1.394,1.333,1-1,v2.1.0-historical-optimized
+78.0,2026-06-30,round_of_32,France,Sweden,France,0.541,0.2746,0.1843,1.717,0.725,1-0,v2.1.0-historical-optimized
+79.0,2026-06-30,round_of_32,Mexico,Ecuador,Mexico,0.4449,0.2649,0.2902,1.397,0.944,1-0,v2.1.0-historical-optimized
+80.0,2026-07-01,round_of_32,England,Congo DR,England,0.6274,0.2758,0.0967,3.004,0.569,3-0,v2.1.0-historical-optimized
+81.0,2026-07-01,round_of_32,Belgium,Senegal,Belgium,0.4946,0.2678,0.2376,1.843,0.98,1-0,v2.1.0-historical-optimized
+82.0,2026-07-01,round_of_32,USA,Bosnia and Herzegovina,USA,0.5208,0.2644,0.2149,1.888,0.898,1-0,v2.1.0-historical-optimized
+83.0,2026-07-02,round_of_32,Spain,Austria,Spain,0.5537,0.287,0.1594,1.814,0.717,1-0,v2.1.0-historical-optimized
+84.0,2026-07-02,round_of_32,Portugal,Croatia,Portugal,0.5425,0.2433,0.2142,1.716,1.182,1-1,v2.1.0-historical-optimized
+85.0,2026-07-02,round_of_32,Switzerland,Algeria,Switzerland,0.5022,0.2584,0.2393,1.775,0.966,1-0,v2.1.0-historical-optimized
+86.0,2026-07-03,round_of_32,Argentina,Cabo Verde,Argentina,0.6894,0.1824,0.1281,3.003,0.77,3-0,v2.1.0-historical-optimized
+87.0,2026-07-03,round_of_32,Colombia,Ghana,Colombia,0.5417,0.2995,0.1589,1.936,0.873,1-0,v2.1.0-historical-optimized
+88.0,2026-07-03,round_of_32,Australia,Egypt,Australia,0.4154,0.2628,0.3218,1.695,1.152,1-1,v2.1.0-historical-optimized
+89.0,2026-07-04,round_of_16,Canada,Morocco,Morocco,0.1503,0.261,0.5887,0.903,1.714,0-1,v2.1.0-historical-optimized
+90.0,2026-07-04,round_of_16,Paraguay,France,France,0.1774,0.2228,0.5997,0.745,1.835,0-1,v2.1.0-historical-optimized
+91.0,2026-07-05,round_of_16,Brazil,Norway,Brazil,0.6041,0.23,0.1659,1.993,0.726,1-0,v2.1.0-historical-optimized
+92.0,2026-07-05,round_of_16,Mexico,England,England,0.2736,0.2843,0.4421,0.951,1.509,0-1,v2.1.0-historical-optimized
+93.0,2026-07-06,round_of_16,Portugal,Spain,Draw,0.3133,0.3481,0.3386,1.117,1.225,1-1,v2.1.0-historical-optimized
+94.0,2026-07-06,round_of_16,USA,Belgium,Belgium,0.2038,0.2816,0.5146,1.067,1.52,1-1,v2.1.0-historical-optimized
+95.0,2026-07-07,round_of_16,Argentina,Egypt,Argentina,0.6297,0.2069,0.1634,2.652,0.74,2-0,v2.1.0-historical-optimized
+96.0,2026-07-07,round_of_16,Switzerland,Colombia,Switzerland,0.3558,0.3074,0.3368,1.138,1.099,1-1,v2.1.0-historical-optimized
+97.0,2026-07-09,quarter_final,France,Morocco,France,0.5884,0.2395,0.1721,1.671,0.764,1-0,v2.1.0-historical-optimized
+98.0,2026-07-10,quarter_final,Spain,Belgium,Spain,0.3788,0.3252,0.2959,1.393,1.018,1-1,v2.1.0-historical-optimized
+99.0,2026-07-11,quarter_final,Norway,England,England,0.1507,0.2745,0.5748,0.718,1.976,0-1,v2.1.0-historical-optimized
+100.0,2026-07-11,quarter_final,Argentina,Switzerland,Argentina,0.5705,0.2979,0.1316,2.067,0.743,2-0,v2.1.0-historical-optimized
+101.0,2026-07-14,semi_final,France,Spain,France,0.3699,0.2618,0.3683,1.389,0.997,1-0,v2.1.0-historical-optimized
+102.0,2026-07-15,semi_final,England,Argentina,Argentina,0.2728,0.3093,0.4179,1.17,1.526,1-1,v2.1.0-historical-optimized
+103.0,2026-07-18,third_place,France,England,France,0.4102,0.2605,0.3293,1.459,1.321,1-1,v2.1.0-historical-optimized
+104.0,2026-07-19,final,Spain,Argentina,Argentina,0.2886,0.3196,0.3918,1.217,1.719,1-1,v2.1.0-historical-optimized

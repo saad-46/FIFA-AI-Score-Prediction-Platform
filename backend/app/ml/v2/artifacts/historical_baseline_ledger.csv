@@ -1,0 +1,385 @@
+match_id,date,stage,home_team,away_team,home_goals,away_goals,tournament_year,predicted_home_goals,predicted_away_goals,away_win_probability,draw_probability,home_win_probability,predicted_result,actual_result,predicted_winner,actual_winner,correct,confidence,model_version
+wc2002_fa539e2908ec,2002-05-31,group_stage,France,Senegal,0.0,1.0,2002,1.849,0.209,0.0666,0.0203,0.9131,home_win,away_win,France,Senegal,False,0.9131,historical-fold
+wc2002_64c88003b0fe,2002-06-01,group_stage,Uruguay,Denmark,1.0,2.0,2002,0.742,0.873,0.2877,0.2496,0.4627,home_win,away_win,Uruguay,Denmark,False,0.4627,historical-fold
+wc2002_79b3c8b8127e,2002-06-01,group_stage,Republic of Ireland,Cameroon,1.0,1.0,2002,1.113,0.621,0.0594,0.808,0.1327,draw,draw,Draw,Draw,True,0.808,historical-fold
+wc2002_8902404cfa9d,2002-06-01,group_stage,Germany,Saudi Arabia,8.0,0.0,2002,2.378,0.644,0.0557,0.2031,0.7412,home_win,home_win,Germany,Germany,True,0.7412,historical-fold
+wc2002_7baede6471a7,2002-06-02,group_stage,Spain,Slovenia,3.0,1.0,2002,2.213,0.442,0.1554,0.1534,0.6912,home_win,home_win,Spain,Spain,True,0.6912,historical-fold
+wc2002_a45533dc4357,2002-06-02,group_stage,England,Sweden,1.0,1.0,2002,1.766,0.473,0.0269,0.3971,0.576,home_win,draw,England,Draw,False,0.576,historical-fold
+wc2002_c7e1cb311d38,2002-06-02,group_stage,Paraguay,South Africa,2.0,2.0,2002,1.061,0.479,0.3849,0.4989,0.1162,draw,draw,Draw,Draw,True,0.4989,historical-fold
+wc2002_e6bf750f4c4b,2002-06-02,group_stage,Argentina,Nigeria,1.0,0.0,2002,1.544,0.403,0.1359,0.111,0.7531,home_win,home_win,Argentina,Argentina,True,0.7531,historical-fold
+wc2002_3d285dd1b650,2002-06-03,group_stage,Italy,Ecuador,2.0,0.0,2002,1.668,0.271,0.1427,0.1221,0.7353,home_win,home_win,Italy,Italy,True,0.7353,historical-fold
+wc2002_44e401cf4037,2002-06-03,group_stage,Croatia,Mexico,0.0,1.0,2002,1.839,1.471,0.629,0.1971,0.1739,away_win,away_win,Mexico,Mexico,True,0.629,historical-fold
+wc2002_bcac7c67032b,2002-06-03,group_stage,Brazil,Türkiye,2.0,1.0,2002,2.471,0.492,0.0538,0.0294,0.9168,home_win,home_win,Brazil,Brazil,True,0.9168,historical-fold
+wc2002_46252eca7ade,2002-06-04,group_stage,Japan,Belgium,2.0,2.0,2002,0.637,1.194,0.9141,0.0449,0.041,away_win,draw,Belgium,Draw,False,0.9141,historical-fold
+wc2002_9bafeedefd2b,2002-06-04,group_stage,South Korea,Poland,2.0,0.0,2002,0.667,0.641,0.1165,0.7693,0.1142,draw,home_win,Draw,South Korea,False,0.7693,historical-fold
+wc2002_d8678b0b5a16,2002-06-04,group_stage,China,Costa Rica,0.0,2.0,2002,2.152,0.877,0.0329,0.1492,0.8179,home_win,away_win,China,Costa Rica,False,0.8179,historical-fold
+wc2002_574f7da93310,2002-06-05,group_stage,Germany,Republic of Ireland,1.0,1.0,2002,1.533,0.606,0.2054,0.0875,0.7072,home_win,draw,Germany,Draw,False,0.7072,historical-fold
+wc2002_c69578ddb911,2002-06-05,group_stage,USA,Portugal,3.0,2.0,2002,0.715,1.153,0.4995,0.2999,0.2007,away_win,home_win,Portugal,USA,False,0.4995,historical-fold
+wc2002_f1e21bea1d4e,2002-06-05,group_stage,Russia,Tunisia,2.0,0.0,2002,2.579,0.812,0.0318,0.0586,0.9096,home_win,home_win,Russia,Russia,True,0.9096,historical-fold
+wc2002_a5d9fa9e4d10,2002-06-06,group_stage,Cameroon,Saudi Arabia,1.0,0.0,2002,1.364,1.042,0.0476,0.7545,0.1979,draw,home_win,Draw,Cameroon,False,0.7545,historical-fold
+wc2002_b83d30004200,2002-06-06,group_stage,France,Uruguay,0.0,0.0,2002,1.662,0.417,0.0828,0.0951,0.8221,home_win,draw,France,Draw,False,0.8221,historical-fold
+wc2002_bf241fa483ee,2002-06-06,group_stage,Denmark,Senegal,1.0,1.0,2002,2.468,0.461,0.0329,0.0602,0.9069,home_win,draw,Denmark,Draw,False,0.9069,historical-fold
+wc2002_187fd438e372,2002-06-07,group_stage,Spain,Paraguay,3.0,1.0,2002,1.437,0.406,0.1074,0.2593,0.6333,home_win,home_win,Spain,Spain,True,0.6333,historical-fold
+wc2002_3929a70342f8,2002-06-07,group_stage,Argentina,England,0.0,1.0,2002,1.206,0.724,0.1081,0.4107,0.4812,home_win,away_win,Argentina,England,False,0.4812,historical-fold
+wc2002_8b7d00607110,2002-06-07,group_stage,Sweden,Nigeria,2.0,1.0,2002,1.257,0.77,0.5587,0.1636,0.2777,away_win,home_win,Nigeria,Sweden,False,0.5587,historical-fold
+wc2002_19cf87dc21a4,2002-06-08,group_stage,Brazil,China,4.0,0.0,2002,1.867,0.332,0.0813,0.0324,0.8863,home_win,home_win,Brazil,Brazil,True,0.8863,historical-fold
+wc2002_b371a3f0a128,2002-06-08,group_stage,South Africa,Slovenia,1.0,0.0,2002,1.538,0.683,0.0828,0.1825,0.7347,home_win,home_win,South Africa,South Africa,True,0.7347,historical-fold
+wc2002_c1c1932682d5,2002-06-08,group_stage,Italy,Croatia,1.0,2.0,2002,0.94,0.338,0.1853,0.0836,0.7311,home_win,away_win,Italy,Croatia,False,0.7311,historical-fold
+wc2002_06f72c402cf4,2002-06-09,group_stage,Mexico,Ecuador,2.0,1.0,2002,1.63,0.418,0.1381,0.0913,0.7707,home_win,home_win,Mexico,Mexico,True,0.7707,historical-fold
+wc2002_130a15690226,2002-06-09,group_stage,Japan,Russia,1.0,0.0,2002,1.45,1.152,0.7961,0.0845,0.1194,away_win,home_win,Russia,Japan,False,0.7961,historical-fold
+wc2002_b85531d3a5b9,2002-06-09,group_stage,Costa Rica,Türkiye,1.0,1.0,2002,0.825,1.496,0.1648,0.0812,0.754,home_win,draw,Costa Rica,Draw,False,0.754,historical-fold
+wc2002_3b3abf579894,2002-06-10,group_stage,South Korea,USA,1.0,1.0,2002,0.616,0.713,0.0713,0.6918,0.2369,draw,draw,Draw,Draw,True,0.6918,historical-fold
+wc2002_962e3a90077d,2002-06-10,group_stage,Portugal,Poland,4.0,0.0,2002,1.48,0.864,0.0711,0.1646,0.7643,home_win,home_win,Portugal,Portugal,True,0.7643,historical-fold
+wc2002_a2bd3a5a3213,2002-06-10,group_stage,Tunisia,Belgium,1.0,1.0,2002,0.419,1.541,0.9021,0.0859,0.012,away_win,draw,Belgium,Draw,False,0.9021,historical-fold
+wc2002_12d24329e60b,2002-06-11,group_stage,Senegal,Uruguay,3.0,3.0,2002,1.539,0.999,0.5172,0.0364,0.4464,away_win,draw,Uruguay,Draw,False,0.5172,historical-fold
+wc2002_3a95726e8519,2002-06-11,group_stage,Cameroon,Germany,0.0,2.0,2002,1.019,1.312,0.2569,0.3981,0.345,draw,away_win,Draw,Germany,False,0.3981,historical-fold
+wc2002_bd948b1a19d2,2002-06-11,group_stage,Saudi Arabia,Republic of Ireland,0.0,3.0,2002,1.424,1.041,0.0938,0.6856,0.2206,draw,away_win,Draw,Republic of Ireland,False,0.6856,historical-fold
+wc2002_cee7e3e22ad3,2002-06-11,group_stage,Denmark,France,2.0,0.0,2002,0.724,1.773,0.7882,0.1656,0.0462,away_win,home_win,France,Denmark,False,0.7882,historical-fold
+wc2002_5d2484659390,2002-06-12,group_stage,South Africa,Spain,2.0,3.0,2002,0.456,1.142,0.7458,0.1897,0.0646,away_win,away_win,Spain,Spain,True,0.7458,historical-fold
+wc2002_990617059e85,2002-06-12,group_stage,Nigeria,England,0.0,0.0,2002,1.188,1.476,0.5084,0.3019,0.1897,away_win,draw,England,Draw,False,0.5084,historical-fold
+wc2002_bc15d493fe41,2002-06-12,group_stage,Sweden,Argentina,1.0,1.0,2002,0.654,1.318,0.7712,0.1304,0.0984,away_win,draw,Argentina,Draw,False,0.7712,historical-fold
+wc2002_e5707eb7042a,2002-06-12,group_stage,Slovenia,Paraguay,1.0,3.0,2002,1.998,0.635,0.0966,0.0396,0.8638,home_win,away_win,Slovenia,Paraguay,False,0.8638,historical-fold
+wc2002_33b24ca67d11,2002-06-13,group_stage,Costa Rica,Brazil,2.0,5.0,2002,0.719,1.67,0.8518,0.0847,0.0635,away_win,away_win,Brazil,Brazil,True,0.8518,historical-fold
+wc2002_72f1bf82a1d0,2002-06-13,group_stage,Ecuador,Croatia,1.0,0.0,2002,1.523,0.923,0.1709,0.0534,0.7757,home_win,home_win,Ecuador,Ecuador,True,0.7757,historical-fold
+wc2002_7d5b92d35d8c,2002-06-13,group_stage,Mexico,Italy,1.0,1.0,2002,0.703,1.084,0.3486,0.4561,0.1953,draw,draw,Draw,Draw,True,0.4561,historical-fold
+wc2002_ed5d5fce626a,2002-06-13,group_stage,Türkiye,China,3.0,0.0,2002,3.162,0.658,0.0157,0.0551,0.9292,home_win,home_win,Türkiye,Türkiye,True,0.9292,historical-fold
+wc2002_057173dd73d9,2002-06-14,group_stage,Belgium,Russia,3.0,2.0,2002,1.711,1.031,0.415,0.188,0.397,away_win,home_win,Russia,Belgium,False,0.415,historical-fold
+wc2002_93a356c506a9,2002-06-14,group_stage,Tunisia,Japan,0.0,2.0,2002,0.964,1.377,0.4405,0.3752,0.1842,away_win,away_win,Japan,Japan,True,0.4405,historical-fold
+wc2002_a7f8aaf02304,2002-06-14,group_stage,Portugal,South Korea,0.0,1.0,2002,2.246,0.902,0.0756,0.1992,0.7252,home_win,away_win,Portugal,South Korea,False,0.7252,historical-fold
+wc2002_d7aca051743f,2002-06-14,group_stage,Poland,USA,3.0,1.0,2002,2.737,0.501,0.0142,0.2082,0.7776,home_win,home_win,Poland,Poland,True,0.7776,historical-fold
+wc2002_1613f78c5c26,2002-06-15,round_of_16,Denmark,England,0.0,3.0,2002,1.432,1.704,0.3332,0.1582,0.5086,home_win,away_win,Denmark,England,False,0.5086,historical-fold
+wc2002_3b651f6177f2,2002-06-15,round_of_16,Germany,Paraguay,1.0,0.0,2002,2.324,0.829,0.1344,0.0654,0.8002,home_win,home_win,Germany,Germany,True,0.8002,historical-fold
+wc2002_8bdb2298aa68,2002-06-16,round_of_16,Spain,Republic of Ireland,1.0,1.0,2002,1.804,0.736,0.2006,0.0482,0.7512,home_win,draw,Spain,Draw,False,0.7512,historical-fold
+wc2002_91f5c2c33705,2002-06-16,round_of_16,Sweden,Senegal,1.0,2.0,2002,1.802,1.171,0.3919,0.0079,0.6003,home_win,away_win,Sweden,Senegal,False,0.6003,historical-fold
+wc2002_507d043b11ed,2002-06-17,round_of_16,Brazil,Belgium,2.0,0.0,2002,1.344,0.914,0.1182,0.3224,0.5594,home_win,home_win,Brazil,Brazil,True,0.5594,historical-fold
+wc2002_da046da5a1aa,2002-06-17,round_of_16,Mexico,USA,0.0,2.0,2002,1.62,0.481,0.0415,0.2014,0.7571,home_win,away_win,Mexico,USA,False,0.7571,historical-fold
+wc2002_0314fa6f1e22,2002-06-18,round_of_16,Japan,Türkiye,0.0,1.0,2002,0.37,1.248,0.6538,0.1154,0.2308,away_win,away_win,Türkiye,Türkiye,True,0.6538,historical-fold
+wc2002_b3a841c2306b,2002-06-18,round_of_16,South Korea,Italy,2.0,1.0,2002,0.714,0.924,0.6568,0.2356,0.1076,away_win,home_win,Italy,South Korea,False,0.6568,historical-fold
+wc2002_64b0f9a1d291,2002-06-21,quarter_final,England,Brazil,1.0,2.0,2002,0.767,1.468,0.5712,0.1104,0.3184,away_win,away_win,Brazil,Brazil,True,0.5712,historical-fold
+wc2002_fa63b8294b4c,2002-06-21,quarter_final,Germany,USA,1.0,0.0,2002,2.584,1.087,0.0461,0.0556,0.8982,home_win,home_win,Germany,Germany,True,0.8982,historical-fold
+wc2002_2800024e931c,2002-06-22,quarter_final,Spain,South Korea,0.0,0.0,2002,2.02,0.375,0.0163,0.1076,0.8761,home_win,draw,Spain,Draw,False,0.8761,historical-fold
+wc2002_34599eae7cb5,2002-06-22,quarter_final,Senegal,Türkiye,0.0,1.0,2002,3.693,1.705,0.1101,0.1044,0.7855,home_win,away_win,Senegal,Türkiye,False,0.7855,historical-fold
+wc2002_11408b0cef14,2002-06-25,semi_final,Germany,South Korea,1.0,0.0,2002,2.631,0.877,0.0529,0.0578,0.8893,home_win,home_win,Germany,Germany,True,0.8893,historical-fold
+wc2002_d6fb8cf07ab1,2002-06-26,semi_final,Brazil,Türkiye,1.0,0.0,2002,2.422,0.756,0.0611,0.0246,0.9143,home_win,home_win,Brazil,Brazil,True,0.9143,historical-fold
+wc2002_d1f9af563cc6,2002-06-29,third_place,South Korea,Türkiye,2.0,3.0,2002,0.218,0.808,0.2866,0.2805,0.4329,home_win,away_win,South Korea,Türkiye,False,0.4329,historical-fold
+wc2002_9549c471829d,2002-06-30,final,Germany,Brazil,0.0,2.0,2002,0.875,2.008,0.8584,0.0206,0.121,away_win,away_win,Brazil,Brazil,True,0.8584,historical-fold
+wc2006_7a97937c2b4f,2006-06-09,group_stage,Germany,Costa Rica,4.0,2.0,2006,1.588,0.362,0.0262,0.2844,0.6894,home_win,home_win,Germany,Germany,True,0.6894,historical-fold
+wc2006_9748b42ca0f5,2006-06-09,group_stage,Poland,Ecuador,0.0,2.0,2006,1.084,0.963,0.0237,0.8919,0.0844,draw,away_win,Draw,Ecuador,False,0.8919,historical-fold
+wc2006_429e57a0f2a5,2006-06-10,group_stage,England,Paraguay,1.0,0.0,2006,2.048,0.596,0.0246,0.2622,0.7132,home_win,home_win,England,England,True,0.7132,historical-fold
+wc2006_7a3a25c775cc,2006-06-10,group_stage,Argentina,Côte d'Ivoire,2.0,1.0,2006,1.841,0.295,0.0122,0.0088,0.9789,home_win,home_win,Argentina,Argentina,True,0.9789,historical-fold
+wc2006_8faab37bc090,2006-06-10,group_stage,Trinidad and Tobago,Sweden,0.0,0.0,2006,1.354,1.152,0.5703,0.0769,0.3528,away_win,draw,Sweden,Draw,False,0.5703,historical-fold
+wc2006_815d7edd2a0a,2006-06-11,group_stage,Angola,Portugal,0.0,1.0,2006,1.526,1.283,0.264,0.0513,0.6846,home_win,away_win,Angola,Portugal,False,0.6846,historical-fold
+wc2006_caddad6b8759,2006-06-11,group_stage,Mexico,IR Iran,3.0,1.0,2006,1.318,1.269,0.3204,0.1091,0.5705,home_win,home_win,Mexico,Mexico,True,0.5705,historical-fold
+wc2006_f37265d9cc88,2006-06-11,group_stage,Serbia and Montenegro,Netherlands,0.0,1.0,2006,1.476,1.143,0.6026,0.05,0.3474,away_win,away_win,Netherlands,Netherlands,True,0.6026,historical-fold
+wc2006_492e7466573a,2006-06-12,group_stage,Italy,Ghana,2.0,0.0,2006,1.934,0.377,0.0563,0.0823,0.8614,home_win,home_win,Italy,Italy,True,0.8614,historical-fold
+wc2006_a743eb3e8e25,2006-06-12,group_stage,Australia,Japan,3.0,1.0,2006,0.757,1.076,0.2037,0.6542,0.1421,draw,home_win,Draw,Australia,False,0.6542,historical-fold
+wc2006_f4e64a294ff7,2006-06-12,group_stage,USA,Czechia,0.0,3.0,2006,1.109,0.946,0.1795,0.3397,0.4808,home_win,away_win,USA,Czechia,False,0.4808,historical-fold
+wc2006_0bcd21b18165,2006-06-13,group_stage,France,Switzerland,0.0,0.0,2006,1.125,0.399,0.0845,0.5399,0.3756,draw,draw,Draw,Draw,True,0.5399,historical-fold
+wc2006_2c0241d8aac7,2006-06-13,group_stage,South Korea,Togo,2.0,1.0,2006,1.638,1.172,0.1753,0.4238,0.4008,draw,home_win,Draw,South Korea,False,0.4238,historical-fold
+wc2006_d7207ea08b70,2006-06-13,group_stage,Brazil,Croatia,1.0,0.0,2006,1.097,0.516,0.1055,0.0407,0.8537,home_win,home_win,Brazil,Brazil,True,0.8537,historical-fold
+wc2006_2d3ef5b75d49,2006-06-14,group_stage,Germany,Poland,1.0,0.0,2006,1.858,0.502,0.0172,0.1991,0.7837,home_win,home_win,Germany,Germany,True,0.7837,historical-fold
+wc2006_68999ffe0cb2,2006-06-14,group_stage,Spain,Ukraine,4.0,0.0,2006,2.114,0.613,0.2327,0.0425,0.7248,home_win,home_win,Spain,Spain,True,0.7248,historical-fold
+wc2006_beac3002d127,2006-06-14,group_stage,Tunisia,Saudi Arabia,2.0,2.0,2006,1.064,1.135,0.304,0.5555,0.1405,draw,draw,Draw,Draw,True,0.5555,historical-fold
+wc2006_8d15cb2e10d7,2006-06-15,group_stage,England,Trinidad and Tobago,2.0,0.0,2006,2.256,0.5,0.0675,0.1545,0.778,home_win,home_win,England,England,True,0.778,historical-fold
+wc2006_cf2a29ca89b0,2006-06-15,group_stage,Ecuador,Costa Rica,3.0,0.0,2006,1.593,1.349,0.3186,0.5063,0.175,draw,home_win,Draw,Ecuador,False,0.5063,historical-fold
+wc2006_e7dcaca64c03,2006-06-15,group_stage,Sweden,Paraguay,1.0,0.0,2006,1.072,0.879,0.399,0.3065,0.2945,away_win,home_win,Paraguay,Sweden,False,0.399,historical-fold
+wc2006_67328df435bc,2006-06-16,group_stage,Netherlands,Côte d'Ivoire,2.0,1.0,2006,1.639,0.81,0.083,0.0142,0.9028,home_win,home_win,Netherlands,Netherlands,True,0.9028,historical-fold
+wc2006_77f3f0691add,2006-06-16,group_stage,Mexico,Angola,0.0,0.0,2006,1.945,0.837,0.1167,0.1229,0.7605,home_win,draw,Mexico,Draw,False,0.7605,historical-fold
+wc2006_b170784c9fae,2006-06-16,group_stage,Argentina,Serbia and Montenegro,6.0,0.0,2006,2.192,0.325,0.0212,0.0195,0.9593,home_win,home_win,Argentina,Argentina,True,0.9593,historical-fold
+wc2006_06433e143969,2006-06-17,group_stage,Portugal,IR Iran,2.0,0.0,2006,2.519,0.946,0.0193,0.1249,0.8558,home_win,home_win,Portugal,Portugal,True,0.8558,historical-fold
+wc2006_1d3bf8ad2e73,2006-06-17,group_stage,Czechia,Ghana,0.0,2.0,2006,2.148,0.865,0.0929,0.0082,0.8989,home_win,away_win,Czechia,Ghana,False,0.8989,historical-fold
+wc2006_1d8d2acfcb6b,2006-06-17,group_stage,Italy,USA,1.0,1.0,2006,2.295,0.744,0.0389,0.2926,0.6685,home_win,draw,Italy,Draw,False,0.6685,historical-fold
+wc2006_99849c8917ba,2006-06-18,group_stage,Japan,Croatia,0.0,0.0,2006,1.006,1.552,0.5668,0.2456,0.1876,away_win,draw,Croatia,Draw,False,0.5668,historical-fold
+wc2006_ade60d03b844,2006-06-18,group_stage,Brazil,Australia,2.0,0.0,2006,2.278,0.146,0.0092,0.006,0.9848,home_win,home_win,Brazil,Brazil,True,0.9848,historical-fold
+wc2006_c84756c00649,2006-06-18,group_stage,France,South Korea,1.0,1.0,2006,1.194,0.447,0.0308,0.4237,0.5454,home_win,draw,France,Draw,False,0.5454,historical-fold
+wc2006_0c96cda7b61c,2006-06-19,group_stage,Saudi Arabia,Ukraine,0.0,4.0,2006,0.684,0.446,0.0741,0.6005,0.3254,draw,away_win,Draw,Ukraine,False,0.6005,historical-fold
+wc2006_157373bc0305,2006-06-19,group_stage,Togo,Switzerland,0.0,2.0,2006,1.843,1.227,0.4903,0.1086,0.401,away_win,away_win,Switzerland,Switzerland,True,0.4903,historical-fold
+wc2006_fea09b4ce920,2006-06-19,group_stage,Spain,Tunisia,3.0,1.0,2006,2.017,0.627,0.0974,0.1494,0.7532,home_win,home_win,Spain,Spain,True,0.7532,historical-fold
+wc2006_1be7e19a6e61,2006-06-20,group_stage,Sweden,England,2.0,2.0,2006,0.837,1.067,0.4967,0.3241,0.1792,away_win,draw,England,Draw,False,0.4967,historical-fold
+wc2006_2cd3d383ca59,2006-06-20,group_stage,Ecuador,Germany,0.0,3.0,2006,0.532,1.987,0.5455,0.3891,0.0654,away_win,away_win,Germany,Germany,True,0.5455,historical-fold
+wc2006_7cf35d11aca9,2006-06-20,group_stage,Paraguay,Trinidad and Tobago,2.0,0.0,2006,1.084,0.933,0.0753,0.6684,0.2563,draw,home_win,Draw,Paraguay,False,0.6684,historical-fold
+wc2006_a1c36afd0ba8,2006-06-20,group_stage,Costa Rica,Poland,1.0,2.0,2006,1.331,0.945,0.1226,0.4772,0.4002,draw,away_win,Draw,Poland,False,0.4772,historical-fold
+wc2006_3a0884f4f195,2006-06-21,group_stage,Portugal,Mexico,2.0,1.0,2006,1.639,1.09,0.1236,0.4032,0.4732,home_win,home_win,Portugal,Portugal,True,0.4732,historical-fold
+wc2006_67117f14130e,2006-06-21,group_stage,Côte d'Ivoire,Serbia and Montenegro,3.0,2.0,2006,1.986,0.975,0.0983,0.0142,0.8875,home_win,home_win,Côte d'Ivoire,Côte d'Ivoire,True,0.8875,historical-fold
+wc2006_8d0ee3f21abf,2006-06-21,group_stage,IR Iran,Angola,1.0,1.0,2006,1.471,0.621,0.0984,0.2879,0.6136,home_win,draw,IR Iran,Draw,False,0.6136,historical-fold
+wc2006_d7079e646fb9,2006-06-21,group_stage,Netherlands,Argentina,0.0,0.0,2006,1.089,0.947,0.454,0.1443,0.4017,away_win,draw,Argentina,Draw,False,0.454,historical-fold
+wc2006_7554534b485a,2006-06-22,group_stage,Czechia,Italy,0.0,2.0,2006,1.038,0.963,0.5076,0.0494,0.443,away_win,away_win,Italy,Italy,True,0.5076,historical-fold
+wc2006_7882484a04ef,2006-06-22,group_stage,Croatia,Australia,2.0,2.0,2006,2.011,0.584,0.0376,0.6914,0.271,draw,draw,Draw,Draw,True,0.6914,historical-fold
+wc2006_b8db6cd90795,2006-06-22,group_stage,Japan,Brazil,1.0,4.0,2006,0.442,1.997,0.9499,0.0293,0.0208,away_win,away_win,Brazil,Brazil,True,0.9499,historical-fold
+wc2006_d59a68e776f2,2006-06-22,group_stage,Ghana,USA,2.0,1.0,2006,1.415,1.194,0.2834,0.1029,0.6137,home_win,home_win,Ghana,Ghana,True,0.6137,historical-fold
+wc2006_0c6002f36e05,2006-06-23,group_stage,Switzerland,South Korea,2.0,0.0,2006,0.777,1.102,0.2022,0.5483,0.2495,draw,home_win,Draw,Switzerland,False,0.5483,historical-fold
+wc2006_4eb4b2ef5a7e,2006-06-23,group_stage,Togo,France,0.0,2.0,2006,1.173,1.28,0.6037,0.044,0.3522,away_win,away_win,France,France,True,0.6037,historical-fold
+wc2006_a999d5a9e352,2006-06-23,group_stage,Saudi Arabia,Spain,0.0,1.0,2006,0.462,1.96,0.8284,0.1297,0.0419,away_win,away_win,Spain,Spain,True,0.8284,historical-fold
+wc2006_ceaa6b2cdeba,2006-06-23,group_stage,Ukraine,Tunisia,1.0,0.0,2006,1.995,0.961,0.2347,0.0195,0.7457,home_win,home_win,Ukraine,Ukraine,True,0.7457,historical-fold
+wc2006_817ba91afadc,2006-06-24,round_of_16,Argentina,Mexico,2.0,1.0,2006,1.431,0.536,0.0298,0.3002,0.67,home_win,home_win,Argentina,Argentina,True,0.67,historical-fold
+wc2006_faadff964504,2006-06-24,round_of_16,Germany,Sweden,2.0,0.0,2006,1.65,1.255,0.3363,0.2069,0.4568,home_win,home_win,Germany,Germany,True,0.4568,historical-fold
+wc2006_6d39ce77df2d,2006-06-25,round_of_16,Portugal,Netherlands,1.0,0.0,2006,1.188,1.869,0.5975,0.1469,0.2556,away_win,home_win,Netherlands,Portugal,False,0.5975,historical-fold
+wc2006_990dadd0107f,2006-06-25,round_of_16,England,Ecuador,1.0,0.0,2006,1.897,0.759,0.0286,0.0706,0.9008,home_win,home_win,England,England,True,0.9008,historical-fold
+wc2006_a24d42f671bd,2006-06-26,round_of_16,Italy,Australia,1.0,0.0,2006,2.38,0.517,0.0225,0.1502,0.8272,home_win,home_win,Italy,Italy,True,0.8272,historical-fold
+wc2006_f91cacfbc985,2006-06-26,round_of_16,Switzerland,Ukraine,0.0,0.0,2006,1.659,0.819,0.1151,0.2622,0.6227,home_win,draw,Switzerland,Draw,False,0.6227,historical-fold
+wc2006_51f05cfa5d96,2006-06-27,round_of_16,Brazil,Ghana,3.0,0.0,2006,1.959,0.259,0.0445,0.0247,0.9308,home_win,home_win,Brazil,Brazil,True,0.9308,historical-fold
+wc2006_57a80237e5c2,2006-06-27,round_of_16,Spain,France,1.0,3.0,2006,1.066,0.846,0.4643,0.1745,0.3613,away_win,away_win,France,France,True,0.4643,historical-fold
+wc2006_0121eb75a8f2,2006-06-30,quarter_final,Italy,Ukraine,3.0,0.0,2006,2.631,0.523,0.0442,0.099,0.8568,home_win,home_win,Italy,Italy,True,0.8568,historical-fold
+wc2006_9cff11eea7f3,2006-06-30,quarter_final,Germany,Argentina,1.0,1.0,2006,1.16,1.208,0.5232,0.107,0.3698,away_win,draw,Argentina,Draw,False,0.5232,historical-fold
+wc2006_02cbecc87380,2006-07-01,quarter_final,Brazil,France,0.0,1.0,2006,1.024,0.861,0.1928,0.2877,0.5195,home_win,away_win,Brazil,France,False,0.5195,historical-fold
+wc2006_5079f078aa46,2006-07-01,quarter_final,England,Portugal,0.0,0.0,2006,1.775,1.172,0.0356,0.0272,0.9372,home_win,draw,England,Draw,False,0.9372,historical-fold
+wc2006_a4d7de77ff64,2006-07-04,semi_final,Germany,Italy,0.0,2.0,2006,1.014,1.186,0.5297,0.0883,0.382,away_win,away_win,Italy,Italy,True,0.5297,historical-fold
+wc2006_f424352e7bee,2006-07-05,semi_final,Portugal,France,0.0,1.0,2006,0.931,1.339,0.6093,0.1435,0.2472,away_win,away_win,France,France,True,0.6093,historical-fold
+wc2006_35acab87cb56,2006-07-08,third_place,Germany,Portugal,3.0,1.0,2006,1.706,1.005,0.1272,0.081,0.7918,home_win,home_win,Germany,Germany,True,0.7918,historical-fold
+wc2006_c1ef433cced5,2006-07-09,final,Italy,France,1.0,1.0,2006,0.84,0.715,0.1086,0.6385,0.2529,draw,draw,Draw,Draw,True,0.6385,historical-fold
+wc2010_b876409c5e1b,2010-06-11,group_stage,South Africa,Mexico,1.0,1.0,2010,0.589,0.974,0.3332,0.4819,0.1848,draw,draw,Draw,Draw,True,0.4819,historical-fold
+wc2010_e161870c0d31,2010-06-11,group_stage,Uruguay,France,0.0,0.0,2010,0.683,0.944,0.1224,0.7085,0.1691,draw,draw,Draw,Draw,True,0.7085,historical-fold
+wc2010_263b543acee4,2010-06-12,group_stage,Argentina,Nigeria,1.0,0.0,2010,2.042,0.375,0.0278,0.0282,0.944,home_win,home_win,Argentina,Argentina,True,0.944,historical-fold
+wc2010_652a0981e1f7,2010-06-12,group_stage,South Korea,Greece,2.0,0.0,2010,1.554,0.461,0.0309,0.3185,0.6506,home_win,home_win,South Korea,South Korea,True,0.6506,historical-fold
+wc2010_b95b6576049a,2010-06-12,group_stage,England,USA,1.0,1.0,2010,1.556,0.543,0.0182,0.6881,0.2938,draw,draw,Draw,Draw,True,0.6881,historical-fold
+wc2010_79c19230e2f7,2010-06-13,group_stage,Germany,Australia,4.0,0.0,2010,1.474,0.534,0.0525,0.2349,0.7127,home_win,home_win,Germany,Germany,True,0.7127,historical-fold
+wc2010_f3130801f1fa,2010-06-13,group_stage,Algeria,Slovenia,0.0,1.0,2010,2.198,1.47,0.0995,0.1754,0.7251,home_win,away_win,Algeria,Slovenia,False,0.7251,historical-fold
+wc2010_feb148c6754c,2010-06-13,group_stage,Serbia,Ghana,0.0,1.0,2010,1.378,0.998,0.4718,0.0976,0.4306,away_win,away_win,Ghana,Ghana,True,0.4718,historical-fold
+wc2010_3456a064c2cc,2010-06-14,group_stage,Italy,Paraguay,1.0,1.0,2010,1.33,0.706,0.0492,0.0674,0.8834,home_win,draw,Italy,Draw,False,0.8834,historical-fold
+wc2010_48a2431cb7de,2010-06-14,group_stage,Netherlands,Denmark,2.0,0.0,2010,1.433,0.579,0.0328,0.5276,0.4396,draw,home_win,Draw,Netherlands,False,0.5276,historical-fold
+wc2010_6bb05f18a17e,2010-06-14,group_stage,Japan,Cameroon,1.0,0.0,2010,1.042,1.329,0.1393,0.5941,0.2666,draw,home_win,Draw,Japan,False,0.5941,historical-fold
+wc2010_4fa46c15f510,2010-06-15,group_stage,New Zealand,Slovakia,1.0,1.0,2010,0.679,0.934,0.272,0.3357,0.3923,home_win,draw,New Zealand,Draw,False,0.3923,historical-fold
+wc2010_bbf07e0d7d8b,2010-06-15,group_stage,Brazil,North Korea,2.0,1.0,2010,2.13,0.182,0.0424,0.0526,0.905,home_win,home_win,Brazil,Brazil,True,0.905,historical-fold
+wc2010_e385d74757cf,2010-06-15,group_stage,Côte d'Ivoire,Portugal,0.0,0.0,2010,0.797,0.788,0.2352,0.4838,0.281,draw,draw,Draw,Draw,True,0.4838,historical-fold
+wc2010_8932c42e486f,2010-06-16,group_stage,South Africa,Uruguay,0.0,3.0,2010,0.726,0.815,0.2281,0.6735,0.0983,draw,away_win,Draw,Uruguay,False,0.6735,historical-fold
+wc2010_acd66e3e1b45,2010-06-16,group_stage,Honduras,Chile,0.0,1.0,2010,0.661,1.122,0.2822,0.6952,0.0226,draw,away_win,Draw,Chile,False,0.6952,historical-fold
+wc2010_e4b2741848ae,2010-06-16,group_stage,Spain,Switzerland,0.0,1.0,2010,1.28,0.465,0.0651,0.3728,0.5621,home_win,away_win,Spain,Switzerland,False,0.5621,historical-fold
+wc2010_5636e1aba499,2010-06-17,group_stage,Argentina,South Korea,4.0,1.0,2010,1.54,0.563,0.1152,0.0914,0.7934,home_win,home_win,Argentina,Argentina,True,0.7934,historical-fold
+wc2010_6eff160b02f1,2010-06-17,group_stage,France,Mexico,0.0,2.0,2010,1.873,0.897,0.0564,0.248,0.6955,home_win,away_win,France,Mexico,False,0.6955,historical-fold
+wc2010_debdc7d630b5,2010-06-17,group_stage,Greece,Nigeria,2.0,1.0,2010,1.003,1.462,0.2632,0.6178,0.119,draw,home_win,Draw,Greece,False,0.6178,historical-fold
+wc2010_481b9ed0d504,2010-06-18,group_stage,Slovenia,USA,2.0,2.0,2010,0.926,1.503,0.6682,0.248,0.0839,away_win,draw,USA,Draw,False,0.6682,historical-fold
+wc2010_97110dc8806a,2010-06-18,group_stage,England,Algeria,0.0,0.0,2010,1.702,0.449,0.0116,0.0415,0.9468,home_win,draw,England,Draw,False,0.9468,historical-fold
+wc2010_e99d3d16c788,2010-06-18,group_stage,Germany,Serbia,0.0,1.0,2010,1.906,0.56,0.121,0.1169,0.7622,home_win,away_win,Germany,Serbia,False,0.7622,historical-fold
+wc2010_64a791ff19bc,2010-06-19,group_stage,Ghana,Australia,1.0,1.0,2010,1.735,1.375,0.2809,0.2242,0.4949,home_win,draw,Ghana,Draw,False,0.4949,historical-fold
+wc2010_8f5be34328a4,2010-06-19,group_stage,Netherlands,Japan,1.0,0.0,2010,1.316,0.654,0.0191,0.3326,0.6483,home_win,home_win,Netherlands,Netherlands,True,0.6483,historical-fold
+wc2010_fa19b8c69104,2010-06-19,group_stage,Cameroon,Denmark,1.0,2.0,2010,0.801,0.799,0.0934,0.6246,0.282,draw,away_win,Draw,Denmark,False,0.6246,historical-fold
+wc2010_b1348da6212d,2010-06-20,group_stage,Italy,New Zealand,1.0,1.0,2010,3.895,0.173,0.027,0.0269,0.9461,home_win,draw,Italy,Draw,False,0.9461,historical-fold
+wc2010_bd47b966da3a,2010-06-20,group_stage,Slovakia,Paraguay,0.0,2.0,2010,1.235,0.965,0.3161,0.1429,0.541,home_win,away_win,Slovakia,Paraguay,False,0.541,historical-fold
+wc2010_fdea4207cc7f,2010-06-20,group_stage,Brazil,Côte d'Ivoire,3.0,1.0,2010,1.428,0.428,0.0494,0.1293,0.8213,home_win,home_win,Brazil,Brazil,True,0.8213,historical-fold
+wc2010_ac9149cf57b4,2010-06-21,group_stage,Portugal,North Korea,7.0,0.0,2010,2.497,0.7,0.0182,0.7755,0.2063,draw,home_win,Draw,Portugal,False,0.7755,historical-fold
+wc2010_e60becd25e13,2010-06-21,group_stage,Chile,Switzerland,1.0,0.0,2010,1.187,0.902,0.2176,0.3831,0.3993,home_win,home_win,Chile,Chile,True,0.3993,historical-fold
+wc2010_e71e42587a91,2010-06-21,group_stage,Spain,Honduras,2.0,0.0,2010,1.611,0.329,0.1899,0.2033,0.6067,home_win,home_win,Spain,Spain,True,0.6067,historical-fold
+wc2010_12367efedc8f,2010-06-22,group_stage,Mexico,Uruguay,0.0,1.0,2010,1.185,0.969,0.1117,0.7937,0.0947,draw,away_win,Draw,Uruguay,False,0.7937,historical-fold
+wc2010_127ab486750f,2010-06-22,group_stage,Greece,Argentina,0.0,2.0,2010,0.259,1.771,0.9171,0.0655,0.0174,away_win,away_win,Argentina,Argentina,True,0.9171,historical-fold
+wc2010_cee71f716596,2010-06-22,group_stage,France,South Africa,1.0,2.0,2010,2.319,0.495,0.0504,0.0106,0.939,home_win,away_win,France,South Africa,False,0.939,historical-fold
+wc2010_ec2701a053fe,2010-06-22,group_stage,Nigeria,South Korea,2.0,2.0,2010,1.466,1.544,0.4474,0.3295,0.2231,away_win,draw,South Korea,Draw,False,0.4474,historical-fold
+wc2010_176825f857fd,2010-06-23,group_stage,Ghana,Germany,0.0,1.0,2010,0.699,1.597,0.8538,0.1068,0.0393,away_win,away_win,Germany,Germany,True,0.8538,historical-fold
+wc2010_93bf271674ad,2010-06-23,group_stage,USA,Algeria,1.0,0.0,2010,1.016,1.464,0.4459,0.3531,0.2009,away_win,home_win,Algeria,USA,False,0.4459,historical-fold
+wc2010_b34cf5ce8954,2010-06-23,group_stage,Slovenia,England,0.0,1.0,2010,0.498,1.327,0.8558,0.0962,0.048,away_win,away_win,England,England,True,0.8558,historical-fold
+wc2010_f1b3376abf3b,2010-06-23,group_stage,Australia,Serbia,2.0,1.0,2010,1.345,1.2,0.1247,0.3844,0.4909,home_win,home_win,Australia,Australia,True,0.4909,historical-fold
+wc2010_017ce8b0410a,2010-06-24,group_stage,Slovakia,Italy,3.0,2.0,2010,0.458,0.785,0.5569,0.2607,0.1823,away_win,home_win,Italy,Slovakia,False,0.5569,historical-fold
+wc2010_2001a8be4e04,2010-06-24,group_stage,Denmark,Japan,1.0,3.0,2010,1.769,0.666,0.0158,0.0366,0.9475,home_win,away_win,Denmark,Japan,False,0.9475,historical-fold
+wc2010_32ce9edbf006,2010-06-24,group_stage,Cameroon,Netherlands,1.0,2.0,2010,0.63,1.356,0.6042,0.283,0.1129,away_win,away_win,Netherlands,Netherlands,True,0.6042,historical-fold
+wc2010_7fd8d758ba0e,2010-06-24,group_stage,Paraguay,New Zealand,0.0,0.0,2010,1.707,0.606,0.0371,0.7301,0.2328,draw,draw,Draw,Draw,True,0.7301,historical-fold
+wc2010_001a8d5c8103,2010-06-25,group_stage,North Korea,Côte d'Ivoire,0.0,3.0,2010,1.313,1.035,0.2056,0.4901,0.3043,draw,away_win,Draw,Côte d'Ivoire,False,0.4901,historical-fold
+wc2010_4c9b2fd33a72,2010-06-25,group_stage,Chile,Spain,1.0,2.0,2010,0.86,1.552,0.7893,0.0986,0.1121,away_win,away_win,Spain,Spain,True,0.7893,historical-fold
+wc2010_5c87e1301a00,2010-06-25,group_stage,Switzerland,Honduras,0.0,0.0,2010,1.558,0.975,0.3279,0.1837,0.4884,home_win,draw,Switzerland,Draw,False,0.4884,historical-fold
+wc2010_78ee95616cfb,2010-06-25,group_stage,Portugal,Brazil,0.0,0.0,2010,0.556,1.793,0.8622,0.0497,0.0881,away_win,draw,Brazil,Draw,False,0.8622,historical-fold
+wc2010_a999d4c80653,2010-06-26,round_of_16,USA,Ghana,1.0,2.0,2010,1.027,0.825,0.3764,0.2104,0.4132,home_win,away_win,USA,Ghana,False,0.4132,historical-fold
+wc2010_f82458780960,2010-06-26,round_of_16,Uruguay,South Korea,2.0,1.0,2010,1.204,0.946,0.1175,0.5923,0.2902,draw,home_win,Draw,Uruguay,False,0.5923,historical-fold
+wc2010_33df22d7a47b,2010-06-27,round_of_16,Argentina,Mexico,3.0,1.0,2010,1.775,0.609,0.0673,0.2096,0.7231,home_win,home_win,Argentina,Argentina,True,0.7231,historical-fold
+wc2010_69a8e1a4e17f,2010-06-27,round_of_16,Germany,England,4.0,1.0,2010,0.977,1.15,0.4697,0.394,0.1364,away_win,home_win,England,Germany,False,0.4697,historical-fold
+wc2010_0545b0b2407f,2010-06-28,round_of_16,Netherlands,Slovakia,2.0,1.0,2010,2.821,1.055,0.0247,0.0702,0.9051,home_win,home_win,Netherlands,Netherlands,True,0.9051,historical-fold
+wc2010_3092700a8c2b,2010-06-28,round_of_16,Brazil,Chile,3.0,0.0,2010,2.744,0.23,0.0147,0.0189,0.9665,home_win,home_win,Brazil,Brazil,True,0.9665,historical-fold
+wc2010_0736931fa8aa,2010-06-29,round_of_16,Paraguay,Japan,0.0,0.0,2010,1.145,1.142,0.2797,0.4379,0.2823,draw,draw,Draw,Draw,True,0.4379,historical-fold
+wc2010_57cb945e6bb9,2010-06-29,round_of_16,Spain,Portugal,1.0,0.0,2010,1.181,0.718,0.4095,0.1425,0.4481,home_win,home_win,Spain,Spain,True,0.4481,historical-fold
+wc2010_5f93bfc1b767,2010-07-02,quarter_final,Netherlands,Brazil,2.0,1.0,2010,0.644,2.399,0.7427,0.151,0.1063,away_win,home_win,Brazil,Netherlands,False,0.7427,historical-fold
+wc2010_a2d133caa6c3,2010-07-02,quarter_final,Uruguay,Ghana,1.0,1.0,2010,1.047,0.817,0.139,0.1631,0.6979,home_win,draw,Uruguay,Draw,False,0.6979,historical-fold
+wc2010_95450d1a58dd,2010-07-03,quarter_final,Paraguay,Spain,0.0,1.0,2010,1.024,1.814,0.8524,0.0965,0.0511,away_win,away_win,Spain,Spain,True,0.8524,historical-fold
+wc2010_efcd0e1334d1,2010-07-03,quarter_final,Argentina,Germany,0.0,4.0,2010,0.793,0.829,0.4832,0.2427,0.2741,away_win,away_win,Germany,Germany,True,0.4832,historical-fold
+wc2010_31c41fdfe4ca,2010-07-06,semi_final,Uruguay,Netherlands,2.0,3.0,2010,0.917,1.029,0.1913,0.4526,0.3562,draw,away_win,Draw,Netherlands,False,0.4526,historical-fold
+wc2010_2305bf4a9b42,2010-07-07,semi_final,Germany,Spain,0.0,1.0,2010,0.882,1.383,0.5481,0.268,0.184,away_win,away_win,Spain,Spain,True,0.5481,historical-fold
+wc2010_76dc76169f1b,2010-07-10,third_place,Uruguay,Germany,2.0,3.0,2010,0.884,1.338,0.5287,0.293,0.1783,away_win,away_win,Germany,Germany,True,0.5287,historical-fold
+wc2010_b32d1f6d646d,2010-07-11,final,Netherlands,Spain,0.0,1.0,2010,1.055,1.805,0.5669,0.2242,0.2088,away_win,away_win,Spain,Spain,True,0.5669,historical-fold
+wc2014_2de387efbc29,2014-06-12,group_stage,Brazil,Croatia,3.0,1.0,2014,1.574,0.269,0.0234,0.0224,0.9542,home_win,home_win,Brazil,Brazil,True,0.9542,historical-fold
+wc2014_3e48dfc348c1,2014-06-13,group_stage,Spain,Netherlands,1.0,5.0,2014,0.646,0.906,0.6512,0.222,0.1268,away_win,away_win,Netherlands,Netherlands,True,0.6512,historical-fold
+wc2014_cf42845ef612,2014-06-13,group_stage,Chile,Australia,3.0,1.0,2014,1.24,0.804,0.0932,0.2987,0.6081,home_win,home_win,Chile,Chile,True,0.6081,historical-fold
+wc2014_ee037fbbedde,2014-06-13,group_stage,Mexico,Cameroon,1.0,0.0,2014,1.47,0.907,0.0772,0.3331,0.5897,home_win,home_win,Mexico,Mexico,True,0.5897,historical-fold
+wc2014_0491c7979814,2014-06-14,group_stage,Uruguay,Costa Rica,1.0,3.0,2014,2.144,0.557,0.008,0.2209,0.7711,home_win,away_win,Uruguay,Costa Rica,False,0.7711,historical-fold
+wc2014_54bfdbe41a56,2014-06-14,group_stage,Côte d'Ivoire,Japan,2.0,1.0,2014,1.012,0.996,0.129,0.754,0.117,draw,home_win,Draw,Côte d'Ivoire,False,0.754,historical-fold
+wc2014_71a5769cd5ba,2014-06-14,group_stage,Colombia,Greece,3.0,0.0,2014,1.342,1.32,0.2537,0.6183,0.128,draw,home_win,Draw,Colombia,False,0.6183,historical-fold
+wc2014_c928a8d65e23,2014-06-14,group_stage,England,Italy,1.0,2.0,2014,1.118,0.953,0.2044,0.6707,0.1249,draw,away_win,Draw,Italy,False,0.6707,historical-fold
+wc2014_d765efe33b6a,2014-06-15,group_stage,France,Honduras,3.0,0.0,2014,1.933,0.241,0.2246,0.0773,0.6981,home_win,home_win,France,France,True,0.6981,historical-fold
+wc2014_de5b22f87f3b,2014-06-15,group_stage,Switzerland,Ecuador,2.0,1.0,2014,0.779,1.069,0.6737,0.1512,0.1751,away_win,home_win,Ecuador,Switzerland,False,0.6737,historical-fold
+wc2014_f5e85fa780a9,2014-06-15,group_stage,Argentina,Bosnia and Herzegovina,2.0,1.0,2014,2.762,0.345,0.0214,0.0028,0.9757,home_win,home_win,Argentina,Argentina,True,0.9757,historical-fold
+wc2014_130a34d15c76,2014-06-16,group_stage,Ghana,USA,1.0,2.0,2014,0.959,1.69,0.728,0.1973,0.0747,away_win,away_win,USA,USA,True,0.728,historical-fold
+wc2014_94aad477dc0c,2014-06-16,group_stage,IR Iran,Nigeria,0.0,0.0,2014,0.992,1.088,0.2448,0.5954,0.1599,draw,draw,Draw,Draw,True,0.5954,historical-fold
+wc2014_b906a08599fd,2014-06-16,group_stage,Germany,Portugal,4.0,0.0,2014,1.347,0.535,0.1048,0.3962,0.4989,home_win,home_win,Germany,Germany,True,0.4989,historical-fold
+wc2014_497836064f25,2014-06-17,group_stage,Russia,South Korea,1.0,1.0,2014,1.515,1.254,0.0753,0.0775,0.8472,home_win,draw,Russia,Draw,False,0.8472,historical-fold
+wc2014_634caa858747,2014-06-17,group_stage,Belgium,Algeria,2.0,1.0,2014,1.584,0.627,0.058,0.1657,0.7763,home_win,home_win,Belgium,Belgium,True,0.7763,historical-fold
+wc2014_b19798eaa3be,2014-06-17,group_stage,Brazil,Mexico,0.0,0.0,2014,1.278,0.311,0.0516,0.22,0.7284,home_win,draw,Brazil,Draw,False,0.7284,historical-fold
+wc2014_177b189aed51,2014-06-18,group_stage,Australia,Netherlands,2.0,3.0,2014,0.514,1.863,0.8998,0.0735,0.0267,away_win,away_win,Netherlands,Netherlands,True,0.8998,historical-fold
+wc2014_690f7d12d66d,2014-06-18,group_stage,Cameroon,Croatia,0.0,4.0,2014,1.006,0.978,0.6107,0.2442,0.1451,away_win,away_win,Croatia,Croatia,True,0.6107,historical-fold
+wc2014_cd2d0eb09b62,2014-06-18,group_stage,Spain,Chile,0.0,2.0,2014,1.895,0.573,0.0203,0.6961,0.2836,draw,away_win,Draw,Chile,False,0.6961,historical-fold
+wc2014_37f3201a11f7,2014-06-19,group_stage,Japan,Greece,0.0,0.0,2014,1.393,0.827,0.1654,0.4908,0.3438,draw,draw,Draw,Draw,True,0.4908,historical-fold
+wc2014_44e1400c08a5,2014-06-19,group_stage,Colombia,Côte d'Ivoire,2.0,1.0,2014,0.965,1.349,0.5634,0.3542,0.0825,away_win,home_win,Côte d'Ivoire,Colombia,False,0.5634,historical-fold
+wc2014_e93dae1dd2f5,2014-06-19,group_stage,Uruguay,England,2.0,1.0,2014,1.05,0.909,0.0503,0.7103,0.2394,draw,home_win,Draw,Uruguay,False,0.7103,historical-fold
+wc2014_b1ac46ea3994,2014-06-20,group_stage,Honduras,Ecuador,1.0,2.0,2014,1.019,0.975,0.4127,0.4837,0.1035,draw,away_win,Draw,Ecuador,False,0.4837,historical-fold
+wc2014_b74a8a7b818e,2014-06-20,group_stage,Italy,Costa Rica,0.0,1.0,2014,1.831,0.313,0.0124,0.481,0.5066,home_win,away_win,Italy,Costa Rica,False,0.5066,historical-fold
+wc2014_c7c8fa2aaa1d,2014-06-20,group_stage,Switzerland,France,2.0,5.0,2014,0.593,1.222,0.897,0.0605,0.0424,away_win,away_win,France,France,True,0.897,historical-fold
+wc2014_02691b1262bf,2014-06-21,group_stage,Argentina,IR Iran,1.0,0.0,2014,2.016,0.225,0.0087,0.0165,0.9748,home_win,home_win,Argentina,Argentina,True,0.9748,historical-fold
+wc2014_7e8ea75b9b70,2014-06-21,group_stage,Germany,Ghana,2.0,2.0,2014,1.136,0.452,0.0807,0.2495,0.6698,home_win,draw,Germany,Draw,False,0.6698,historical-fold
+wc2014_a1b54e3f80ec,2014-06-21,group_stage,Nigeria,Bosnia and Herzegovina,1.0,0.0,2014,2.011,1.128,0.1643,0.5327,0.303,draw,home_win,Draw,Nigeria,False,0.5327,historical-fold
+wc2014_1d1fc7fd03c3,2014-06-22,group_stage,South Korea,Algeria,2.0,4.0,2014,1.069,0.622,0.2062,0.2236,0.5703,home_win,away_win,South Korea,Algeria,False,0.5703,historical-fold
+wc2014_43e886ad4a6b,2014-06-22,group_stage,USA,Portugal,2.0,2.0,2014,0.763,0.767,0.4182,0.3705,0.2113,away_win,draw,Portugal,Draw,False,0.4182,historical-fold
+wc2014_c1211da88fd7,2014-06-22,group_stage,Belgium,Russia,1.0,0.0,2014,1.654,1.321,0.1514,0.0303,0.8183,home_win,home_win,Belgium,Belgium,True,0.8183,historical-fold
+wc2014_02f7239d538d,2014-06-23,group_stage,Australia,Spain,0.0,3.0,2014,0.388,1.2,0.8168,0.1019,0.0813,away_win,away_win,Spain,Spain,True,0.8168,historical-fold
+wc2014_5f1d589d043e,2014-06-23,group_stage,Croatia,Mexico,1.0,3.0,2014,0.748,1.629,0.3059,0.6477,0.0464,draw,away_win,Draw,Mexico,False,0.6477,historical-fold
+wc2014_8dd08feb2b9e,2014-06-23,group_stage,Netherlands,Chile,2.0,0.0,2014,1.692,0.435,0.0256,0.5368,0.4376,draw,home_win,Draw,Netherlands,False,0.5368,historical-fold
+wc2014_c97066dd755f,2014-06-23,group_stage,Cameroon,Brazil,1.0,4.0,2014,0.607,2.054,0.8858,0.0656,0.0486,away_win,away_win,Brazil,Brazil,True,0.8858,historical-fold
+wc2014_1bca1310c7fe,2014-06-24,group_stage,Japan,Colombia,1.0,4.0,2014,1.301,1.391,0.1644,0.6457,0.1898,draw,away_win,Draw,Colombia,False,0.6457,historical-fold
+wc2014_bfd7ba71d43e,2014-06-24,group_stage,Greece,Côte d'Ivoire,2.0,1.0,2014,1.088,1.822,0.64,0.1703,0.1897,away_win,home_win,Côte d'Ivoire,Greece,False,0.64,historical-fold
+wc2014_d785bb99633a,2014-06-24,group_stage,Italy,Uruguay,0.0,1.0,2014,1.133,0.798,0.0856,0.453,0.4615,home_win,away_win,Italy,Uruguay,False,0.4615,historical-fold
+wc2014_fda8c76db47f,2014-06-24,group_stage,Costa Rica,England,0.0,0.0,2014,0.385,1.736,0.5373,0.381,0.0818,away_win,draw,England,Draw,False,0.5373,historical-fold
+wc2014_2c7aa76bc150,2014-06-25,group_stage,Ecuador,France,0.0,0.0,2014,0.407,1.587,0.7237,0.2408,0.0354,away_win,draw,France,Draw,False,0.7237,historical-fold
+wc2014_7c42523803bc,2014-06-25,group_stage,Honduras,Switzerland,0.0,3.0,2014,0.962,1.569,0.1852,0.7591,0.0558,draw,away_win,Draw,Switzerland,False,0.7591,historical-fold
+wc2014_d090910a679e,2014-06-25,group_stage,Nigeria,Argentina,2.0,3.0,2014,0.542,1.983,0.9156,0.0639,0.0205,away_win,away_win,Argentina,Argentina,True,0.9156,historical-fold
+wc2014_d9a00286da5b,2014-06-25,group_stage,Bosnia and Herzegovina,IR Iran,3.0,1.0,2014,0.995,1.133,0.5451,0.0705,0.3843,away_win,home_win,IR Iran,Bosnia and Herzegovina,False,0.5451,historical-fold
+wc2014_04d7dfc8cb2a,2014-06-26,group_stage,Portugal,Ghana,2.0,1.0,2014,2.077,0.459,0.0349,0.1289,0.8362,home_win,home_win,Portugal,Portugal,True,0.8362,historical-fold
+wc2014_09456a74b98c,2014-06-26,group_stage,USA,Germany,0.0,1.0,2014,0.651,1.545,0.7915,0.1492,0.0593,away_win,away_win,Germany,Germany,True,0.7915,historical-fold
+wc2014_7dbb98ab2e6f,2014-06-26,group_stage,South Korea,Belgium,0.0,1.0,2014,0.834,1.235,0.3721,0.507,0.1209,draw,away_win,Draw,Belgium,False,0.507,historical-fold
+wc2014_f588c4518c5e,2014-06-26,group_stage,Algeria,Russia,1.0,1.0,2014,1.054,1.407,0.8167,0.0966,0.0867,away_win,draw,Russia,Draw,False,0.8167,historical-fold
+wc2014_6671a7c9cd85,2014-06-28,round_of_16,Colombia,Uruguay,2.0,0.0,2014,0.455,1.673,0.8665,0.1154,0.0181,away_win,home_win,Uruguay,Colombia,False,0.8665,historical-fold
+wc2014_c51d493b1adb,2014-06-28,round_of_16,Brazil,Chile,1.0,1.0,2014,2.636,0.199,0.0035,0.0099,0.9866,home_win,draw,Brazil,Draw,False,0.9866,historical-fold
+wc2014_03377a277921,2014-06-29,round_of_16,Costa Rica,Greece,1.0,1.0,2014,2.284,1.228,0.0723,0.2259,0.7018,home_win,draw,Costa Rica,Draw,False,0.7018,historical-fold
+wc2014_0f74458c3691,2014-06-29,round_of_16,Netherlands,Mexico,2.0,1.0,2014,1.529,0.9,0.1591,0.3542,0.4867,home_win,home_win,Netherlands,Netherlands,True,0.4867,historical-fold
+wc2014_5c5b608407e5,2014-06-30,round_of_16,France,Nigeria,2.0,0.0,2014,2.147,0.783,0.0897,0.1849,0.7254,home_win,home_win,France,France,True,0.7254,historical-fold
+wc2014_8f8687334687,2014-06-30,round_of_16,Germany,Algeria,2.0,1.0,2014,1.915,0.359,0.1095,0.1352,0.7553,home_win,home_win,Germany,Germany,True,0.7553,historical-fold
+wc2014_68aa57205178,2014-07-01,round_of_16,Belgium,USA,2.0,1.0,2014,1.309,1.074,0.2028,0.1216,0.6757,home_win,home_win,Belgium,Belgium,True,0.6757,historical-fold
+wc2014_b104853bc3da,2014-07-01,round_of_16,Argentina,Switzerland,1.0,0.0,2014,1.399,0.797,0.0989,0.1475,0.7536,home_win,home_win,Argentina,Argentina,True,0.7536,historical-fold
+wc2014_93ebc60d8834,2014-07-04,quarter_final,Brazil,Colombia,2.0,1.0,2014,1.946,0.275,0.0156,0.0172,0.9672,home_win,home_win,Brazil,Brazil,True,0.9672,historical-fold
+wc2014_9e94e71efb70,2014-07-04,quarter_final,France,Germany,0.0,1.0,2014,0.684,1.38,0.6615,0.2308,0.1077,away_win,away_win,Germany,Germany,True,0.6615,historical-fold
+wc2014_5bfbca4b52db,2014-07-05,quarter_final,Netherlands,Costa Rica,0.0,0.0,2014,1.97,0.445,0.0218,0.2519,0.7263,home_win,draw,Netherlands,Draw,False,0.7263,historical-fold
+wc2014_669255afeb5b,2014-07-05,quarter_final,Argentina,Belgium,1.0,0.0,2014,1.313,0.798,0.1361,0.1261,0.7378,home_win,home_win,Argentina,Argentina,True,0.7378,historical-fold
+wc2014_5bf91d87afc1,2014-07-08,semi_final,Brazil,Germany,1.0,7.0,2014,0.953,0.73,0.3672,0.2582,0.3746,home_win,away_win,Brazil,Germany,False,0.3746,historical-fold
+wc2014_e31a6e10ddf0,2014-07-09,semi_final,Netherlands,Argentina,0.0,0.0,2014,0.691,1.211,0.6968,0.1682,0.135,away_win,draw,Argentina,Draw,False,0.6968,historical-fold
+wc2014_9b7dd005ee4d,2014-07-12,third_place,Brazil,Netherlands,0.0,3.0,2014,0.747,0.892,0.215,0.2204,0.5646,home_win,away_win,Brazil,Netherlands,False,0.5646,historical-fold
+wc2014_90714e189971,2014-07-13,final,Germany,Argentina,1.0,0.0,2014,0.558,1.349,0.7675,0.1932,0.0393,away_win,home_win,Argentina,Germany,False,0.7675,historical-fold
+wc2018_cc96c8392fe5,2018-06-14,group_stage,Russia,Saudi Arabia,5.0,0.0,2018,1.711,0.602,0.0776,0.1866,0.7359,home_win,home_win,Russia,Russia,True,0.7359,historical-fold
+wc2018_4b3410ce9c32,2018-06-15,group_stage,Egypt,Uruguay,0.0,1.0,2018,0.601,1.427,0.6194,0.3136,0.067,away_win,away_win,Uruguay,Uruguay,True,0.6194,historical-fold
+wc2018_5f933677a5f8,2018-06-15,group_stage,Portugal,Spain,3.0,3.0,2018,0.584,1.145,0.5924,0.3437,0.0639,away_win,draw,Spain,Draw,False,0.5924,historical-fold
+wc2018_8e38c9757e02,2018-06-15,group_stage,Morocco,IR Iran,0.0,1.0,2018,1.494,1.024,0.0321,0.2967,0.6712,home_win,away_win,Morocco,IR Iran,False,0.6712,historical-fold
+wc2018_6b546717d55c,2018-06-16,group_stage,Croatia,Nigeria,2.0,0.0,2018,1.463,1.114,0.1678,0.3317,0.5005,home_win,home_win,Croatia,Croatia,True,0.5005,historical-fold
+wc2018_801a7c2836ae,2018-06-16,group_stage,Argentina,Iceland,1.0,1.0,2018,1.836,0.271,0.0678,0.0181,0.9141,home_win,draw,Argentina,Draw,False,0.9141,historical-fold
+wc2018_da645f17d301,2018-06-16,group_stage,Peru,Denmark,0.0,1.0,2018,1.014,0.983,0.1874,0.3612,0.4514,home_win,away_win,Peru,Denmark,False,0.4514,historical-fold
+wc2018_dd1e79effa1d,2018-06-16,group_stage,France,Australia,2.0,1.0,2018,2.305,0.386,0.0363,0.0768,0.8869,home_win,home_win,France,France,True,0.8869,historical-fold
+wc2018_2b0338e159fb,2018-06-17,group_stage,Brazil,Switzerland,1.0,1.0,2018,0.829,0.782,0.1731,0.3732,0.4537,home_win,draw,Brazil,Draw,False,0.4537,historical-fold
+wc2018_604ed39b5ae3,2018-06-17,group_stage,Germany,Mexico,0.0,1.0,2018,1.189,0.643,0.0984,0.1981,0.7035,home_win,away_win,Germany,Mexico,False,0.7035,historical-fold
+wc2018_8d2e5a18ac30,2018-06-17,group_stage,Costa Rica,Serbia,0.0,1.0,2018,1.489,0.866,0.1279,0.2424,0.6298,home_win,away_win,Costa Rica,Serbia,False,0.6298,historical-fold
+wc2018_0b9c36b8d6b8,2018-06-18,group_stage,Tunisia,England,1.0,2.0,2018,0.362,1.403,0.5218,0.436,0.0422,away_win,away_win,England,England,True,0.5218,historical-fold
+wc2018_3397c997951f,2018-06-18,group_stage,Belgium,Panama,3.0,0.0,2018,2.091,0.53,0.0668,0.0885,0.8447,home_win,home_win,Belgium,Belgium,True,0.8447,historical-fold
+wc2018_b9fa0e36ecbb,2018-06-18,group_stage,Sweden,South Korea,1.0,0.0,2018,1.363,0.811,0.1729,0.3901,0.437,home_win,home_win,Sweden,Sweden,True,0.437,historical-fold
+wc2018_3127ac89f7a0,2018-06-19,group_stage,Poland,Senegal,1.0,2.0,2018,1.097,0.838,0.3194,0.2744,0.4062,home_win,away_win,Poland,Senegal,False,0.4062,historical-fold
+wc2018_9ae6cc313575,2018-06-19,group_stage,Russia,Egypt,3.0,1.0,2018,1.656,0.644,0.102,0.2234,0.6746,home_win,home_win,Russia,Russia,True,0.6746,historical-fold
+wc2018_e3a7d982f7d5,2018-06-19,group_stage,Colombia,Japan,1.0,2.0,2018,1.491,0.852,0.0774,0.5271,0.3954,draw,away_win,Draw,Japan,False,0.5271,historical-fold
+wc2018_a8d2ae034cdd,2018-06-20,group_stage,IR Iran,Spain,0.0,1.0,2018,0.606,2.218,0.9242,0.063,0.0128,away_win,away_win,Spain,Spain,True,0.9242,historical-fold
+wc2018_ad75560803ec,2018-06-20,group_stage,Uruguay,Saudi Arabia,1.0,0.0,2018,1.772,0.589,0.0245,0.3357,0.6399,home_win,home_win,Uruguay,Uruguay,True,0.6399,historical-fold
+wc2018_ea72edf6bf02,2018-06-20,group_stage,Portugal,Morocco,1.0,0.0,2018,2.013,0.934,0.0975,0.196,0.7065,home_win,home_win,Portugal,Portugal,True,0.7065,historical-fold
+wc2018_249dceb55b9a,2018-06-21,group_stage,France,Peru,1.0,0.0,2018,1.985,0.336,0.0665,0.0326,0.901,home_win,home_win,France,France,True,0.901,historical-fold
+wc2018_6b3d5de8b227,2018-06-21,group_stage,Denmark,Australia,1.0,1.0,2018,1.884,0.785,0.0343,0.2314,0.7343,home_win,draw,Denmark,Draw,False,0.7343,historical-fold
+wc2018_895903a177d8,2018-06-21,group_stage,Argentina,Croatia,0.0,3.0,2018,1.401,0.477,0.0924,0.0082,0.8994,home_win,away_win,Argentina,Croatia,False,0.8994,historical-fold
+wc2018_29f1b9870123,2018-06-22,group_stage,Nigeria,Iceland,2.0,0.0,2018,1.286,1.119,0.1267,0.653,0.2203,draw,home_win,Draw,Nigeria,False,0.653,historical-fold
+wc2018_79b4e682a25d,2018-06-22,group_stage,Serbia,Switzerland,1.0,2.0,2018,0.925,1.925,0.6129,0.3386,0.0485,away_win,away_win,Switzerland,Switzerland,True,0.6129,historical-fold
+wc2018_7dd0400251ae,2018-06-22,group_stage,Brazil,Costa Rica,2.0,0.0,2018,1.705,0.523,0.023,0.1162,0.8608,home_win,home_win,Brazil,Brazil,True,0.8608,historical-fold
+wc2018_6e8da19dc600,2018-06-23,group_stage,South Korea,Mexico,1.0,2.0,2018,0.681,2.148,0.7422,0.1737,0.0841,away_win,away_win,Mexico,Mexico,True,0.7422,historical-fold
+wc2018_7f747593a6a6,2018-06-23,group_stage,Germany,Sweden,2.0,1.0,2018,1.128,0.559,0.1018,0.1441,0.7542,home_win,home_win,Germany,Germany,True,0.7542,historical-fold
+wc2018_ce7db04c578d,2018-06-23,group_stage,Belgium,Tunisia,5.0,2.0,2018,1.918,0.614,0.0249,0.3489,0.6262,home_win,home_win,Belgium,Belgium,True,0.6262,historical-fold
+wc2018_2901be472d74,2018-06-24,group_stage,Japan,Senegal,2.0,2.0,2018,1.045,1.243,0.5517,0.182,0.2663,away_win,draw,Senegal,Draw,False,0.5517,historical-fold
+wc2018_67df9e9a5182,2018-06-24,group_stage,England,Panama,6.0,1.0,2018,1.461,0.644,0.0351,0.0814,0.8835,home_win,home_win,England,England,True,0.8835,historical-fold
+wc2018_d8f98c9e8c3d,2018-06-24,group_stage,Poland,Colombia,0.0,3.0,2018,0.922,1.058,0.2705,0.336,0.3935,home_win,away_win,Poland,Colombia,False,0.3935,historical-fold
+wc2018_34427c6e93e9,2018-06-25,group_stage,IR Iran,Portugal,1.0,1.0,2018,0.822,1.614,0.5501,0.3663,0.0835,away_win,draw,Portugal,Draw,False,0.5501,historical-fold
+wc2018_77ca8fa72b69,2018-06-25,group_stage,Saudi Arabia,Egypt,2.0,1.0,2018,0.928,1.307,0.5808,0.2978,0.1214,away_win,home_win,Egypt,Saudi Arabia,False,0.5808,historical-fold
+wc2018_82a86e33d39b,2018-06-25,group_stage,Uruguay,Russia,3.0,0.0,2018,1.079,0.869,0.2355,0.2011,0.5634,home_win,home_win,Uruguay,Uruguay,True,0.5634,historical-fold
+wc2018_e0862628f94b,2018-06-25,group_stage,Spain,Morocco,2.0,2.0,2018,1.729,0.676,0.1155,0.0384,0.8461,home_win,draw,Spain,Draw,False,0.8461,historical-fold
+wc2018_140e7bf6b347,2018-06-26,group_stage,Nigeria,Argentina,1.0,2.0,2018,0.714,1.534,0.4932,0.478,0.0288,away_win,away_win,Argentina,Argentina,True,0.4932,historical-fold
+wc2018_1b3aca3c0848,2018-06-26,group_stage,Australia,Peru,0.0,2.0,2018,1.17,1.061,0.3351,0.4029,0.262,draw,away_win,Draw,Peru,False,0.4029,historical-fold
+wc2018_96952f64dde1,2018-06-26,group_stage,Denmark,France,0.0,0.0,2018,0.302,1.227,0.4158,0.5626,0.0215,draw,draw,Draw,Draw,True,0.5626,historical-fold
+wc2018_dbee304353c9,2018-06-26,group_stage,Iceland,Croatia,1.0,2.0,2018,0.916,1.251,0.7237,0.0651,0.2112,away_win,away_win,Croatia,Croatia,True,0.7237,historical-fold
+wc2018_87593c6cf3a5,2018-06-27,group_stage,South Korea,Germany,2.0,0.0,2018,0.548,1.206,0.6012,0.2087,0.19,away_win,home_win,Germany,South Korea,False,0.6012,historical-fold
+wc2018_c462acb1eb95,2018-06-27,group_stage,Switzerland,Costa Rica,2.0,2.0,2018,1.181,0.71,0.0696,0.6844,0.246,draw,draw,Draw,Draw,True,0.6844,historical-fold
+wc2018_dfbc321a0dda,2018-06-27,group_stage,Serbia,Brazil,0.0,2.0,2018,0.745,2.481,0.8306,0.1455,0.024,away_win,away_win,Brazil,Brazil,True,0.8306,historical-fold
+wc2018_e45594d9c2c3,2018-06-27,group_stage,Mexico,Sweden,0.0,3.0,2018,0.858,1.167,0.3414,0.5143,0.1443,draw,away_win,Draw,Sweden,False,0.5143,historical-fold
+wc2018_2127e747c840,2018-06-28,group_stage,Japan,Poland,0.0,1.0,2018,0.843,0.934,0.7448,0.1537,0.1015,away_win,away_win,Poland,Poland,True,0.7448,historical-fold
+wc2018_3686a3908f94,2018-06-28,group_stage,England,Belgium,0.0,1.0,2018,0.709,0.765,0.3297,0.3919,0.2784,draw,away_win,Draw,Belgium,False,0.3919,historical-fold
+wc2018_73e9b3e6e5e2,2018-06-28,group_stage,Senegal,Colombia,0.0,1.0,2018,1.132,1.356,0.6173,0.2699,0.1129,away_win,away_win,Colombia,Colombia,True,0.6173,historical-fold
+wc2018_f589eb2fcb92,2018-06-28,group_stage,Panama,Tunisia,1.0,2.0,2018,1.063,0.828,0.3052,0.0727,0.6221,home_win,away_win,Panama,Tunisia,False,0.6221,historical-fold
+wc2018_1e271e9bd6c5,2018-06-30,round_of_16,Uruguay,Portugal,2.0,1.0,2018,1.093,0.821,0.1425,0.202,0.6555,home_win,home_win,Uruguay,Uruguay,True,0.6555,historical-fold
+wc2018_5e7e46424ebd,2018-06-30,round_of_16,France,Argentina,4.0,3.0,2018,0.896,0.733,0.3473,0.3684,0.2844,draw,home_win,Draw,France,False,0.3684,historical-fold
+wc2018_431e3f06eff9,2018-07-01,round_of_16,Spain,Russia,1.0,1.0,2018,1.881,0.623,0.2116,0.0244,0.7639,home_win,draw,Spain,Draw,False,0.7639,historical-fold
+wc2018_d371d0c84a6c,2018-07-01,round_of_16,Croatia,Denmark,1.0,1.0,2018,1.592,0.736,0.0698,0.1634,0.7667,home_win,draw,Croatia,Draw,False,0.7667,historical-fold
+wc2018_084a73093966,2018-07-02,round_of_16,Brazil,Mexico,2.0,0.0,2018,0.836,0.789,0.1142,0.5086,0.3773,draw,home_win,Draw,Brazil,False,0.5086,historical-fold
+wc2018_55e614cdf725,2018-07-02,round_of_16,Belgium,Japan,3.0,2.0,2018,1.592,0.908,0.072,0.2992,0.6288,home_win,home_win,Belgium,Belgium,True,0.6288,historical-fold
+wc2018_2a09d33a81ba,2018-07-03,round_of_16,Sweden,Switzerland,1.0,0.0,2018,1.206,1.215,0.6083,0.2093,0.1824,away_win,home_win,Switzerland,Sweden,False,0.6083,historical-fold
+wc2018_efd812b678cf,2018-07-03,round_of_16,Colombia,England,1.0,1.0,2018,1.08,0.943,0.3189,0.2389,0.4422,home_win,draw,Colombia,Draw,False,0.4422,historical-fold
+wc2018_1290a6375f4b,2018-07-06,quarter_final,Brazil,Belgium,1.0,2.0,2018,0.857,1.012,0.1869,0.4368,0.3763,draw,away_win,Draw,Belgium,False,0.4368,historical-fold
+wc2018_95b46b1d8cde,2018-07-06,quarter_final,Uruguay,France,0.0,2.0,2018,0.757,1.136,0.1926,0.693,0.1144,draw,away_win,Draw,France,False,0.693,historical-fold
+wc2018_a51ea79d6ffc,2018-07-07,quarter_final,Sweden,England,0.0,2.0,2018,1.354,1.409,0.4509,0.302,0.2471,away_win,away_win,England,England,True,0.4509,historical-fold
+wc2018_e60389304614,2018-07-07,quarter_final,Russia,Croatia,2.0,2.0,2018,1.164,1.123,0.2329,0.1342,0.6329,home_win,draw,Russia,Draw,False,0.6329,historical-fold
+wc2018_b23ed39310f5,2018-07-10,semi_final,France,Belgium,1.0,0.0,2018,1.236,0.904,0.2059,0.2796,0.5145,home_win,home_win,France,France,True,0.5145,historical-fold
+wc2018_c372d6a05d42,2018-07-11,semi_final,Croatia,England,2.0,1.0,2018,0.614,1.154,0.5413,0.1617,0.297,away_win,home_win,England,Croatia,False,0.5413,historical-fold
+wc2018_6ad05bb584d8,2018-07-14,third_place,Belgium,England,2.0,0.0,2018,1.514,1.099,0.4272,0.3034,0.2693,away_win,home_win,England,Belgium,False,0.4272,historical-fold
+wc2018_c5b62c3e6622,2018-07-15,final,France,Croatia,4.0,2.0,2018,1.733,0.896,0.1115,0.0204,0.8681,home_win,home_win,France,France,True,0.8681,historical-fold
+wc2022_9df2a50d171b,2022-11-20,group_stage,Qatar,Ecuador,0.0,2.0,2022,1.081,0.805,0.1597,0.0991,0.7413,home_win,away_win,Qatar,Ecuador,False,0.7413,historical-fold
+wc2022_171cdf9a4cc4,2022-11-21,group_stage,Senegal,Netherlands,0.0,2.0,2022,0.777,1.502,0.7887,0.1845,0.0267,away_win,away_win,Netherlands,Netherlands,True,0.7887,historical-fold
+wc2022_db1243fdfa3a,2022-11-21,group_stage,USA,Wales,1.0,1.0,2022,1.465,0.858,0.1434,0.1119,0.7448,home_win,draw,USA,Draw,False,0.7448,historical-fold
+wc2022_f7327e1dc535,2022-11-21,group_stage,England,IR Iran,6.0,2.0,2022,1.866,0.453,0.0102,0.0937,0.8961,home_win,home_win,England,England,True,0.8961,historical-fold
+wc2022_5eb0118089e0,2022-11-22,group_stage,France,Australia,4.0,1.0,2022,1.734,0.42,0.0255,0.0308,0.9436,home_win,home_win,France,France,True,0.9436,historical-fold
+wc2022_9b11bd63dae3,2022-11-22,group_stage,Argentina,Saudi Arabia,1.0,2.0,2022,1.857,0.425,0.0272,0.1114,0.8614,home_win,away_win,Argentina,Saudi Arabia,False,0.8614,historical-fold
+wc2022_b17a8b0f60ac,2022-11-22,group_stage,Denmark,Tunisia,0.0,0.0,2022,1.883,0.773,0.1234,0.2555,0.6211,home_win,draw,Denmark,Draw,False,0.6211,historical-fold
+wc2022_b36d270cdb3c,2022-11-22,group_stage,Mexico,Poland,0.0,0.0,2022,0.684,0.936,0.3146,0.3694,0.316,draw,draw,Draw,Draw,True,0.3694,historical-fold
+wc2022_1473afeb6794,2022-11-23,group_stage,Spain,Costa Rica,7.0,0.0,2022,1.719,0.752,0.0549,0.1094,0.8356,home_win,home_win,Spain,Spain,True,0.8356,historical-fold
+wc2022_15b1ff12e420,2022-11-23,group_stage,Belgium,Canada,1.0,0.0,2022,2.917,0.403,0.0159,0.0414,0.9427,home_win,home_win,Belgium,Belgium,True,0.9427,historical-fold
+wc2022_9245ef03134e,2022-11-23,group_stage,Morocco,Croatia,0.0,0.0,2022,1.052,1.272,0.625,0.2239,0.1511,away_win,draw,Croatia,Draw,False,0.625,historical-fold
+wc2022_eb4d17a38484,2022-11-23,group_stage,Germany,Japan,1.0,2.0,2022,1.643,0.715,0.0783,0.2964,0.6254,home_win,away_win,Germany,Japan,False,0.6254,historical-fold
+wc2022_026374d5796c,2022-11-24,group_stage,Brazil,Serbia,2.0,0.0,2022,1.883,0.588,0.0782,0.1066,0.8152,home_win,home_win,Brazil,Brazil,True,0.8152,historical-fold
+wc2022_709191095cb8,2022-11-24,group_stage,Portugal,Ghana,3.0,2.0,2022,2.093,0.833,0.0211,0.0376,0.9413,home_win,home_win,Portugal,Portugal,True,0.9413,historical-fold
+wc2022_bddd50017ce6,2022-11-24,group_stage,Uruguay,South Korea,0.0,0.0,2022,1.19,0.961,0.1807,0.5764,0.2429,draw,draw,Draw,Draw,True,0.5764,historical-fold
+wc2022_ceb732590ab7,2022-11-24,group_stage,Switzerland,Cameroon,1.0,0.0,2022,1.487,0.592,0.0491,0.2555,0.6954,home_win,home_win,Switzerland,Switzerland,True,0.6954,historical-fold
+wc2022_8b11c9dbbc5c,2022-11-25,group_stage,Wales,IR Iran,0.0,2.0,2022,0.876,1.12,0.3774,0.4666,0.156,draw,away_win,Draw,IR Iran,False,0.4666,historical-fold
+wc2022_93a40a9e4529,2022-11-25,group_stage,Netherlands,Ecuador,1.0,1.0,2022,1.543,0.613,0.0554,0.0202,0.9244,home_win,draw,Netherlands,Draw,False,0.9244,historical-fold
+wc2022_e8039bd0eef2,2022-11-25,group_stage,England,USA,0.0,0.0,2022,1.025,0.739,0.1394,0.4753,0.3853,draw,draw,Draw,Draw,True,0.4753,historical-fold
+wc2022_ed90d0f49c95,2022-11-25,group_stage,Qatar,Senegal,1.0,3.0,2022,1.157,0.763,0.1942,0.1682,0.6376,home_win,away_win,Qatar,Senegal,False,0.6376,historical-fold
+wc2022_5fd5dd5aafbd,2022-11-26,group_stage,Argentina,Mexico,2.0,0.0,2022,1.21,0.899,0.0591,0.1916,0.7493,home_win,home_win,Argentina,Argentina,True,0.7493,historical-fold
+wc2022_8ac57aaa5311,2022-11-26,group_stage,Tunisia,Australia,0.0,1.0,2022,0.901,1.223,0.5193,0.1847,0.296,away_win,away_win,Australia,Australia,True,0.5193,historical-fold
+wc2022_9a41c55167a3,2022-11-26,group_stage,Poland,Saudi Arabia,2.0,0.0,2022,1.483,1.18,0.2531,0.4557,0.2912,draw,home_win,Draw,Poland,False,0.4557,historical-fold
+wc2022_e000ef330baf,2022-11-26,group_stage,France,Denmark,2.0,1.0,2022,1.602,0.644,0.1164,0.0601,0.8235,home_win,home_win,France,France,True,0.8235,historical-fold
+wc2022_36cada62c3a8,2022-11-27,group_stage,Belgium,Morocco,0.0,2.0,2022,1.365,0.892,0.0702,0.0635,0.8663,home_win,away_win,Belgium,Morocco,False,0.8663,historical-fold
+wc2022_49176a71cc7c,2022-11-27,group_stage,Spain,Germany,1.0,1.0,2022,0.808,1.791,0.7559,0.1707,0.0734,away_win,draw,Germany,Draw,False,0.7559,historical-fold
+wc2022_9d4f22d77cf1,2022-11-27,group_stage,Croatia,Canada,4.0,1.0,2022,2.426,0.622,0.0719,0.1214,0.8066,home_win,home_win,Croatia,Croatia,True,0.8066,historical-fold
+wc2022_d41db6967974,2022-11-27,group_stage,Japan,Costa Rica,0.0,1.0,2022,0.836,0.885,0.3257,0.4557,0.2186,draw,away_win,Draw,Costa Rica,False,0.4557,historical-fold
+wc2022_59bfc1fa7c16,2022-11-28,group_stage,Brazil,Switzerland,1.0,0.0,2022,1.541,0.809,0.088,0.1224,0.7895,home_win,home_win,Brazil,Brazil,True,0.7895,historical-fold
+wc2022_83fcc807f4cc,2022-11-28,group_stage,Portugal,Uruguay,2.0,0.0,2022,0.966,1.231,0.535,0.2546,0.2104,away_win,home_win,Uruguay,Portugal,False,0.535,historical-fold
+wc2022_8fb4ce287930,2022-11-28,group_stage,South Korea,Ghana,2.0,3.0,2022,0.95,1.469,0.4541,0.1129,0.4329,away_win,away_win,Ghana,Ghana,True,0.4541,historical-fold
+wc2022_9729b370b82a,2022-11-28,group_stage,Cameroon,Serbia,3.0,3.0,2022,1.068,1.389,0.2716,0.3213,0.4072,home_win,draw,Cameroon,Draw,False,0.4072,historical-fold
+wc2022_118926676262,2022-11-29,group_stage,Netherlands,Qatar,2.0,0.0,2022,1.588,0.561,0.1692,0.0163,0.8145,home_win,home_win,Netherlands,Netherlands,True,0.8145,historical-fold
+wc2022_15b76e1515a9,2022-11-29,group_stage,Ecuador,Senegal,1.0,2.0,2022,1.36,1.321,0.4596,0.2665,0.2739,away_win,away_win,Senegal,Senegal,True,0.4596,historical-fold
+wc2022_339a3c336f2b,2022-11-29,group_stage,IR Iran,USA,0.0,1.0,2022,0.867,1.561,0.5743,0.4107,0.0149,away_win,away_win,USA,USA,True,0.5743,historical-fold
+wc2022_46dd2e7e1ba9,2022-11-29,group_stage,Wales,England,0.0,3.0,2022,0.493,1.453,0.9154,0.0772,0.0074,away_win,away_win,England,England,True,0.9154,historical-fold
+wc2022_c4d7113ece83,2022-11-30,group_stage,Tunisia,France,1.0,0.0,2022,0.475,1.212,0.8408,0.1352,0.024,away_win,home_win,France,Tunisia,False,0.8408,historical-fold
+wc2022_cdf5210902bc,2022-11-30,group_stage,Poland,Argentina,0.0,2.0,2022,0.677,1.803,0.8968,0.0915,0.0117,away_win,away_win,Argentina,Argentina,True,0.8968,historical-fold
+wc2022_dc6d4b75eb2e,2022-11-30,group_stage,Australia,Denmark,1.0,0.0,2022,0.785,1.054,0.3726,0.3284,0.2989,away_win,home_win,Denmark,Australia,False,0.3726,historical-fold
+wc2022_e0c17291b22a,2022-11-30,group_stage,Saudi Arabia,Mexico,1.0,2.0,2022,0.396,1.794,0.9079,0.0659,0.0262,away_win,away_win,Mexico,Mexico,True,0.9079,historical-fold
+wc2022_0a48eff04cfe,2022-12-01,group_stage,Costa Rica,Germany,2.0,4.0,2022,1.163,2.032,0.9432,0.0382,0.0186,away_win,away_win,Germany,Germany,True,0.9432,historical-fold
+wc2022_0c2cdef78f38,2022-12-01,group_stage,Croatia,Belgium,0.0,0.0,2022,0.779,1.355,0.6074,0.278,0.1146,away_win,draw,Belgium,Draw,False,0.6074,historical-fold
+wc2022_12b95205edc7,2022-12-01,group_stage,Japan,Spain,2.0,1.0,2022,0.499,1.5,0.8199,0.1609,0.0191,away_win,home_win,Spain,Japan,False,0.8199,historical-fold
+wc2022_8b5377552f2b,2022-12-01,group_stage,Canada,Morocco,1.0,2.0,2022,1.188,1.526,0.4994,0.2794,0.2212,away_win,away_win,Morocco,Morocco,True,0.4994,historical-fold
+wc2022_349e3fc43f75,2022-12-02,group_stage,Ghana,Uruguay,0.0,2.0,2022,0.399,1.107,0.853,0.1202,0.0267,away_win,away_win,Uruguay,Uruguay,True,0.853,historical-fold
+wc2022_54aaae68d05f,2022-12-02,group_stage,Serbia,Switzerland,2.0,3.0,2022,0.756,1.961,0.6453,0.2946,0.0602,away_win,away_win,Switzerland,Switzerland,True,0.6453,historical-fold
+wc2022_e4c8d7896838,2022-12-02,group_stage,Cameroon,Brazil,1.0,0.0,2022,0.855,2.137,0.859,0.0636,0.0774,away_win,home_win,Brazil,Cameroon,False,0.859,historical-fold
+wc2022_fe28c74852f5,2022-12-02,group_stage,South Korea,Portugal,2.0,1.0,2022,0.729,1.382,0.4657,0.3007,0.2336,away_win,home_win,Portugal,South Korea,False,0.4657,historical-fold
+wc2022_71b5c755b86b,2022-12-03,round_of_16,Argentina,Australia,2.0,1.0,2022,2.119,0.578,0.0209,0.0639,0.9151,home_win,home_win,Argentina,Argentina,True,0.9151,historical-fold
+wc2022_c905ab26ab99,2022-12-03,round_of_16,Netherlands,USA,3.0,1.0,2022,1.678,0.809,0.1216,0.0861,0.7923,home_win,home_win,Netherlands,Netherlands,True,0.7923,historical-fold
+wc2022_1ab2ad5c5d62,2022-12-04,round_of_16,France,Poland,3.0,1.0,2022,1.33,0.433,0.1061,0.3043,0.5895,home_win,home_win,France,France,True,0.5895,historical-fold
+wc2022_2b238eea02fc,2022-12-04,round_of_16,England,Senegal,3.0,0.0,2022,1.728,0.675,0.1055,0.1337,0.7608,home_win,home_win,England,England,True,0.7608,historical-fold
+wc2022_59643eef5464,2022-12-05,round_of_16,Brazil,South Korea,4.0,1.0,2022,1.788,0.499,0.1259,0.1545,0.7196,home_win,home_win,Brazil,Brazil,True,0.7196,historical-fold
+wc2022_fa903556e958,2022-12-05,round_of_16,Japan,Croatia,1.0,1.0,2022,0.889,1.451,0.5758,0.2552,0.1689,away_win,draw,Croatia,Draw,False,0.5758,historical-fold
+wc2022_4b14ac407655,2022-12-06,round_of_16,Portugal,Switzerland,6.0,1.0,2022,1.491,1.179,0.1963,0.0877,0.7159,home_win,home_win,Portugal,Portugal,True,0.7159,historical-fold
+wc2022_77f703742a8a,2022-12-06,round_of_16,Morocco,Spain,0.0,0.0,2022,0.56,1.371,0.8949,0.0879,0.0172,away_win,draw,Spain,Draw,False,0.8949,historical-fold
+wc2022_306ee9eab9c9,2022-12-09,quarter_final,Netherlands,Argentina,2.0,2.0,2022,1.291,1.303,0.3678,0.1212,0.511,home_win,draw,Netherlands,Draw,False,0.511,historical-fold
+wc2022_d95e5141b655,2022-12-09,quarter_final,Croatia,Brazil,1.0,1.0,2022,0.787,1.56,0.7222,0.1486,0.1292,away_win,draw,Brazil,Draw,False,0.7222,historical-fold
+wc2022_97bc6d21722f,2022-12-10,quarter_final,Morocco,Portugal,1.0,0.0,2022,0.909,1.327,0.469,0.4074,0.1236,away_win,home_win,Portugal,Morocco,False,0.469,historical-fold
+wc2022_c6623bb71730,2022-12-10,quarter_final,England,France,1.0,2.0,2022,0.807,0.963,0.3131,0.5831,0.1037,draw,away_win,Draw,France,False,0.5831,historical-fold
+wc2022_131a677fc8a6,2022-12-13,semi_final,Argentina,Croatia,3.0,0.0,2022,1.241,1.5,0.1999,0.0828,0.7172,home_win,home_win,Argentina,Argentina,True,0.7172,historical-fold
+wc2022_cc71859c1a59,2022-12-14,semi_final,France,Morocco,2.0,0.0,2022,1.793,0.662,0.0476,0.0669,0.8855,home_win,home_win,France,France,True,0.8855,historical-fold
+wc2022_ae0ff76e678f,2022-12-17,third_place,Croatia,Morocco,2.0,1.0,2022,1.934,0.761,0.0823,0.0273,0.8904,home_win,home_win,Croatia,Croatia,True,0.8904,historical-fold
+wc2022_95d17fcc6af2,2022-12-18,final,Argentina,France,3.0,3.0,2022,0.675,0.92,0.3866,0.5221,0.0913,draw,draw,Draw,Draw,True,0.5221,historical-fold

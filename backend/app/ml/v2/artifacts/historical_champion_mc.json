@@ -1,0 +1,494 @@
+{
+  "per_tournament": {
+    "2002": {
+      "year": 2002,
+      "n_sims": 20000,
+      "completed_sims": 20000,
+      "champion_probabilities": [
+        {
+          "team": "Brazil",
+          "p": 0.3591
+        },
+        {
+          "team": "Italy",
+          "p": 0.3529
+        },
+        {
+          "team": "Spain",
+          "p": 0.0635
+        },
+        {
+          "team": "England",
+          "p": 0.0619
+        },
+        {
+          "team": "Mexico",
+          "p": 0.045
+        },
+        {
+          "team": "Denmark",
+          "p": 0.0341
+        },
+        {
+          "team": "Sweden",
+          "p": 0.0296
+        },
+        {
+          "team": "Germany",
+          "p": 0.0275
+        },
+        {
+          "team": "Türkiye",
+          "p": 0.0098
+        },
+        {
+          "team": "Belgium",
+          "p": 0.0088
+        },
+        {
+          "team": "Senegal",
+          "p": 0.0029
+        },
+        {
+          "team": "Republic of Ireland",
+          "p": 0.0025
+        },
+        {
+          "team": "Paraguay",
+          "p": 0.0009
+        },
+        {
+          "team": "Japan",
+          "p": 0.0006
+        },
+        {
+          "team": "South Korea",
+          "p": 0.0004
+        },
+        {
+          "team": "USA",
+          "p": 0.0003
+        }
+      ],
+      "actual_champion": "Brazil",
+      "actual_champion_rank": 1,
+      "actual_champion_probability": 0.3591,
+      "actual_champion_in_top3": true,
+      "actual_champion_in_top5": true,
+      "brier_champion": 0.4108
+    },
+    "2006": {
+      "year": 2006,
+      "n_sims": 20000,
+      "completed_sims": 20000,
+      "champion_probabilities": [
+        {
+          "team": "Brazil",
+          "p": 0.3643
+        },
+        {
+          "team": "Italy",
+          "p": 0.2091
+        },
+        {
+          "team": "England",
+          "p": 0.0952
+        },
+        {
+          "team": "Argentina",
+          "p": 0.094
+        },
+        {
+          "team": "France",
+          "p": 0.0837
+        },
+        {
+          "team": "Spain",
+          "p": 0.0716
+        },
+        {
+          "team": "Netherlands",
+          "p": 0.0325
+        },
+        {
+          "team": "Mexico",
+          "p": 0.0181
+        },
+        {
+          "team": "Germany",
+          "p": 0.0113
+        },
+        {
+          "team": "Sweden",
+          "p": 0.0072
+        },
+        {
+          "team": "Portugal",
+          "p": 0.0066
+        },
+        {
+          "team": "Switzerland",
+          "p": 0.0039
+        },
+        {
+          "team": "Ukraine",
+          "p": 0.0008
+        },
+        {
+          "team": "Ghana",
+          "p": 0.0008
+        },
+        {
+          "team": "Australia",
+          "p": 0.0006
+        },
+        {
+          "team": "Ecuador",
+          "p": 0.0006
+        }
+      ],
+      "actual_champion": "Italy",
+      "actual_champion_rank": 2,
+      "actual_champion_probability": 0.2091,
+      "actual_champion_in_top3": true,
+      "actual_champion_in_top5": true,
+      "brier_champion": 0.6255
+    },
+    "2010": {
+      "year": 2010,
+      "n_sims": 20000,
+      "completed_sims": 20000,
+      "champion_probabilities": [
+        {
+          "team": "Brazil",
+          "p": 0.3494
+        },
+        {
+          "team": "Spain",
+          "p": 0.2264
+        },
+        {
+          "team": "Argentina",
+          "p": 0.1349
+        },
+        {
+          "team": "England",
+          "p": 0.1305
+        },
+        {
+          "team": "Germany",
+          "p": 0.0456
+        },
+        {
+          "team": "Netherlands",
+          "p": 0.041
+        },
+        {
+          "team": "Uruguay",
+          "p": 0.0233
+        },
+        {
+          "team": "USA",
+          "p": 0.0135
+        },
+        {
+          "team": "Mexico",
+          "p": 0.0123
+        },
+        {
+          "team": "Portugal",
+          "p": 0.0107
+        },
+        {
+          "team": "South Korea",
+          "p": 0.0054
+        },
+        {
+          "team": "Paraguay",
+          "p": 0.0024
+        },
+        {
+          "team": "Japan",
+          "p": 0.0016
+        },
+        {
+          "team": "Ghana",
+          "p": 0.0014
+        },
+        {
+          "team": "Chile",
+          "p": 0.001
+        },
+        {
+          "team": "Slovakia",
+          "p": 0.0006
+        }
+      ],
+      "actual_champion": "Spain",
+      "actual_champion_rank": 2,
+      "actual_champion_probability": 0.2264,
+      "actual_champion_in_top3": true,
+      "actual_champion_in_top5": true,
+      "brier_champion": 0.5985
+    },
+    "2014": {
+      "year": 2014,
+      "n_sims": 20000,
+      "completed_sims": 20000,
+      "champion_probabilities": [
+        {
+          "team": "Argentina",
+          "p": 0.4199
+        },
+        {
+          "team": "Netherlands",
+          "p": 0.1623
+        },
+        {
+          "team": "Germany",
+          "p": 0.1449
+        },
+        {
+          "team": "Brazil",
+          "p": 0.1287
+        },
+        {
+          "team": "France",
+          "p": 0.0478
+        },
+        {
+          "team": "Mexico",
+          "p": 0.0267
+        },
+        {
+          "team": "Uruguay",
+          "p": 0.0248
+        },
+        {
+          "team": "Belgium",
+          "p": 0.02
+        },
+        {
+          "team": "USA",
+          "p": 0.0123
+        },
+        {
+          "team": "Switzerland",
+          "p": 0.0101
+        },
+        {
+          "team": "Chile",
+          "p": 0.0009
+        },
+        {
+          "team": "Costa Rica",
+          "p": 0.0006
+        },
+        {
+          "team": "Nigeria",
+          "p": 0.0003
+        },
+        {
+          "team": "Greece",
+          "p": 0.0001
+        },
+        {
+          "team": "Colombia",
+          "p": 0.0001
+        },
+        {
+          "team": "Algeria",
+          "p": 0.0001
+        }
+      ],
+      "actual_champion": "Germany",
+      "actual_champion_rank": 3,
+      "actual_champion_probability": 0.1449,
+      "actual_champion_in_top3": true,
+      "actual_champion_in_top5": true,
+      "brier_champion": 0.7312
+    },
+    "2018": {
+      "year": 2018,
+      "n_sims": 20000,
+      "completed_sims": 20000,
+      "champion_probabilities": [
+        {
+          "team": "Spain",
+          "p": 0.2107
+        },
+        {
+          "team": "Brazil",
+          "p": 0.1927
+        },
+        {
+          "team": "England",
+          "p": 0.1037
+        },
+        {
+          "team": "Argentina",
+          "p": 0.1026
+        },
+        {
+          "team": "France",
+          "p": 0.0902
+        },
+        {
+          "team": "Switzerland",
+          "p": 0.0803
+        },
+        {
+          "team": "Belgium",
+          "p": 0.0488
+        },
+        {
+          "team": "Colombia",
+          "p": 0.0453
+        },
+        {
+          "team": "Uruguay",
+          "p": 0.0281
+        },
+        {
+          "team": "Mexico",
+          "p": 0.0269
+        },
+        {
+          "team": "Sweden",
+          "p": 0.0267
+        },
+        {
+          "team": "Croatia",
+          "p": 0.0242
+        },
+        {
+          "team": "Portugal",
+          "p": 0.0101
+        },
+        {
+          "team": "Russia",
+          "p": 0.0065
+        },
+        {
+          "team": "Denmark",
+          "p": 0.0027
+        },
+        {
+          "team": "Japan",
+          "p": 0.0006
+        }
+      ],
+      "actual_champion": "France",
+      "actual_champion_rank": 5,
+      "actual_champion_probability": 0.0902,
+      "actual_champion_in_top3": false,
+      "actual_champion_in_top5": true,
+      "brier_champion": 0.8277
+    },
+    "2022": {
+      "year": 2022,
+      "n_sims": 20000,
+      "completed_sims": 20000,
+      "champion_probabilities": [
+        {
+          "team": "France",
+          "p": 0.3465
+        },
+        {
+          "team": "Brazil",
+          "p": 0.2247
+        },
+        {
+          "team": "Spain",
+          "p": 0.1761
+        },
+        {
+          "team": "Netherlands",
+          "p": 0.0741
+        },
+        {
+          "team": "Argentina",
+          "p": 0.0728
+        },
+        {
+          "team": "England",
+          "p": 0.0456
+        },
+        {
+          "team": "Portugal",
+          "p": 0.0227
+        },
+        {
+          "team": "Croatia",
+          "p": 0.0214
+        },
+        {
+          "team": "Switzerland",
+          "p": 0.0086
+        },
+        {
+          "team": "Poland",
+          "p": 0.002
+        },
+        {
+          "team": "USA",
+          "p": 0.0015
+        },
+        {
+          "team": "Senegal",
+          "p": 0.0013
+        },
+        {
+          "team": "South Korea",
+          "p": 0.0012
+        },
+        {
+          "team": "Japan",
+          "p": 0.0008
+        },
+        {
+          "team": "Morocco",
+          "p": 0.0006
+        },
+        {
+          "team": "Australia",
+          "p": 0.0001
+        }
+      ],
+      "actual_champion": "Argentina",
+      "actual_champion_rank": 5,
+      "actual_champion_probability": 0.0728,
+      "actual_champion_in_top3": false,
+      "actual_champion_in_top5": true,
+      "brier_champion": 0.8597
+    }
+  },
+  "summary": {
+    "n_tournaments": 6,
+    "actual_champion_top3_rate": 0.6667,
+    "actual_champion_top5_rate": 1.0,
+    "mean_champion_brier": 0.6756
+  },
+  "convergence": {
+    "2010": {
+      "year": 2010,
+      "top_team_by_sim_count": {
+        "10000": "Brazil",
+        "50000": "Brazil",
+        "100000": "Brazil"
+      },
+      "max_probability_drift_last_two_counts": 0.0013,
+      "converged": true
+    },
+    "2022": {
+      "year": 2022,
+      "top_team_by_sim_count": {
+        "10000": "France",
+        "50000": "France",
+        "100000": "France"
+      },
+      "max_probability_drift_last_two_counts": 0.0013,
+      "converged": true
+    }
+  }
+}

@@ -1,0 +1,209 @@
+match_id,date,team,opponent,is_home,possession,sot,total_shots,saves,cards_yellow,cards_red,fouls,corners,crosses,interceptions,offsides,formation,manager,captain
+wc2026_d22c74e5343d,2026-06-11,Mexico,South Africa,True,61,4,16,2,1,1,12,3,12,8,1,4-1-4-1,Javier Aguirre,César Montes
+wc2026_d22c74e5343d,2026-06-11,South Africa,Mexico,False,40,2,3,2,2,2,11,1,8,7,1,5-3-2,Hugo Broos,Ronwen Williams
+wc2026_9029667b723b,2026-06-11,South Korea,Czechia,True,62,6,15,3,1,0,9,4,12,11,2,3-4-3,Hong Myung-bo,Son Heung-min
+wc2026_9029667b723b,2026-06-11,Czechia,South Korea,False,38,4,7,4,0,0,16,5,15,7,2,3-4-3,Miroslav Koubek,Ladislav Krejčí
+wc2026_618208e98ac4,2026-06-12,Canada,Bosnia and Herzegovina,True,61,4,13,2,2,0,10,9,24,4,1,4-2-2-2,Jesse Marsch,Stephen Eustáquio
+wc2026_618208e98ac4,2026-06-12,Bosnia and Herzegovina,Canada,False,39,3,8,1,3,0,20,4,10,10,0,4-2-2-2,Sergej Barbarez,Sead Kolašinac
+wc2026_974c02074c90,2026-06-12,USA,Paraguay,True,65,6,16,0,1,0,13,3,17,11,2,4-2-3-1,Mauricio Pochettino,Tim Ream
+wc2026_974c02074c90,2026-06-12,Paraguay,USA,False,35,1,9,3,5,0,17,1,5,9,1,4-2-2-2,Gustavo Alfaro,Gustavo Gómez
+wc2026_0573cac991ab,2026-06-13,Qatar,Switzerland,True,32,4,7,5,2,0,12,3,8,10,0,4-1-4-1,Julen Lopetegui,Boualem Khoukhi
+wc2026_0573cac991ab,2026-06-13,Switzerland,Qatar,False,68,7,26,3,1,0,11,10,35,7,1,4-2-3-1,Murat Yakin,Granit Xhaka
+wc2026_8df45225626e,2026-06-13,Brazil,Morocco,True,51,5,12,2,2,0,16,6,16,5,0,4-2-2-2,Carlo Ancelotti,Marquinhos
+wc2026_8df45225626e,2026-06-13,Morocco,Brazil,False,49,3,14,4,0,0,14,2,15,4,1,4-2-3-1,Mohamed Ouahbi,Achraf Hakimi
+wc2026_c6577ff073f4,2026-06-13,Australia,Türkiye,True,28,4,9,8,0,0,12,5,14,6,1,5-4-1,Tony Popovic,Harry Souttar
+wc2026_c6577ff073f4,2026-06-13,Türkiye,Australia,False,72,8,30,2,1,0,4,8,26,4,3,4-2-3-1,Vincenzo Montella,Hakan Çalhanoğlu
+wc2026_c75a835ae73b,2026-06-13,Haiti,Scotland,True,54,2,15,1,1,0,23,4,23,6,3,4-2-2-2,Sébastien Migné,Johny Placide
+wc2026_c75a835ae73b,2026-06-13,Scotland,Haiti,False,46,2,9,2,3,0,21,3,14,6,1,4-2-2-2,Steve Clarke,Andy Robertson
+wc2026_e2a5dcc199b9,2026-06-14,Germany,Curaçao,True,65,12,26,1,0,0,18,8,12,10,0,4-2-3-1,Julian Nagelsmann,Joshua Kimmich
+wc2026_e2a5dcc199b9,2026-06-14,Curaçao,Germany,False,35,2,8,4,0,0,11,1,7,16,1,4-3-1-2,Dick Advocaat,Leandro Bacuna
+wc2026_dfcafad34cf7,2026-06-14,Netherlands,Japan,True,60,6,10,1,3,0,7,5,21,7,1,4-1-4-1,Ronald Koeman,Virgil van Dijk
+wc2026_dfcafad34cf7,2026-06-14,Japan,Netherlands,False,40,3,10,4,0,0,7,4,23,4,0,3-4-3,Hajime Moriyasu,Ritsu Doan
+wc2026_c9987d16c231,2026-06-14,Côte d'Ivoire,Ecuador,True,48,4,15,1,3,0,10,3,7,11,,4-2-2-2,Emerse Faé,Franck Kessié
+wc2026_c9987d16c231,2026-06-14,Ecuador,Côte d'Ivoire,False,52,1,12,3,1,0,13,5,14,13,,4-2-2-2,Sebastián Becaccece,Enner Valencia
+wc2026_5da8904846e4,2026-06-14,Sweden,Tunisia,True,49,7,13,1,0,0,10,4,12,8,3,3-4-1-2,Graham Potter,Victor Lindelöf
+wc2026_5da8904846e4,2026-06-14,Tunisia,Sweden,False,51,2,6,1,1,0,8,2,13,5,6,5-3-2,Sabri Lamouchi,Ellyes Skhiri
+wc2026_229bd3da6469,2026-06-15,Belgium,Egypt,True,54,3,15,2,2,0,15,2,16,10,0,4-2-3-1,Rudi Garcia,Youri Tielemans
+wc2026_229bd3da6469,2026-06-15,Egypt,Belgium,False,46,3,14,3,2,0,15,7,13,12,1,4-2-3-1,Hossam Hassan,Mohamed Salah
+wc2026_27599b5d1194,2026-06-15,Spain,Cabo Verde,True,74,7,27,1,1,0,10,11,36,6,2,4-1-4-1,Luis de la Fuente,Rodri
+wc2026_27599b5d1194,2026-06-15,Cabo Verde,Spain,False,26,1,6,7,1,0,1,1,4,16,3,4-1-4-1,Bubista,Ryan Mendes
+wc2026_72853ad0c97d,2026-06-15,Saudi Arabia,Uruguay,True,33,3,7,9,1,0,11,4,7,7,0,4-2-2-2,Georgios Donis,Salem Al-Dawsari
+wc2026_72853ad0c97d,2026-06-15,Uruguay,Saudi Arabia,False,67,10,27,2,0,0,6,14,47,10,6,4-2-2-2,Marcelo Bielsa,Federico Valverde
+wc2026_78ee555dde7e,2026-06-15,IR Iran,New Zealand,True,48,4,17,6,1,0,10,4,19,11,2,4-2-2-2,Amir Ghalehnoy,Mehdi Taremi
+wc2026_78ee555dde7e,2026-06-15,New Zealand,IR Iran,False,52,8,14,2,0,0,8,1,12,13,0,4-2-3-1,Darren Bazeley,Chris Wood
+wc2026_a52808d09f64,2026-06-16,France,Senegal,True,54,8,11,2,0,0,5,6,9,7,1,4-2-3-1,Didier Deschamps,Kylian Mbappé
+wc2026_a52808d09f64,2026-06-16,Senegal,France,False,46,2,6,5,0,0,9,4,9,8,3,4-2-3-1,Pape Thiaw,Kalidou Koulibaly
+wc2026_dcf721fd692e,2026-06-16,Iraq,Norway,True,39,1,11,2,1,0,12,2,13,5,1,4-2-2-2,Graham Arnold,Jalal Hassan
+wc2026_dcf721fd692e,2026-06-16,Norway,Iraq,False,61,5,12,0,0,0,13,5,17,3,0,4-1-4-1,Ståle Solbakken,Martin Ødegaard
+wc2026_8ce9dfc1cb90,2026-06-16,Argentina,Algeria,True,48,6,10,0,0,0,13,2,5,12,3,4-2-2-2,Lionel Scaloni,Lionel Messi
+wc2026_8ce9dfc1cb90,2026-06-16,Algeria,Argentina,False,52,0,7,3,0,0,8,2,8,8,1,4-2-3-1,Vladimir Petković,Aïssa Mandi
+wc2026_1d5fd99b0d66,2026-06-16,Austria,Jordan,True,63,4,11,3,1,0,12,4,17,15,3,4-2-3-1,Ralf Rangnick,David Alaba
+wc2026_1d5fd99b0d66,2026-06-16,Jordan,Austria,False,37,4,11,1,0,0,7,3,15,12,1,5-4-1,Jamal Sellami,Ihsan Haddad
+wc2026_54f739eb0c7e,2026-06-17,Portugal,Congo DR,True,75,1,7,1,3,0,9,5,23,2,3,4-2-3-1,Roberto Martínez,Cristiano Ronaldo
+wc2026_54f739eb0c7e,2026-06-17,Congo DR,Portugal,False,25,2,8,0,1,0,10,4,9,5,2,5-3-2,Sébastien Desabre,Chancel Mbemba
+wc2026_76c62698d89a,2026-06-17,England,Croatia,True,52,11,22,3,0,0,10,8,13,7,0,4-2-3-1,Thomas Tuchel,Harry Kane
+wc2026_76c62698d89a,2026-06-17,Croatia,England,False,48,5,10,7,0,0,12,2,13,7,1,3-4-3,Zlatko Dalić,Luka Modrić
+wc2026_dbd71250d9a7,2026-06-17,Ghana,Panama,True,38,2,8,4,1,0,9,2,16,8,4,4-2-3-1,Carlos Queiroz,Jordan Ayew
+wc2026_dbd71250d9a7,2026-06-17,Panama,Ghana,False,62,4,11,2,2,0,11,2,21,5,1,3-4-3,Thomas Christiansen,Yoel Bárcenas
+wc2026_27c094527835,2026-06-17,Uzbekistan,Colombia,True,39,2,8,1,1,0,14,3,13,7,0,5-4-1,Fabio Cannavaro,Eldor Shomurodov
+wc2026_27c094527835,2026-06-17,Colombia,Uzbekistan,False,62,4,15,1,1,0,11,4,15,6,3,4-1-4-1,Néstor Lorenzo,James Rodríguez
+wc2026_f9f7cedf7f20,2026-06-18,Czechia,South Africa,True,38,3,14,3,1,0,12,5,16,9,2,5-3-2,Miroslav Koubek,Ladislav Krejčí
+wc2026_f9f7cedf7f20,2026-06-18,South Africa,Czechia,False,62,4,17,2,2,0,10,5,17,9,3,4-1-4-1,Hugo Broos,Ronwen Williams
+wc2026_2490485cb4f5,2026-06-18,Switzerland,Bosnia and Herzegovina,True,62,7,13,2,1,0,7,7,22,4,3,4-1-4-1,Murat Yakin,Granit Xhaka
+wc2026_2490485cb4f5,2026-06-18,Bosnia and Herzegovina,Switzerland,False,38,3,5,3,2,1,18,3,12,12,1,4-2-2-2,Sergej Barbarez,Edin Džeko
+wc2026_39963dbb6aee,2026-06-18,Canada,Qatar,True,79,10,32,0,1,0,9,19,55,6,1,4-2-2-2,Jesse Marsch,Stephen Eustáquio
+wc2026_39963dbb6aee,2026-06-18,Qatar,Canada,False,21,0,2,4,1,2,10,1,3,11,1,4-3-2-1,Julen Lopetegui,Boualem Khoukhi
+wc2026_f2db1221018a,2026-06-18,Mexico,South Korea,True,42,4,8,2,0,0,9,0,5,7,3,4-1-4-1,Javier Aguirre,Edson Álvarez
+wc2026_f2db1221018a,2026-06-18,South Korea,Mexico,False,58,2,9,3,2,0,7,2,9,5,6,3-4-3,Hong Myung-bo,Son Heung-min
+wc2026_01bc7217a313,2026-06-19,USA,Australia,True,62,2,10,2,3,0,12,7,14,21,1,3-5-2,Mauricio Pochettino,Tim Ream
+wc2026_01bc7217a313,2026-06-19,Australia,USA,False,38,2,5,1,4,0,16,4,19,7,0,5-4-1,Tony Popovic,Harry Souttar
+wc2026_7aae04f7242f,2026-06-19,Scotland,Morocco,True,41,0,6,1,1,0,11,2,13,9,1,4-1-4-1,Steve Clarke,Andy Robertson
+wc2026_7aae04f7242f,2026-06-19,Morocco,Scotland,False,59,2,12,0,1,0,8,5,10,5,0,4-2-3-1,Mohamed Ouahbi,Achraf Hakimi
+wc2026_713718e641b0,2026-06-19,Türkiye,Paraguay,True,79,5,32,1,2,0,14,12,42,6,2,4-2-3-1,Vincenzo Montella,Hakan Çalhanoğlu
+wc2026_713718e641b0,2026-06-19,Paraguay,Türkiye,False,22,2,7,5,1,1,15,0,6,9,3,4-2-2-2,Gustavo Alfaro,Gustavo Gómez
+wc2026_b2147c9330a0,2026-06-19,Brazil,Haiti,True,57,5,8,3,1,0,13,4,9,10,8,4-1-4-1,Carlo Ancelotti,Marquinhos
+wc2026_b2147c9330a0,2026-06-19,Haiti,Brazil,False,43,3,7,2,3,0,14,4,11,9,4,3-4-3,Sébastien Migné,Johny Placide
+wc2026_5612557b971d,2026-06-20,Netherlands,Sweden,True,51,7,10,7,0,0,9,2,15,8,3,4-1-4-1,Ronald Koeman,Virgil van Dijk
+wc2026_5612557b971d,2026-06-20,Sweden,Netherlands,False,49,8,16,2,3,0,12,5,21,6,3,3-1-4-2,Graham Potter,Victor Lindelöf
+wc2026_ed32d11435ea,2026-06-20,Germany,Côte d'Ivoire,True,59,7,16,1,0,0,5,8,21,7,0,4-2-3-1,Julian Nagelsmann,Joshua Kimmich
+wc2026_ed32d11435ea,2026-06-20,Côte d'Ivoire,Germany,False,41,2,9,5,0,0,7,3,9,13,1,4-1-4-1,Emerse Faé,Franck Kessié
+wc2026_0bd13e0fc12f,2026-06-20,Ecuador,Curaçao,True,75,15,27,3,1,0,7,9,32,7,1,3-1-4-2,Sebastián Becaccece,Enner Valencia
+wc2026_0bd13e0fc12f,2026-06-20,Curaçao,Ecuador,False,25,3,10,15,5,0,10,0,1,8,2,5-4-1,Dick Advocaat,Leandro Bacuna
+wc2026_bcc65405bb8a,2026-06-20,Tunisia,Japan,True,38,0,2,1,0,0,8,3,10,14,1,5-4-1,Hervé Renard,Ellyes Skhiri
+wc2026_bcc65405bb8a,2026-06-20,Japan,Tunisia,False,62,5,11,0,0,0,15,5,11,6,1,3-4-3,Hajime Moriyasu,Ko Itakura
+wc2026_c7436333a97c,2026-06-21,Spain,Saudi Arabia,True,67,8,22,1,0,0,10,6,25,16,2,4-1-4-1,Luis de la Fuente,Rodri
+wc2026_c7436333a97c,2026-06-21,Saudi Arabia,Spain,False,33,1,3,5,2,0,2,1,5,12,3,5-4-1,Georgios Donis,Salem Al-Dawsari
+wc2026_75463bf8d943,2026-06-21,Belgium,IR Iran,True,70,7,23,3,1,1,7,4,32,3,3,4-2-3-1,Rudi Garcia,Youri Tielemans
+wc2026_75463bf8d943,2026-06-21,IR Iran,Belgium,False,30,3,7,7,1,0,9,2,8,13,4,5-4-1,Amir Ghalehnoy,Ehsan Hajsafi
+wc2026_738cdfe7f666,2026-06-21,Uruguay,Cabo Verde,True,65,2,17,2,2,0,11,11,29,8,3,4-1-4-1,Marcelo Bielsa,Federico Valverde
+wc2026_738cdfe7f666,2026-06-21,Cabo Verde,Uruguay,False,35,4,12,0,2,0,4,4,7,13,0,4-1-4-1,Bubista,Ryan Mendes
+wc2026_c629a6928635,2026-06-21,New Zealand,Egypt,True,44,5,11,4,2,0,14,4,15,5,3,4-2-3-1,Darren Bazeley,Chris Wood
+wc2026_c629a6928635,2026-06-21,Egypt,New Zealand,False,56,7,19,4,1,0,8,3,22,7,0,4-2-2-2,Hossam Hassan,Mohamed Salah
+wc2026_c292176cc683,2026-06-22,Argentina,Austria,True,54,5,12,1,2,0,13,1,4,8,2,4-2-2-2,Lionel Scaloni,Lionel Messi
+wc2026_c292176cc683,2026-06-22,Austria,Argentina,False,46,1,6,2,2,0,13,3,16,9,0,4-2-3-1,Ralf Rangnick,David Alaba
+wc2026_4dba1871c76b,2026-06-22,France,Iraq,True,56,5,19,0,0,0,8,4,14,5,1,4-2-3-1,Didier Deschamps,Kylian Mbappé
+wc2026_4dba1871c76b,2026-06-22,Iraq,France,False,45,0,4,2,1,0,4,2,9,11,0,4-1-4-1,Graham Arnold,Ayman Hussein
+wc2026_4c817770c739,2026-06-22,Norway,Senegal,True,42,7,13,2,0,0,13,5,10,8,0,4-1-4-1,Ståle Solbakken,Martin Ødegaard
+wc2026_4c817770c739,2026-06-22,Senegal,Norway,False,58,4,16,3,0,0,5,4,23,10,4,4-2-3-1,Pape Thiaw,Kalidou Koulibaly
+wc2026_9530b85a9db9,2026-06-22,Jordan,Algeria,True,28,4,8,6,1,0,11,1,5,2,1,5-4-1,Jamal Sellami,Ihsan Haddad
+wc2026_9530b85a9db9,2026-06-22,Algeria,Jordan,False,72,8,17,3,1,0,6,10,21,10,0,4-2-3-1,Vladimir Petković,Riyad Mahrez
+wc2026_1f7416d8bdc6,2026-06-23,Portugal,Uzbekistan,True,66,9,17,2,1,0,14,3,22,5,2,4-2-3-1,Roberto Martínez,Cristiano Ronaldo
+wc2026_1f7416d8bdc6,2026-06-23,Uzbekistan,Portugal,False,34,2,7,4,1,0,15,2,8,14,2,5-4-1,Fabio Cannavaro,Eldor Shomurodov
+wc2026_2163119e93ac,2026-06-23,England,Ghana,True,79,3,19,0,1,0,14,9,30,1,2,4-2-3-1,Thomas Tuchel,Harry Kane
+wc2026_2163119e93ac,2026-06-23,Ghana,England,False,21,1,2,3,1,0,24,2,5,8,2,4-1-4-1,Carlos Queiroz,Jordan Ayew
+wc2026_f19637cd8eb0,2026-06-23,Panama,Croatia,True,42,1,8,1,1,0,19,7,29,4,1,5-4-1,Thomas Christiansen,Yoel Bárcenas
+wc2026_f19637cd8eb0,2026-06-23,Croatia,Panama,False,58,2,6,1,1,0,12,2,17,5,2,4-2-3-1,Zlatko Dalić,Luka Modrić
+wc2026_e85e7c1e279e,2026-06-23,Colombia,Congo DR,True,64,9,20,1,2,0,12,5,12,10,7,4-1-4-1,Néstor Lorenzo,James Rodríguez
+wc2026_e85e7c1e279e,2026-06-23,Congo DR,Colombia,False,37,1,7,8,1,0,16,4,14,7,0,5-3-2,Sébastien Desabre,Chancel Mbemba
+wc2026_8d92bdfa9b4a,2026-06-24,Switzerland,Canada,True,55,4,6,6,1,0,19,2,6,5,1,4-2-2-2,Murat Yakin,Granit Xhaka
+wc2026_8d92bdfa9b4a,2026-06-24,Canada,Switzerland,False,45,7,13,2,2,0,13,7,26,13,3,4-2-2-2,Jesse Marsch,Jonathan David
+wc2026_edd15886bd2c,2026-06-24,Bosnia and Herzegovina,Qatar,True,55,5,14,2,1,0,9,5,22,4,1,4-2-2-2,Sergej Barbarez,Edin Džeko
+wc2026_edd15886bd2c,2026-06-24,Qatar,Bosnia and Herzegovina,False,46,3,9,3,1,0,14,5,17,4,3,4-3-2-1,Julen Lopetegui,Hassan Al-Haydos
+wc2026_39634e3e68e2,2026-06-24,Scotland,Brazil,True,46,5,14,5,1,0,10,7,23,2,0,4-2-3-1,Steve Clarke,Andy Robertson
+wc2026_39634e3e68e2,2026-06-24,Brazil,Scotland,False,54,9,21,5,2,0,11,6,12,13,1,4-1-4-1,Carlo Ancelotti,Marquinhos
+wc2026_9d671e2caaba,2026-06-24,Morocco,Haiti,True,69,11,22,1,0,0,10,9,22,7,5,4-2-2-2,Mohamed Ouahbi,Achraf Hakimi
+wc2026_9d671e2caaba,2026-06-24,Haiti,Morocco,False,31,2,9,8,3,0,18,1,3,14,0,4-2-2-2,Sébastien Migné,Johny Placide
+wc2026_832ac2d7e33c,2026-06-24,South Africa,South Korea,True,32,4,13,2,1,0,7,4,8,15,3,4-2-3-1,Hugo Broos,Ronwen Williams
+wc2026_832ac2d7e33c,2026-06-24,South Korea,South Africa,False,69,3,8,3,1,0,9,6,33,4,0,3-4-3,Hong Myung-bo,Kim Min-jae
+wc2026_e1947e5a7d99,2026-06-24,Czechia,Mexico,True,52,1,13,2,0,0,9,5,26,3,1,3-4-3,Miroslav Koubek,Ladislav Krejčí
+wc2026_e1947e5a7d99,2026-06-24,Mexico,Czechia,False,48,5,11,1,1,0,13,1,13,7,0,4-1-4-1,Javier Aguirre,Edson Álvarez
+wc2026_e063b32c41e8,2026-06-25,Curaçao,Côte d'Ivoire,True,37,2,11,1,2,0,11,4,15,15,2,5-4-1,Dick Advocaat,Leandro Bacuna
+wc2026_e063b32c41e8,2026-06-25,Côte d'Ivoire,Curaçao,False,63,3,7,2,1,0,6,6,16,12,1,4-2-2-2,Emerse Faé,Franck Kessié
+wc2026_22542f3a931a,2026-06-25,Ecuador,Germany,True,39,3,7,2,3,0,15,3,12,12,,4-2-2-2,Sebastián Becaccece,Moisés Caicedo
+wc2026_22542f3a931a,2026-06-25,Germany,Ecuador,False,61,3,11,1,1,0,10,2,16,4,,4-2-3-1,Julian Nagelsmann,Joshua Kimmich
+wc2026_6e207ce02935,2026-06-25,Tunisia,Netherlands,True,29,4,10,4,0,0,11,4,13,8,2,5-4-1,Hervé Renard,Ellyes Skhiri
+wc2026_6e207ce02935,2026-06-25,Netherlands,Tunisia,False,72,7,20,3,0,0,10,6,28,10,1,4-1-4-1,Ronald Koeman,Virgil van Dijk
+wc2026_a7f446b5af3c,2026-06-25,Japan,Sweden,True,52,3,8,4,1,0,20,2,13,4,3,3-4-3,Hajime Moriyasu,Ko Itakura
+wc2026_a7f446b5af3c,2026-06-25,Sweden,Japan,False,48,5,11,2,2,0,11,8,16,5,2,3-4-3,Graham Potter,Victor Lindelöf
+wc2026_6bca45b32c5f,2026-06-25,Türkiye,USA,True,48,3,9,5,0,0,13,2,11,8,2,5-4-1,Vincenzo Montella,Zeki Çelik
+wc2026_6bca45b32c5f,2026-06-25,USA,Türkiye,False,53,7,18,0,1,0,13,9,18,11,5,4-2-3-1,Mauricio Pochettino,Weston McKennie
+wc2026_e2ff43c7c72d,2026-06-25,Paraguay,Australia,True,44,2,7,5,1,0,9,1,7,8,,5-3-2,Gustavo Alfaro,Gustavo Gómez
+wc2026_e2ff43c7c72d,2026-06-25,Australia,Paraguay,False,56,5,12,2,1,0,6,3,13,7,,3-4-3,Tony Popovic,Harry Souttar
+wc2026_4b2fc52dc591,2026-06-26,Norway,France,True,43,4,10,5,1,0,9,4,9,13,1,4-1-4-1,Ståle Solbakken,Patrick Berg
+wc2026_4b2fc52dc591,2026-06-26,France,Norway,False,57,9,18,2,1,0,11,5,9,11,2,4-2-3-1,Guy Stéphan,Kylian Mbappé
+wc2026_3041a0ae79a8,2026-06-26,Senegal,Iraq,True,69,12,28,1,2,0,10,12,25,2,1,4-1-4-1,Pape Thiaw,Idrissa Gueye
+wc2026_3041a0ae79a8,2026-06-26,Iraq,Senegal,False,31,1,6,7,2,1,11,3,6,7,0,4-2-3-1,Graham Arnold,Ibrahim Bayesh
+wc2026_cf2a66dc640e,2026-06-26,Uruguay,Spain,True,33,1,5,0,3,1,14,1,16,14,5,4-1-4-1,Marcelo Bielsa,Federico Valverde
+wc2026_cf2a66dc640e,2026-06-26,Spain,Uruguay,False,67,1,6,1,1,0,14,6,12,9,2,4-1-4-1,Luis de la Fuente,Rodri
+wc2026_c940b0e8770c,2026-06-26,Cabo Verde,Saudi Arabia,True,51,2,15,3,1,0,10,4,18,13,2,4-1-4-1,Bubista,Ryan Mendes
+wc2026_c940b0e8770c,2026-06-26,Saudi Arabia,Cabo Verde,False,49,3,7,2,3,0,16,2,10,10,0,4-2-3-1,Georgios Donis,Salem Al-Dawsari
+wc2026_4e180982d2a5,2026-06-26,Egypt,IR Iran,True,61,3,15,1,3,0,11,8,15,7,0,4-2-2-2,Hossam Hassan,Mohamed Salah
+wc2026_4e180982d2a5,2026-06-26,IR Iran,Egypt,False,39,4,13,2,4,0,16,2,10,8,3,5-4-1,Amir Ghalehnoy,Mehdi Taremi
+wc2026_4e5e516d1025,2026-06-26,New Zealand,Belgium,True,45,2,6,5,2,0,10,5,17,6,1,4-2-3-1,Darren Bazeley,Chris Wood
+wc2026_4e5e516d1025,2026-06-26,Belgium,New Zealand,False,55,10,35,1,0,0,7,8,16,10,1,4-2-3-1,Rudi Garcia,Youri Tielemans
+wc2026_bfc04bcf2b3d,2026-06-27,Croatia,Ghana,True,53,4,8,0,1,0,9,3,15,4,1,4-2-3-1,Zlatko Dalić,Luka Modrić
+wc2026_bfc04bcf2b3d,2026-06-27,Ghana,Croatia,False,47,1,6,2,1,0,13,2,12,10,2,4-1-4-1,Carlos Queiroz,Jordan Ayew
+wc2026_269f2b7be3dd,2026-06-27,Panama,England,True,33,2,13,4,2,0,16,3,9,6,4,5-4-1,Thomas Christiansen,Yoel Bárcenas
+wc2026_269f2b7be3dd,2026-06-27,England,Panama,False,67,6,17,2,1,0,13,7,25,5,4,4-2-3-1,Thomas Tuchel,Harry Kane
+wc2026_5320ac193de4,2026-06-27,Congo DR,Uzbekistan,True,58,4,19,1,3,0,6,2,21,7,3,4-2-2-2,Sébastien Desabre,Chancel Mbemba
+wc2026_5320ac193de4,2026-06-27,Uzbekistan,Congo DR,False,42,1,3,1,2,0,16,4,16,12,1,3-4-3,Fabio Cannavaro,Eldor Shomurodov
+wc2026_90e57d08c7b9,2026-06-27,Colombia,Portugal,True,55,6,24,2,1,0,12,5,10,5,3,4-1-4-1,Néstor Lorenzo,James Rodríguez
+wc2026_90e57d08c7b9,2026-06-27,Portugal,Colombia,False,45,2,13,6,0,0,6,2,14,11,2,4-2-3-1,Roberto Martínez,Cristiano Ronaldo
+wc2026_1809c17e282b,2026-06-27,Jordan,Argentina,True,27,1,5,1,3,0,13,2,7,19,1,5-4-1,Jamal Sellami,Ihsan Haddad
+wc2026_1809c17e282b,2026-06-27,Argentina,Jordan,False,73,4,12,0,0,0,7,6,5,12,3,4-1-4-1,Lionel Scaloni,Nicolás Otamendi
+wc2026_6a61b28e24d4,2026-06-27,Algeria,Austria,True,65,5,12,0,0,0,3,0,5,3,1,4-2-3-1,Vladimir Petković,Riyad Mahrez
+wc2026_6a61b28e24d4,2026-06-27,Austria,Algeria,False,35,3,10,2,1,0,7,3,13,10,3,4-1-3-2,Ralf Rangnick,David Alaba
+wc2026_debd733fb46e,2026-06-28,South Africa,Canada,True,58,1,6,5,0,0,10,1,8,16,1,4-2-3-1,Hugo Broos,Ronwen Williams
+wc2026_debd733fb46e,2026-06-28,Canada,South Africa,False,42,7,12,1,2,0,16,4,12,8,0,4-2-2-2,Jesse Marsch,Stephen Eustáquio
+wc2026_7d2bc6628cee,2026-06-29,Brazil,Japan,True,69,7,19,1,2,0,4,6,40,9,1,4-1-4-1,Carlo Ancelotti,Marquinhos
+wc2026_7d2bc6628cee,2026-06-29,Japan,Brazil,False,31,2,5,4,3,0,13,2,10,5,0,3-4-3,Hajime Moriyasu,Ritsu Doan
+wc2026_30e521b41659,2026-06-29,Germany,Paraguay,True,75,6,21,2,3,0,18,16,56,4,4,4-2-2-2,Julian Nagelsmann,Joshua Kimmich
+wc2026_30e521b41659,2026-06-29,Paraguay,Germany,False,25,3,7,6,3,0,12,6,21,13,1,4-1-4-1,Gustavo Alfaro,Gustavo Gómez
+wc2026_9d8783dbdcb2,2026-06-29,Netherlands,Morocco,True,30,2,6,5,0,0,18,5,10,11,3,3-4-3,Ronald Koeman,Virgil van Dijk
+wc2026_9d8783dbdcb2,2026-06-29,Morocco,Netherlands,False,70,5,11,1,1,0,15,8,18,10,0,4-2-3-1,Mohamed Ouahbi,Achraf Hakimi
+wc2026_a07596712254,2026-06-30,Côte d'Ivoire,Norway,True,47,5,14,1,0,0,6,14,29,4,2,4-1-4-1,Emerse Faé,Franck Kessié
+wc2026_a07596712254,2026-06-30,Norway,Côte d'Ivoire,False,53,4,9,4,1,0,7,3,10,6,2,4-1-4-1,Ståle Solbakken,Martin Ødegaard
+wc2026_48edba28ab43,2026-06-30,France,Sweden,True,61,12,25,3,0,0,14,9,16,5,3,4-2-3-1,Didier Deschamps,Kylian Mbappé
+wc2026_48edba28ab43,2026-06-30,Sweden,France,False,39,3,8,9,0,0,10,1,10,12,1,4-2-2-2,Graham Potter,Victor Lindelöf
+wc2026_a7a370596db9,2026-06-30,Mexico,Ecuador,True,43,3,15,1,0,0,10,3,7,7,0,4-1-4-1,Javier Aguirre,César Montes
+wc2026_a7a370596db9,2026-06-30,Ecuador,Mexico,False,57,1,7,1,3,1,14,8,25,6,1,4-2-2-2,Sebastián Becaccece,Moisés Caicedo
+wc2026_6f3b67f59379,2026-07-01,England,Congo DR,True,60,7,16,1,1,0,10,5,43,7,0,4-2-3-1,Thomas Tuchel,Harry Kane
+wc2026_6f3b67f59379,2026-07-01,Congo DR,England,False,40,2,7,5,1,0,12,3,13,3,4,4-1-4-1,Sébastien Desabre,Chancel Mbemba
+wc2026_65b852b5990c,2026-07-01,Belgium,Senegal,True,52,5,19,3,2,0,22,4,26,8,2,4-2-3-1,Rudi Garcia,Youri Tielemans
+wc2026_65b852b5990c,2026-07-01,Senegal,Belgium,False,48,5,19,3,1,0,12,2,22,11,2,4-1-4-1,Pape Thiaw,Idrissa Gueye
+wc2026_18ac79be3b3b,2026-07-01,USA,Bosnia and Herzegovina,True,48,2,8,3,0,1,7,4,14,8,3,4-1-4-1,Mauricio Pochettino,Tim Ream
+wc2026_18ac79be3b3b,2026-07-01,Bosnia and Herzegovina,USA,False,52,3,10,0,2,0,13,3,13,8,0,5-3-2,Sergej Barbarez,Edin Džeko
+wc2026_230d4fa08d38,2026-07-02,Spain,Austria,True,65,10,23,0,0,0,8,9,22,6,2,4-2-3-1,Luis de la Fuente,Rodri
+wc2026_230d4fa08d38,2026-07-02,Austria,Spain,False,36,0,5,6,1,0,15,0,13,7,5,4-2-3-1,Ralf Rangnick,David Alaba
+wc2026_39d9ca75ccac,2026-07-02,Portugal,Croatia,True,61,3,15,5,1,0,6,9,20,5,1,4-2-3-1,Roberto Martínez,Cristiano Ronaldo
+wc2026_39d9ca75ccac,2026-07-02,Croatia,Portugal,False,40,6,13,2,2,0,12,5,22,9,4,4-2-3-1,Zlatko Dalić,Luka Modrić
+wc2026_ed806183ca32,2026-07-02,Switzerland,Algeria,True,45,5,11,2,0,0,10,4,14,17,0,4-2-3-1,Murat Yakin,Granit Xhaka
+wc2026_ed806183ca32,2026-07-02,Algeria,Switzerland,False,55,2,8,2,2,0,12,2,6,9,2,4-1-4-1,Vladimir Petković,Riyad Mahrez
+wc2026_c3ff701d0238,2026-07-03,Australia,Egypt,True,42,1,16,3,0,0,12,4,24,9,0,3-4-3,Tony Popovic,Harry Souttar
+wc2026_c3ff701d0238,2026-07-03,Egypt,Australia,False,58,3,14,1,2,0,14,7,24,8,3,4-2-2-2,Hossam Hassan,Mohamed Salah
+wc2026_de1456f0777c,2026-07-03,Argentina,Cabo Verde,True,64,10,22,3,1,0,13,8,15,9,3,4-2-2-2,Lionel Scaloni,Lionel Messi
+wc2026_de1456f0777c,2026-07-03,Cabo Verde,Argentina,False,37,5,16,8,1,0,12,8,21,10,2,4-1-4-1,Bubista,Ryan Mendes
+wc2026_6c3e218f1582,2026-07-03,Colombia,Ghana,True,61,8,20,0,2,0,14,3,15,5,2,4-1-4-1,Néstor Lorenzo,James Rodríguez
+wc2026_6c3e218f1582,2026-07-03,Ghana,Colombia,False,39,0,8,7,3,0,10,2,15,5,0,4-1-4-1,Carlos Queiroz,Jordan Ayew
+wc2026_380178e8b602,2026-07-04,Canada,Morocco,True,45,3,10,1,4,0,24,11,29,5,2,4-2-2-2,Jesse Marsch,Stephen Eustáquio
+wc2026_380178e8b602,2026-07-04,Morocco,Canada,False,55,4,5,3,4,0,14,1,5,8,3,4-2-3-1,Mohamed Ouahbi,Achraf Hakimi
+wc2026_184a5b0efbc7,2026-07-04,Paraguay,France,True,24,0,5,4,0,0,13,2,4,14,,5-4-1,Gustavo Alfaro,Gustavo Gómez
+wc2026_184a5b0efbc7,2026-07-04,France,Paraguay,False,76,5,15,0,3,0,11,12,23,10,,4-2-3-1,Didier Deschamps,Kylian Mbappé
+wc2026_d53e4cad5773,2026-07-05,Brazil,Norway,True,34,4,14,3,1,0,7,5,16,11,1,4-2-2-2,Carlo Ancelotti,Marquinhos
+wc2026_d53e4cad5773,2026-07-05,Norway,Brazil,False,66,5,9,3,0,0,6,5,13,6,1,4-1-4-1,Ståle Solbakken,Martin Ødegaard
+wc2026_fb5950744709,2026-07-05,Mexico,England,True,67,5,20,2,2,0,14,12,49,7,1,4-1-4-1,Javier Aguirre,César Montes
+wc2026_fb5950744709,2026-07-05,England,Mexico,False,33,5,6,3,4,1,7,2,4,4,0,4-2-3-1,Thomas Tuchel,Harry Kane
+wc2026_b876ae3e0a3a,2026-07-06,Portugal,Spain,True,45,2,10,5,2,0,9,3,13,7,2,4-2-3-1,Roberto Martínez,Cristiano Ronaldo
+wc2026_b876ae3e0a3a,2026-07-06,Spain,Portugal,False,56,6,15,2,1,0,13,7,16,5,1,4-2-3-1,Luis de la Fuente,Rodri
+wc2026_a90021a82b82,2026-07-06,USA,Belgium,True,56,2,7,3,2,0,11,3,11,9,0,4-1-4-1,Mauricio Pochettino,Tim Ream
+wc2026_a90021a82b82,2026-07-06,Belgium,USA,False,44,7,15,1,0,0,9,5,14,9,1,4-2-3-1,Rudi Garcia,Youri Tielemans
+wc2026_8bed4c7a1163,2026-07-07,Argentina,Egypt,True,64,7,19,0,0,0,13,6,26,7,3,4-1-3-2,Lionel Scaloni,Lionel Messi
+wc2026_8bed4c7a1163,2026-07-07,Egypt,Argentina,False,36,2,5,3,5,0,11,1,8,10,0,4-2-2-2,Hossam Hassan,Mohamed Salah
+wc2026_75d8ac5354e8,2026-07-07,Switzerland,Colombia,True,53,2,7,3,3,0,22,3,15,13,5,4-1-4-1,Murat Yakin,Granit Xhaka
+wc2026_75d8ac5354e8,2026-07-07,Colombia,Switzerland,False,47,3,15,2,2,0,21,7,18,12,4,4-2-3-1,Néstor Lorenzo,James Rodríguez
+wc2026_9cd387672632,2026-07-09,France,Morocco,True,48,8,22,1,0,0,10,5,12,11,,4-2-3-1,Didier Deschamps,Kylian Mbappé
+wc2026_9cd387672632,2026-07-09,Morocco,France,False,52,1,5,5,1,0,13,5,13,6,,4-2-3-1,Mohamed Ouahbi,Achraf Hakimi
+wc2026_852c2df5eba5,2026-07-10,Spain,Belgium,True,68,8,17,1,2,0,13,5,19,4,3,4-2-3-1,Luis de la Fuente,Rodri
+wc2026_852c2df5eba5,2026-07-10,Belgium,Spain,False,32,2,5,6,2,0,18,1,10,10,1,4-2-3-1,Rudi Garcia,Kevin De Bruyne
+wc2026_ce3e6d31925e,2026-07-11,Norway,England,True,48,4,13,6,1,0,10,7,19,8,1,4-1-4-1,Ståle Solbakken,Martin Ødegaard
+wc2026_ce3e6d31925e,2026-07-11,England,Norway,False,52,8,14,3,0,0,8,4,21,7,5,4-2-3-1,Thomas Tuchel,Harry Kane
+wc2026_b30f42744bcd,2026-07-11,Argentina,Switzerland,True,59,7,22,4,3,0,14,8,22,12,4,4-1-3-2,Lionel Scaloni,Lionel Messi
+wc2026_b30f42744bcd,2026-07-11,Switzerland,Argentina,False,41,5,11,4,2,1,18,2,19,6,3,4-2-3-1,Murat Yakin,Granit Xhaka
+wc2026_09a8d54d40f2,2026-07-14,France,Spain,True,49,3,10,0,2,0,11,7,20,8,4,4-2-3-1,Didier Deschamps,Kylian Mbappé
+wc2026_09a8d54d40f2,2026-07-14,Spain,France,False,51,2,10,3,1,0,12,1,8,7,5,4-2-3-1,Luis de la Fuente,Rodri
+wc2026_e7e2310d35d9,2026-07-15,England,Argentina,True,36,2,5,3,1,0,11,1,15,9,1,4-2-3-1,Thomas Tuchel,Harry Kane
+wc2026_e7e2310d35d9,2026-07-15,Argentina,England,False,64,5,15,1,3,0,15,6,19,6,3,4-1-4-1,Lionel Scaloni,Lionel Messi
+wc2026_7adc2719127a,2026-07-18,France,England,True,46,9,19,4,0,0,14,3,6,8,3,4-2-3-1,Didier Deschamps,Kylian Mbappé
+wc2026_7adc2719127a,2026-07-18,England,France,False,54,11,19,5,0,0,8,4,12,11,3,4-1-4-1,Thomas Tuchel,Declan Rice
+wc2026_b04c0c092f6c,2026-07-19,Spain,Argentina,True,65,12,20,0,0,0,21,9,27,11,4,4-2-3-1,Luis de la Fuente,Rodri
+wc2026_b04c0c092f6c,2026-07-19,Argentina,Spain,False,35,0,2,11,7,1,25,4,8,16,1,4-2-2-2,Lionel Scaloni,Lionel Messi

@@ -1,0 +1,633 @@
+{
+  "mode": "WC2026_BACKTEST",
+  "generated_at": "2026-08-13T20:49:10+05:30",
+  "conditioning": {
+    "model_training": "1930-2022 only; feature accumulators frozen at end of 2022",
+    "knockout_monte_carlo": "conditioned on the real 32 qualifiers",
+    "full_tournament_monte_carlo": "unconditioned; group stage simulated from scratch"
+  },
+  "bracket_progression": {
+    "overall": {
+      "correct": 21,
+      "n": 32,
+      "accuracy": 0.6562
+    },
+    "by_round": {
+      "round_of_32": {
+        "correct": 10,
+        "n": 16,
+        "accuracy": 0.625
+      },
+      "round_of_16": {
+        "correct": 6,
+        "n": 8,
+        "accuracy": 0.75
+      },
+      "quarter_final": {
+        "correct": 4,
+        "n": 4,
+        "accuracy": 1.0
+      },
+      "semi_final": {
+        "correct": 1,
+        "n": 2,
+        "accuracy": 0.5
+      },
+      "third_place": {
+        "correct": 0,
+        "n": 1,
+        "accuracy": 0.0
+      },
+      "final": {
+        "correct": 0,
+        "n": 1,
+        "accuracy": 0.0
+      }
+    },
+    "matches": [
+      {
+        "match_number": 73,
+        "fixture": "South Africa v Canada",
+        "model_favourite": "South Africa",
+        "p_favourite": 0.5778,
+        "actual_winner": "Canada",
+        "correct": false
+      },
+      {
+        "match_number": 76,
+        "fixture": "Germany v Paraguay",
+        "model_favourite": "Germany",
+        "p_favourite": 0.9544,
+        "actual_winner": "Paraguay",
+        "correct": false
+      },
+      {
+        "match_number": 74,
+        "fixture": "Brazil v Japan",
+        "model_favourite": "Brazil",
+        "p_favourite": 0.9653,
+        "actual_winner": "Brazil",
+        "correct": true
+      },
+      {
+        "match_number": 75,
+        "fixture": "Netherlands v Morocco",
+        "model_favourite": "Netherlands",
+        "p_favourite": 0.6126,
+        "actual_winner": "Morocco",
+        "correct": false
+      },
+      {
+        "match_number": 78,
+        "fixture": "France v Sweden",
+        "model_favourite": "France",
+        "p_favourite": 0.9113,
+        "actual_winner": "France",
+        "correct": true
+      },
+      {
+        "match_number": 77,
+        "fixture": "Côte d'Ivoire v Norway",
+        "model_favourite": "Côte d'Ivoire",
+        "p_favourite": 0.7414,
+        "actual_winner": "Norway",
+        "correct": false
+      },
+      {
+        "match_number": 79,
+        "fixture": "Mexico v Ecuador",
+        "model_favourite": "Ecuador",
+        "p_favourite": 0.6288,
+        "actual_winner": "Mexico",
+        "correct": false
+      },
+      {
+        "match_number": 82,
+        "fixture": "USA v Bosnia and Herzegovina",
+        "model_favourite": "USA",
+        "p_favourite": 0.8099,
+        "actual_winner": "USA",
+        "correct": true
+      },
+      {
+        "match_number": 81,
+        "fixture": "Belgium v Senegal",
+        "model_favourite": "Belgium",
+        "p_favourite": 0.5928,
+        "actual_winner": "Belgium",
+        "correct": true
+      },
+      {
+        "match_number": 80,
+        "fixture": "England v Congo DR",
+        "model_favourite": "England",
+        "p_favourite": 0.9888,
+        "actual_winner": "England",
+        "correct": true
+      },
+      {
+        "match_number": 83,
+        "fixture": "Spain v Austria",
+        "model_favourite": "Spain",
+        "p_favourite": 0.9126,
+        "actual_winner": "Spain",
+        "correct": true
+      },
+      {
+        "match_number": 84,
+        "fixture": "Portugal v Croatia",
+        "model_favourite": "Portugal",
+        "p_favourite": 0.8553,
+        "actual_winner": "Portugal",
+        "correct": true
+      },
+      {
+        "match_number": 85,
+        "fixture": "Switzerland v Algeria",
+        "model_favourite": "Switzerland",
+        "p_favourite": 0.8081,
+        "actual_winner": "Switzerland",
+        "correct": true
+      },
+      {
+        "match_number": 87,
+        "fixture": "Colombia v Ghana",
+        "model_favourite": "Colombia",
+        "p_favourite": 0.8267,
+        "actual_winner": "Colombia",
+        "correct": true
+      },
+      {
+        "match_number": 88,
+        "fixture": "Australia v Egypt",
+        "model_favourite": "Australia",
+        "p_favourite": 0.8112,
+        "actual_winner": "Egypt",
+        "correct": false
+      },
+      {
+        "match_number": 86,
+        "fixture": "Argentina v Cabo Verde",
+        "model_favourite": "Argentina",
+        "p_favourite": 0.9859,
+        "actual_winner": "Argentina",
+        "correct": true
+      },
+      {
+        "match_number": 90,
+        "fixture": "Paraguay v France",
+        "model_favourite": "France",
+        "p_favourite": 0.9556,
+        "actual_winner": "France",
+        "correct": true
+      },
+      {
+        "match_number": 89,
+        "fixture": "Canada v Morocco",
+        "model_favourite": "Morocco",
+        "p_favourite": 0.9222,
+        "actual_winner": "Morocco",
+        "correct": true
+      },
+      {
+        "match_number": 91,
+        "fixture": "Brazil v Norway",
+        "model_favourite": "Brazil",
+        "p_favourite": 0.9738,
+        "actual_winner": "Norway",
+        "correct": false
+      },
+      {
+        "match_number": 92,
+        "fixture": "Mexico v England",
+        "model_favourite": "England",
+        "p_favourite": 0.5398,
+        "actual_winner": "England",
+        "correct": true
+      },
+      {
+        "match_number": 94,
+        "fixture": "USA v Belgium",
+        "model_favourite": "Belgium",
+        "p_favourite": 0.812,
+        "actual_winner": "Belgium",
+        "correct": true
+      },
+      {
+        "match_number": 93,
+        "fixture": "Portugal v Spain",
+        "model_favourite": "Portugal",
+        "p_favourite": 0.6794,
+        "actual_winner": "Spain",
+        "correct": false
+      },
+      {
+        "match_number": 96,
+        "fixture": "Switzerland v Colombia",
+        "model_favourite": "Switzerland",
+        "p_favourite": 0.5881,
+        "actual_winner": "Switzerland",
+        "correct": true
+      },
+      {
+        "match_number": 95,
+        "fixture": "Argentina v Egypt",
+        "model_favourite": "Argentina",
+        "p_favourite": 0.9549,
+        "actual_winner": "Argentina",
+        "correct": true
+      },
+      {
+        "match_number": 97,
+        "fixture": "France v Morocco",
+        "model_favourite": "France",
+        "p_favourite": 0.9118,
+        "actual_winner": "France",
+        "correct": true
+      },
+      {
+        "match_number": 98,
+        "fixture": "Spain v Belgium",
+        "model_favourite": "Spain",
+        "p_favourite": 0.641,
+        "actual_winner": "Spain",
+        "correct": true
+      },
+      {
+        "match_number": 100,
+        "fixture": "Argentina v Switzerland",
+        "model_favourite": "Argentina",
+        "p_favourite": 0.9325,
+        "actual_winner": "Argentina",
+        "correct": true
+      },
+      {
+        "match_number": 99,
+        "fixture": "Norway v England",
+        "model_favourite": "England",
+        "p_favourite": 0.9503,
+        "actual_winner": "England",
+        "correct": true
+      },
+      {
+        "match_number": 101,
+        "fixture": "France v Spain",
+        "model_favourite": "France",
+        "p_favourite": 0.6783,
+        "actual_winner": "Spain",
+        "correct": false
+      },
+      {
+        "match_number": 102,
+        "fixture": "England v Argentina",
+        "model_favourite": "Argentina",
+        "p_favourite": 0.8347,
+        "actual_winner": "Argentina",
+        "correct": true
+      },
+      {
+        "match_number": 103,
+        "fixture": "France v England",
+        "model_favourite": "France",
+        "p_favourite": 0.7862,
+        "actual_winner": "England",
+        "correct": false
+      },
+      {
+        "match_number": 104,
+        "fixture": "Spain v Argentina",
+        "model_favourite": "Argentina",
+        "p_favourite": 0.7353,
+        "actual_winner": "Spain",
+        "correct": false
+      }
+    ]
+  },
+  "knockout_monte_carlo": {
+    "n_sims": 20000,
+    "champion_probabilities": [
+      {
+        "team": "France",
+        "p": 0.3181
+      },
+      {
+        "team": "Argentina",
+        "p": 0.2411
+      },
+      {
+        "team": "Germany",
+        "p": 0.1159
+      },
+      {
+        "team": "Brazil",
+        "p": 0.0809
+      },
+      {
+        "team": "Netherlands",
+        "p": 0.0781
+      },
+      {
+        "team": "Portugal",
+        "p": 0.0572
+      },
+      {
+        "team": "Spain",
+        "p": 0.0467
+      },
+      {
+        "team": "England",
+        "p": 0.0237
+      },
+      {
+        "team": "Colombia",
+        "p": 0.02
+      },
+      {
+        "team": "Belgium",
+        "p": 0.011
+      },
+      {
+        "team": "Switzerland",
+        "p": 0.0026
+      },
+      {
+        "team": "Mexico",
+        "p": 0.0019
+      },
+      {
+        "team": "USA",
+        "p": 0.0009
+      },
+      {
+        "team": "Croatia",
+        "p": 0.0006
+      },
+      {
+        "team": "Senegal",
+        "p": 0.0003
+      },
+      {
+        "team": "Morocco",
+        "p": 0.0003
+      }
+    ],
+    "final_appearance_probabilities": [
+      {
+        "team": "France",
+        "p": 0.3861
+      },
+      {
+        "team": "Argentina",
+        "p": 0.3781
+      },
+      {
+        "team": "Netherlands",
+        "p": 0.2777
+      },
+      {
+        "team": "Brazil",
+        "p": 0.2418
+      },
+      {
+        "team": "Spain",
+        "p": 0.1989
+      },
+      {
+        "team": "Portugal",
+        "p": 0.1459
+      },
+      {
+        "team": "Germany",
+        "p": 0.1321
+      },
+      {
+        "team": "Belgium",
+        "p": 0.115
+      },
+      {
+        "team": "England",
+        "p": 0.0449
+      },
+      {
+        "team": "Colombia",
+        "p": 0.0395
+      },
+      {
+        "team": "Switzerland",
+        "p": 0.0088
+      },
+      {
+        "team": "Mexico",
+        "p": 0.0076
+      },
+      {
+        "team": "USA",
+        "p": 0.0063
+      },
+      {
+        "team": "Senegal",
+        "p": 0.005
+      },
+      {
+        "team": "Morocco",
+        "p": 0.005
+      },
+      {
+        "team": "Croatia",
+        "p": 0.0029
+      }
+    ],
+    "semi_final_probabilities": [
+      {
+        "team": "Argentina",
+        "p": 0.7718
+      },
+      {
+        "team": "France",
+        "p": 0.5248
+      },
+      {
+        "team": "Netherlands",
+        "p": 0.523
+      },
+      {
+        "team": "Brazil",
+        "p": 0.4135
+      },
+      {
+        "team": "Portugal",
+        "p": 0.3898
+      },
+      {
+        "team": "Spain",
+        "p": 0.3542
+      },
+      {
+        "team": "Germany",
+        "p": 0.2925
+      },
+      {
+        "team": "Belgium",
+        "p": 0.1813
+      },
+      {
+        "team": "England",
+        "p": 0.1527
+      },
+      {
+        "team": "Colombia",
+        "p": 0.1284
+      },
+      {
+        "team": "Switzerland",
+        "p": 0.0675
+      },
+      {
+        "team": "Morocco",
+        "p": 0.0507
+      },
+      {
+        "team": "USA",
+        "p": 0.0295
+      },
+      {
+        "team": "Senegal",
+        "p": 0.0232
+      },
+      {
+        "team": "Australia",
+        "p": 0.0212
+      },
+      {
+        "team": "Mexico",
+        "p": 0.0211
+      }
+    ]
+  },
+  "full_tournament_monte_carlo": {
+    "n_sims": 5000,
+    "completed_sims": 5000,
+    "champion_probabilities": [
+      {
+        "team": "France",
+        "p": 0.3306
+      },
+      {
+        "team": "Argentina",
+        "p": 0.1858
+      },
+      {
+        "team": "Germany",
+        "p": 0.1418
+      },
+      {
+        "team": "Brazil",
+        "p": 0.0738
+      },
+      {
+        "team": "Netherlands",
+        "p": 0.0714
+      },
+      {
+        "team": "Spain",
+        "p": 0.0574
+      },
+      {
+        "team": "Portugal",
+        "p": 0.0468
+      },
+      {
+        "team": "Belgium",
+        "p": 0.0298
+      },
+      {
+        "team": "England",
+        "p": 0.017
+      },
+      {
+        "team": "Colombia",
+        "p": 0.0164
+      },
+      {
+        "team": "Mexico",
+        "p": 0.0072
+      },
+      {
+        "team": "Uruguay",
+        "p": 0.0054
+      },
+      {
+        "team": "Croatia",
+        "p": 0.0052
+      },
+      {
+        "team": "Switzerland",
+        "p": 0.0032
+      },
+      {
+        "team": "South Korea",
+        "p": 0.0026
+      },
+      {
+        "team": "USA",
+        "p": 0.0024
+      }
+    ],
+    "group_winner_probabilities": [
+      {
+        "team": "Argentina",
+        "p": 0.92
+      },
+      {
+        "team": "France",
+        "p": 0.9074
+      },
+      {
+        "team": "Brazil",
+        "p": 0.895
+      },
+      {
+        "team": "Germany",
+        "p": 0.8716
+      },
+      {
+        "team": "Switzerland",
+        "p": 0.7878
+      },
+      {
+        "team": "Mexico",
+        "p": 0.7624
+      },
+      {
+        "team": "Spain",
+        "p": 0.7286
+      },
+      {
+        "team": "Netherlands",
+        "p": 0.663
+      },
+      {
+        "team": "Belgium",
+        "p": 0.5936
+      },
+      {
+        "team": "Portugal",
+        "p": 0.5638
+      },
+      {
+        "team": "England",
+        "p": 0.5338
+      },
+      {
+        "team": "Croatia",
+        "p": 0.4418
+      }
+    ]
+  },
+  "actual_outcome": {
+    "champion": "Spain",
+    "final": "Spain v Argentina",
+    "model_rank_for_actual_champion_knockout_mc": 7,
+    "model_rank_for_actual_champion_full_mc": 6
+  }
+}

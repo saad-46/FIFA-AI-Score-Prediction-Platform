@@ -1,7 +1,12 @@
 import logging
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.core.rate_limit import check_rate_limit, simulation_rule
+from app.core.security import get_optional_user
+from app.db.database import get_db
 from app.schemas.tournament import (
     TournamentSimulationRequest,
     TournamentSimulationResponse,
@@ -67,12 +72,21 @@ async def get_fifa_2026_schedule(
 
 
 @router.post("/simulate", response_model=TournamentSimulationResponse, status_code=status.HTTP_200_OK)
-async def simulate_tournament(payload: TournamentSimulationRequest):
+async def simulate_tournament(
+    payload: TournamentSimulationRequest,
+    request: Request,
+    db: AsyncSession = Depends(get_db),
+    user: Optional[dict] = Depends(get_optional_user),
+):
     """
     Run Monte Carlo simulations for a FIFA 2026 World Cup tournament.
     Supports 48 teams in 12 groups with Round of 32 knockout.
-    Public endpoint.
+    Public endpoint, rate limited far more strictly than /predictions/predict —
+    a single call is several seconds of multi-process CPU (see
+    app/core/rate_limit.py::simulation_rule).
     """
+    await check_rate_limit(db, simulation_rule(), request, user)
+
     predictor, df = await _get_simulator_dependencies()
     
     if not predictor.is_loaded:

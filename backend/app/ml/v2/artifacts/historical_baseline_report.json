@@ -1,0 +1,523 @@
+{
+  "feature_groups": [
+    "strength",
+    "form",
+    "history",
+    "context"
+  ],
+  "years": [
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+  ],
+  "per_tournament": {
+    "2002": {
+      "metrics": {
+        "n": 64,
+        "accuracy": 0.4688,
+        "balanced_accuracy": 0.429,
+        "precision_macro": 0.463,
+        "recall_macro": 0.429,
+        "f1_macro": 0.4256,
+        "log_loss": 1.2737,
+        "brier_multiclass": 0.7326,
+        "ece": 0.2452,
+        "draw_precision": 0.5,
+        "draw_recall": 0.25,
+        "draw_f1": 0.3333,
+        "draw_brier": 0.2059,
+        "reliability": [
+          {
+            "bucket": "0-40%",
+            "n": 1,
+            "mean_confidence": 0.3981,
+            "empirical_accuracy": 0.0
+          },
+          {
+            "bucket": "40-50%",
+            "n": 8,
+            "mean_confidence": 0.4608,
+            "empirical_accuracy": 0.375
+          },
+          {
+            "bucket": "50-60%",
+            "n": 7,
+            "mean_confidence": 0.5428,
+            "empirical_accuracy": 0.2857
+          },
+          {
+            "bucket": "60-70%",
+            "n": 8,
+            "mean_confidence": 0.6552,
+            "empirical_accuracy": 0.625
+          },
+          {
+            "bucket": "70-80%",
+            "n": 21,
+            "mean_confidence": 0.7566,
+            "empirical_accuracy": 0.4286
+          },
+          {
+            "bucket": "80-90%",
+            "n": 11,
+            "mean_confidence": 0.852,
+            "empirical_accuracy": 0.6364
+          },
+          {
+            "bucket": "90-100%",
+            "n": 8,
+            "mean_confidence": 0.9133,
+            "empirical_accuracy": 0.5
+          }
+        ],
+        "home_goals_mae": 1.1531,
+        "away_goals_mae": 0.8383,
+        "total_goals_mae": 1.4367,
+        "home_goals_rmse": 1.464,
+        "away_goals_rmse": 1.0434,
+        "composite_objective": 0.79204
+      },
+      "progression": {
+        "correct": 10,
+        "n": 16,
+        "accuracy": 0.625
+      },
+      "group_qualification": {
+        "n_sims": 2000,
+        "brier_score": 0.3691,
+        "team_level_qualification_hits": 8,
+        "team_level_qualification_total": 16,
+        "team_level_qualification_accuracy": 0.5
+      }
+    },
+    "2006": {
+      "metrics": {
+        "n": 64,
+        "accuracy": 0.6094,
+        "balanced_accuracy": 0.5454,
+        "precision_macro": 0.5453,
+        "recall_macro": 0.5454,
+        "f1_macro": 0.5436,
+        "log_loss": 0.9198,
+        "brier_multiclass": 0.5304,
+        "ece": 0.0958,
+        "draw_precision": 0.3333,
+        "draw_recall": 0.2667,
+        "draw_f1": 0.2963,
+        "draw_brier": 0.1848,
+        "reliability": [
+          {
+            "bucket": "0-40%",
+            "n": 1,
+            "mean_confidence": 0.399,
+            "empirical_accuracy": 0.0
+          },
+          {
+            "bucket": "40-50%",
+            "n": 9,
+            "mean_confidence": 0.4686,
+            "empirical_accuracy": 0.4444
+          },
+          {
+            "bucket": "50-60%",
+            "n": 14,
+            "mean_confidence": 0.5447,
+            "empirical_accuracy": 0.4286
+          },
+          {
+            "bucket": "60-70%",
+            "n": 15,
+            "mean_confidence": 0.6421,
+            "empirical_accuracy": 0.5333
+          },
+          {
+            "bucket": "70-80%",
+            "n": 8,
+            "mean_confidence": 0.7564,
+            "empirical_accuracy": 0.875
+          },
+          {
+            "bucket": "80-90%",
+            "n": 9,
+            "mean_confidence": 0.8624,
+            "empirical_accuracy": 0.7778
+          },
+          {
+            "bucket": "90-100%",
+            "n": 8,
+            "mean_confidence": 0.9431,
+            "empirical_accuracy": 0.875
+          }
+        ],
+        "home_goals_mae": 0.9535,
+        "away_goals_mae": 0.7986,
+        "total_goals_mae": 1.2718,
+        "home_goals_rmse": 1.1796,
+        "away_goals_rmse": 1.0085,
+        "composite_objective": 0.58594
+      },
+      "progression": {
+        "correct": 10,
+        "n": 16,
+        "accuracy": 0.625
+      },
+      "group_qualification": {
+        "n_sims": 2000,
+        "brier_score": 0.1861,
+        "team_level_qualification_hits": 10,
+        "team_level_qualification_total": 16,
+        "team_level_qualification_accuracy": 0.625
+      }
+    },
+    "2010": {
+      "metrics": {
+        "n": 64,
+        "accuracy": 0.4844,
+        "balanced_accuracy": 0.4746,
+        "precision_macro": 0.4823,
+        "recall_macro": 0.4746,
+        "f1_macro": 0.4712,
+        "log_loss": 1.2286,
+        "brier_multiclass": 0.713,
+        "ece": 0.1859,
+        "draw_precision": 0.3529,
+        "draw_recall": 0.375,
+        "draw_f1": 0.3636,
+        "draw_brier": 0.2238,
+        "reliability": [
+          {
+            "bucket": "0-40%",
+            "n": 2,
+            "mean_confidence": 0.3958,
+            "empirical_accuracy": 0.5
+          },
+          {
+            "bucket": "40-50%",
+            "n": 15,
+            "mean_confidence": 0.4667,
+            "empirical_accuracy": 0.4667
+          },
+          {
+            "bucket": "50-60%",
+            "n": 9,
+            "mean_confidence": 0.5575,
+            "empirical_accuracy": 0.3333
+          },
+          {
+            "bucket": "60-70%",
+            "n": 12,
+            "mean_confidence": 0.6559,
+            "empirical_accuracy": 0.4167
+          },
+          {
+            "bucket": "70-80%",
+            "n": 11,
+            "mean_confidence": 0.7506,
+            "empirical_accuracy": 0.5455
+          },
+          {
+            "bucket": "80-90%",
+            "n": 6,
+            "mean_confidence": 0.8548,
+            "empirical_accuracy": 0.6667
+          },
+          {
+            "bucket": "90-100%",
+            "n": 9,
+            "mean_confidence": 0.9352,
+            "empirical_accuracy": 0.5556
+          }
+        ],
+        "home_goals_mae": 1.017,
+        "away_goals_mae": 0.7666,
+        "total_goals_mae": 1.3132,
+        "home_goals_rmse": 1.3189,
+        "away_goals_rmse": 0.992,
+        "composite_objective": 0.75634
+      },
+      "progression": {
+        "correct": 12,
+        "n": 16,
+        "accuracy": 0.75
+      },
+      "group_qualification": {
+        "n_sims": 2000,
+        "brier_score": 0.2359,
+        "team_level_qualification_hits": 10,
+        "team_level_qualification_total": 16,
+        "team_level_qualification_accuracy": 0.625
+      }
+    },
+    "2014": {
+      "metrics": {
+        "n": 64,
+        "accuracy": 0.4531,
+        "balanced_accuracy": 0.3986,
+        "precision_macro": 0.4018,
+        "recall_macro": 0.3986,
+        "f1_macro": 0.3997,
+        "log_loss": 1.233,
+        "brier_multiclass": 0.679,
+        "ece": 0.2471,
+        "draw_precision": 0.1429,
+        "draw_recall": 0.1538,
+        "draw_f1": 0.1481,
+        "draw_brier": 0.2201,
+        "reliability": [
+          {
+            "bucket": "0-40%",
+            "n": 1,
+            "mean_confidence": 0.3746,
+            "empirical_accuracy": 0.0
+          },
+          {
+            "bucket": "40-50%",
+            "n": 6,
+            "mean_confidence": 0.4733,
+            "empirical_accuracy": 0.5
+          },
+          {
+            "bucket": "50-60%",
+            "n": 11,
+            "mean_confidence": 0.5499,
+            "empirical_accuracy": 0.1818
+          },
+          {
+            "bucket": "60-70%",
+            "n": 15,
+            "mean_confidence": 0.6576,
+            "empirical_accuracy": 0.4
+          },
+          {
+            "bucket": "70-80%",
+            "n": 16,
+            "mean_confidence": 0.7444,
+            "empirical_accuracy": 0.4375
+          },
+          {
+            "bucket": "80-90%",
+            "n": 9,
+            "mean_confidence": 0.8538,
+            "empirical_accuracy": 0.6667
+          },
+          {
+            "bucket": "90-100%",
+            "n": 6,
+            "mean_confidence": 0.9624,
+            "empirical_accuracy": 0.8333
+          }
+        ],
+        "home_goals_mae": 0.8644,
+        "away_goals_mae": 1.1087,
+        "total_goals_mae": 1.5239,
+        "home_goals_rmse": 1.0456,
+        "away_goals_rmse": 1.5641,
+        "composite_objective": 0.78808
+      },
+      "progression": {
+        "correct": 13,
+        "n": 16,
+        "accuracy": 0.8125
+      },
+      "group_qualification": {
+        "n_sims": 2000,
+        "brier_score": 0.2789,
+        "team_level_qualification_hits": 8,
+        "team_level_qualification_total": 16,
+        "team_level_qualification_accuracy": 0.5
+      }
+    },
+    "2018": {
+      "metrics": {
+        "n": 64,
+        "accuracy": 0.4844,
+        "balanced_accuracy": 0.4287,
+        "precision_macro": 0.4301,
+        "recall_macro": 0.4287,
+        "f1_macro": 0.4222,
+        "log_loss": 1.1141,
+        "brier_multiclass": 0.6379,
+        "ece": 0.1483,
+        "draw_precision": 0.1818,
+        "draw_recall": 0.1538,
+        "draw_f1": 0.1667,
+        "draw_brier": 0.1969,
+        "reliability": [
+          {
+            "bucket": "0-40%",
+            "n": 3,
+            "mean_confidence": 0.3846,
+            "empirical_accuracy": 0.0
+          },
+          {
+            "bucket": "40-50%",
+            "n": 10,
+            "mean_confidence": 0.4402,
+            "empirical_accuracy": 0.3
+          },
+          {
+            "bucket": "50-60%",
+            "n": 13,
+            "mean_confidence": 0.5407,
+            "empirical_accuracy": 0.3846
+          },
+          {
+            "bucket": "60-70%",
+            "n": 17,
+            "mean_confidence": 0.6394,
+            "empirical_accuracy": 0.5294
+          },
+          {
+            "bucket": "70-80%",
+            "n": 10,
+            "mean_confidence": 0.7376,
+            "empirical_accuracy": 0.6
+          },
+          {
+            "bucket": "80-90%",
+            "n": 8,
+            "mean_confidence": 0.865,
+            "empirical_accuracy": 0.75
+          },
+          {
+            "bucket": "90-100%",
+            "n": 3,
+            "mean_confidence": 0.9131,
+            "empirical_accuracy": 0.6667
+          }
+        ],
+        "home_goals_mae": 0.974,
+        "away_goals_mae": 0.7689,
+        "total_goals_mae": 1.2526,
+        "home_goals_rmse": 1.2868,
+        "away_goals_rmse": 0.9436,
+        "composite_objective": 0.71495
+      },
+      "progression": {
+        "correct": 8,
+        "n": 16,
+        "accuracy": 0.5
+      },
+      "group_qualification": {
+        "n_sims": 2000,
+        "brier_score": 0.1256,
+        "team_level_qualification_hits": 14,
+        "team_level_qualification_total": 16,
+        "team_level_qualification_accuracy": 0.875
+      }
+    },
+    "2022": {
+      "metrics": {
+        "n": 64,
+        "accuracy": 0.5781,
+        "balanced_accuracy": 0.5303,
+        "precision_macro": 0.5525,
+        "recall_macro": 0.5303,
+        "f1_macro": 0.5271,
+        "log_loss": 1.0377,
+        "brier_multiclass": 0.5813,
+        "ece": 0.1317,
+        "draw_precision": 0.5,
+        "draw_recall": 0.2667,
+        "draw_f1": 0.3478,
+        "draw_brier": 0.1717,
+        "reliability": [
+          {
+            "bucket": "0-40%",
+            "n": 2,
+            "mean_confidence": 0.371,
+            "empirical_accuracy": 0.5
+          },
+          {
+            "bucket": "40-50%",
+            "n": 10,
+            "mean_confidence": 0.4608,
+            "empirical_accuracy": 0.4
+          },
+          {
+            "bucket": "50-60%",
+            "n": 9,
+            "mean_confidence": 0.5541,
+            "empirical_accuracy": 0.5556
+          },
+          {
+            "bucket": "60-70%",
+            "n": 7,
+            "mean_confidence": 0.6368,
+            "empirical_accuracy": 0.2857
+          },
+          {
+            "bucket": "70-80%",
+            "n": 12,
+            "mean_confidence": 0.7498,
+            "empirical_accuracy": 0.6667
+          },
+          {
+            "bucket": "80-90%",
+            "n": 16,
+            "mean_confidence": 0.8537,
+            "empirical_accuracy": 0.625
+          },
+          {
+            "bucket": "90-100%",
+            "n": 8,
+            "mean_confidence": 0.9292,
+            "empirical_accuracy": 0.875
+          }
+        ],
+        "home_goals_mae": 1.0207,
+        "away_goals_mae": 0.8744,
+        "total_goals_mae": 1.3896,
+        "home_goals_rmse": 1.4255,
+        "away_goals_rmse": 1.0179,
+        "composite_objective": 0.64351
+      },
+      "progression": {
+        "correct": 11,
+        "n": 16,
+        "accuracy": 0.6875
+      },
+      "group_qualification": {
+        "n_sims": 2000,
+        "brier_score": 0.2424,
+        "team_level_qualification_hits": 10,
+        "team_level_qualification_total": 16,
+        "team_level_qualification_accuracy": 0.625
+      }
+    }
+  },
+  "aggregate": {
+    "mean": {
+      "accuracy": 0.513,
+      "balanced_accuracy": 0.4678,
+      "log_loss": 1.1345,
+      "brier_multiclass": 0.6457,
+      "ece": 0.1757,
+      "draw_recall": 0.2443,
+      "draw_f1": 0.276,
+      "draw_brier": 0.2005,
+      "home_goals_mae": 0.9971,
+      "away_goals_mae": 0.8592,
+      "composite_objective": 0.7135
+    },
+    "std": {
+      "accuracy": 0.0587,
+      "balanced_accuracy": 0.0545,
+      "log_loss": 0.125,
+      "brier_multiclass": 0.0715,
+      "ece": 0.0564,
+      "draw_recall": 0.0758,
+      "draw_f1": 0.0864,
+      "draw_brier": 0.0185,
+      "home_goals_mae": 0.0869,
+      "away_goals_mae": 0.1178,
+      "composite_objective": 0.0761
+    },
+    "knockout_progression_accuracy": 0.6667
+  },
+  "composite_objective": 0.7135,
+  "experiment_id": "EXP-001"
+}

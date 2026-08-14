@@ -1,0 +1,133 @@
+{
+  "source_file": "FWC26 Match Schedule.pdf",
+  "encryption": "standard security handler V=1 R=2 RC4-40, empty user password (/P -60)",
+  "extracted_chars": 4021,
+  "groups": {
+    "A": [
+      "MEX",
+      "RSA",
+      "KOR",
+      "CZE"
+    ],
+    "B": [
+      "CAN",
+      "BIH",
+      "QAT",
+      "SUI"
+    ],
+    "C": [
+      "BRA",
+      "MAR",
+      "HAI",
+      "SCO"
+    ],
+    "D": [
+      "USA",
+      "PAR",
+      "AUS",
+      "TUR"
+    ],
+    "E": [
+      "GER",
+      "CUW",
+      "CIV",
+      "ECU"
+    ],
+    "F": [
+      "NED",
+      "JPN",
+      "SWE",
+      "TUN"
+    ],
+    "G": [
+      "BEL",
+      "EGY",
+      "IRN",
+      "NZL"
+    ],
+    "H": [
+      "ESP",
+      "CPV",
+      "KSA",
+      "URU"
+    ],
+    "I": [
+      "FRA",
+      "SEN",
+      "IRQ",
+      "NOR"
+    ],
+    "J": [
+      "ARG",
+      "ALG",
+      "AUT",
+      "JOR"
+    ],
+    "K": [
+      "POR",
+      "COD",
+      "UZB",
+      "COL"
+    ],
+    "L": [
+      "ENG",
+      "CRO",
+      "GHA",
+      "PAN"
+    ]
+  },
+  "group_diagnostics": {
+    "group_count": 12,
+    "teams_per_group": {
+      "A": 4,
+      "B": 4,
+      "C": 4,
+      "D": 4,
+      "E": 4,
+      "F": 4,
+      "G": 4,
+      "H": 4,
+      "I": 4,
+      "J": 4,
+      "K": 4,
+      "L": 4
+    },
+    "all_groups_have_four": true,
+    "distinct_teams": 48
+  },
+  "fixture_diagnostics": {
+    "fixtures_parsed": 84,
+    "with_any_number_candidate": 84,
+    "with_single_candidate": 68,
+    "with_ambiguous_candidates": 16,
+    "without_any_number": 0
+  },
+  "knockout_diagnostics": {
+    "knockout_links_parsed": 14,
+    "match_numbers": [
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102
+    ]
+  },
+  "graph_diagnostics": {
+    "nodes": 104,
+    "dependency_sources": {
+      "group_fixture": 72,
+      "group_qualification": 16,
+      "pdf": 14,
+      "derived_from_semi_finals": 2
+    }
+  }
+}

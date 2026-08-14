@@ -23,8 +23,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
-from app.ml.data.loader import load_matches_dataframe
-from app.ml.models.predictor import get_predictor
+from app.ml.model_loader import get_model_loader
 from app.models.match import SavedPrediction
 from app.schemas.analytics import RecentPredictionSummary
 from app.schemas.prediction import (
@@ -90,11 +89,15 @@ async def run_prediction(
       - AI insights
       - head-to-head stats
     """
-    df        = await load_matches_dataframe()
-    predictor = get_predictor()
+    # ModelLoader resolves to the legacy predictor unless USE_V2_MODEL=true
+    # (see app/ml/model_loader.py). Everything below this point is unchanged
+    # from before the flag existed — it operates on `pred`/`df` through the
+    # same dict/DataFrame contract regardless of which adapter produced them.
+    adapter = get_model_loader().get_active()
+    df      = await adapter.get_history_dataframe()
 
     # ── ML prediction ─────────────────────────────────────────────────────────
-    pred = predictor.predict(
+    pred = adapter.predict(
         df=df,
         home_team=home_team,
         away_team=away_team,

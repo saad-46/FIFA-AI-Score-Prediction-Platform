@@ -179,8 +179,15 @@ async def test_run_prediction_with_unknown_team_does_not_raise():
     should surface a normal (if low-confidence) PredictionResult."""
     df = _small_history_df()
 
+    # Patched at its true source rather than at
+    # app.services.prediction_service (which no longer imports it at module
+    # level since the V2 ModelLoader refactor — run_prediction now goes
+    # through app.ml.model_loader.LegacyPredictionAdapter, which does a
+    # function-local `from app.ml.data.loader import load_matches_dataframe`
+    # and so still picks up this patch; USE_V2_MODEL defaults to false, so
+    # this exercises the legacy path exactly as before).
     with patch(
-        "app.services.prediction_service.load_matches_dataframe",
+        "app.ml.data.loader.load_matches_dataframe",
         new_callable=AsyncMock,
         return_value=df,
     ):
@@ -204,7 +211,7 @@ async def test_predict_endpoint_with_unknown_teams_returns_200():
     df = _small_history_df()
 
     with patch(
-        "app.services.prediction_service.load_matches_dataframe",
+        "app.ml.data.loader.load_matches_dataframe",
         new_callable=AsyncMock,
         return_value=df,
     ):

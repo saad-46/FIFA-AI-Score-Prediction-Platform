@@ -1,0 +1,1034 @@
+{
+  "groups": {
+    "A": [
+      "MEX",
+      "RSA",
+      "KOR",
+      "CZE"
+    ],
+    "B": [
+      "CAN",
+      "BIH",
+      "QAT",
+      "SUI"
+    ],
+    "C": [
+      "BRA",
+      "MAR",
+      "HAI",
+      "SCO"
+    ],
+    "D": [
+      "USA",
+      "PAR",
+      "AUS",
+      "TUR"
+    ],
+    "E": [
+      "GER",
+      "CUW",
+      "CIV",
+      "ECU"
+    ],
+    "F": [
+      "NED",
+      "JPN",
+      "SWE",
+      "TUN"
+    ],
+    "G": [
+      "BEL",
+      "EGY",
+      "IRN",
+      "NZL"
+    ],
+    "H": [
+      "ESP",
+      "CPV",
+      "KSA",
+      "URU"
+    ],
+    "I": [
+      "FRA",
+      "SEN",
+      "IRQ",
+      "NOR"
+    ],
+    "J": [
+      "ARG",
+      "ALG",
+      "AUT",
+      "JOR"
+    ],
+    "K": [
+      "POR",
+      "COD",
+      "UZB",
+      "COL"
+    ],
+    "L": [
+      "ENG",
+      "CRO",
+      "GHA",
+      "PAN"
+    ]
+  },
+  "fixtures": [
+    {
+      "home_code": "AUS",
+      "away_code": "TUR",
+      "kickoff_et": "22:00",
+      "group": "D",
+      "match_number_candidates": [
+        2
+      ]
+    },
+    {
+      "home_code": "NED",
+      "away_code": "SWE",
+      "kickoff_et": "00:00",
+      "group": "F",
+      "match_number_candidates": [
+        6
+      ]
+    },
+    {
+      "home_code": "POR",
+      "away_code": "COD",
+      "kickoff_et": "13:00",
+      "group": "K",
+      "match_number_candidates": [
+        35
+      ]
+    },
+    {
+      "home_code": "COL",
+      "away_code": "COD",
+      "kickoff_et": "13:00",
+      "group": "K",
+      "match_number_candidates": [
+        23
+      ]
+    },
+    {
+      "home_code": "FRA",
+      "away_code": "IRQ",
+      "kickoff_et": "22:00",
+      "group": "I",
+      "match_number_candidates": [
+        48
+      ]
+    },
+    {
+      "home_code": "SEN",
+      "away_code": "IRQ",
+      "kickoff_et": "17:00",
+      "group": "I",
+      "match_number_candidates": [
+        42
+      ]
+    },
+    {
+      "home_code": "JPN",
+      "away_code": "SWE",
+      "kickoff_et": "15:00",
+      "group": "F",
+      "match_number_candidates": [
+        62
+      ]
+    },
+    {
+      "home_code": "CAN",
+      "away_code": "BIH",
+      "kickoff_et": "19:00",
+      "group": "B",
+      "match_number_candidates": [
+        57
+      ]
+    },
+    {
+      "home_code": "SUI",
+      "away_code": "BIH",
+      "kickoff_et": "15:00",
+      "group": "B",
+      "match_number_candidates": [
+        3
+      ]
+    },
+    {
+      "home_code": "USA",
+      "away_code": "PAR",
+      "kickoff_et": "15:00",
+      "group": "D",
+      "match_number_candidates": [
+        26
+      ]
+    },
+    {
+      "home_code": "BRA",
+      "away_code": "MAR",
+      "kickoff_et": "21:00",
+      "group": "C",
+      "match_number_candidates": [
+        4
+      ]
+    },
+    {
+      "home_code": "HAI",
+      "away_code": "SCO",
+      "kickoff_et": "18:00",
+      "group": "C",
+      "match_number_candidates": [
+        7
+      ]
+    },
+    {
+      "home_code": "QAT",
+      "away_code": "SUI",
+      "kickoff_et": "21:00",
+      "group": "B",
+      "match_number_candidates": [
+        5
+      ]
+    },
+    {
+      "home_code": "GER",
+      "away_code": "CUW",
+      "kickoff_et": "15:00",
+      "group": "E",
+      "match_number_candidates": [
+        8
+      ]
+    },
+    {
+      "home_code": "NED",
+      "away_code": "JPN",
+      "kickoff_et": "13:00",
+      "group": "F",
+      "match_number_candidates": [
+        10
+      ]
+    },
+    {
+      "home_code": "CIV",
+      "away_code": "ECU",
+      "kickoff_et": "16:00",
+      "group": "E",
+      "match_number_candidates": [
+        11
+      ]
+    },
+    {
+      "home_code": "KSA",
+      "away_code": "URU",
+      "kickoff_et": "19:00",
+      "group": "H",
+      "match_number_candidates": [
+        9
+      ]
+    },
+    {
+      "home_code": "ESP",
+      "away_code": "CPV",
+      "kickoff_et": "18:00",
+      "group": "H",
+      "match_number_candidates": [
+        13
+      ]
+    },
+    {
+      "home_code": "AUT",
+      "away_code": "JOR",
+      "kickoff_et": "12:00",
+      "group": "J",
+      "match_number_candidates": [
+        14
+      ]
+    },
+    {
+      "home_code": "ARG",
+      "away_code": "ALG",
+      "kickoff_et": "00:00",
+      "group": "J",
+      "match_number_candidates": [
+        20
+      ]
+    },
+    {
+      "home_code": "FRA",
+      "away_code": "SEN",
+      "kickoff_et": "21:00",
+      "group": "I",
+      "match_number_candidates": [
+        19
+      ]
+    },
+    {
+      "home_code": "GHA",
+      "away_code": "PAN",
+      "kickoff_et": "15:00",
+      "group": "L",
+      "match_number_candidates": [
+        17
+      ]
+    },
+    {
+      "home_code": "ENG",
+      "away_code": "CRO",
+      "kickoff_et": "19:00",
+      "group": "L",
+      "match_number_candidates": [
+        21
+      ]
+    },
+    {
+      "home_code": "UZB",
+      "away_code": "COL",
+      "kickoff_et": "16:00",
+      "group": "K",
+      "match_number_candidates": [
+        22
+      ]
+    },
+    {
+      "home_code": "CAN",
+      "away_code": "QAT",
+      "kickoff_et": "22:00",
+      "group": "B",
+      "match_number_candidates": [
+        24
+      ]
+    },
+    {
+      "home_code": "MEX",
+      "away_code": "KOR",
+      "kickoff_et": "18:00",
+      "group": "A",
+      "match_number_candidates": [
+        27
+      ]
+    },
+    {
+      "home_code": "BRA",
+      "away_code": "HAI",
+      "kickoff_et": "21:00",
+      "group": "C",
+      "match_number_candidates": [
+        28
+      ]
+    },
+    {
+      "home_code": "SCO",
+      "away_code": "MAR",
+      "kickoff_et": "20:30",
+      "group": "C",
+      "match_number_candidates": [
+        29
+      ]
+    },
+    {
+      "home_code": "USA",
+      "away_code": "AUS",
+      "kickoff_et": "18:00",
+      "group": "D",
+      "match_number_candidates": [
+        30
+      ]
+    },
+    {
+      "home_code": "TUN",
+      "away_code": "JPN",
+      "kickoff_et": "15:00",
+      "group": "F",
+      "match_number_candidates": [
+        32
+      ]
+    },
+    {
+      "home_code": "ECU",
+      "away_code": "CUW",
+      "kickoff_et": "00:00",
+      "group": "E",
+      "match_number_candidates": [
+        36
+      ]
+    },
+    {
+      "home_code": "GER",
+      "away_code": "CIV",
+      "kickoff_et": "20:00",
+      "group": "E",
+      "match_number_candidates": [
+        34
+      ]
+    },
+    {
+      "home_code": "NOR",
+      "away_code": "SEN",
+      "kickoff_et": "16:00",
+      "group": "I",
+      "match_number_candidates": [
+        33
+      ]
+    },
+    {
+      "home_code": "ENG",
+      "away_code": "GHA",
+      "kickoff_et": "20:00",
+      "group": "L",
+      "match_number_candidates": [
+        41
+      ]
+    },
+    {
+      "home_code": "PAN",
+      "away_code": "CRO",
+      "kickoff_et": "16:00",
+      "group": "L",
+      "match_number_candidates": [
+        45
+      ]
+    },
+    {
+      "home_code": "URU",
+      "away_code": "CPV",
+      "kickoff_et": "19:00",
+      "group": "H",
+      "match_number_candidates": [
+        46
+      ]
+    },
+    {
+      "home_code": "ESP",
+      "away_code": "KSA",
+      "kickoff_et": "18:00",
+      "group": "H",
+      "match_number_candidates": [
+        37
+      ]
+    },
+    {
+      "home_code": "ARG",
+      "away_code": "AUT",
+      "kickoff_et": "12:00",
+      "group": "J",
+      "match_number_candidates": [
+        38
+      ]
+    },
+    {
+      "home_code": "BEL",
+      "away_code": "IRN",
+      "kickoff_et": "13:00",
+      "group": "G",
+      "match_number_candidates": [
+        43
+      ]
+    },
+    {
+      "home_code": "NZL",
+      "away_code": "EGY",
+      "kickoff_et": "15:00",
+      "group": "G",
+      "match_number_candidates": [
+        39
+      ]
+    },
+    {
+      "home_code": "JOR",
+      "away_code": "ALG",
+      "kickoff_et": "21:00",
+      "group": "J",
+      "match_number_candidates": [
+        40
+      ]
+    },
+    {
+      "home_code": "SUI",
+      "away_code": "CAN",
+      "kickoff_et": "23:00",
+      "group": "B",
+      "match_number_candidates": [
+        44
+      ]
+    },
+    {
+      "home_code": "RSA",
+      "away_code": "KOR",
+      "kickoff_et": "15:00",
+      "group": "A",
+      "match_number_candidates": [
+        51
+      ]
+    },
+    {
+      "home_code": "POR",
+      "away_code": "UZB",
+      "kickoff_et": "21:00",
+      "group": "K",
+      "match_number_candidates": [
+        54
+      ]
+    },
+    {
+      "home_code": "MAR",
+      "away_code": "HAI",
+      "kickoff_et": "13:00",
+      "group": "C",
+      "match_number_candidates": [
+        47
+      ]
+    },
+    {
+      "home_code": "SCO",
+      "away_code": "BRA",
+      "kickoff_et": "18:00",
+      "group": "C",
+      "match_number_candidates": [
+        50
+      ]
+    },
+    {
+      "home_code": "ECU",
+      "away_code": "GER",
+      "kickoff_et": "18:00",
+      "group": "E",
+      "match_number_candidates": [
+        49
+      ]
+    },
+    {
+      "home_code": "CUW",
+      "away_code": "CIV",
+      "kickoff_et": "16:00",
+      "group": "E",
+      "match_number_candidates": [
+        56
+      ]
+    },
+    {
+      "home_code": "TUN",
+      "away_code": "NED",
+      "kickoff_et": "16:00",
+      "group": "F",
+      "match_number_candidates": [
+        55
+      ]
+    },
+    {
+      "home_code": "PAR",
+      "away_code": "AUS",
+      "kickoff_et": "19:00",
+      "group": "D",
+      "match_number_candidates": [
+        58
+      ]
+    },
+    {
+      "home_code": "NZL",
+      "away_code": "BEL",
+      "kickoff_et": "22:00",
+      "group": "G",
+      "match_number_candidates": [
+        60
+      ]
+    },
+    {
+      "home_code": "CPV",
+      "away_code": "KSA",
+      "kickoff_et": "23:00",
+      "group": "H",
+      "match_number_candidates": [
+        64
+      ]
+    },
+    {
+      "home_code": "URU",
+      "away_code": "ESP",
+      "kickoff_et": "20:00",
+      "group": "H",
+      "match_number_candidates": [
+        65
+      ]
+    },
+    {
+      "home_code": "NOR",
+      "away_code": "FRA",
+      "kickoff_et": "20:00",
+      "group": "I",
+      "match_number_candidates": [
+        66
+      ]
+    },
+    {
+      "home_code": "PAN",
+      "away_code": "ENG",
+      "kickoff_et": "15:00",
+      "group": "L",
+      "match_number_candidates": [
+        61
+      ]
+    },
+    {
+      "home_code": "CRO",
+      "away_code": "GHA",
+      "kickoff_et": "17:00",
+      "group": "L",
+      "match_number_candidates": [
+        67
+      ]
+    },
+    {
+      "home_code": "COL",
+      "away_code": "POR",
+      "kickoff_et": "17:00",
+      "group": "K",
+      "match_number_candidates": [
+        68
+      ]
+    },
+    {
+      "home_code": "ALG",
+      "away_code": "AUT",
+      "kickoff_et": "19:30",
+      "group": "J",
+      "match_number_candidates": [
+        71
+      ]
+    },
+    {
+      "home_code": "JOR",
+      "away_code": "ARG",
+      "kickoff_et": "22:00",
+      "group": "J",
+      "match_number_candidates": [
+        69
+      ]
+    },
+    {
+      "home_code": "EGY",
+      "away_code": "IRN",
+      "kickoff_et": "22:00",
+      "group": "G",
+      "match_number_candidates": [
+        70
+      ]
+    },
+    {
+      "home_code": "CZE",
+      "away_code": "MEX",
+      "kickoff_et": "15:00",
+      "group": "A",
+      "match_number_candidates": [
+        1
+      ]
+    },
+    {
+      "home_code": "SWE",
+      "away_code": "TUN",
+      "kickoff_et": "23:00",
+      "group": "F",
+      "match_number_candidates": [
+        31
+      ]
+    },
+    {
+      "home_code": "TUR",
+      "away_code": "USA",
+      "kickoff_et": "18:00",
+      "group": "D",
+      "match_number_candidates": [
+        18
+      ]
+    },
+    {
+      "home_code": "BIH",
+      "away_code": "QAT",
+      "kickoff_et": "22:00",
+      "group": "B",
+      "match_number_candidates": [
+        59
+      ]
+    },
+    {
+      "home_code": "BEL",
+      "away_code": "EGY",
+      "kickoff_et": "19:30",
+      "group": "G",
+      "match_number_candidates": [
+        72
+      ]
+    },
+    {
+      "home_code": "IRN",
+      "away_code": "NZL",
+      "kickoff_et": "15:00",
+      "group": "G",
+      "match_number_candidates": [
+        16
+      ]
+    },
+    {
+      "home_code": "TUR",
+      "away_code": "PAR",
+      "kickoff_et": "12:00",
+      "group": null,
+      "match_number_candidates": [
+        25
+      ]
+    },
+    {
+      "home_code": "RSA",
+      "away_code": "CAN",
+      "kickoff_et": "23:00",
+      "group": null,
+      "match_number_candidates": [
+        63,
+        73
+      ]
+    },
+    {
+      "home_code": "NED",
+      "away_code": "MAR",
+      "kickoff_et": "15:00",
+      "group": null,
+      "match_number_candidates": [
+        73,
+        75
+      ]
+    },
+    {
+      "home_code": "BRA",
+      "away_code": "JPN",
+      "kickoff_et": "21:00",
+      "group": null,
+      "match_number_candidates": [
+        75,
+        76
+      ]
+    },
+    {
+      "home_code": "CIV",
+      "away_code": "NOR",
+      "kickoff_et": "13:00",
+      "group": null,
+      "match_number_candidates": [
+        76,
+        78
+      ]
+    },
+    {
+      "home_code": "ARG",
+      "away_code": "CPV",
+      "kickoff_et": "13:00",
+      "group": null,
+      "match_number_candidates": [
+        78,
+        86
+      ]
+    },
+    {
+      "home_code": "POR",
+      "away_code": "CRO",
+      "kickoff_et": "18:00",
+      "group": null,
+      "match_number_candidates": [
+        86,
+        83
+      ]
+    },
+    {
+      "home_code": "AUS",
+      "away_code": "EGY",
+      "kickoff_et": "16:00",
+      "group": null,
+      "match_number_candidates": [
+        91,
+        88
+      ]
+    },
+    {
+      "home_code": "COL",
+      "away_code": "GHA",
+      "kickoff_et": "14:00",
+      "group": null,
+      "match_number_candidates": [
+        88,
+        87
+      ]
+    },
+    {
+      "home_code": "MEX",
+      "away_code": "ECU",
+      "kickoff_et": "21:30",
+      "group": null,
+      "match_number_candidates": [
+        87,
+        79
+      ]
+    },
+    {
+      "home_code": "USA",
+      "away_code": "BIH",
+      "kickoff_et": "21:00",
+      "group": null,
+      "match_number_candidates": [
+        79,
+        81
+      ]
+    },
+    {
+      "home_code": "BEL",
+      "away_code": "SEN",
+      "kickoff_et": "20:00",
+      "group": null,
+      "match_number_candidates": [
+        81,
+        82
+      ]
+    },
+    {
+      "home_code": "SUI",
+      "away_code": "ALG",
+      "kickoff_et": "16:00",
+      "group": null,
+      "match_number_candidates": [
+        82,
+        85
+      ]
+    },
+    {
+      "home_code": "ENG",
+      "away_code": "COD",
+      "kickoff_et": "23:00",
+      "group": null,
+      "match_number_candidates": [
+        85,
+        80
+      ]
+    },
+    {
+      "home_code": "GER",
+      "away_code": "PAR",
+      "kickoff_et": "12:00",
+      "group": null,
+      "match_number_candidates": [
+        80,
+        74
+      ]
+    },
+    {
+      "home_code": "FRA",
+      "away_code": "SWE",
+      "kickoff_et": "16:30",
+      "group": null,
+      "match_number_candidates": [
+        74,
+        77
+      ]
+    },
+    {
+      "home_code": "ESP",
+      "away_code": "AUT",
+      "kickoff_et": "17:00",
+      "group": null,
+      "match_number_candidates": [
+        77,
+        84
+      ]
+    },
+    {
+      "home_code": "COD",
+      "away_code": "UZB",
+      "kickoff_et": "15:00",
+      "group": null,
+      "match_number_candidates": [
+        104
+      ]
+    }
+  ],
+  "knockout_links": [
+    {
+      "match_number": 89,
+      "kickoff_et": "19:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 74
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 77
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 90,
+      "kickoff_et": "15:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 73
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 75
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 91,
+      "kickoff_et": "16:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 76
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 78
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 92,
+      "kickoff_et": "13:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 79
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 80
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 93,
+      "kickoff_et": "12:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 83
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 84
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 94,
+      "kickoff_et": "16:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 81
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 82
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 95,
+      "kickoff_et": "17:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 86
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 88
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 96,
+      "kickoff_et": "20:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 85
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 87
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 97,
+      "kickoff_et": "21:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 89
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 90
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 98,
+      "kickoff_et": "20:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 93
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 94
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 99,
+      "kickoff_et": "15:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 91
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 92
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 100,
+      "kickoff_et": "15:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 95
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 96
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 101,
+      "kickoff_et": "15:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 97
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 98
+      },
+      "source": "pdf"
+    },
+    {
+      "match_number": 102,
+      "kickoff_et": "15:00",
+      "home_source": {
+        "type": "winner_of",
+        "match_number": 99
+      },
+      "away_source": {
+        "type": "winner_of",
+        "match_number": 100
+      },
+      "source": "pdf"
+    }
+  ]
+}

@@ -1,0 +1,736 @@
+{
+  "generated_at": "2026-08-14T12:01:17+05:30",
+  "n_matches_scored": 104,
+  "accuracy": 0.7019,
+  "matches": [
+    {
+      "match": "Czechia v Mexico",
+      "stage": "group_stage",
+      "predicted": "Mexico",
+      "actual": "Mexico",
+      "correct": true
+    },
+    {
+      "match": "Australia v Türkiye",
+      "stage": "group_stage",
+      "predicted": "Australia",
+      "actual": "Australia",
+      "correct": true
+    },
+    {
+      "match": "Switzerland v Bosnia and Herzegovina",
+      "stage": "group_stage",
+      "predicted": "Switzerland",
+      "actual": "Switzerland",
+      "correct": true
+    },
+    {
+      "match": "Brazil v Morocco",
+      "stage": "group_stage",
+      "predicted": "Brazil",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Qatar v Switzerland",
+      "stage": "group_stage",
+      "predicted": "Switzerland",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Netherlands v Sweden",
+      "stage": "group_stage",
+      "predicted": "Netherlands",
+      "actual": "Netherlands",
+      "correct": true
+    },
+    {
+      "match": "Haiti v Scotland",
+      "stage": "group_stage",
+      "predicted": "Scotland",
+      "actual": "Scotland",
+      "correct": true
+    },
+    {
+      "match": "Germany v Curaçao",
+      "stage": "group_stage",
+      "predicted": "Germany",
+      "actual": "Germany",
+      "correct": true
+    },
+    {
+      "match": "Saudi Arabia v Uruguay",
+      "stage": "group_stage",
+      "predicted": "Uruguay",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Netherlands v Japan",
+      "stage": "group_stage",
+      "predicted": "Draw",
+      "actual": "Draw",
+      "correct": true
+    },
+    {
+      "match": "Côte d'Ivoire v Ecuador",
+      "stage": "group_stage",
+      "predicted": "Draw",
+      "actual": "Côte d'Ivoire",
+      "correct": false
+    },
+    {
+      "match": "Mexico v South Africa",
+      "stage": "group_stage",
+      "predicted": "Mexico",
+      "actual": "Mexico",
+      "correct": true
+    },
+    {
+      "match": "Spain v Cabo Verde",
+      "stage": "group_stage",
+      "predicted": "Spain",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Austria v Jordan",
+      "stage": "group_stage",
+      "predicted": "Austria",
+      "actual": "Austria",
+      "correct": true
+    },
+    {
+      "match": "South Korea v Czechia",
+      "stage": "group_stage",
+      "predicted": "South Korea",
+      "actual": "South Korea",
+      "correct": true
+    },
+    {
+      "match": "IR Iran v New Zealand",
+      "stage": "group_stage",
+      "predicted": "Draw",
+      "actual": "Draw",
+      "correct": true
+    },
+    {
+      "match": "Ghana v Panama",
+      "stage": "group_stage",
+      "predicted": "Ghana",
+      "actual": "Ghana",
+      "correct": true
+    },
+    {
+      "match": "Türkiye v USA",
+      "stage": "group_stage",
+      "predicted": "USA",
+      "actual": "Türkiye",
+      "correct": false
+    },
+    {
+      "match": "France v Senegal",
+      "stage": "group_stage",
+      "predicted": "France",
+      "actual": "France",
+      "correct": true
+    },
+    {
+      "match": "Argentina v Algeria",
+      "stage": "group_stage",
+      "predicted": "Argentina",
+      "actual": "Argentina",
+      "correct": true
+    },
+    {
+      "match": "England v Croatia",
+      "stage": "group_stage",
+      "predicted": "England",
+      "actual": "England",
+      "correct": true
+    },
+    {
+      "match": "Uzbekistan v Colombia",
+      "stage": "group_stage",
+      "predicted": "Colombia",
+      "actual": "Colombia",
+      "correct": true
+    },
+    {
+      "match": "Colombia v Congo DR",
+      "stage": "group_stage",
+      "predicted": "Colombia",
+      "actual": "Colombia",
+      "correct": true
+    },
+    {
+      "match": "Canada v Qatar",
+      "stage": "group_stage",
+      "predicted": "Canada",
+      "actual": "Canada",
+      "correct": true
+    },
+    {
+      "match": "Türkiye v Paraguay",
+      "stage": "group_stage",
+      "predicted": "Türkiye",
+      "actual": "Paraguay",
+      "correct": false
+    },
+    {
+      "match": "USA v Paraguay",
+      "stage": "group_stage",
+      "predicted": "USA",
+      "actual": "USA",
+      "correct": true
+    },
+    {
+      "match": "Mexico v South Korea",
+      "stage": "group_stage",
+      "predicted": "Mexico",
+      "actual": "Mexico",
+      "correct": true
+    },
+    {
+      "match": "Brazil v Haiti",
+      "stage": "group_stage",
+      "predicted": "Brazil",
+      "actual": "Brazil",
+      "correct": true
+    },
+    {
+      "match": "Scotland v Morocco",
+      "stage": "group_stage",
+      "predicted": "Morocco",
+      "actual": "Morocco",
+      "correct": true
+    },
+    {
+      "match": "USA v Australia",
+      "stage": "group_stage",
+      "predicted": "USA",
+      "actual": "USA",
+      "correct": true
+    },
+    {
+      "match": "Sweden v Tunisia",
+      "stage": "group_stage",
+      "predicted": "Sweden",
+      "actual": "Sweden",
+      "correct": true
+    },
+    {
+      "match": "Tunisia v Japan",
+      "stage": "group_stage",
+      "predicted": "Japan",
+      "actual": "Japan",
+      "correct": true
+    },
+    {
+      "match": "Norway v Senegal",
+      "stage": "group_stage",
+      "predicted": "Senegal",
+      "actual": "Norway",
+      "correct": false
+    },
+    {
+      "match": "Germany v Côte d'Ivoire",
+      "stage": "group_stage",
+      "predicted": "Germany",
+      "actual": "Germany",
+      "correct": true
+    },
+    {
+      "match": "Portugal v Congo DR",
+      "stage": "group_stage",
+      "predicted": "Portugal",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Ecuador v Curaçao",
+      "stage": "group_stage",
+      "predicted": "Ecuador",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Spain v Saudi Arabia",
+      "stage": "group_stage",
+      "predicted": "Spain",
+      "actual": "Spain",
+      "correct": true
+    },
+    {
+      "match": "Argentina v Austria",
+      "stage": "group_stage",
+      "predicted": "Argentina",
+      "actual": "Argentina",
+      "correct": true
+    },
+    {
+      "match": "New Zealand v Egypt",
+      "stage": "group_stage",
+      "predicted": "Egypt",
+      "actual": "Egypt",
+      "correct": true
+    },
+    {
+      "match": "Jordan v Algeria",
+      "stage": "group_stage",
+      "predicted": "Algeria",
+      "actual": "Algeria",
+      "correct": true
+    },
+    {
+      "match": "England v Ghana",
+      "stage": "group_stage",
+      "predicted": "England",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Senegal v Iraq",
+      "stage": "group_stage",
+      "predicted": "Senegal",
+      "actual": "Senegal",
+      "correct": true
+    },
+    {
+      "match": "Belgium v IR Iran",
+      "stage": "group_stage",
+      "predicted": "Belgium",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Switzerland v Canada",
+      "stage": "group_stage",
+      "predicted": "Switzerland",
+      "actual": "Switzerland",
+      "correct": true
+    },
+    {
+      "match": "Panama v Croatia",
+      "stage": "group_stage",
+      "predicted": "Croatia",
+      "actual": "Croatia",
+      "correct": true
+    },
+    {
+      "match": "Uruguay v Cabo Verde",
+      "stage": "group_stage",
+      "predicted": "Uruguay",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Morocco v Haiti",
+      "stage": "group_stage",
+      "predicted": "Morocco",
+      "actual": "Morocco",
+      "correct": true
+    },
+    {
+      "match": "France v Iraq",
+      "stage": "group_stage",
+      "predicted": "France",
+      "actual": "France",
+      "correct": true
+    },
+    {
+      "match": "Ecuador v Germany",
+      "stage": "group_stage",
+      "predicted": "Germany",
+      "actual": "Ecuador",
+      "correct": false
+    },
+    {
+      "match": "Scotland v Brazil",
+      "stage": "group_stage",
+      "predicted": "Brazil",
+      "actual": "Brazil",
+      "correct": true
+    },
+    {
+      "match": "South Africa v South Korea",
+      "stage": "group_stage",
+      "predicted": "South Korea",
+      "actual": "South Africa",
+      "correct": false
+    },
+    {
+      "match": "Iraq v Norway",
+      "stage": "group_stage",
+      "predicted": "Norway",
+      "actual": "Norway",
+      "correct": true
+    },
+    {
+      "match": "Czechia v South Africa",
+      "stage": "group_stage",
+      "predicted": "Draw",
+      "actual": "Draw",
+      "correct": true
+    },
+    {
+      "match": "Portugal v Uzbekistan",
+      "stage": "group_stage",
+      "predicted": "Portugal",
+      "actual": "Portugal",
+      "correct": true
+    },
+    {
+      "match": "Tunisia v Netherlands",
+      "stage": "group_stage",
+      "predicted": "Netherlands",
+      "actual": "Netherlands",
+      "correct": true
+    },
+    {
+      "match": "Curaçao v Côte d'Ivoire",
+      "stage": "group_stage",
+      "predicted": "Côte d'Ivoire",
+      "actual": "Côte d'Ivoire",
+      "correct": true
+    },
+    {
+      "match": "Canada v Bosnia and Herzegovina",
+      "stage": "group_stage",
+      "predicted": "Draw",
+      "actual": "Draw",
+      "correct": true
+    },
+    {
+      "match": "Paraguay v Australia",
+      "stage": "group_stage",
+      "predicted": "Draw",
+      "actual": "Draw",
+      "correct": true
+    },
+    {
+      "match": "Bosnia and Herzegovina v Qatar",
+      "stage": "group_stage",
+      "predicted": "Bosnia and Herzegovina",
+      "actual": "Bosnia and Herzegovina",
+      "correct": true
+    },
+    {
+      "match": "New Zealand v Belgium",
+      "stage": "group_stage",
+      "predicted": "Belgium",
+      "actual": "Belgium",
+      "correct": true
+    },
+    {
+      "match": "Panama v England",
+      "stage": "group_stage",
+      "predicted": "England",
+      "actual": "England",
+      "correct": true
+    },
+    {
+      "match": "Japan v Sweden",
+      "stage": "group_stage",
+      "predicted": "Sweden",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Congo DR v Uzbekistan",
+      "stage": "group_stage",
+      "predicted": "Congo DR",
+      "actual": "Congo DR",
+      "correct": true
+    },
+    {
+      "match": "Cabo Verde v Saudi Arabia",
+      "stage": "group_stage",
+      "predicted": "Saudi Arabia",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Uruguay v Spain",
+      "stage": "group_stage",
+      "predicted": "Spain",
+      "actual": "Spain",
+      "correct": true
+    },
+    {
+      "match": "Norway v France",
+      "stage": "group_stage",
+      "predicted": "France",
+      "actual": "France",
+      "correct": true
+    },
+    {
+      "match": "Croatia v Ghana",
+      "stage": "group_stage",
+      "predicted": "Croatia",
+      "actual": "Croatia",
+      "correct": true
+    },
+    {
+      "match": "Colombia v Portugal",
+      "stage": "group_stage",
+      "predicted": "Portugal",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Jordan v Argentina",
+      "stage": "group_stage",
+      "predicted": "Argentina",
+      "actual": "Argentina",
+      "correct": true
+    },
+    {
+      "match": "Egypt v IR Iran",
+      "stage": "group_stage",
+      "predicted": "IR Iran",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Algeria v Austria",
+      "stage": "group_stage",
+      "predicted": "Austria",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "Belgium v Egypt",
+      "stage": "group_stage",
+      "predicted": "Belgium",
+      "actual": "Draw",
+      "correct": false
+    },
+    {
+      "match": "South Africa v Canada",
+      "stage": "round_of_32",
+      "predicted": "South Africa",
+      "actual": "Canada",
+      "correct": false
+    },
+    {
+      "match": "Brazil v Japan",
+      "stage": "round_of_32",
+      "predicted": "Brazil",
+      "actual": "Brazil",
+      "correct": true
+    },
+    {
+      "match": "Netherlands v Morocco",
+      "stage": "round_of_32",
+      "predicted": "Draw",
+      "actual": "Morocco",
+      "correct": false
+    },
+    {
+      "match": "Germany v Paraguay",
+      "stage": "round_of_32",
+      "predicted": "Germany",
+      "actual": "Paraguay",
+      "correct": false
+    },
+    {
+      "match": "Côte d'Ivoire v Norway",
+      "stage": "round_of_32",
+      "predicted": "Côte d'Ivoire",
+      "actual": "Norway",
+      "correct": false
+    },
+    {
+      "match": "France v Sweden",
+      "stage": "round_of_32",
+      "predicted": "France",
+      "actual": "France",
+      "correct": true
+    },
+    {
+      "match": "Mexico v Ecuador",
+      "stage": "round_of_32",
+      "predicted": "Mexico",
+      "actual": "Mexico",
+      "correct": true
+    },
+    {
+      "match": "England v Congo DR",
+      "stage": "round_of_32",
+      "predicted": "England",
+      "actual": "England",
+      "correct": true
+    },
+    {
+      "match": "Belgium v Senegal",
+      "stage": "round_of_32",
+      "predicted": "Belgium",
+      "actual": "Belgium",
+      "correct": true
+    },
+    {
+      "match": "USA v Bosnia and Herzegovina",
+      "stage": "round_of_32",
+      "predicted": "USA",
+      "actual": "USA",
+      "correct": true
+    },
+    {
+      "match": "Spain v Austria",
+      "stage": "round_of_32",
+      "predicted": "Spain",
+      "actual": "Spain",
+      "correct": true
+    },
+    {
+      "match": "Portugal v Croatia",
+      "stage": "round_of_32",
+      "predicted": "Portugal",
+      "actual": "Portugal",
+      "correct": true
+    },
+    {
+      "match": "Switzerland v Algeria",
+      "stage": "round_of_32",
+      "predicted": "Switzerland",
+      "actual": "Switzerland",
+      "correct": true
+    },
+    {
+      "match": "Argentina v Cabo Verde",
+      "stage": "round_of_32",
+      "predicted": "Argentina",
+      "actual": "Argentina",
+      "correct": true
+    },
+    {
+      "match": "Colombia v Ghana",
+      "stage": "round_of_32",
+      "predicted": "Colombia",
+      "actual": "Colombia",
+      "correct": true
+    },
+    {
+      "match": "Australia v Egypt",
+      "stage": "round_of_32",
+      "predicted": "Australia",
+      "actual": "Egypt",
+      "correct": false
+    },
+    {
+      "match": "Canada v Morocco",
+      "stage": "round_of_16",
+      "predicted": "Morocco",
+      "actual": "Morocco",
+      "correct": true
+    },
+    {
+      "match": "Paraguay v France",
+      "stage": "round_of_16",
+      "predicted": "France",
+      "actual": "France",
+      "correct": true
+    },
+    {
+      "match": "Brazil v Norway",
+      "stage": "round_of_16",
+      "predicted": "Brazil",
+      "actual": "Norway",
+      "correct": false
+    },
+    {
+      "match": "Mexico v England",
+      "stage": "round_of_16",
+      "predicted": "England",
+      "actual": "England",
+      "correct": true
+    },
+    {
+      "match": "Portugal v Spain",
+      "stage": "round_of_16",
+      "predicted": "Draw",
+      "actual": "Spain",
+      "correct": false
+    },
+    {
+      "match": "USA v Belgium",
+      "stage": "round_of_16",
+      "predicted": "Belgium",
+      "actual": "Belgium",
+      "correct": true
+    },
+    {
+      "match": "Argentina v Egypt",
+      "stage": "round_of_16",
+      "predicted": "Argentina",
+      "actual": "Argentina",
+      "correct": true
+    },
+    {
+      "match": "Switzerland v Colombia",
+      "stage": "round_of_16",
+      "predicted": "Switzerland",
+      "actual": "Switzerland",
+      "correct": true
+    },
+    {
+      "match": "France v Morocco",
+      "stage": "quarter_final",
+      "predicted": "France",
+      "actual": "France",
+      "correct": true
+    },
+    {
+      "match": "Spain v Belgium",
+      "stage": "quarter_final",
+      "predicted": "Spain",
+      "actual": "Spain",
+      "correct": true
+    },
+    {
+      "match": "Norway v England",
+      "stage": "quarter_final",
+      "predicted": "England",
+      "actual": "England",
+      "correct": true
+    },
+    {
+      "match": "Argentina v Switzerland",
+      "stage": "quarter_final",
+      "predicted": "Argentina",
+      "actual": "Argentina",
+      "correct": true
+    },
+    {
+      "match": "France v Spain",
+      "stage": "semi_final",
+      "predicted": "France",
+      "actual": "Spain",
+      "correct": false
+    },
+    {
+      "match": "England v Argentina",
+      "stage": "semi_final",
+      "predicted": "Argentina",
+      "actual": "Argentina",
+      "correct": true
+    },
+    {
+      "match": "France v England",
+      "stage": "third_place",
+      "predicted": "France",
+      "actual": "England",
+      "correct": false
+    },
+    {
+      "match": "Spain v Argentina",
+      "stage": "final",
+      "predicted": "Argentina",
+      "actual": "Spain",
+      "correct": false
+    }
+  ],
+  "note": "This file is a comparison ONLY. It was written after, and never caused a change to, wc2026_pretournament_predictions.csv."
+}

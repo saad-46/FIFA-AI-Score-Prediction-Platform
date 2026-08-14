@@ -1,0 +1,115 @@
+{
+  "comparison_table": [
+    {
+      "label": "Current V2 (baseline)",
+      "id": "EXP-001",
+      "accuracy": 0.513,
+      "log_loss": 1.1345,
+      "brier": 0.6457,
+      "ece": 0.1757,
+      "draw_recall": 0.2443,
+      "score_mae": 0.9282,
+      "composite": 0.7135
+    },
+    {
+      "label": "EXP-002 (feature)",
+      "id": "EXP-002",
+      "accuracy": 0.5157,
+      "log_loss": 1.1254,
+      "brier": 0.6373,
+      "ece": 0.1889,
+      "draw_recall": 0.2602,
+      "score_mae": 0.933,
+      "composite": 0.7085
+    },
+    {
+      "label": "EXP-007 (hyperparameters)",
+      "id": "EXP-007",
+      "accuracy": 0.5287,
+      "log_loss": 1.0155,
+      "brier": 0.6008,
+      "ece": 0.1116,
+      "draw_recall": 0.2148,
+      "score_mae": 0.9319,
+      "composite": 0.653
+    }
+  ],
+  "selection_note": "Selected EXP-007 — beat baseline by 0.06050 composite.",
+  "final_version": "v2.1.0-historical-optimized",
+  "final_groups": [
+    "strength",
+    "form",
+    "history",
+    "context"
+  ],
+  "final_clf_params": {
+    "n_estimators": 200,
+    "max_depth": 3,
+    "learning_rate": 0.03328934350873081,
+    "subsample": 0.6950873836384747,
+    "colsample_bytree": 0.860456436297428,
+    "min_child_weight": 3,
+    "gamma": 0.3,
+    "reg_alpha": 0.2586762826070334,
+    "reg_lambda": 1.2456180155061534,
+    "objective": "multi:softprob",
+    "num_class": 3,
+    "eval_metric": "mlogloss",
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "final_reg_params": {
+    "n_estimators": 200,
+    "max_depth": 3,
+    "learning_rate": 0.03328934350873081,
+    "subsample": 0.6950873836384747,
+    "colsample_bytree": 0.860456436297428,
+    "min_child_weight": 3,
+    "gamma": 0.3,
+    "reg_alpha": 0.2586762826070334,
+    "reg_lambda": 1.2456180155061534,
+    "objective": "count:poisson",
+    "eval_metric": "rmse",
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "calibration": {
+    "chronological_comparison": {
+      "none": {
+        "log_loss": 1.0155,
+        "brier": 0.6009,
+        "ece": 0.1116
+      },
+      "platt": {
+        "log_loss": 1.0123,
+        "brier": 0.6052,
+        "ece": 0.1008
+      },
+      "isotonic": {
+        "log_loss": 1.1872,
+        "brier": 0.5951,
+        "ece": 0.092
+      },
+      "temperature": {
+        "log_loss": 1.0044,
+        "brier": 0.5998,
+        "ece": 0.0919
+      }
+    },
+    "selected_method": "temperature",
+    "selected_params": {
+      "temperature": 1.622242
+    },
+    "oof_rows": 448,
+    "oof_years": [
+      1998,
+      2002,
+      2006,
+      2010,
+      2014,
+      2018,
+      2022
+    ]
+  },
+  "artifact_sha256": "7ca69d8520dca875106d77c50d579a281ae03de3b3f9f9ffb401903cda59368f"
+}

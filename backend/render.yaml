@@ -26,3 +26,24 @@ services:
         value: '["https://your-app.vercel.app"]'
       - key: MODEL_VERSION
         value: "1.0.0"
+      # ── V2 model (feature-flagged). MUST stay false until V2 is approved:
+      # with it false the legacy production model serves every request.
+      - key: USE_V2_MODEL
+        value: "false"
+      # When V2 is enabled, serve the production bundle (trained through 2026)
+      # rather than the 2022-frozen backtest bundle.
+      - key: V2_USE_PRODUCTION_MODEL
+        value: "true"
+      # V2 reads matches_v2/teams_v2 from Postgres — a deployed container has
+      # no local canonical CSV.
+      - key: V2_DATA_SOURCE
+        value: "supabase"
+      # ── Rate limiting. Counters live in public.rate_limit_buckets so the
+      # limit is shared across the 2 uvicorn workers below; a per-process
+      # limiter would let each client take 2x the configured limit.
+      - key: RATE_LIMIT_ENABLED
+        value: "true"
+      - key: RATE_LIMIT_PREDICT_PER_MINUTE
+        value: "30"
+      - key: RATE_LIMIT_SIMULATE_PER_MINUTE
+        value: "5"

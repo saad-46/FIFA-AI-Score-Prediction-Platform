@@ -1,0 +1,114 @@
+{
+  "generated_at": "2026-08-13T20:19:56+05:30",
+  "sources": {
+    "S1": "fifa_world_cup_all_matches_1930_1998.csv",
+    "S2": "fifa_world_cup_all_matches_2002_2026.csv",
+    "S3": "FWC26 Match Schedule.pdf",
+    "S4": "matches_wc26_detailed.csv",
+    "S5": "teams(group_ELOrank).csv.xlsx"
+  },
+  "counts": {
+    "matches_total": 1069,
+    "matches_1930_1998": 581,
+    "matches_2002_2026": 488,
+    "matches_2026": 104,
+    "teams_total": 89,
+    "teams_wc2026": 48,
+    "match_stat_rows": 208,
+    "tournaments": 23
+  },
+  "matches_by_year": {
+    "1930": 18,
+    "1934": 17,
+    "1938": 19,
+    "1950": 22,
+    "1954": 26,
+    "1958": 35,
+    "1962": 32,
+    "1966": 32,
+    "1970": 32,
+    "1974": 38,
+    "1978": 38,
+    "1982": 52,
+    "1986": 52,
+    "1990": 52,
+    "1994": 52,
+    "1998": 64,
+    "2002": 64,
+    "2006": 64,
+    "2010": 64,
+    "2014": 64,
+    "2018": 64,
+    "2022": 64,
+    "2026": 104
+  },
+  "duplicates": {
+    "date_home_away": {},
+    "year_stage_teams_unordered": {
+      "(1934, 'quarter_final', ('Italy', 'Spain'))": 2,
+      "(1938, 'first_round', ('Germany', 'Switzerland'))": 2,
+      "(1938, 'first_round', ('Cuba', 'Romania'))": 2,
+      "(1938, 'quarter_final', ('Brazil', 'Czechoslovakia'))": 2,
+      "(1954, 'group_stage', ('Italy', 'Switzerland'))": 2,
+      "(1954, 'group_stage', ('Türkiye', 'West Germany'))": 2,
+      "(1958, 'group_stage', ('Hungary', 'Wales'))": 2,
+      "(1958, 'group_stage', ('Czechoslovakia', 'Northern Ireland'))": 2,
+      "(1958, 'group_stage', ('England', 'Soviet Union'))": 2
+    }
+  },
+  "team_diagnostics": {
+    "reference_teams": 48,
+    "teams_in_reference_not_in_matches": [],
+    "wc2026_teams_matched": 48
+  },
+  "wc2026_enrichment": {
+    "matched": 104,
+    "unmatched_s4_keys": [],
+    "score_conflicts": [],
+    "reversed_fixture": 0
+  },
+  "stat_notes": {
+    "unparsed_scores": [],
+    "formation_repairs": 43
+  },
+  "build_notes": {
+    "unmapped_stages": [],
+    "date_failures": [],
+    "winner_mismatch": []
+  },
+  "deliberately_distinct_identities": [
+    [
+      "West Germany",
+      "Germany"
+    ],
+    [
+      "East Germany",
+      "Germany"
+    ],
+    [
+      "Soviet Union",
+      "Russia"
+    ],
+    [
+      "Czechoslovakia",
+      "Czechia"
+    ],
+    [
+      "Yugoslavia",
+      "Serbia"
+    ],
+    [
+      "Serbia and Montenegro",
+      "Serbia"
+    ],
+    [
+      "Dutch East Indies",
+      "Indonesia"
+    ]
+  ],
+  "dropped_columns": {
+    "total_goals_team1": "corrupt in 650/1069 rows — disagrees with the real scoreline",
+    "total_goals_team2": "corrupt in 650/1069 rows — disagrees with the real scoreline"
+  },
+  "xg_status": "UNAVAILABLE — not present in any approved source; never fabricated"
+}

@@ -1,10 +1,11 @@
 import logging
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional
 
 from app.db.database import get_db
+from app.core.rate_limit import check_rate_limit, prediction_rule
 from app.core.security import get_current_user, get_optional_user
 from app.schemas.prediction import (
     PredictionRequest,
@@ -25,12 +26,21 @@ router = APIRouter(prefix="/predictions", tags=["predictions"])
 @router.post("/predict", response_model=PredictionResult, status_code=status.HTTP_200_OK)
 async def predict_match(
     payload: PredictionRequest,
+    request: Request,
+    db: AsyncSession = Depends(get_db),
     user: Optional[dict] = Depends(get_optional_user),
 ):
     """
     Run AI prediction for a match.
-    Public endpoint — authentication optional.
+    Public endpoint — authentication optional, but rate limited (see
+    app/core/rate_limit.py): authenticated callers are limited per account,
+    anonymous callers per client IP.
     """
+    # Raises 429 with Retry-After when over the limit. Deliberately before the
+    # try/except below so a 429 propagates as a 429 rather than being caught
+    # and re-raised as a generic 500.
+    await check_rate_limit(db, prediction_rule(), request, user)
+
     try:
         result = await run_prediction(
             home_team=payload.home_team,

@@ -1,0 +1,105 @@
+match_id,date,stage,home_team,away_team,home_goals,away_goals,raw_p_away_win,cal_p_away_win,raw_p_draw,cal_p_draw,raw_p_home_win,cal_p_home_win,predicted_home_score,predicted_away_score,confidence,predicted_result,actual_result,correct
+wc2026_9029667b723b,2026-06-11,group_stage,South Korea,Czechia,2.0,1.0,0.3608,0.3446,0.2876,0.3144,0.3516,0.341,1.062,1.47,0.3446,away_win,home_win,False
+wc2026_d22c74e5343d,2026-06-11,group_stage,Mexico,South Africa,2.0,0.0,0.1325,0.2499,0.1337,0.2508,0.7339,0.4994,1.844,0.698,0.4994,home_win,home_win,True
+wc2026_618208e98ac4,2026-06-12,group_stage,Canada,Bosnia and Herzegovina,1.0,1.0,0.2966,0.3182,0.3488,0.3397,0.3547,0.3421,1.534,1.354,0.3421,home_win,draw,False
+wc2026_974c02074c90,2026-06-12,group_stage,USA,Paraguay,4.0,1.0,0.1138,0.2272,0.2725,0.3235,0.6137,0.4493,1.144,0.785,0.4493,home_win,home_win,True
+wc2026_0573cac991ab,2026-06-13,group_stage,Qatar,Switzerland,1.0,1.0,0.8982,0.6279,0.0823,0.2388,0.0195,0.1333,0.447,1.924,0.6279,away_win,draw,False
+wc2026_8df45225626e,2026-06-13,group_stage,Brazil,Morocco,1.0,1.0,0.127,0.2585,0.0628,0.1944,0.8102,0.5471,1.866,0.384,0.5471,home_win,draw,False
+wc2026_c6577ff073f4,2026-06-13,group_stage,Australia,Türkiye,2.0,0.0,0.3364,0.3593,0.0676,0.1878,0.596,0.4529,1.004,0.938,0.4529,home_win,home_win,True
+wc2026_c75a835ae73b,2026-06-13,group_stage,Haiti,Scotland,0.0,1.0,0.8353,0.5673,0.1195,0.2583,0.0452,0.1744,0.57,2.089,0.5673,away_win,away_win,True
+wc2026_5da8904846e4,2026-06-14,group_stage,Sweden,Tunisia,5.0,1.0,0.1489,0.2469,0.4872,0.3988,0.3638,0.3543,1.113,0.774,0.3988,draw,home_win,False
+wc2026_c9987d16c231,2026-06-14,group_stage,Côte d'Ivoire,Ecuador,1.0,0.0,0.2545,0.3115,0.6019,0.4413,0.1436,0.2472,1.032,1.302,0.4413,draw,home_win,False
+wc2026_dfcafad34cf7,2026-06-14,group_stage,Netherlands,Japan,2.0,2.0,0.1237,0.2344,0.6159,0.4487,0.2605,0.3168,1.365,0.778,0.4487,draw,draw,True
+wc2026_e2a5dcc199b9,2026-06-14,group_stage,Germany,Curaçao,7.0,1.0,0.0554,0.2052,0.0283,0.1564,0.9163,0.6384,1.921,0.574,0.6384,home_win,home_win,True
+wc2026_229bd3da6469,2026-06-15,group_stage,Belgium,Egypt,1.0,1.0,0.1171,0.2441,0.1007,0.2296,0.7823,0.5263,1.678,0.521,0.5263,home_win,draw,False
+wc2026_27599b5d1194,2026-06-15,group_stage,Spain,Cabo Verde,0.0,0.0,0.0176,0.1503,0.0046,0.087,0.9778,0.7627,2.9,0.681,0.7627,home_win,draw,False
+wc2026_72853ad0c97d,2026-06-15,group_stage,Saudi Arabia,Uruguay,1.0,1.0,0.9484,0.6949,0.042,0.197,0.0096,0.1082,0.323,1.355,0.6949,away_win,draw,False
+wc2026_78ee555dde7e,2026-06-15,group_stage,IR Iran,New Zealand,2.0,2.0,0.1689,0.2642,0.2096,0.2883,0.6215,0.4475,1.657,1.104,0.4475,home_win,draw,False
+wc2026_1d5fd99b0d66,2026-06-16,group_stage,Austria,Jordan,3.0,1.0,0.2788,0.3301,0.0925,0.2113,0.6287,0.4586,1.502,0.958,0.4586,home_win,home_win,True
+wc2026_8ce9dfc1cb90,2026-06-16,group_stage,Argentina,Algeria,3.0,0.0,0.0603,0.2041,0.0503,0.1897,0.8894,0.6062,2.508,0.73,0.6062,home_win,home_win,True
+wc2026_a52808d09f64,2026-06-16,group_stage,France,Senegal,3.0,1.0,0.116,0.2551,0.0472,0.1773,0.8368,0.5675,1.447,0.373,0.5675,home_win,home_win,True
+wc2026_dcf721fd692e,2026-06-16,group_stage,Iraq,Norway,1.0,4.0,0.3176,0.3367,0.5328,0.415,0.1496,0.2483,1.478,1.524,0.415,draw,away_win,False
+wc2026_27c094527835,2026-06-17,group_stage,Uzbekistan,Colombia,1.0,3.0,0.7714,0.5261,0.0643,0.1926,0.1643,0.2814,0.544,1.188,0.5261,away_win,away_win,True
+wc2026_54f739eb0c7e,2026-06-17,group_stage,Portugal,Congo DR,1.0,1.0,0.004,0.0814,0.0231,0.1659,0.9729,0.7527,3.552,0.34,0.7527,home_win,draw,False
+wc2026_76c62698d89a,2026-06-17,group_stage,England,Croatia,4.0,2.0,0.392,0.3689,0.119,0.2277,0.4891,0.4034,1.216,0.823,0.4034,home_win,home_win,True
+wc2026_dbd71250d9a7,2026-06-17,group_stage,Ghana,Panama,1.0,0.0,0.2188,0.2871,0.2436,0.2999,0.5376,0.413,1.01,0.906,0.413,home_win,home_win,True
+wc2026_2490485cb4f5,2026-06-18,group_stage,Switzerland,Bosnia and Herzegovina,4.0,1.0,0.1295,0.2416,0.2008,0.2886,0.6697,0.4698,1.52,1.125,0.4698,home_win,home_win,True
+wc2026_39963dbb6aee,2026-06-18,group_stage,Canada,Qatar,6.0,0.0,0.1798,0.2645,0.3382,0.3415,0.482,0.3941,1.817,1.13,0.3941,home_win,home_win,True
+wc2026_f2db1221018a,2026-06-18,group_stage,Mexico,South Korea,1.0,0.0,0.147,0.2458,0.4941,0.4014,0.3589,0.3527,0.811,0.782,0.4014,draw,home_win,False
+wc2026_f9f7cedf7f20,2026-06-18,group_stage,Czechia,South Africa,1.0,1.0,0.135,0.2411,0.5932,0.4388,0.2718,0.3201,1.779,1.321,0.4388,draw,draw,True
+wc2026_01bc7217a313,2026-06-19,group_stage,USA,Australia,2.0,0.0,0.0653,0.196,0.1369,0.2644,0.7979,0.5396,1.142,0.744,0.5396,home_win,home_win,True
+wc2026_713718e641b0,2026-06-19,group_stage,Türkiye,Paraguay,0.0,1.0,0.2942,0.3224,0.2011,0.2765,0.5047,0.4011,1.724,1.066,0.4011,home_win,away_win,False
+wc2026_7aae04f7242f,2026-06-19,group_stage,Scotland,Morocco,0.0,1.0,0.6818,0.4752,0.1919,0.2845,0.1263,0.2403,0.763,1.6,0.4752,away_win,away_win,True
+wc2026_b2147c9330a0,2026-06-19,group_stage,Brazil,Haiti,3.0,0.0,0.0134,0.133,0.0091,0.1138,0.9774,0.7533,3.012,0.255,0.7533,home_win,home_win,True
+wc2026_0bd13e0fc12f,2026-06-20,group_stage,Ecuador,Curaçao,0.0,0.0,0.0527,0.1862,0.1001,0.2413,0.8472,0.5725,2.553,1.3,0.5725,home_win,draw,False
+wc2026_5612557b971d,2026-06-20,group_stage,Netherlands,Sweden,5.0,1.0,0.1445,0.2439,0.463,0.3907,0.3924,0.3654,1.199,0.713,0.3907,draw,home_win,False
+wc2026_bcc65405bb8a,2026-06-20,group_stage,Tunisia,Japan,0.0,4.0,0.3801,0.352,0.3298,0.3324,0.29,0.3156,0.859,1.09,0.352,away_win,away_win,True
+wc2026_ed32d11435ea,2026-06-20,group_stage,Germany,Côte d'Ivoire,2.0,1.0,0.0553,0.1758,0.3051,0.3509,0.6396,0.4733,1.469,0.79,0.4733,home_win,home_win,True
+wc2026_738cdfe7f666,2026-06-21,group_stage,Uruguay,Cabo Verde,2.0,2.0,0.0317,0.1604,0.0685,0.219,0.8998,0.6207,2.08,0.604,0.6207,home_win,draw,False
+wc2026_75463bf8d943,2026-06-21,group_stage,Belgium,IR Iran,0.0,0.0,0.495,0.3982,0.1883,0.2694,0.3167,0.3324,1.263,1.198,0.3982,away_win,draw,False
+wc2026_c629a6928635,2026-06-21,group_stage,New Zealand,Egypt,1.0,3.0,0.279,0.3185,0.5465,0.418,0.1746,0.2635,0.959,1.116,0.418,draw,away_win,False
+wc2026_c7436333a97c,2026-06-21,group_stage,Spain,Saudi Arabia,4.0,0.0,0.0971,0.2189,0.2019,0.2943,0.701,0.4869,2.0,0.676,0.4869,home_win,home_win,True
+wc2026_4c817770c739,2026-06-22,group_stage,Norway,Senegal,3.0,2.0,0.8126,0.5627,0.1578,0.2899,0.0296,0.1474,0.592,1.313,0.5627,away_win,home_win,False
+wc2026_4dba1871c76b,2026-06-22,group_stage,France,Iraq,3.0,0.0,0.0469,0.2057,0.0081,0.1012,0.945,0.6931,2.797,0.373,0.6931,home_win,home_win,True
+wc2026_9530b85a9db9,2026-06-22,group_stage,Jordan,Algeria,1.0,2.0,0.7194,0.494,0.1047,0.2265,0.1759,0.2795,0.874,1.581,0.494,away_win,away_win,True
+wc2026_c292176cc683,2026-06-22,group_stage,Argentina,Austria,2.0,0.0,0.0228,0.1524,0.0252,0.1587,0.9519,0.689,1.939,0.452,0.689,home_win,home_win,True
+wc2026_1f7416d8bdc6,2026-06-23,group_stage,Portugal,Uzbekistan,5.0,0.0,0.0131,0.1313,0.0101,0.1182,0.9767,0.7504,2.674,0.793,0.7504,home_win,home_win,True
+wc2026_2163119e93ac,2026-06-23,group_stage,England,Ghana,0.0,0.0,0.0372,0.1606,0.1468,0.2797,0.8159,0.5597,1.506,0.658,0.5597,home_win,draw,False
+wc2026_e85e7c1e279e,2026-06-23,group_stage,Colombia,Congo DR,1.0,0.0,0.012,0.1157,0.0527,0.2105,0.9353,0.6739,2.817,0.377,0.6739,home_win,home_win,True
+wc2026_f19637cd8eb0,2026-06-23,group_stage,Panama,Croatia,0.0,1.0,0.8633,0.5893,0.0999,0.2463,0.0368,0.1644,0.658,1.904,0.5893,away_win,away_win,True
+wc2026_39634e3e68e2,2026-06-24,group_stage,Scotland,Brazil,0.0,3.0,0.8829,0.6024,0.0412,0.1744,0.0759,0.2232,0.762,1.772,0.6024,away_win,away_win,True
+wc2026_832ac2d7e33c,2026-06-24,group_stage,South Africa,South Korea,1.0,0.0,0.2365,0.3236,0.7154,0.5064,0.0481,0.1699,0.672,1.337,0.5064,draw,home_win,False
+wc2026_8d92bdfa9b4a,2026-06-24,group_stage,Switzerland,Canada,2.0,1.0,0.1131,0.2451,0.079,0.212,0.8078,0.5429,1.368,1.006,0.5429,home_win,home_win,True
+wc2026_9d671e2caaba,2026-06-24,group_stage,Morocco,Haiti,4.0,2.0,0.0572,0.1774,0.3241,0.3578,0.6187,0.4648,1.634,0.555,0.4648,home_win,home_win,True
+wc2026_e1947e5a7d99,2026-06-24,group_stage,Czechia,Mexico,0.0,3.0,0.7706,0.5303,0.179,0.2938,0.0504,0.176,0.482,1.872,0.5303,away_win,away_win,True
+wc2026_edd15886bd2c,2026-06-24,group_stage,Bosnia and Herzegovina,Qatar,3.0,1.0,0.3049,0.324,0.4498,0.3792,0.2453,0.2967,1.309,1.158,0.3792,draw,home_win,False
+wc2026_22542f3a931a,2026-06-25,group_stage,Ecuador,Germany,2.0,1.0,0.915,0.6459,0.0683,0.2261,0.0168,0.1281,0.7,1.945,0.6459,away_win,home_win,False
+wc2026_6bca45b32c5f,2026-06-25,group_stage,Türkiye,USA,3.0,2.0,0.3922,0.3591,0.2149,0.2816,0.3929,0.3594,1.305,1.507,0.3594,home_win,home_win,True
+wc2026_6e207ce02935,2026-06-25,group_stage,Tunisia,Netherlands,1.0,3.0,0.874,0.5917,0.0664,0.2086,0.0596,0.1997,0.711,1.073,0.5917,away_win,away_win,True
+wc2026_a7f446b5af3c,2026-06-25,group_stage,Japan,Sweden,1.0,1.0,0.592,0.4672,0.3756,0.3887,0.0324,0.1442,0.68,1.152,0.4672,away_win,draw,False
+wc2026_e063b32c41e8,2026-06-25,group_stage,Curaçao,Côte d'Ivoire,0.0,2.0,0.5118,0.4046,0.1848,0.268,0.3034,0.3274,0.77,1.349,0.4046,away_win,away_win,True
+wc2026_e2ff43c7c72d,2026-06-25,group_stage,Paraguay,Australia,0.0,0.0,0.1467,0.2462,0.5228,0.4117,0.3306,0.342,0.771,0.709,0.4117,draw,draw,True
+wc2026_3041a0ae79a8,2026-06-26,group_stage,Senegal,Iraq,5.0,0.0,0.0296,0.1468,0.1668,0.2953,0.8036,0.5578,1.984,0.728,0.5578,home_win,home_win,True
+wc2026_4b2fc52dc591,2026-06-26,group_stage,Norway,France,1.0,4.0,0.9327,0.6665,0.0521,0.2075,0.0152,0.126,0.38,1.958,0.6665,away_win,away_win,True
+wc2026_4e180982d2a5,2026-06-26,group_stage,Egypt,IR Iran,1.0,1.0,0.6868,0.4874,0.2453,0.3214,0.068,0.1912,0.893,1.552,0.4874,away_win,draw,False
+wc2026_4e5e516d1025,2026-06-26,group_stage,New Zealand,Belgium,1.0,5.0,0.8546,0.5863,0.1139,0.2595,0.0315,0.1542,0.504,2.031,0.5863,away_win,away_win,True
+wc2026_c940b0e8770c,2026-06-26,group_stage,Cabo Verde,Saudi Arabia,0.0,0.0,0.5285,0.4185,0.1123,0.2236,0.3592,0.3579,1.13,1.315,0.4185,away_win,draw,False
+wc2026_cf2a66dc640e,2026-06-26,group_stage,Uruguay,Spain,0.0,1.0,0.6405,0.4578,0.2311,0.3032,0.1284,0.239,0.774,1.263,0.4578,away_win,away_win,True
+wc2026_1809c17e282b,2026-06-27,group_stage,Jordan,Argentina,1.0,3.0,0.8239,0.5573,0.1218,0.2572,0.0543,0.1855,0.318,1.428,0.5573,away_win,away_win,True
+wc2026_269f2b7be3dd,2026-06-27,group_stage,Panama,England,0.0,2.0,0.7287,0.4987,0.1705,0.2771,0.1008,0.2241,0.404,1.464,0.4987,away_win,away_win,True
+wc2026_5320ac193de4,2026-06-27,group_stage,Congo DR,Uzbekistan,3.0,1.0,0.1793,0.2658,0.5387,0.4149,0.282,0.3193,0.879,1.083,0.4149,draw,home_win,False
+wc2026_6a61b28e24d4,2026-06-27,group_stage,Algeria,Austria,3.0,3.0,0.5494,0.4472,0.4104,0.3974,0.0402,0.1553,0.636,1.378,0.4472,away_win,draw,False
+wc2026_90e57d08c7b9,2026-06-27,group_stage,Colombia,Portugal,0.0,0.0,0.5312,0.4112,0.272,0.3137,0.1968,0.2751,0.829,1.135,0.4112,away_win,draw,False
+wc2026_bfc04bcf2b3d,2026-06-27,group_stage,Croatia,Ghana,2.0,1.0,0.1483,0.2567,0.16,0.2647,0.6917,0.4786,1.908,0.674,0.4786,home_win,home_win,True
+wc2026_debd733fb46e,2026-06-28,round_of_32,South Africa,Canada,0.0,1.0,0.1777,0.2668,0.579,0.4302,0.2433,0.3029,0.907,1.164,0.4302,draw,away_win,False
+wc2026_30e521b41659,2026-06-29,round_of_32,Germany,Paraguay,1.0,1.0,0.0408,0.1697,0.106,0.2497,0.8533,0.5806,2.009,0.528,0.5806,home_win,draw,False
+wc2026_7d2bc6628cee,2026-06-29,round_of_32,Brazil,Japan,2.0,1.0,0.0313,0.1557,0.0976,0.2466,0.8711,0.5977,2.414,0.43,0.5977,home_win,home_win,True
+wc2026_9d8783dbdcb2,2026-06-29,round_of_32,Netherlands,Morocco,1.0,1.0,0.2169,0.2829,0.4402,0.3767,0.3429,0.3405,1.574,0.78,0.3767,draw,draw,True
+wc2026_48edba28ab43,2026-06-30,round_of_32,France,Sweden,3.0,0.0,0.0748,0.2034,0.1571,0.2746,0.7682,0.522,1.362,0.51,0.522,home_win,home_win,True
+wc2026_a07596712254,2026-06-30,round_of_32,Côte d'Ivoire,Norway,1.0,2.0,0.1426,0.2427,0.4484,0.3857,0.4089,0.3716,1.552,1.254,0.3857,draw,away_win,False
+wc2026_a7a370596db9,2026-06-30,round_of_32,Mexico,Ecuador,2.0,0.0,0.5019,0.4,0.2018,0.2767,0.2963,0.3232,1.377,0.956,0.4,away_win,home_win,False
+wc2026_18ac79be3b3b,2026-07-01,round_of_32,USA,Bosnia and Herzegovina,2.0,0.0,0.1666,0.2715,0.1236,0.2406,0.7098,0.4879,1.795,0.9,0.4879,home_win,home_win,True
+wc2026_65b852b5990c,2026-07-01,round_of_32,Belgium,Senegal,3.0,2.0,0.3886,0.3868,0.0459,0.163,0.5656,0.4502,1.522,0.821,0.4502,home_win,home_win,True
+wc2026_6f3b67f59379,2026-07-01,round_of_32,England,Congo DR,2.0,1.0,0.0105,0.1082,0.0674,0.2298,0.9221,0.662,3.034,0.376,0.662,home_win,home_win,True
+wc2026_230d4fa08d38,2026-07-02,round_of_32,Spain,Austria,3.0,0.0,0.0819,0.2232,0.0627,0.2003,0.8553,0.5765,2.341,0.784,0.5765,home_win,home_win,True
+wc2026_39d9ca75ccac,2026-07-02,round_of_32,Portugal,Croatia,2.0,1.0,0.1299,0.2525,0.1025,0.2295,0.7676,0.518,2.41,0.832,0.518,home_win,home_win,True
+wc2026_ed806183ca32,2026-07-02,round_of_32,Switzerland,Algeria,2.0,0.0,0.1491,0.2522,0.2226,0.2966,0.6282,0.4512,1.527,1.438,0.4512,home_win,home_win,True
+wc2026_6c3e218f1582,2026-07-03,round_of_32,Colombia,Ghana,1.0,0.0,0.1108,0.2225,0.3607,0.3588,0.5285,0.4187,1.761,1.126,0.4187,home_win,home_win,True
+wc2026_c3ff701d0238,2026-07-03,round_of_32,Australia,Egypt,1.0,1.0,0.1635,0.2684,0.1338,0.2475,0.7027,0.4841,1.478,1.098,0.4841,home_win,draw,False
+wc2026_de1456f0777c,2026-07-03,round_of_32,Argentina,Cabo Verde,3.0,2.0,0.014,0.1362,0.0072,0.104,0.9789,0.7598,2.62,0.604,0.7598,home_win,home_win,True
+wc2026_184a5b0efbc7,2026-07-04,round_of_16,Paraguay,France,0.0,1.0,0.8868,0.6056,0.072,0.2193,0.0412,0.1751,0.508,1.622,0.6056,away_win,away_win,True
+wc2026_380178e8b602,2026-07-04,round_of_16,Canada,Morocco,0.0,3.0,0.8552,0.5758,0.0727,0.2124,0.0721,0.2118,0.997,1.643,0.5758,away_win,away_win,True
+wc2026_d53e4cad5773,2026-07-05,round_of_16,Brazil,Norway,1.0,2.0,0.0256,0.1599,0.0217,0.1495,0.9527,0.6906,2.628,0.443,0.6906,home_win,away_win,False
+wc2026_fb5950744709,2026-07-05,round_of_16,Mexico,England,2.0,3.0,0.2628,0.3078,0.5133,0.4036,0.224,0.2886,0.863,1.174,0.4036,draw,away_win,False
+wc2026_a90021a82b82,2026-07-06,round_of_16,USA,Belgium,1.0,4.0,0.5879,0.4367,0.276,0.3216,0.1362,0.2417,1.025,1.227,0.4367,away_win,away_win,True
+wc2026_b876ae3e0a3a,2026-07-06,round_of_16,Portugal,Spain,0.0,1.0,0.2058,0.2773,0.3581,0.3469,0.4361,0.3757,1.642,0.911,0.3757,home_win,away_win,False
+wc2026_75d8ac5354e8,2026-07-07,round_of_16,Switzerland,Colombia,0.0,0.0,0.2416,0.2943,0.4135,0.3658,0.3449,0.3399,0.909,1.061,0.3658,draw,draw,True
+wc2026_8bed4c7a1163,2026-07-07,round_of_16,Argentina,Egypt,3.0,2.0,0.0441,0.1922,0.0228,0.1471,0.9332,0.6607,2.976,0.602,0.6607,home_win,home_win,True
+wc2026_9cd387672632,2026-07-09,quarter_final,France,Morocco,2.0,0.0,0.082,0.2217,0.0698,0.2078,0.8482,0.5705,1.929,0.658,0.5705,home_win,home_win,True
+wc2026_852c2df5eba5,2026-07-10,quarter_final,Spain,Belgium,2.0,1.0,0.2895,0.3212,0.1934,0.2728,0.517,0.4061,1.4,0.831,0.4061,home_win,home_win,True
+wc2026_b30f42744bcd,2026-07-11,quarter_final,Argentina,Switzerland,3.0,1.0,0.0461,0.1647,0.3169,0.3591,0.637,0.4763,1.639,0.701,0.4763,home_win,home_win,True
+wc2026_ce3e6d31925e,2026-07-11,quarter_final,Norway,England,1.0,2.0,0.7304,0.5178,0.2314,0.3252,0.0382,0.157,0.373,1.426,0.5178,away_win,away_win,True
+wc2026_09a8d54d40f2,2026-07-14,semi_final,France,Spain,0.0,2.0,0.2588,0.3082,0.1954,0.2751,0.5458,0.4168,1.471,0.74,0.4168,home_win,away_win,False
+wc2026_e7e2310d35d9,2026-07-15,semi_final,England,Argentina,1.0,2.0,0.574,0.4346,0.3123,0.3397,0.1136,0.2257,1.195,1.256,0.4346,away_win,away_win,True
+wc2026_7adc2719127a,2026-07-18,third_place,France,England,4.0,6.0,0.1672,0.2627,0.218,0.2925,0.6148,0.4449,1.407,0.733,0.4449,home_win,away_win,False
+wc2026_b04c0c092f6c,2026-07-19,final,Spain,Argentina,1.0,0.0,0.5056,0.4025,0.3124,0.3313,0.182,0.2662,1.538,1.292,0.4025,away_win,home_win,False

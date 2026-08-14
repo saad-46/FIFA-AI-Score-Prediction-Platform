@@ -1,0 +1,90 @@
+{
+  "n_total_matches": 384,
+  "n_wrong": 181,
+  "overall_error_rate": 0.4714,
+  "categories": {
+    "strong_favourite_lost": {
+      "population": 134,
+      "errors_in_population": 45,
+      "error_rate": 0.3358,
+      "overall_error_rate": 0.4714,
+      "share_of_all_errors": 0.2486,
+      "note": "Model gave >=65% to the predicted outcome, but was wrong."
+    },
+    "draw_predicted_as_win": {
+      "population": 88,
+      "errors_in_population": 69,
+      "error_rate": 0.7841,
+      "overall_error_rate": 0.4714,
+      "share_of_all_errors": 0.3812,
+      "note": "Match was actually a draw; model predicted a decisive winner."
+    },
+    "win_predicted_as_draw": {
+      "population": 62,
+      "errors_in_population": 43,
+      "error_rate": 0.6935,
+      "overall_error_rate": 0.4714,
+      "share_of_all_errors": 0.2376,
+      "note": "Model predicted a draw; match actually had a winner."
+    },
+    "elo_favourite_upset": {
+      "population": 44,
+      "errors_in_population": 39,
+      "error_rate": 0.8864,
+      "overall_error_rate": 0.4714,
+      "share_of_all_errors": 0.2155,
+      "note": "Elo gap >100 in one side's favour, but the underdog won outright — a genuine upset regardless of what the model predicted; flags whether the model still over-trusted Elo in these cases."
+    },
+    "knockout_stage_errors": {
+      "population": 96,
+      "errors_in_population": 40,
+      "error_rate": 0.4167,
+      "overall_error_rate": 0.4714,
+      "share_of_all_errors": 0.221,
+      "note": "Errors specifically in knockout matches (higher stakes, single match, small sample per stage)."
+    },
+    "group_stage_errors": {
+      "population": 288,
+      "errors_in_population": 141,
+      "error_rate": 0.4896,
+      "overall_error_rate": 0.4714,
+      "share_of_all_errors": 0.779,
+      "note": "Errors in group-stage matches."
+    },
+    "high_scoring_match_error": {
+      "population": 87,
+      "errors_in_population": 28,
+      "error_rate": 0.3218,
+      "overall_error_rate": 0.4714,
+      "share_of_all_errors": 0.1547,
+      "note": "Actual combined goals >= 4."
+    },
+    "low_scoring_match_error": {
+      "population": 114,
+      "errors_in_population": 57,
+      "error_rate": 0.5,
+      "overall_error_rate": 0.4714,
+      "share_of_all_errors": 0.3149,
+      "note": "Actual combined goals <= 1."
+    },
+    "extra_time_or_penalties": {
+      "population": 33,
+      "errors_in_population": 24,
+      "error_rate": 0.7273,
+      "overall_error_rate": 0.4714,
+      "share_of_all_errors": 0.1326,
+      "note": "Match went to extra time or penalties — score-based features see a level match at 90 minutes; result depends on factors outside the model's inputs."
+    }
+  },
+  "verdicts": {
+    "strong_favourite_lost": "consistent with baseline — not distinguishable from random",
+    "draw_predicted_as_win": "systematic — error rate notably above baseline",
+    "win_predicted_as_draw": "systematic — error rate notably above baseline",
+    "elo_favourite_upset": "systematic — error rate notably above baseline",
+    "knockout_stage_errors": "consistent with baseline — not distinguishable from random",
+    "group_stage_errors": "consistent with baseline — not distinguishable from random",
+    "high_scoring_match_error": "consistent with baseline — not distinguishable from random",
+    "low_scoring_match_error": "consistent with baseline — not distinguishable from random",
+    "extra_time_or_penalties": "systematic — error rate notably above baseline"
+  }
+}

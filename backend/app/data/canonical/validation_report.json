@@ -1,0 +1,919 @@
+{
+  "counts": {
+    "total_matches": 1069,
+    "expected_total": 1069,
+    "matches_1930_1998": 581,
+    "matches_2002_2026": 488,
+    "matches_2026": 104,
+    "tournaments": 23,
+    "by_year": {
+      "1930": 18,
+      "1934": 17,
+      "1938": 19,
+      "1950": 22,
+      "1954": 26,
+      "1958": 35,
+      "1962": 32,
+      "1966": 32,
+      "1970": 32,
+      "1974": 38,
+      "1978": 38,
+      "1982": 52,
+      "1986": 52,
+      "1990": 52,
+      "1994": 52,
+      "1998": 64,
+      "2002": 64,
+      "2006": 64,
+      "2010": 64,
+      "2014": 64,
+      "2018": 64,
+      "2022": 64,
+      "2026": 104
+    },
+    "per_tournament_mismatches": {}
+  },
+  "duplicates": {
+    "exact_date_home_away": {},
+    "duplicate_match_ids": {},
+    "same_year_stage_teams_distinct_dates": [
+      {
+        "year": 1934,
+        "stage": "quarter_final",
+        "teams": [
+          "Italy",
+          "Spain"
+        ],
+        "dates": [
+          "1934-05-31",
+          "1934-06-01"
+        ],
+        "is_replay": [
+          false,
+          true
+        ]
+      },
+      {
+        "year": 1938,
+        "stage": "first_round",
+        "teams": [
+          "Germany",
+          "Switzerland"
+        ],
+        "dates": [
+          "1938-06-04",
+          "1938-06-09"
+        ],
+        "is_replay": [
+          false,
+          true
+        ]
+      },
+      {
+        "year": 1938,
+        "stage": "first_round",
+        "teams": [
+          "Cuba",
+          "Romania"
+        ],
+        "dates": [
+          "1938-06-05",
+          "1938-06-09"
+        ],
+        "is_replay": [
+          false,
+          true
+        ]
+      },
+      {
+        "year": 1938,
+        "stage": "quarter_final",
+        "teams": [
+          "Brazil",
+          "Czechoslovakia"
+        ],
+        "dates": [
+          "1938-06-12",
+          "1938-06-14"
+        ],
+        "is_replay": [
+          false,
+          true
+        ]
+      },
+      {
+        "year": 1954,
+        "stage": "group_stage",
+        "teams": [
+          "Italy",
+          "Switzerland"
+        ],
+        "dates": [
+          "1954-06-17",
+          "1954-06-23"
+        ],
+        "is_replay": [
+          false,
+          false
+        ]
+      },
+      {
+        "year": 1954,
+        "stage": "group_stage",
+        "teams": [
+          "Türkiye",
+          "West Germany"
+        ],
+        "dates": [
+          "1954-06-17",
+          "1954-06-23"
+        ],
+        "is_replay": [
+          false,
+          false
+        ]
+      },
+      {
+        "year": 1958,
+        "stage": "group_stage",
+        "teams": [
+          "Hungary",
+          "Wales"
+        ],
+        "dates": [
+          "1958-06-08",
+          "1958-06-17"
+        ],
+        "is_replay": [
+          false,
+          false
+        ]
+      },
+      {
+        "year": 1958,
+        "stage": "group_stage",
+        "teams": [
+          "Czechoslovakia",
+          "Northern Ireland"
+        ],
+        "dates": [
+          "1958-06-08",
+          "1958-06-17"
+        ],
+        "is_replay": [
+          false,
+          false
+        ]
+      },
+      {
+        "year": 1958,
+        "stage": "group_stage",
+        "teams": [
+          "England",
+          "Soviet Union"
+        ],
+        "dates": [
+          "1958-06-08",
+          "1958-06-17"
+        ],
+        "is_replay": [
+          false,
+          false
+        ]
+      }
+    ],
+    "same_year_stage_teams_SAME_date": []
+  },
+  "teams": {
+    "total_teams": 89,
+    "wc2026_teams": 48,
+    "wc2026_groups": 12,
+    "groups_not_of_four": {},
+    "teams_missing_fifa_code": [],
+    "teams_missing_elo": [],
+    "teams_missing_fifa_rank": [],
+    "pdf_groups_match_reference": true,
+    "pdf_vs_reference_group_mismatches": []
+  },
+  "scores": {
+    "negative_scores": [],
+    "implausible_scores": [],
+    "null_full_time_scores": [
+      {
+        "match": "1938-06-05 Sweden v Austria",
+        "method": "Walkover"
+      }
+    ],
+    "extra_time_below_full_time": [],
+    "penalties_on_non_level_match": [],
+    "matches_with_extra_time": 82,
+    "matches_with_penalties": 39
+  },
+  "dates": {
+    "invalid_or_missing": [],
+    "outside_tournament_year": [],
+    "earliest": "1930-07-13",
+    "latest": "2026-07-19",
+    "chronologically_sorted": true
+  },
+  "tournament_structure": {
+    "wc2026_stage_counts": {
+      "group_stage": 72,
+      "round_of_32": 16,
+      "round_of_16": 8,
+      "quarter_final": 4,
+      "semi_final": 2,
+      "third_place": 1,
+      "final": 1
+    },
+    "stage_count_mismatches": {},
+    "match_numbers_complete_1_104": true,
+    "match_number_provenance": {
+      "derived_from_fifa_scheme": 33,
+      "pdf_wallchart": 71
+    },
+    "graph_nodes": 104,
+    "dangling_dependency_refs": [],
+    "final_present": true,
+    "third_place_present": true,
+    "knockout_links_from_pdf": 14
+  },
+  "provenance": {
+    "by_source_dataset": {
+      "wc_1930_1998": 581,
+      "wc_2002_2026": 488
+    },
+    "by_source_file": {
+      "fifa_world_cup_all_matches_1930_1998.csv": 581,
+      "fifa_world_cup_all_matches_2002_2026.csv": 488
+    }
+  },
+  "match_statistics": {
+    "rows": 208,
+    "distinct_matches_covered": 104,
+    "coverage_pct_of_corpus": 9.73,
+    "usage_policy": "MATCH OUTCOMES ONLY — never a pre-match feature for the same match; permitted solely as lagged aggregates of earlier matches"
+  },
+  "xg": {
+    "status": "UNAVAILABLE",
+    "reason": "not present in any approved source; never fabricated"
+  },
+  "match_number_assignment": {
+    "wc2026_rows": 104,
+    "assigned_from_pdf": 71,
+    "assigned_by_derivation": 33,
+    "unresolved_fifa_codes": [],
+    "pdf_pairs_unmatched_to_dataset": [],
+    "kickoff_conflicts": [
+      {
+        "match_number": 57,
+        "pdf": "19:00",
+        "s4": "15:00",
+        "teams": [
+          "Canada",
+          "Bosnia and Herzegovina"
+        ]
+      },
+      {
+        "match_number": 26,
+        "pdf": "15:00",
+        "s4": "18:00",
+        "teams": [
+          "USA",
+          "Paraguay"
+        ]
+      },
+      {
+        "match_number": 2,
+        "pdf": "22:00",
+        "s4": "21:00",
+        "teams": [
+          "Australia",
+          "Türkiye"
+        ]
+      },
+      {
+        "match_number": 4,
+        "pdf": "21:00",
+        "s4": "18:00",
+        "teams": [
+          "Brazil",
+          "Morocco"
+        ]
+      },
+      {
+        "match_number": 7,
+        "pdf": "18:00",
+        "s4": "21:00",
+        "teams": [
+          "Haiti",
+          "Scotland"
+        ]
+      },
+      {
+        "match_number": 5,
+        "pdf": "21:00",
+        "s4": "12:00",
+        "teams": [
+          "Qatar",
+          "Switzerland"
+        ]
+      },
+      {
+        "match_number": 11,
+        "pdf": "16:00",
+        "s4": "19:00",
+        "teams": [
+          "Côte d'Ivoire",
+          "Ecuador"
+        ]
+      },
+      {
+        "match_number": 8,
+        "pdf": "15:00",
+        "s4": "12:00",
+        "teams": [
+          "Germany",
+          "Curaçao"
+        ]
+      },
+      {
+        "match_number": 10,
+        "pdf": "13:00",
+        "s4": "15:00",
+        "teams": [
+          "Netherlands",
+          "Japan"
+        ]
+      },
+      {
+        "match_number": 31,
+        "pdf": "23:00",
+        "s4": "20:00",
+        "teams": [
+          "Sweden",
+          "Tunisia"
+        ]
+      },
+      {
+        "match_number": 72,
+        "pdf": "19:30",
+        "s4": "12:00",
+        "teams": [
+          "Belgium",
+          "Egypt"
+        ]
+      },
+      {
+        "match_number": 16,
+        "pdf": "15:00",
+        "s4": "18:00",
+        "teams": [
+          "IR Iran",
+          "New Zealand"
+        ]
+      },
+      {
+        "match_number": 9,
+        "pdf": "19:00",
+        "s4": "18:00",
+        "teams": [
+          "Saudi Arabia",
+          "Uruguay"
+        ]
+      },
+      {
+        "match_number": 13,
+        "pdf": "18:00",
+        "s4": "12:00",
+        "teams": [
+          "Spain",
+          "Cabo Verde"
+        ]
+      },
+      {
+        "match_number": 20,
+        "pdf": "00:00",
+        "s4": "20:00",
+        "teams": [
+          "Argentina",
+          "Algeria"
+        ]
+      },
+      {
+        "match_number": 14,
+        "pdf": "12:00",
+        "s4": "21:00",
+        "teams": [
+          "Austria",
+          "Jordan"
+        ]
+      },
+      {
+        "match_number": 19,
+        "pdf": "21:00",
+        "s4": "15:00",
+        "teams": [
+          "France",
+          "Senegal"
+        ]
+      },
+      {
+        "match_number": 21,
+        "pdf": "19:00",
+        "s4": "15:00",
+        "teams": [
+          "England",
+          "Croatia"
+        ]
+      },
+      {
+        "match_number": 17,
+        "pdf": "15:00",
+        "s4": "19:00",
+        "teams": [
+          "Ghana",
+          "Panama"
+        ]
+      },
+      {
+        "match_number": 35,
+        "pdf": "13:00",
+        "s4": "12:00",
+        "teams": [
+          "Portugal",
+          "Congo DR"
+        ]
+      },
+      {
+        "match_number": 22,
+        "pdf": "16:00",
+        "s4": "20:00",
+        "teams": [
+          "Uzbekistan",
+          "Colombia"
+        ]
+      },
+      {
+        "match_number": 24,
+        "pdf": "22:00",
+        "s4": "15:00",
+        "teams": [
+          "Canada",
+          "Qatar"
+        ]
+      },
+      {
+        "match_number": 27,
+        "pdf": "18:00",
+        "s4": "19:00",
+        "teams": [
+          "Mexico",
+          "South Korea"
+        ]
+      },
+      {
+        "match_number": 3,
+        "pdf": "15:00",
+        "s4": "12:00",
+        "teams": [
+          "Switzerland",
+          "Bosnia and Herzegovina"
+        ]
+      },
+      {
+        "match_number": 28,
+        "pdf": "21:00",
+        "s4": "20:30",
+        "teams": [
+          "Brazil",
+          "Haiti"
+        ]
+      },
+      {
+        "match_number": 29,
+        "pdf": "20:30",
+        "s4": "18:00",
+        "teams": [
+          "Scotland",
+          "Morocco"
+        ]
+      },
+      {
+        "match_number": 25,
+        "pdf": "12:00",
+        "s4": "20:00",
+        "teams": [
+          "Türkiye",
+          "Paraguay"
+        ]
+      },
+      {
+        "match_number": 30,
+        "pdf": "18:00",
+        "s4": "12:00",
+        "teams": [
+          "USA",
+          "Australia"
+        ]
+      },
+      {
+        "match_number": 36,
+        "pdf": "00:00",
+        "s4": "19:00",
+        "teams": [
+          "Ecuador",
+          "Curaçao"
+        ]
+      },
+      {
+        "match_number": 34,
+        "pdf": "20:00",
+        "s4": "16:00",
+        "teams": [
+          "Germany",
+          "Côte d'Ivoire"
+        ]
+      },
+      {
+        "match_number": 6,
+        "pdf": "00:00",
+        "s4": "12:00",
+        "teams": [
+          "Netherlands",
+          "Sweden"
+        ]
+      },
+      {
+        "match_number": 32,
+        "pdf": "15:00",
+        "s4": "22:00",
+        "teams": [
+          "Tunisia",
+          "Japan"
+        ]
+      },
+      {
+        "match_number": 43,
+        "pdf": "13:00",
+        "s4": "12:00",
+        "teams": [
+          "Belgium",
+          "IR Iran"
+        ]
+      },
+      {
+        "match_number": 39,
+        "pdf": "15:00",
+        "s4": "18:00",
+        "teams": [
+          "New Zealand",
+          "Egypt"
+        ]
+      },
+      {
+        "match_number": 37,
+        "pdf": "18:00",
+        "s4": "12:00",
+        "teams": [
+          "Spain",
+          "Saudi Arabia"
+        ]
+      },
+      {
+        "match_number": 46,
+        "pdf": "19:00",
+        "s4": "18:00",
+        "teams": [
+          "Uruguay",
+          "Cabo Verde"
+        ]
+      },
+      {
+        "match_number": 48,
+        "pdf": "22:00",
+        "s4": "17:00",
+        "teams": [
+          "France",
+          "Iraq"
+        ]
+      },
+      {
+        "match_number": 40,
+        "pdf": "21:00",
+        "s4": "20:00",
+        "teams": [
+          "Jordan",
+          "Algeria"
+        ]
+      },
+      {
+        "match_number": 33,
+        "pdf": "16:00",
+        "s4": "20:00",
+        "teams": [
+          "Norway",
+          "Senegal"
+        ]
+      },
+      {
+        "match_number": 23,
+        "pdf": "13:00",
+        "s4": "20:00",
+        "teams": [
+          "Colombia",
+          "Congo DR"
+        ]
+      },
+      {
+        "match_number": 41,
+        "pdf": "20:00",
+        "s4": "16:00",
+        "teams": [
+          "England",
+          "Ghana"
+        ]
+      },
+      {
+        "match_number": 45,
+        "pdf": "16:00",
+        "s4": "19:00",
+        "teams": [
+          "Panama",
+          "Croatia"
+        ]
+      },
+      {
+        "match_number": 54,
+        "pdf": "21:00",
+        "s4": "12:00",
+        "teams": [
+          "Portugal",
+          "Uzbekistan"
+        ]
+      },
+      {
+        "match_number": 59,
+        "pdf": "22:00",
+        "s4": "12:00",
+        "teams": [
+          "Bosnia and Herzegovina",
+          "Qatar"
+        ]
+      },
+      {
+        "match_number": 1,
+        "pdf": "15:00",
+        "s4": "19:00",
+        "teams": [
+          "Czechia",
+          "Mexico"
+        ]
+      },
+      {
+        "match_number": 47,
+        "pdf": "13:00",
+        "s4": "18:00",
+        "teams": [
+          "Morocco",
+          "Haiti"
+        ]
+      },
+      {
+        "match_number": 51,
+        "pdf": "15:00",
+        "s4": "19:00",
+        "teams": [
+          "South Africa",
+          "South Korea"
+        ]
+      },
+      {
+        "match_number": 44,
+        "pdf": "23:00",
+        "s4": "12:00",
+        "teams": [
+          "Switzerland",
+          "Canada"
+        ]
+      },
+      {
+        "match_number": 49,
+        "pdf": "18:00",
+        "s4": "16:00",
+        "teams": [
+          "Ecuador",
+          "Germany"
+        ]
+      },
+      {
+        "match_number": 62,
+        "pdf": "15:00",
+        "s4": "18:00",
+        "teams": [
+          "Japan",
+          "Sweden"
+        ]
+      },
+      {
+        "match_number": 55,
+        "pdf": "16:00",
+        "s4": "18:00",
+        "teams": [
+          "Tunisia",
+          "Netherlands"
+        ]
+      },
+      {
+        "match_number": 18,
+        "pdf": "18:00",
+        "s4": "19:00",
+        "teams": [
+          "Türkiye",
+          "USA"
+        ]
+      },
+      {
+        "match_number": 64,
+        "pdf": "23:00",
+        "s4": "19:00",
+        "teams": [
+          "Cabo Verde",
+          "Saudi Arabia"
+        ]
+      },
+      {
+        "match_number": 70,
+        "pdf": "22:00",
+        "s4": "20:00",
+        "teams": [
+          "Egypt",
+          "IR Iran"
+        ]
+      },
+      {
+        "match_number": 60,
+        "pdf": "22:00",
+        "s4": "20:00",
+        "teams": [
+          "New Zealand",
+          "Belgium"
+        ]
+      },
+      {
+        "match_number": 66,
+        "pdf": "20:00",
+        "s4": "15:00",
+        "teams": [
+          "Norway",
+          "France"
+        ]
+      },
+      {
+        "match_number": 42,
+        "pdf": "17:00",
+        "s4": "15:00",
+        "teams": [
+          "Senegal",
+          "Iraq"
+        ]
+      },
+      {
+        "match_number": 65,
+        "pdf": "20:00",
+        "s4": "18:00",
+        "teams": [
+          "Uruguay",
+          "Spain"
+        ]
+      },
+      {
+        "match_number": 71,
+        "pdf": "19:30",
+        "s4": "21:00",
+        "teams": [
+          "Algeria",
+          "Austria"
+        ]
+      },
+      {
+        "match_number": 68,
+        "pdf": "17:00",
+        "s4": "19:30",
+        "teams": [
+          "Colombia",
+          "Portugal"
+        ]
+      },
+      {
+        "match_number": 69,
+        "pdf": "22:00",
+        "s4": "21:00",
+        "teams": [
+          "Jordan",
+          "Argentina"
+        ]
+      },
+      {
+        "match_number": 61,
+        "pdf": "15:00",
+        "s4": "17:00",
+        "teams": [
+          "Panama",
+          "England"
+        ]
+      },
+      {
+        "match_number": 73,
+        "pdf": "23:00",
+        "s4": "12:00",
+        "teams": [
+          "South Africa",
+          "Canada"
+        ]
+      },
+      {
+        "match_number": 75,
+        "pdf": "15:00",
+        "s4": "19:00",
+        "teams": [
+          "Netherlands",
+          "Morocco"
+        ]
+      },
+      {
+        "match_number": 88,
+        "pdf": "16:00",
+        "s4": "13:00",
+        "teams": [
+          "Australia",
+          "Egypt"
+        ]
+      },
+      {
+        "match_number": 87,
+        "pdf": "14:00",
+        "s4": "20:30",
+        "teams": [
+          "Colombia",
+          "Ghana"
+        ]
+      }
+    ],
+    "rejected_out_of_stage_candidates": [
+      {
+        "teams": [
+          "Congo DR",
+          "Uzbekistan"
+        ],
+        "stage": "group_stage",
+        "valid_range": [
+          1,
+          72
+        ],
+        "rejected": [
+          104
+        ]
+      },
+      {
+        "teams": [
+          "South Africa",
+          "Canada"
+        ],
+        "stage": "round_of_32",
+        "valid_range": [
+          73,
+          88
+        ],
+        "rejected": [
+          63
+        ]
+      },
+      {
+        "teams": [
+          "Australia",
+          "Egypt"
+        ],
+        "stage": "round_of_32",
+        "valid_range": [
+          73,
+          88
+        ],
+        "rejected": [
+          91
+        ]
+      }
+    ],
+    "kickoff_resolution": {
+      "authoritative_source": "S4 matches_wc26_detailed.csv (start_time)",
+      "pdf_times_discarded": true,
+      "reason": "wallchart text extraction binds times to adjacent grid cells; differences are non-uniform so they are extraction artefacts, not a substantive source conflict",
+      "fixtures_where_pdf_time_differed": 66
+    },
+    "assigned_total": 104,
+    "numbers_are_1_to_104": true
+  },
+  "result": "PASS",
+  "failures": [],
+  "validated_at": "2026-08-13T20:21:30+05:30"
+}
