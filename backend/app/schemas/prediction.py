@@ -76,6 +76,13 @@ class HeadToHeadStats(BaseModel):
     draws:           int
     home_team_goals: int
     away_team_goals: int
+    # Additive: the counts above are meaningless without knowing which corpus
+    # they were drawn from. Zero meetings in a World-Cup-only dataset does not
+    # mean two teams have never played, and the UI previously rendered exactly
+    # that as "No previous meetings". Optional so existing clients are
+    # unaffected.
+    scope:       Optional[str] = None
+    scope_label: Optional[str] = None
 
 
 # ─── Full prediction result ───────────────────────────────────────────────────

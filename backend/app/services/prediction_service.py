@@ -23,6 +23,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
+from app.data import wc2026 as wc2026_data
 from app.ml.model_loader import get_model_loader
 from app.models.match import SavedPrediction
 from app.schemas.analytics import RecentPredictionSummary
@@ -193,6 +194,38 @@ def _compute_h2h(
     home_team: str,
     away_team: str,
 ) -> HeadToHeadStats:
+    """Head-to-head record shown beside a prediction.
+
+    Reads the canonical 1930-2026 World Cup corpus rather than ``df``. ``df``
+    is the model-serving frame, whose WC-tagged rows only begin in 2002, so
+    this reported "no previous meetings" for pairs who had met earlier —
+    Spain v Argentina met at the 1966 World Cup. ``df`` itself is deliberately
+    left alone: it feeds inference, and changing its population would be a
+    train/serve skew.
+
+    This affects only the displayed record and the head-to-head *insight*
+    text. Probabilities, expected goals and scorelines are produced by the
+    model before this runs and are untouched.
+    """
+    canonical = wc2026_data.world_cup_head_to_head(home_team, away_team)
+    return HeadToHeadStats(
+        total_matches=canonical["total_matches"],
+        home_team_wins=canonical["team_a_wins"],
+        away_team_wins=canonical["team_b_wins"],
+        draws=canonical["draws"],
+        home_team_goals=canonical["team_a_goals"],
+        away_team_goals=canonical["team_b_goals"],
+        scope=canonical["scope"],
+        scope_label=canonical["scope_label"],
+    )
+
+
+def _compute_h2h_legacy(
+    df: pd.DataFrame,
+    home_team: str,
+    away_team: str,
+) -> HeadToHeadStats:
+    """Previous served-corpus implementation, retained for reference/tests."""
     mask = (
         ((df["home_team"] == home_team) & (df["away_team"] == away_team))
         | ((df["home_team"] == away_team) & (df["away_team"] == home_team))

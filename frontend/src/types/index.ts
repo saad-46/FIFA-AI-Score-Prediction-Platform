@@ -188,6 +188,10 @@ export interface HeadToHeadStats {
   home_team_goals: number;
   away_team_goals: number;
   last_5_matches?: Match[];
+  /** Which corpus the counts were drawn from. Render it: zero meetings in a
+   * World-Cup-only dataset does not mean two teams have never played. */
+  scope?: string | null;
+  scope_label?: string | null;
 }
 
 // ─── Analytics ───────────────────────────────────────────────────────────────

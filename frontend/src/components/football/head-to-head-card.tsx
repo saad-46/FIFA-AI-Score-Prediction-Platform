@@ -16,15 +16,22 @@ export function HeadToHeadCard({ stats, homeTeam, awayTeam }: HeadToHeadCardProp
       <CardHeader className="pb-2 border-b border-border/20">
         <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
           <Shield className="h-4.5 w-4.5 text-primary" aria-hidden="true" />
-          Historical Head-to-Head Matrix
+          Head-to-Head
         </CardTitle>
       </CardHeader>
       <CardContent>
         {stats.total_matches === 0 ? (
+          // Never "No previous meetings": the corpus is World Cup only, so two
+          // sides can have met many times in friendlies or qualifiers and still
+          // show zero here. The scope has to be stated for the zero to be true.
           <EmptyState
             icon={Shield}
-            title="No previous meetings"
-            description={`${homeTeam} and ${awayTeam} haven't met in this dataset.`}
+            title="No World Cup meetings"
+            description={
+              stats.scope_label
+                ? `${homeTeam} and ${awayTeam} have not met within ${stats.scope_label.toLowerCase()}. Matches outside this dataset are not counted.`
+                : `${homeTeam} and ${awayTeam} have not met in the dataset used here.`
+            }
             className="py-6"
           />
         ) : (
@@ -56,6 +63,11 @@ export function HeadToHeadCard({ stats, homeTeam, awayTeam }: HeadToHeadCardProp
                 </p>
               </div>
             </div>
+            {stats.scope_label && (
+              <p className="pt-3 text-center font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+                {stats.scope_label}
+              </p>
+            )}
           </>
         )}
       </CardContent>

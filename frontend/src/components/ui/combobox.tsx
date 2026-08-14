@@ -9,6 +9,13 @@ export interface ComboboxOption {
   value: string;
   label: string;
   description?: string;
+  /** Optional leading visual (e.g. a flag). Kept as a node so this primitive
+   * stays domain-agnostic — it renders whatever the caller supplies rather
+   * than knowing about teams. */
+  leading?: React.ReactNode;
+  /** Optional right-aligned metadata (e.g. rank / Elo), shown before the
+   * selected-check so it never displaces it. */
+  trailing?: React.ReactNode;
 }
 
 interface ComboboxProps {
@@ -158,13 +165,21 @@ export function Combobox({
                   i === highlighted && "bg-surface-2"
                 )}
               >
-                <span className="flex flex-col overflow-hidden">
-                  <span className="truncate font-medium">{option.label}</span>
-                  {option.description && (
-                    <span className="truncate text-xs text-fg-muted">{option.description}</span>
+                <span className="flex min-w-0 items-center gap-2.5">
+                  {option.leading}
+                  <span className="flex min-w-0 flex-col overflow-hidden">
+                    <span className="truncate font-medium">{option.label}</span>
+                    {option.description && (
+                      <span className="truncate text-xs text-fg-muted">{option.description}</span>
+                    )}
+                  </span>
+                </span>
+                <span className="flex shrink-0 items-center gap-2">
+                  {option.trailing}
+                  {option.value === value && (
+                    <Check className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                   )}
                 </span>
-                {option.value === value && <Check className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />}
               </li>
             ))
           )}

@@ -48,7 +48,10 @@ export function Navbar({ user }: NavbarProps) {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* xl:, not md: — the seven nav items plus the search and theme
+              controls need ~1140px. Showing them from 768px pushed the header
+              past the viewport and gave the whole page a horizontal scrollbar. */}
+          <nav className="hidden xl:flex items-center gap-1">
             {navItems.map((item) => {
               const Icon = item.icon;
               const active = pathname.startsWith(item.href);
@@ -75,7 +78,7 @@ export function Navbar({ user }: NavbarProps) {
             <Button
               variant="outline"
               size="sm"
-              className="hidden md:inline-flex text-fg-muted font-normal"
+              className="hidden xl:inline-flex text-fg-muted font-normal"
               onClick={() => setPaletteOpen(true)}
             >
               <Search className="h-3.5 w-3.5" />
@@ -86,7 +89,7 @@ export function Navbar({ user }: NavbarProps) {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="hidden md:flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-foreground hover:bg-surface-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                  <button className="hidden xl:flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-foreground hover:bg-surface-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                     <Avatar className="h-7 w-7">
                       <AvatarFallback>
                         {(user.full_name || user.email)[0].toUpperCase()}
@@ -123,7 +126,7 @@ export function Navbar({ user }: NavbarProps) {
 
             {/* Mobile menu toggle */}
             <button
-              className="md:hidden rounded-lg p-2 text-fg-muted hover:bg-surface-2"
+              className="xl:hidden rounded-lg p-2 text-fg-muted hover:bg-surface-2"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -140,7 +143,7 @@ export function Navbar({ user }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-border bg-background"
+            className="xl:hidden border-t border-border bg-background"
           >
             <nav className="flex flex-col gap-1 p-4">
               {navItems.map((item) => {

@@ -225,10 +225,20 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
             <CardHeader className="pb-2 border-b border-border/20">
               <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
                 <Info className="h-4 w-4 text-cyan-400" aria-hidden="true" />
-                Strategic Risk Factors
+                Notable Factors
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 pt-4">
+              {/* These come from the backend's rule-based checks over real
+                  match history (home win rate, recent form, H2H record, xG
+                  total, model confidence) — each only appears when its
+                  threshold is actually met. The section used to be titled
+                  "Strategic Risk Factors", which mislabelled every
+                  type="advantage" entry as a risk. */}
+              <p className="pb-1 text-[11px] text-fg-muted">
+                Derived from historical results for this matchup — shown only when the
+                underlying data supports them.
+              </p>
               {result.insights.map((insight, i) => {
                 const { icon: Icon, className } = INSIGHT_STYLE[insight.type];
                 return (

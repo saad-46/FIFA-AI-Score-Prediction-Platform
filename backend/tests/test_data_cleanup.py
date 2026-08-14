@@ -206,3 +206,47 @@ async def test_wc2026_team_directory_endpoint_returns_48_alphabetically():
     names = [t["name"] for t in body]
     assert "Central Spain" not in names
     assert names == sorted(names), "directory must come back alphabetically"
+
+
+# ─── Prediction-path head-to-head (commit 3) ─────────────────────────────────
+
+def test_prediction_head_to_head_uses_the_canonical_corpus():
+    """The H2H shown beside a prediction previously came from the
+    model-serving frame, whose WC rows start in 2002 — so Spain v Argentina
+    rendered "No previous meetings" despite their 1966 meeting."""
+    import pandas as pd
+
+    from app.services.prediction_service import _compute_h2h
+
+    # An empty frame proves the result cannot be coming from `df`.
+    stats = _compute_h2h(pd.DataFrame(), "Spain", "Argentina")
+    assert stats.total_matches == 2
+    assert stats.home_team_wins == 1 and stats.away_team_wins == 1
+    assert stats.draws == 0
+
+
+def test_prediction_head_to_head_always_declares_its_scope():
+    """Counts without a scope are unreadable: zero World Cup meetings does not
+    mean two teams have never played."""
+    import pandas as pd
+
+    from app.services.prediction_service import _compute_h2h
+
+    for pair in (("Spain", "Argentina"), ("Haiti", "Jordan")):
+        stats = _compute_h2h(pd.DataFrame(), *pair)
+        assert stats.scope == "fifa_world_cup_1930_2026"
+        assert stats.scope_label and "World Cup" in stats.scope_label
+
+
+def test_prediction_head_to_head_is_oriented_to_the_home_team():
+    """home_team_wins must count the *first* argument's wins, not the team that
+    happened to be at home in each historical fixture."""
+    import pandas as pd
+
+    from app.services.prediction_service import _compute_h2h
+
+    forward = _compute_h2h(pd.DataFrame(), "Spain", "Argentina")
+    reverse = _compute_h2h(pd.DataFrame(), "Argentina", "Spain")
+    assert forward.home_team_wins == reverse.away_team_wins
+    assert forward.away_team_wins == reverse.home_team_wins
+    assert forward.total_matches == reverse.total_matches

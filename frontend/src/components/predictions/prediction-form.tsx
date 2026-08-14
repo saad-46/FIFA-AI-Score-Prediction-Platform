@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Brain, ArrowRight, RefreshCw, Cpu, ShieldAlert } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,7 +8,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Combobox } from "@/components/ui/combobox";
+import { Combobox, type ComboboxOption } from "@/components/ui/combobox";
 import {
   Select,
   SelectContent,
@@ -21,7 +21,8 @@ import { predictionsApi } from "@/lib/api/predictions";
 import { getApiErrorMessage } from "@/lib/api/client";
 import type { PredictionResult, Team } from "@/types";
 import { toast } from "@/hooks/use-toast";
-import { useTeamSearch } from "@/hooks/use-team-search";
+import useSWR from "swr";
+import { teamsApi } from "@/lib/api/teams";
 import { TeamFlag } from "@/components/football/team-flag";
 
 const schema = z.object({
@@ -58,12 +59,53 @@ interface PredictionFormProps {
   onPredictError: () => void;
 }
 
+/** Builds a Combobox option for a WC2026 team: flag, name, code + group, and
+ * rank/Elo on the right. Defined once here rather than inline at both call
+ * sites so the two selectors cannot drift apart. */
+function teamOption(t: Team): ComboboxOption {
+  const meta = [t.fifa_code, t.wc2026_group ? `Group ${t.wc2026_group}` : null]
+    .filter(Boolean)
+    .join(" · ");
+  return {
+    value: t.name,
+    label: t.name,
+    description: meta || t.country,
+    leading: <TeamFlag name={t.name} fifaCode={t.fifa_code} size="sm" />,
+    trailing: (
+      <span className="font-mono text-[10px] tabular-nums text-fg-muted">
+        {t.fifa_ranking != null ? `#${t.fifa_ranking}` : "—"}
+        {t.elo_rating != null ? ` · ${t.elo_rating}` : ""}
+      </span>
+    ),
+  };
+}
+
 export function PredictionForm({ onResult, onStartPredict, onPredictError }: PredictionFormProps) {
   const [loading, setLoading] = useState(false);
   const [homeSearch, setHomeSearch] = useState("");
   const [awaySearch, setAwaySearch] = useState("");
-  const { results: homeTeams, loading: homeSearching } = useTeamSearch(homeSearch);
-  const { results: awayTeams, loading: awaySearching } = useTeamSearch(awaySearch);
+  // The 48 WC2026 qualifiers, not /teams/search. That endpoint queries all 335
+  // rows in the teams table, which still contains non-national entities from
+  // the legacy seed ("Central Spain", "Asturias", "Ticino") — they must never
+  // be selectable as a 2026 fixture. Filtering happens client-side over a
+  // fixed 48-item list, so there is no per-keystroke request either.
+  const { data: rosterData, isLoading: rosterLoading } = useSWR(
+    "wc2026-team-directory",
+    teamsApi.getWc2026Teams,
+    { revalidateOnFocus: false }
+  );
+  const roster = useMemo(() => rosterData ?? [], [rosterData]);
+
+  const filterRoster = (query: string, exclude?: string) => {
+    const q = query.trim().toLowerCase();
+    return roster.filter((t) => {
+      if (exclude && t.name === exclude) return false;
+      if (!q) return true;
+      return (
+        t.name.toLowerCase().includes(q) || (t.fifa_code ?? "").toLowerCase().includes(q)
+      );
+    });
+  };
 
   const [selectedHome, setSelectedHome] = useState<Team | null>(null);
   const [selectedAway, setSelectedAway] = useState<Team | null>(null);
@@ -83,6 +125,13 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
   const awayTeamValue = watch("away_team");
   const neutralVenue = watch("neutral_venue");
   const tournamentValue = watch("tournament");
+
+  // Declared after watch(): each side's list excludes the other side's pick so
+  // a team cannot be selected against itself.
+  const homeTeams = filterRoster(homeSearch, awayTeamValue);
+  const awayTeams = filterRoster(awaySearch, homeTeamValue);
+  const homeSearching = rosterLoading;
+  const awaySearching = rosterLoading;
 
   const onSubmit = async (values: FormValues) => {
     if (values.home_team === values.away_team) {
@@ -137,15 +186,15 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
                   value={homeTeamValue}
                   onValueChange={(v) => {
                     setValue("home_team", v, { shouldValidate: true });
-                    const team = homeTeams.find((t) => t.name === v);
+                    const team = roster.find((t) => t.name === v);
                     if (team) setSelectedHome(team);
                   }}
                   onSearchChange={setHomeSearch}
                   loading={homeSearching}
                   placeholder="Select home team…"
                   searchPlaceholder="Type team name…"
-                  emptyMessage={homeSearch.length < 2 ? "Keep typing…" : "No matches found."}
-                  options={homeTeams.map((t) => ({ value: t.name, label: t.name, description: t.country }))}
+                  emptyMessage="No 2026 team matches that."
+                  options={homeTeams.map((t) => teamOption(t))}
                 />
                 {errors.home_team && <p className="text-xs text-loss font-mono">{errors.home_team.message}</p>}
               </div>
@@ -192,15 +241,15 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
                   value={awayTeamValue}
                   onValueChange={(v) => {
                     setValue("away_team", v, { shouldValidate: true });
-                    const team = awayTeams.find((t) => t.name === v);
+                    const team = roster.find((t) => t.name === v);
                     if (team) setSelectedAway(team);
                   }}
                   onSearchChange={setAwaySearch}
                   loading={awaySearching}
                   placeholder="Select away team…"
                   searchPlaceholder="Type team name…"
-                  emptyMessage={awaySearch.length < 2 ? "Keep typing…" : "No matches found."}
-                  options={awayTeams.map((t) => ({ value: t.name, label: t.name, description: t.country }))}
+                  emptyMessage="No 2026 team matches that."
+                  options={awayTeams.map((t) => teamOption(t))}
                 />
                 {errors.away_team && <p className="text-xs text-loss font-mono">{errors.away_team.message}</p>}
               </div>
