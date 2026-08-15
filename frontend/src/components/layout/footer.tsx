@@ -25,12 +25,11 @@ export function Footer() {
             <Link href="/about" className="hover:text-foreground transition-colors">
               About
             </Link>
-            <Link href="/privacy" className="hover:text-foreground transition-colors">
-              Privacy
-            </Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">
-              Terms
-            </Link>
+            {/* No Privacy / Terms links here. They pointed at /privacy and
+                /terms, neither of which exists — every page in the product was
+                shipping two links that 404. Rather than invent legal copy, the
+                links are gone until real pages exist; /about already carries the
+                entertainment-only and not-affiliated-with-FIFA disclaimers. */}
           </div>
         </div>
       </div>

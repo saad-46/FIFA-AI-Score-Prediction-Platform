@@ -53,12 +53,21 @@ export function AnalyticsView() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatsCard title="Total Matches" value={global.total_matches.toLocaleString()} icon={Activity} color="primary" delay={0} />
           <StatsCard title="Avg Goals/Match" value={global.avg_goals_per_match.toFixed(2)} icon={Target} color="accent" delay={0.05} />
-          <StatsCard title="Home Win Rate" value={`${(global.home_win_rate * 100).toFixed(1)}%`} icon={TrendingUp} color="purple" delay={0.1} />
+          <StatsCard title="Home Win Rate" value={`${(global.home_win_rate * 100).toFixed(1)}%`} icon={TrendingUp} color="accent" delay={0.1} />
           <StatsCard title="Draw Rate" value={`${(global.draw_rate * 100).toFixed(1)}%`} icon={BarChart3} color="draw" delay={0.15} />
         </div>
       )}
+      {/* This line used to claim the opposite — "the full historical dataset
+          across all competitions, not only World Cup matches". That was stale:
+          /analytics/global reads load_matches_dataframe(), which is explicitly
+          filtered to the WC-only corpus so live inference matches training (see
+          ml/data/loader.py). The endpoint's own top_tournaments confirms it —
+          seven entries, all FIFA World Cups. Browsing the wider ~49k-row table
+          is what /matches does; these figures are not that. */}
       <p className="-mt-4 text-xs text-fg-muted">
-        Figures reflect the full historical dataset across all competitions, not only World Cup matches.
+        Figures cover World Cup matches only ({global?.total_matches.toLocaleString() ?? "—"} matches,
+        2002–2026) — the same corpus the model is trained and served on. The full historical record is
+        browsable under Matches.
       </p>
 
       <Tabs defaultValue="overview">

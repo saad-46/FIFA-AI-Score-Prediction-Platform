@@ -12,6 +12,7 @@ import { ErrorState } from "@/components/ui/error-state";
 import { EmptyState } from "@/components/ui/empty-state";
 import { StatsGridSkeleton } from "@/components/ui/page-skeletons";
 import { formatPercent } from "@/lib/utils";
+import { useUser } from "@/hooks/use-user";
 import { TeamFlag } from "@/components/football/team-flag";
 
 const QUICK_ACTIONS = [
@@ -22,6 +23,7 @@ const QUICK_ACTIONS = [
 
 export function DashboardView() {
   const { data: stats, error, isLoading, mutate } = useSWR("dashboard-stats", analyticsApi.getDashboardStats);
+  const { isAuthenticated } = useUser();
 
   return (
     <div className="space-y-8">
@@ -31,9 +33,36 @@ export function DashboardView() {
         <ErrorState title="Couldn't load your dashboard" description={getApiErrorMessage(error)} onRetry={() => mutate()} />
       ) : stats ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatsCard title="Total Projections" value={stats.total_predictions.toLocaleString()} icon={Brain} color="primary" delay={0} />
-          <StatsCard title="Accuracy Rate" value={formatPercent(stats.accuracy_rate)} icon={TrendingUp} color="accent" delay={0.05} />
-          <StatsCard title="Matches Analyzed" value={stats.total_matches_analyzed.toLocaleString()} icon={Activity} color="purple" delay={0.1} />
+          {/* total_predictions and accuracy_rate are the *caller's* numbers —
+              /analytics/dashboard zeroes them for anonymous visitors. Since the
+              site is browsable without an account, the common case was a tile
+              reading "Accuracy Rate 0.0%" with nothing marking it as personal.
+              On a prediction product that parses as the model scoring 0%, which
+              flatly contradicts the real 70.2% WC2026 backtest. Signed out, the
+              tiles now say what they are; signed in, they read as before. */}
+          <StatsCard
+            title="Your Predictions"
+            value={isAuthenticated ? stats.total_predictions.toLocaleString() : "—"}
+            subtitle={isAuthenticated ? undefined : "Saved predictions need an account"}
+            icon={Brain}
+            color="primary"
+            delay={0}
+          />
+          <StatsCard
+            title="Your Accuracy"
+            value={isAuthenticated ? formatPercent(stats.accuracy_rate) : "—"}
+            subtitle={isAuthenticated ? undefined : "See Insights for model accuracy"}
+            icon={TrendingUp}
+            color="accent"
+            delay={0.05}
+          />
+          <StatsCard
+            title="Matches On Record"
+            value={stats.total_matches_analyzed.toLocaleString()}
+            icon={Activity}
+            color="primary"
+            delay={0.1}
+          />
           <StatsCard title="Teams Tracked" value={stats.total_teams.toLocaleString()} icon={Users} color="draw" delay={0.15} />
         </div>
       ) : null}

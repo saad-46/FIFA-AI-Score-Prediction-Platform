@@ -155,8 +155,16 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
     }
   };
 
+  // Everything inside this form sizes off @container, not viewport breakpoints.
+  // The card's width comes from the parent layout, not the screen: once a result
+  // renders, PredictView drops the form into a 3-of-12 column, so at a 1920px
+  // viewport the card is ~280px wide while `md:` (768px viewport) still reported
+  // "large" and forced home/away side by side. Each side got ~130px, which
+  // truncated the selected teams to "Ar…"/"Sa…", wrapped "Team Identifier" onto
+  // two lines and "Neutral Pitch Venue" onto three. Container queries ask the
+  // only question that matters here — how wide is this card.
   return (
-    <Card className="border border-border bg-surface/40 backdrop-blur-md shadow-2xl">
+    <Card className="@container border border-border bg-surface/40 backdrop-blur-md shadow-2xl">
       <CardHeader className="border-b border-border/40 pb-4">
         <CardTitle className="flex items-center gap-2.5 font-mono text-sm tracking-widest uppercase text-foreground">
           <Cpu className="h-4.5 w-4.5 text-primary" aria-hidden="true" />
@@ -166,7 +174,7 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
       <CardContent className="pt-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Dual Node Selectors */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+          <div className="grid grid-cols-1 @md:grid-cols-2 gap-6 relative">
             {/* Left Node: Home */}
             <div className="space-y-4 rounded-lg border border-border/40 bg-zinc-950/20 p-4">
               <div className="flex items-center justify-between">
@@ -179,7 +187,13 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
               </div>
               
               <div className="space-y-1.5">
-                <Label htmlFor="home_team_combobox" className="text-xs font-mono tracking-wider text-zinc-400">Team Identifier</Label>
+                {/* "Home Team", not "Team Identifier". Both selectors carried
+                    the identical label, and since <button> is labelable the
+                    <label> won the accessible-name computation over the
+                    Combobox's aria-label (which only reaches the popover's
+                    search input) — a screen reader announced two controls named
+                    "Team Identifier" with no way to tell home from away. */}
+                <Label htmlFor="home_team_combobox" className="text-xs font-mono tracking-wider text-zinc-400">Home Team</Label>
                 <Combobox
                   id="home_team_combobox"
                   aria-label="Search for a home team"
@@ -234,7 +248,7 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="away_team_combobox" className="text-xs font-mono tracking-wider text-zinc-400">Team Identifier</Label>
+                <Label htmlFor="away_team_combobox" className="text-xs font-mono tracking-wider text-zinc-400">Away Team</Label>
                 <Combobox
                   id="away_team_combobox"
                   aria-label="Search for an away team"
@@ -279,7 +293,7 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
           </div>
 
           {/* Tournament Parameters */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+          <div className="grid grid-cols-1 @md:grid-cols-2 gap-6 pt-2">
             <div className="space-y-1.5">
               <Label className="text-xs font-mono tracking-wider text-zinc-400">Context Competition</Label>
               <Select value={tournamentValue ?? ""} onValueChange={(v) => setValue("tournament", v)}>

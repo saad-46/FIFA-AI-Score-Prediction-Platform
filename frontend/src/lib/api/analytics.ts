@@ -20,8 +20,11 @@ export const analyticsApi = {
   },
 
   /**
-   * Get global analytics overview (server-cached 60s). NOTE: figures reflect
-   * the full historical dataset, not just the WC-only corpus.
+   * Get global analytics overview (server-cached 60s). NOTE: figures cover the
+   * WC-only corpus (2002-2026), NOT the full ~49k-row historical table — the
+   * endpoint reads load_matches_dataframe(), which is deliberately filtered to
+   * keep serving aligned with training. matchesApi.getHistory() is the one that
+   * spans everything.
    */
   async getGlobalAnalytics(): Promise<GlobalAnalytics> {
     const { data } = await apiClient.get<GlobalAnalytics>("/analytics/global");

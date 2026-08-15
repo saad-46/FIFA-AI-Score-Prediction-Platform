@@ -89,7 +89,7 @@ export function TeamDetailView({ teamId }: { teamId: string }) {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatsCard title="Win Rate" value={`${(stats.win_rate * 100).toFixed(1)}%`} icon={TrendingUp} color="primary" />
           <StatsCard title="Goals Scored" value={stats.goals_scored} icon={Target} color="accent" />
-          <StatsCard title="Clean Sheets" value={stats.clean_sheets} icon={Shield} color="purple" />
+          <StatsCard title="Clean Sheets" value={stats.clean_sheets} icon={Shield} color="primary" />
           <StatsCard title="Matches Played" value={stats.matches_played} icon={Activity} color="draw" />
         </div>
       ) : null}

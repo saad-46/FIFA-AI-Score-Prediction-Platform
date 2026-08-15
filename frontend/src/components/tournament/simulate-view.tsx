@@ -79,10 +79,27 @@ export function SimulateView() {
               </Label>
             </div>
           </div>
+          {/* Without this, the tab reads as a contradiction: the Bracket tab
+              shows 2026 finished with Spain champion, while this table gives
+              Spain ~2%. Both are right. Each run redraws the knockout from
+              simulated group tables, so a pairing only takes a real score when
+              it happens to match a fixture that was actually played — most
+              simulated brackets never reproduce the real ones. The switch
+              suppresses re-simulating known facts; it does not replay the
+              tournament. Say so rather than letting the numbers look broken. */}
           <Button variant="gradient" onClick={handleRun} loading={isMutating}>
             {!isMutating && <Play className="h-4 w-4" />}
             {isMutating ? "Simulating…" : "Run simulation"}
           </Button>
+        </CardContent>
+        <CardContent className="pt-0">
+          <p className="text-xs leading-relaxed text-fg-muted">
+            Every run redraws the knockout stage from simulated group tables, so these are
+            probabilities across {nSimulations.toLocaleString()} hypothetical tournaments — not a
+            replay of the real one. With the switch on, a tie only takes its real score when the
+            simulated draw happens to reproduce a fixture that was actually played; everything else
+            is genuinely simulated. The completed 2026 tournament is on the Bracket tab.
+          </p>
         </CardContent>
       </Card>
 

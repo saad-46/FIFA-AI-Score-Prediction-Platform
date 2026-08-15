@@ -117,7 +117,9 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
           <CardContent className="pt-6 space-y-6">
             {/* Target Verdict */}
             <div className="text-center space-y-1">
-              <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">Prototypal Outturn Verdict</span>
+              {/* Was "Prototypal Outturn Verdict" — thesaurus filler that says
+                  nothing. This line labels the model's most likely outcome. */}
+              <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">Most Likely Outcome</span>
               <h2 className="text-lg md:text-xl font-bold font-mono tracking-wide text-foreground">
                 {getVerdict()}
               </h2>

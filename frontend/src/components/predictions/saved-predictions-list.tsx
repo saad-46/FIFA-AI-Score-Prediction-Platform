@@ -88,7 +88,11 @@ export function SavedPredictionsList() {
         <Card className="border-border/40 bg-zinc-950/20 shadow-md">
           <CardContent className="flex items-center justify-between p-5">
             <div>
-              <p className="text-[10px] font-mono tracking-widest text-fg-muted uppercase">Calibration Convergence Accuracy</p>
+              {/* Was "Calibration Convergence Accuracy" — no calibration and no
+                  convergence happens here. /predictions/accuracy is a plain
+                  count: saved predictions whose was_correct is true, over those
+                  already scored against a real result. Name it that. */}
+              <p className="text-[10px] font-mono tracking-widest text-fg-muted uppercase">Your Prediction Accuracy</p>
               <p className="font-mono text-2xl font-bold text-foreground mt-1">
                 {formatPercent(accuracy.accuracy)}
               </p>

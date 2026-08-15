@@ -8,7 +8,7 @@ interface StatsCardProps {
   subtitle?: string;
   icon: LucideIcon;
   trend?: { value: number; label: string };
-  color?: "primary" | "accent" | "draw" | "loss" | "purple";
+  color?: "primary" | "accent" | "draw" | "loss";
   delay?: number;
 }
 
@@ -17,12 +17,11 @@ const colorMap = {
   accent: { icon: "text-accent", bg: "bg-accent/10", border: "border-accent/20", trend: "text-accent" },
   draw: { icon: "text-draw", bg: "bg-draw/10", border: "border-draw/20", trend: "text-draw" },
   loss: { icon: "text-loss", bg: "bg-loss/10", border: "border-loss/20", trend: "text-loss" },
-  purple: {
-    icon: "text-purple-400",
-    bg: "bg-purple-500/10",
-    border: "border-purple-500/20",
-    trend: "text-purple-400",
-  },
+  // No `purple` variant. It hardcoded text-purple-400 / bg-purple-500/10,
+  // the one hue this product's identity rules out, and it was live on two of the
+  // most-visited tiles (dashboard "Matches Analyzed", insights "Home Win Rate").
+  // Every colour here now resolves through a semantic token, so the palette
+  // stays black + cyan and can't drift again from a stray literal.
 };
 
 /** Server Component — the entrance animation is pure CSS so this never
