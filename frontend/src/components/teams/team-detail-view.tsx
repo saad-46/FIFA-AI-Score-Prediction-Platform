@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import useSWR from "swr";
+import { TeamSquadSection } from "@/components/teams/team-squad-section";
 import { notFound } from "next/navigation";
 import { Activity, Shield, Target, TrendingUp } from "lucide-react";
 import { teamsApi } from "@/lib/api/teams";
@@ -93,6 +94,11 @@ export function TeamDetailView({ teamId }: { teamId: string }) {
           <StatsCard title="Matches Played" value={stats.matches_played} icon={Activity} color="draw" />
         </div>
       ) : null}
+
+      {/* Squad, captain and the 26-player roster. Sits between the existing
+          hero/stats and the existing tabs so nothing already on this page
+          moves or changes behaviour. */}
+      <TeamSquadSection teamId={teamId} />
 
       <Tabs defaultValue="overview">
         <TabsList>

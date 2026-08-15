@@ -9,6 +9,7 @@ from app.schemas.team import (
     HeadToHeadResponse,
     PerformanceTrendPoint,
 )
+from app.schemas.squad import TeamSquadResponse
 from app.schemas.wc2026 import WorldCupHeadToHeadResponse
 from app.services.team_service import (
     search_teams,
@@ -19,6 +20,7 @@ from app.services.team_service import (
     get_top_teams,
     get_wc2026_teams,
 )
+from app.data import players as players_data
 from app.data import wc2026 as wc2026_data
 
 router = APIRouter(prefix="/teams", tags=["teams"])
@@ -53,6 +55,39 @@ async def world_cup_head_to_head(
     meetings does not mean two teams have never played.
     """
     return wc2026_data.world_cup_head_to_head(team_a, team_b)
+
+
+@router.get("/{team_id}/squad", response_model=TeamSquadResponse)
+async def team_squad(team_id: str, db: AsyncSession = Depends(get_db)):
+    """
+    The 26-player squad, captain and squad totals for one WC2026 team.
+
+    Deliberately one request for the whole team page: the squad, the captain and
+    every per-player statistic the detail view renders come back together, so a
+    26-card grid costs one call rather than 26. The player data is a cached
+    in-process read of a committed CSV, so this adds no database work beyond the
+    single lookup that resolves team_id to a name.
+
+    404s when the id is unknown; 404s too when the team has no squad on record,
+    which is how a non-WC2026 team from the legacy seed is rejected rather than
+    returned as an empty roster.
+    """
+    team = await get_team_by_id(db, team_id)
+    if not team:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team not found")
+
+    summary = players_data.team_squad_summary(team.name)
+    if not summary["players"]:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"No squad on record for {team.name}",
+        )
+
+    return TeamSquadResponse(
+        fifa_code=team.fifa_code,
+        wc2026_group=team.wc2026_group,
+        **summary,
+    )
 
 
 @router.get("/search", response_model=list[TeamResponse])

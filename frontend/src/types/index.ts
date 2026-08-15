@@ -530,3 +530,66 @@ export interface DashboardStats {
   top_teams?: TeamStats[];
   upcoming_matches?: Match[];
 }
+
+// ─── WC2026 squads ───────────────────────────────────────────────────────────
+
+/**
+ * A player from the committed squad dataset.
+ *
+ * Every statistic is optional because the source only fills one in when it
+ * genuinely exists: 198 of the 1,248 squad members have no appearances at all,
+ * and 78 of the 136 goalkeepers never kept goal. `null`/absent means "not
+ * available" and must render as such — never as 0.
+ */
+export interface Player {
+  name: string;
+  team: string;
+  position: string | null;
+  age: number | null;
+  birth_year: number | null;
+  club: string | null;
+  is_goalkeeper: boolean;
+
+  games: number | null;
+  games_starts: number | null;
+  minutes: number | null;
+
+  goals: number | null;
+  assists: number | null;
+  shots: number | null;
+  shots_on_target: number | null;
+  goals_per90: number | null;
+  assists_per90: number | null;
+
+  crosses: number | null;
+  fouled: number | null;
+  offsides: number | null;
+  cards_yellow: number | null;
+  cards_red: number | null;
+
+  tackles_won: number | null;
+  interceptions: number | null;
+  fouls: number | null;
+
+  gk_games: number | null;
+  gk_minutes: number | null;
+  gk_goals_against: number | null;
+  gk_saves: number | null;
+  gk_save_pct: number | null;
+  gk_clean_sheets: number | null;
+  gk_clean_sheets_pct: number | null;
+}
+
+export interface TeamSquad {
+  team: string;
+  fifa_code: string | null;
+  wc2026_group: string | null;
+  squad_size: number;
+  players_with_appearances: number;
+  /** Captain of the team's most recent 2026 match. Null when unavailable. */
+  captain: Player | null;
+  players: Player[];
+  total_goals: number;
+  total_assists: number;
+  total_minutes: number;
+}

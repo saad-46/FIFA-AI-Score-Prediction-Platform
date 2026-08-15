@@ -27,13 +27,32 @@ export function Navbar({ user }: NavbarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const reduceMotion = useReducedMotion();
   const signOutFormRef = React.useRef<HTMLFormElement>(null);
 
+  // Glass gets heavier once the page moves under it, so the bar separates from
+  // content while scrolling but stays light at rest. Passive listener, and only
+  // a boolean is tracked, so this never re-renders per pixel.
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-md">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 w-full px-3 pt-3 sm:px-4">
+      <div
+        className={cn(
+          "mx-auto max-w-7xl rounded-xl border px-4 sm:px-5",
+          "bg-surface/60 backdrop-blur-xl transition-all duration-300",
+          scrolled
+            ? "border-border/80 bg-surface/80 shadow-lg shadow-black/20 backdrop-blur-2xl"
+            : "border-border/50 shadow-md shadow-black/10"
+        )}
+      >
+        <div className="flex h-14 items-center justify-between">
           {/* Logo */}
           <Link href="/dashboard" className="flex items-center gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded border border-border bg-surface-2/80 shadow-lg shadow-cyan-500/5">
@@ -60,14 +79,19 @@ export function Navbar({ user }: NavbarProps) {
                 <Link
                   key={item.href}
                   href={item.href}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                    "flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium",
+                    "transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     active
-                      ? "bg-primary/10 text-primary"
-                      : "text-fg-muted hover:bg-surface-2 hover:text-foreground"
+                      // Active is a cyan-tinted glass pill with a border, not
+                      // colour alone: aria-current carries it for assistive
+                      // tech and the border carries it visually.
+                      ? "border-primary/30 bg-primary/10 text-primary"
+                      : "border-transparent text-fg-muted hover:border-border/60 hover:bg-surface-2/60 hover:text-foreground"
                   )}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-4 w-4" aria-hidden="true" />
                   {item.label}
                 </Link>
               );
@@ -127,50 +151,55 @@ export function Navbar({ user }: NavbarProps) {
 
             {/* Mobile menu toggle */}
             <button
-              className="xl:hidden rounded-lg p-2 text-fg-muted hover:bg-surface-2"
+              className="xl:hidden rounded-lg border border-transparent p-2 text-fg-muted transition-colors hover:border-border/60 hover:bg-surface-2/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
             >
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
-            className="xl:hidden border-t border-border bg-background"
-          >
-            <nav className="flex flex-col gap-1 p-4">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const active = pathname.startsWith(item.href);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-                      active
-                      ? "bg-primary/10 text-primary"
-                      : "text-fg-muted hover:bg-surface-2 hover:text-foreground"
-                    )}
-                  >
-                    <Icon className="h-4 w-4" />
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* Mobile menu lives inside the glass container so the bar stays one
+            floating surface when it expands, rather than dropping a separate
+            opaque panel underneath it. */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+              className="overflow-hidden xl:hidden"
+            >
+              <nav className="flex flex-col gap-1 border-t border-border/50 py-3">
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  const active = pathname.startsWith(item.href);
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm font-medium transition-all",
+                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                        active
+                          ? "border-primary/30 bg-primary/10 text-primary"
+                          : "border-transparent text-fg-muted hover:border-border/60 hover:bg-surface-2/60 hover:text-foreground"
+                      )}
+                    >
+                      <Icon className="h-4 w-4" aria-hidden="true" />
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       <CommandPalette items={navItems} open={paletteOpen} onOpenChange={setPaletteOpen} />
 
