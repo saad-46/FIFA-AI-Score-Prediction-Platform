@@ -4,8 +4,8 @@ import { MatchesView } from "@/components/matches/matches-view";
 import { PageHeader } from "@/components/layout/page-header";
 
 export const metadata: Metadata = {
-  title: "Historical Registry",
-  description: "Browse historical FIFA match results and performance records.",
+  title: "World Cup Matches",
+  description: "Browse World Cup match results and scorelines from the historical record.",
 };
 
 export default function MatchesPage() {
@@ -13,8 +13,8 @@ export default function MatchesPage() {
     <div className="space-y-8">
       <PageHeader
         icon={Activity}
-        title="Historical Registry"
-        description="Archive of historical matches, scorelines, and tournament results"
+        title="World Cup Matches"
+        description="Results and scorelines from the historical match record"
       />
       <MatchesView />
     </div>

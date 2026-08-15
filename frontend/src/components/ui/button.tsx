@@ -8,9 +8,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        // text-slate-950, not text-white: cyan is a light accent, so white on
+        // it measures 2.43:1 — well under the 4.5:1 WCAG AA floor. Near-black
+        // on the same fill measures 8.31:1. Matches the `gradient` variant so
+        // both primary buttons read identically.
         default:
-          "bg-primary text-white shadow hover:bg-primary-hover active:bg-primary-hover",
-        destructive: "bg-loss text-white shadow-sm hover:opacity-90",
+          "bg-primary text-slate-950 font-semibold shadow hover:bg-primary-hover active:bg-primary-hover",
+        // Same reason as `default`: white on --loss is 3.67:1, under the AA
+        // floor for button-sized text; near-black on it is 5.49:1.
+        destructive: "bg-loss text-slate-950 font-semibold shadow-sm hover:opacity-90",
         outline:
           "border border-border bg-transparent text-foreground shadow-sm hover:bg-surface-2",
         secondary: "bg-surface-2 text-foreground shadow-sm hover:opacity-80",

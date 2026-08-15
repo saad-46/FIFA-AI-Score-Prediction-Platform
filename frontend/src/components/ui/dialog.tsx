@@ -33,6 +33,11 @@ const DialogContent = React.forwardRef<
     <DialogOverlay />
     <DialogPrimitive.Content
       ref={ref}
+      // Focus is trapped correctly, but neither aria-modal nor an aria-hidden
+      // background was being emitted, so a screen reader could read straight
+      // past the dialog into the page behind it. Stated explicitly here so
+      // every dialog in the app (feedback, match detail) is announced as modal.
+      aria-modal="true"
       className={cn(
         "fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-surface p-6 shadow-2xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         className
