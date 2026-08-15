@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { predictionsApi } from "@/lib/api/predictions";
 import { getApiErrorMessage } from "@/lib/api/client";
 import { toast } from "@/hooks/use-toast";
-import { formatPercent, formatGoals, cn } from "@/lib/utils";
+import { formatGoals, cn } from "@/lib/utils";
 import { WinProbabilityCard } from "@/components/football/win-probability-card";
 import { ScorelineDistribution } from "@/components/football/scoreline-distribution";
 import { ShapExplanation } from "@/components/football/shap-explanation";
@@ -54,8 +54,12 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
     }
   };
 
-  const confidenceColor =
-    result.confidence_score >= 0.7 ? "text-win" : result.confidence_score >= 0.5 ? "text-primary" : "text-loss";
+  // No confidence readout: V2_FRONTEND_CONTRACT §4 asks for it to stay out of
+  // the UI until validated against a second tournament. The colour-coding made
+  // it worse — it painted anything under 50% red, while the documented residual
+  // error is *under*-confidence (predictions stated near 55% came true ~72% of
+  // the time in the WC2026 backtest), so red signalled the opposite of reality.
+  // The value is still in the payload for callers that need it.
 
   // Calculate high-level summary outcome
   const getVerdict = () => {
@@ -90,9 +94,6 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
               </div>
               
               <div className="flex items-center gap-3">
-                <span className={cn("font-mono text-xs font-bold", confidenceColor)}>
-                  {formatPercent(result.confidence_score)} CONFIDENCE
-                </span>
                 <Button 
                   size="sm" 
                   variant={saved ? "secondary" : "outline"} 

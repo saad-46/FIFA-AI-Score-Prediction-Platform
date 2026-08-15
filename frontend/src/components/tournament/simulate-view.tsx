@@ -86,7 +86,7 @@ export function SimulateView() {
         </CardContent>
       </Card>
 
-      {isMutating && <SimulationProgress />}
+      {isMutating && <SimulationProgress simulations={nSimulations} />}
 
       {error && !isMutating && (
         <ErrorState title="Simulation failed" description={getApiErrorMessage(error)} onRetry={handleRun} />
