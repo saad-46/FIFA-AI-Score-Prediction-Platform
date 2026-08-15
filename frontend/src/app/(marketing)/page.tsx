@@ -1,19 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MarketingHeader } from "@/components/layout/marketing-header";
 import { Footer } from "@/components/layout/footer";
 
 export default function LandingPage() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className="relative flex min-h-screen flex-col bg-background overflow-hidden bg-noise">
       {/* Ambient background glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[20%] w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[120px]" />
-        <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-emerald-500/5 blur-[100px]" />
+        <div className="absolute top-[-10%] left-[20%] w-[600px] h-[600px] rounded-full bg-primary/10 blur-[120px]" />
+        <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[100px]" />
       </div>
 
       <MarketingHeader />
@@ -22,7 +24,7 @@ export default function LandingPage() {
         <div className="max-w-4xl space-y-12">
           {/* Subtle Tagline */}
           <motion.div
-            initial={{ opacity: 0, x: -10 }}
+            initial={reduceMotion ? false : { opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             className="flex items-center gap-3 text-xs tracking-[0.2em] font-mono text-cyan-400 uppercase"
@@ -33,7 +35,7 @@ export default function LandingPage() {
 
           {/* Huge Cinematic Left-Aligned Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-6xl sm:text-7xl lg:text-9xl font-extrabold tracking-tight text-foreground leading-[0.85] font-sans uppercase"
@@ -51,7 +53,7 @@ export default function LandingPage() {
 
           {/* Minimal Copy with perfect rhythm */}
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 0.9 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             className="max-w-xl text-lg sm:text-xl font-normal text-fg-muted leading-relaxed font-sans"
@@ -63,7 +65,7 @@ export default function LandingPage() {
 
           {/* Call to actions - subtle border glows, no generic flashy stuff */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
             className="flex flex-wrap items-center gap-6 pt-4"
@@ -84,7 +86,7 @@ export default function LandingPage() {
 
         {/* Minimal Contextual Facts Footer Row */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 1 }}
           className="mt-24 lg:mt-40 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border/60 pt-10"

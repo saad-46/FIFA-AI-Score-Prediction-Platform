@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X, LogOut, User, Search, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,7 @@ export function Navbar({ user }: NavbarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
   const signOutFormRef = React.useRef<HTMLFormElement>(null);
 
   return (
@@ -140,9 +141,9 @@ export function Navbar({ user }: NavbarProps) {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
+            initial={reduceMotion ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
             className="xl:hidden border-t border-border bg-background"
           >
             <nav className="flex flex-col gap-1 p-4">

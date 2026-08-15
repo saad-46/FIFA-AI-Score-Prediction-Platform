@@ -69,8 +69,8 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
         <div className="mb-8 flex justify-center">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500">
-              <Trophy className="h-5 w-5 text-white" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/30 bg-primary/15">
+              <Trophy className="h-5 w-5 text-primary" />
             </div>
             <span className="text-xl font-bold text-foreground">
               FIFA<span className="text-primary">AI</span>

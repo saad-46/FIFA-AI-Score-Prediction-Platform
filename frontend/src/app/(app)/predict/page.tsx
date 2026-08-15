@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Brain } from "lucide-react";
 import { PredictView } from "@/components/predictions/predict-view";
+import { PageHeader } from "@/components/layout/page-header";
 
 export const metadata: Metadata = {
   title: "Simulation Engine",
@@ -10,15 +11,11 @@ export const metadata: Metadata = {
 export default function PredictPage() {
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="flex items-center gap-2.5 text-2xl font-bold tracking-tight text-foreground font-mono uppercase">
-          <Brain className="h-6 w-6 text-primary" aria-hidden="true" />
-          Simulation Engine
-        </h1>
-        <p className="mt-1 text-sm text-fg-muted">
-          Configure model parameters to execute Poisson-derived predictive scoreline vectors
-        </p>
-      </div>
+      <PageHeader
+        icon={Brain}
+        title="Simulation Engine"
+        description="Configure model parameters to execute Poisson-derived predictive scoreline vectors"
+      />
       <PredictView />
     </div>
   );

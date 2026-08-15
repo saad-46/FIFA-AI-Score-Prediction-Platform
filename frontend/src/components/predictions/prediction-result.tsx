@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { BookmarkPlus, CheckCircle, Loader2, AlertTriangle, Info, TrendingUp, FileText, Lock } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,7 @@ const INSIGHT_STYLE = {
 } as const;
 
 export function PredictionResultCard({ result, isAuthenticated }: PredictionResultCardProps) {
+  const reduceMotion = useReducedMotion();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -74,7 +75,7 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
     <div className="space-y-6">
       {/* SECTION 1: EXECUTIVE VERDICT (Immediate Reveal) */}
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
@@ -177,7 +178,7 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
           below xl so nothing is cramped on tablet/mobile. */}
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2 xl:items-start">
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
@@ -193,7 +194,7 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
       {/* SECTION 3: POISSON SCORELINE DISTRIBUTION (Staggered Reveal) */}
       {result.top_scorelines.length > 0 && (
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
@@ -204,7 +205,7 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
       {/* SECTION 4: SHAP REASONING (Staggered Reveal) */}
       {result.prediction_explanation && (
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
@@ -217,7 +218,7 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
       {/* SECTION 5: TACTICAL INSIGHTS (Staggered Reveal) */}
       {result.insights && result.insights.length > 0 && (
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.5 }}
         >
@@ -262,7 +263,7 @@ export function PredictionResultCard({ result, isAuthenticated }: PredictionResu
       {/* SECTION 6: HISTORICAL H2H MATRIX (Staggered Reveal) */}
       {result.head_to_head && (
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.5 }}
         >

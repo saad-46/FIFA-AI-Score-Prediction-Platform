@@ -16,8 +16,13 @@ const buttonVariants = cva(
         secondary: "bg-surface-2 text-foreground shadow-sm hover:opacity-80",
         ghost: "text-fg-muted hover:bg-surface-2 hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Was an emerald->cyan gradient. Green is a *semantic* colour here
+        // (--win), so spending it on every primary CTA both muddied the
+        // blue/cyan identity and weakened the win/loss signal elsewhere.
+        // Now a solid primary with a cyan lift on hover: same emphasis, one
+        // accent. Kept as a named variant so existing call sites still work.
         gradient:
-          "bg-gradient-to-r from-emerald-600 to-cyan-600 text-white shadow hover:from-emerald-500 hover:to-cyan-500",
+          "bg-primary text-slate-950 font-semibold shadow-lg shadow-primary/20 hover:bg-primary-hover hover:shadow-primary/30",
       },
       size: {
         default: "h-9 px-4 py-2",

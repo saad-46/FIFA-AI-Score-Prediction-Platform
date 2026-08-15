@@ -3,6 +3,7 @@ import { BookmarkCheck } from "lucide-react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { SavedPredictionsList } from "@/components/predictions/saved-predictions-list";
+import { PageHeader } from "@/components/layout/page-header";
 
 export const metadata: Metadata = { title: "Prediction Archive" };
 
@@ -16,13 +17,11 @@ export default async function SavedPage() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="flex items-center gap-2.5 text-2xl font-bold tracking-tight text-foreground font-mono uppercase">
-          <BookmarkCheck className="h-6 w-6 text-primary" aria-hidden="true" />
-          Prediction Archive
-        </h1>
-        <p className="mt-1 text-sm text-fg-muted">Archive of simulated projections and performance evaluation logs</p>
-      </div>
+      <PageHeader
+        icon={BookmarkCheck}
+        title="Prediction Archive"
+        description="Archive of simulated projections and performance evaluation logs"
+      />
       <SavedPredictionsList />
     </div>
   );

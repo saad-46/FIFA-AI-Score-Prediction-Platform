@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { SignOutButton } from "@/components/auth/sign-out-button";
+import { PageHeader } from "@/components/layout/page-header";
 
 export const metadata: Metadata = { title: "Profile" };
 
@@ -30,13 +31,11 @@ export default async function ProfilePage() {
 
   return (
     <div className="max-w-2xl space-y-8">
-      <div>
-        <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground">
-          <User className="h-6 w-6 text-primary" aria-hidden="true" />
-          Profile
-        </h1>
-        <p className="mt-1 text-sm text-fg-muted">Your account details and preferences</p>
-      </div>
+      <PageHeader
+        icon={User}
+        title="Profile"
+        description="Your account details and preferences"
+      />
 
       <Card>
         <CardContent className="flex items-center gap-4 p-6">

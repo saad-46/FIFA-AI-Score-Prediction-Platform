@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Brain, AlertTriangle, Layers } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { PageHeader } from "@/components/layout/page-header";
 
 export const metadata: Metadata = {
   title: "About",
@@ -20,13 +21,11 @@ const STACK = [
 export default function AboutPage() {
   return (
     <div className="max-w-2xl space-y-8">
-      <div>
-        <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground">
-          <Brain className="h-6 w-6 text-primary" aria-hidden="true" />
-          About
-        </h1>
-        <p className="mt-1 text-sm text-fg-muted">How the model works, and where it falls short</p>
-      </div>
+      <PageHeader
+        icon={Brain}
+        title="About"
+        description="How the model works, and where it falls short"
+      />
 
       <Card>
         <CardHeader>

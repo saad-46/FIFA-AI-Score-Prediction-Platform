@@ -7,8 +7,8 @@ export default function VerifyEmailPage() {
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
       <div className="w-full max-w-md text-center">
         <div className="flex justify-center mb-8">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500">
-            <Trophy className="h-5 w-5 text-white" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/30 bg-primary/15">
+            <Trophy className="h-5 w-5 text-primary" />
           </div>
         </div>
         <div className="flex justify-center mb-6">
