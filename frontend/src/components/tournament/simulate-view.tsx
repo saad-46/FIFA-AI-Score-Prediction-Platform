@@ -79,26 +79,22 @@ export function SimulateView() {
               </Label>
             </div>
           </div>
-          {/* Without this, the tab reads as a contradiction: the Bracket tab
-              shows 2026 finished with Spain champion, while this table gives
-              Spain ~2%. Both are right. Each run redraws the knockout from
-              simulated group tables, so a pairing only takes a real score when
-              it happens to match a fixture that was actually played — most
-              simulated brackets never reproduce the real ones. The switch
-              suppresses re-simulating known facts; it does not replay the
-              tournament. Say so rather than letting the numbers look broken. */}
           <Button variant="gradient" onClick={handleRun} loading={isMutating}>
             {!isMutating && <Play className="h-4 w-4" />}
             {isMutating ? "Simulating…" : "Run simulation"}
           </Button>
         </CardContent>
+        {/* Without this the tab looks broken: the Bracket shows 2026 finished
+            with Spain champion, while this table gives Spain ~2%. Both are
+            right, because each run builds its own knockout path. Say so. */}
         <CardContent className="pt-0">
           <p className="text-xs leading-relaxed text-fg-muted">
-            Every run redraws the knockout stage from simulated group tables, so these are
+            Each run redraws the knockout stage from its own simulated group tables, so these are
             probabilities across {nSimulations.toLocaleString()} hypothetical tournaments — not a
-            replay of the real one. With the switch on, a tie only takes its real score when the
-            simulated draw happens to reproduce a fixture that was actually played; everything else
-            is genuinely simulated. The completed 2026 tournament is on the Bracket tab.
+            replay of 2026. A team can win the real bracket and still show a low chance here; the
+            two tabs answer different questions. The switch only stops an already-played fixture
+            being re-simulated when a simulated draw happens to reproduce it. Real results are on
+            the Bracket tab.
           </p>
         </CardContent>
       </Card>

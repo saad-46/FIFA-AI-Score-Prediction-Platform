@@ -9,7 +9,7 @@ from datetime import date
 from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func, or_, desc
-from sqlalchemy.orm import selectinload, aliased
+from sqlalchemy.orm import selectinload, joinedload, aliased
 
 from app.models.match import Match, Team, TeamStatistics
 from app.schemas.analytics import UpcomingMatchSummary
@@ -62,9 +62,19 @@ async def get_matches(
     burst, without risking meaningful staleness (match data changes
     infrequently; see load_matches_dataframe's own 6h refresh cadence).
     """
+    # joinedload, not selectinload. Both return identical objects, but
+    # selectinload resolves each relationship with its own follow-up SELECT, so
+    # one page cost four sequential round trips (count, page, home teams, away
+    # teams). Measured against this Supabase instance the round trip is ~120ms
+    # while the queries themselves execute in 0.05-10ms server-side (EXPLAIN
+    # ANALYZE; every one is an index-only scan), so latency here is round-trip
+    # count, not row count. joinedload folds both teams into the page query as
+    # LEFT OUTER JOINs -- 4 round trips become 2. It stays an outer join, so the
+    # nullable away_team_id (TBD knockout opponents) still comes back as None
+    # rather than dropping the row.
     stmt = (
         select(Match)
-        .options(selectinload(Match.home_team), selectinload(Match.away_team))
+        .options(joinedload(Match.home_team), joinedload(Match.away_team))
         .order_by(desc(Match.date))
     )
 
@@ -240,8 +250,20 @@ async def get_upcoming_matches(db: AsyncSession, limit: int = 5) -> list[Upcomin
     ]
 
 
+@async_ttl_cache(ttl_seconds=300, max_size=1, ignore_args={0})
 async def get_tournaments(db: AsyncSession) -> list[str]:
-    """Get all distinct tournament names."""
+    """
+    Get all distinct tournament names.
+
+    Cached for 5 minutes. The /matches page loads this alongside every match
+    page to populate the tournament filter, and it was the single most
+    expensive call on that screen (~1.6s per request end to end) despite the
+    query itself running in ~10ms server-side on an index-only scan of
+    idx_matches_tournament -- the cost is the round trip, paid on every visit.
+    The result is a fixed list of seven World Cup names that only changes when
+    a new tournament is imported, so a short TTL is safe; the ttl is longer
+    than get_matches' 60s because this is even more static.
+    """
     stmt = select(Match.tournament).distinct().order_by(Match.tournament)
     result = await db.execute(stmt)
     return [row[0] for row in result.fetchall()]

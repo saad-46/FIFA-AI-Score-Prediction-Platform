@@ -68,11 +68,28 @@ export function MatchesView() {
             ))}
           </SelectContent>
         </Select>
-        {data && <p className="text-sm text-fg-muted sm:ml-auto">{data.total.toLocaleString()} matches</p>}
+        {/* "49,389 matches" alone read as though the dozen cards below were the
+            whole record. Name the window explicitly so the page never implies
+            one page is the entire history. */}
+        {data && data.total > 0 && (
+          <p className="text-sm text-fg-muted sm:ml-auto">
+            Showing {((page - 1) * PAGE_SIZE + 1).toLocaleString()}–
+            {Math.min(page * PAGE_SIZE, data.total).toLocaleString()} of{" "}
+            {data.total.toLocaleString()} matches
+          </p>
+        )}
       </div>
 
       {isLoading ? (
-        <ListSkeleton count={PAGE_SIZE} />
+        <div>
+          {/* Plain statement of what is being fetched — no fabricated stages,
+              no percentage, no ETA. The wait is real (one round trip to the
+              match table), so the skeleton stays. */}
+          <p className="pb-3 text-sm text-fg-muted" role="status" aria-live="polite">
+            Loading historical World Cup matches…
+          </p>
+          <ListSkeleton count={PAGE_SIZE} />
+        </div>
       ) : error ? (
         <ErrorState title="Couldn't load matches" description={getApiErrorMessage(error)} onRetry={() => mutate()} />
       ) : !data || data.data.length === 0 ? (
