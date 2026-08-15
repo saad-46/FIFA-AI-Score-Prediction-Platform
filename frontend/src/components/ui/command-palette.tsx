@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import type { NavItem } from "@/lib/nav-items";
 
 interface CommandPaletteProps {
@@ -82,7 +82,13 @@ export function CommandPalette({ items, open: openProp, onOpenChange }: CommandP
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="max-w-lg p-0 gap-0" aria-label="Command palette">
+      <DialogContent className="max-w-lg p-0 gap-0">
+        {/* Radix requires a DialogTitle for the dialog to have an accessible
+            name; without one it logs an error and screen readers announce an
+            unnamed dialog. An aria-label on the content does not satisfy the
+            labelling Radix wires up, so the title is rendered and visually
+            hidden instead. */}
+        <DialogTitle className="sr-only">Search and navigate</DialogTitle>
         <div className="flex items-center gap-2 border-b border-border px-4">
           <Search className="h-4 w-4 shrink-0 text-fg-muted" aria-hidden="true" />
           <input

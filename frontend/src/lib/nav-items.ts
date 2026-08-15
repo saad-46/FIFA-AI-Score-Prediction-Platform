@@ -1,9 +1,7 @@
 import {
   Activity,
   BarChart3,
-  BookmarkCheck,
   Brain,
-  Home,
   Trophy,
   Users,
   type LucideIcon,
@@ -17,12 +15,19 @@ export interface NavItem {
 
 /** Single source of truth for primary navigation — shared by the navbar
  * (desktop + mobile) and the command palette so the two never drift. */
+/**
+ * Public navigation.
+ *
+ * Deliberately excludes /dashboard, /saved and /profile: middleware.ts still
+ * protects those three, so with the sign-in UI removed an anonymous visitor
+ * clicking them was redirected to /auth/login — a page nothing else links to.
+ * The nav was advertising dead ends. The routes and their auth gate are
+ * untouched; they simply are not offered to visitors who cannot reach them.
+ */
 export const navItems: NavItem[] = [
-  { href: "/dashboard", label: "Intelligence", icon: Home },
+  { href: "/tournaments", label: "Tournament", icon: Trophy },
   { href: "/predict", label: "Simulation", icon: Brain },
-  { href: "/analytics", label: "Insights", icon: BarChart3 },
   { href: "/teams", label: "Teams", icon: Users },
   { href: "/matches", label: "Matches", icon: Activity },
-  { href: "/tournaments", label: "Tournament Intelligence", icon: Trophy },
-  { href: "/saved", label: "Saved", icon: BookmarkCheck },
+  { href: "/analytics", label: "Insights", icon: BarChart3 },
 ];
