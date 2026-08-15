@@ -588,6 +588,12 @@ export interface TeamSquad {
   players_with_appearances: number;
   /** Captain of the team's most recent 2026 match. Null when unavailable. */
   captain: Player | null;
+  /**
+   * The players the profile leads with — captain first, then ranked by
+   * appearances, starts and goal contribution (saves/clean sheets for keepers).
+   * Players with no appearances are excluded, so this can be shorter than 8.
+   */
+  key_players: Player[];
   players: Player[];
   total_goals: number;
   total_assists: number;

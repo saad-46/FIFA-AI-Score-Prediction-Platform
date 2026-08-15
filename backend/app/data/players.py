@@ -201,6 +201,67 @@ def captain_for_team(team_name: str) -> Optional[dict[str, Any]]:
     return None
 
 
+KEY_PLAYER_COUNT = 8
+
+
+def _importance(player: dict[str, Any]) -> float:
+    """
+    How prominently a player featured for his country, from his own record.
+
+    This ranks real numbers; it does not judge talent and it invents nothing. A
+    player who did not play scores 0 and cannot be promoted by any other term.
+
+    Starts are weighted above appearances because starting is the clearer signal
+    that a manager considers a player first-choice, and goals above assists
+    because goals are the scarcer event. Goalkeepers score on saves and clean
+    sheets instead of goal contributions, otherwise every keeper would rank
+    below every forward regardless of how central he was to the team.
+    """
+    games = player["games"] or 0
+    starts = player["games_starts"] or 0
+    if games == 0:
+        return 0.0
+
+    score = games * 2.0 + starts * 3.0
+
+    if player["is_goalkeeper"] and player["gk_saves"] is not None:
+        score += (player["gk_saves"] or 0) * 0.5
+        score += (player["gk_clean_sheets"] or 0) * 2.0
+    else:
+        score += (player["goals"] or 0) * 4.0
+        score += (player["assists"] or 0) * 3.0
+
+    return score
+
+
+def key_players_for_team(team_name: str, limit: int = KEY_PLAYER_COUNT) -> list[dict[str, Any]]:
+    """
+    The handful of players a team profile should lead with.
+
+    The captain is always first — he is the one player whose prominence is a
+    recorded fact rather than a ranking — and the rest follow by ``_importance``.
+    Players with no appearances are excluded outright: a squad member who never
+    took the field cannot be a key player, and padding the list with him would
+    put an empty card on the page purely to reach a target count. That means a
+    team with very few players used returns fewer than ``limit`` entries, which
+    is the honest outcome.
+    """
+    squad = squad_for_team(team_name)
+    if not squad:
+        return []
+
+    captain = captain_for_team(team_name)
+    captain_name = captain["name"] if captain else None
+
+    ranked = sorted(
+        (p for p in squad if (p["games"] or 0) > 0 and p["name"] != captain_name),
+        key=lambda p: (-_importance(p), p["name"]),
+    )
+
+    chosen = ([captain] if captain else []) + ranked
+    return chosen[:limit]
+
+
 def team_squad_summary(team_name: str) -> dict[str, Any]:
     """Squad, captain and a few aggregate totals for one team."""
     squad = squad_for_team(team_name)
@@ -210,6 +271,7 @@ def team_squad_summary(team_name: str) -> dict[str, Any]:
         "squad_size": len(squad),
         "players_with_appearances": len(played),
         "captain": captain_for_team(team_name),
+        "key_players": key_players_for_team(team_name),
         "players": squad,
         "total_goals": sum(p["goals"] or 0 for p in squad),
         "total_assists": sum(p["assists"] or 0 for p in squad),

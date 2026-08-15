@@ -11,9 +11,12 @@ a player who did not play.
 import pytest
 
 from app.data.players import (
+    KEY_PLAYER_COUNT,
     SQUAD_SIZE,
     TEAM_ALIASES,
+    _importance,
     captain_for_team,
+    key_players_for_team,
     load_players,
     mapped_team_names,
     squad_for_team,
@@ -139,3 +142,68 @@ def test_goalkeepers_are_listed_first():
 def test_unknown_team_returns_empty_rather_than_raising():
     assert squad_for_team("Not A Country") == []
     assert captain_for_team("Not A Country") is None
+    assert key_players_for_team("Not A Country") == []
+
+
+# ─── Key players: a ranking over real numbers, never a padded list ───────────
+
+def test_every_team_yields_key_players(registry):
+    empty = sorted(t for t in registry if not key_players_for_team(t))
+    assert not empty, f"teams with no key players: {empty}"
+
+
+def test_key_players_are_capped_and_never_padded(registry):
+    for team in registry:
+        key = key_players_for_team(team)
+        assert len(key) <= KEY_PLAYER_COUNT
+        # Nobody is included to reach the target: everyone here has played.
+        for p in key:
+            assert (p["games"] or 0) > 0, f"{team}: {p['name']} has no appearances"
+
+
+def test_captain_leads_the_key_players(registry):
+    for team in registry:
+        key = key_players_for_team(team)
+        captain = captain_for_team(team)
+        assert key[0]["name"] == captain["name"], (
+            f"{team}: expected captain {captain['name']!r} first, got {key[0]['name']!r}"
+        )
+
+
+def test_key_players_are_drawn_from_that_teams_squad(registry):
+    for team in registry:
+        squad_names = {p["name"] for p in squad_for_team(team)}
+        for p in key_players_for_team(team):
+            assert p["name"] in squad_names, f"{team}: {p['name']} is not in the squad"
+            assert p["team"] == team
+
+
+def test_key_players_contain_no_duplicates(registry):
+    """The captain is prepended, so he must be excluded from the ranked tail."""
+    for team in registry:
+        names = [p["name"] for p in key_players_for_team(team)]
+        assert len(names) == len(set(names)), f"{team}: duplicate key player in {names}"
+
+
+def test_key_player_order_is_by_descending_importance(registry):
+    """After the captain, the list must actually be sorted."""
+    for team in registry:
+        tail = key_players_for_team(team)[1:]
+        scores = [_importance(p) for p in tail]
+        assert scores == sorted(scores, reverse=True), f"{team}: key players out of order"
+
+
+def test_importance_is_zero_for_a_player_who_never_played():
+    unplayed = next(p for p in load_players() if not p["games"])
+    assert _importance(unplayed) == 0.0
+
+
+def test_goalkeepers_are_ranked_on_goalkeeping_not_goals():
+    """A keeper with saves must outrank an identical keeper without them."""
+    base = {
+        "games": 5, "games_starts": 5, "is_goalkeeper": True,
+        "goals": 0, "assists": 0, "gk_saves": None, "gk_clean_sheets": None,
+    }
+    quiet = dict(base)
+    busy = dict(base, gk_saves=20, gk_clean_sheets=3)
+    assert _importance(busy) > _importance(quiet)

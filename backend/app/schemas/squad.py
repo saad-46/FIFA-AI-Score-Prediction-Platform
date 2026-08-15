@@ -72,6 +72,16 @@ class TeamSquadResponse(BaseModel):
             "canonical match record. Null when unavailable — never guessed."
         ),
     )
+    key_players: list[PlayerResponse] = Field(
+        default_factory=list,
+        description=(
+            "The players the team profile leads with: the captain first, then "
+            "the squad ranked by appearances, starts and goal contribution "
+            "(saves and clean sheets for goalkeepers). Players with no "
+            "appearances are excluded, so this can be shorter than the target "
+            "of 8 rather than padded."
+        ),
+    )
     players: list[PlayerResponse]
     total_goals: int
     total_assists: int
