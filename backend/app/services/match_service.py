@@ -72,10 +72,19 @@ async def get_matches(
     # LEFT OUTER JOINs -- 4 round trips become 2. It stays an outer join, so the
     # nullable away_team_id (TBD knockout opponents) still comes back as None
     # rather than dropping the row.
+    # Match.id is a tiebreaker, not decoration. `date` is a DATE column and is
+    # nowhere near unique: 49,389 rows share 16,441 distinct dates (~3 per date,
+    # up to 66 on 2012-02-29). ORDER BY date DESC alone therefore isn't a total
+    # order, and OFFSET/LIMIT over a non-total order is only stable for as long
+    # as the plan is. Today it happens to be stable (six identical runs, zero
+    # duplicates across six pages), but any plan change -- new statistics, a
+    # parallel scan, a Postgres upgrade -- can reshuffle tied rows and make a
+    # visitor paging through the archive see one match twice and miss another.
+    # Appending the primary key costs nothing and makes the order total.
     stmt = (
         select(Match)
         .options(joinedload(Match.home_team), joinedload(Match.away_team))
-        .order_by(desc(Match.date))
+        .order_by(desc(Match.date), Match.id)
     )
 
     if team:
