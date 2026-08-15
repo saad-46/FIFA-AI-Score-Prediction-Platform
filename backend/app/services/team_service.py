@@ -44,9 +44,17 @@ async def search_teams(db: AsyncSession, query: str, limit: int = 10) -> list[Te
     return [TeamResponse.model_validate(t) for t in teams]
 
 
+@async_ttl_cache(ttl_seconds=300, max_size=1, ignore_args={0})
 async def get_wc2026_teams(db: AsyncSession) -> list[TeamResponse]:
     """
     The 48 teams competing at the 2026 World Cup, alphabetically.
+
+    Cached for 5 minutes. This is the most-requested reference read in the
+    product -- the teams directory and the prediction form both mount it -- and
+    it was costing a full round trip every time: ~850ms measured end to end, of
+    which ~360ms is the query's network round trip and roughly none is real
+    work. The roster is 48 rows that change only when a tournament is imported,
+    so the same reasoning that already caches the tournament list applies here.
 
     Scoped on ``wc2026_group IS NOT NULL``, which is populated for exactly
     those 48 and NULL for everyone else. This is the fix for two real defects

@@ -42,19 +42,38 @@ class FeatureImportanceResponse(BaseModel):
     total_features: int
 
 
+@async_ttl_cache(ttl_seconds=60, max_size=1, ignore_args={0})
+async def _global_dashboard_block(db: AsyncSession):
+    """
+    The part of the dashboard that is identical for every caller.
+
+    Split out and cached because /analytics/dashboard is the product's landing
+    page and was its slowest endpoint: ~1.5s median, and for an anonymous
+    visitor every one of those round trips was spent re-deriving numbers that
+    do not depend on who is asking. Two table counts and a fixtures lookup, all
+    at ~150ms of Tokyo round trip each and single-digit milliseconds of actual
+    query time.
+
+    Only caller-independent data belongs here. Saved-prediction counts, accuracy
+    and recent predictions stay uncached in the endpoint below, keyed to the
+    signed-in user, so a freshly saved prediction is never served stale.
+    """
+    total_matches = (await db.execute(select(func.count()).select_from(Match))).scalar() or 0
+    total_teams = (await db.execute(select(func.count()).select_from(Team))).scalar() or 0
+    top_teams_stats = await get_top_teams(db, limit=5)
+    upcoming = await get_upcoming_matches(db, limit=5)
+    return total_matches, total_teams, top_teams_stats, upcoming
+
+
 @router.get("/dashboard", response_model=DashboardStatsResponse)
 async def dashboard_stats(
     db: AsyncSession = Depends(get_db),
     user: Optional[dict] = Depends(get_optional_user),
 ):
     """Dashboard summary statistics."""
-    # Total matches
-    match_count_result = await db.execute(select(func.count()).select_from(Match))
-    total_matches = match_count_result.scalar() or 0
-
-    # Total teams
-    team_count_result = await db.execute(select(func.count()).select_from(Team))
-    total_teams = team_count_result.scalar() or 0
+    total_matches, total_teams, top_teams_stats, upcoming_matches = (
+        await _global_dashboard_block(db)
+    )
 
     # User-specific stats
     total_predictions = 0
@@ -87,8 +106,8 @@ async def dashboard_stats(
 
         recent_predictions = await get_recent_predictions(db, user_id, limit=5)
 
-    # Top teams by win rate (min 10 matches played), capped to keep the payload small
-    top_teams_stats = await get_top_teams(db, limit=5)
+    # Top teams by win rate (min 10 matches played), capped to keep the payload
+    # small. Both this and upcoming_matches come from the cached global block.
     top_teams = [
         TopTeamSummary(
             team_id=t.team_id,
@@ -98,9 +117,6 @@ async def dashboard_stats(
         )
         for t in top_teams_stats
     ]
-
-    # Soonest scheduled fixtures
-    upcoming_matches = await get_upcoming_matches(db, limit=5)
 
     return DashboardStatsResponse(
         total_predictions=total_predictions,
