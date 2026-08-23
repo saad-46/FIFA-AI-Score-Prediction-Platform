@@ -77,9 +77,10 @@ class TeamSquadResponse(BaseModel):
         description=(
             "The players the team profile leads with: the captain first, then "
             "the squad ranked by appearances, starts and goal contribution "
-            "(saves and clean sheets for goalkeepers). Players with no "
-            "appearances are excluded, so this can be shorter than the target "
-            "of 8 rather than padded."
+            "(saves and clean sheets for goalkeepers). The team's top goalkeeper "
+            "is guaranteed a slot if one played, even when his raw ranking score "
+            "would place him lower. Players with no appearances are excluded, so "
+            "this can be shorter than the target of 8 rather than padded."
         ),
     )
     players: list[PlayerResponse]

@@ -193,6 +193,97 @@ def test_key_player_order_is_by_descending_importance(registry):
         assert scores == sorted(scores, reverse=True), f"{team}: key players out of order"
 
 
+def test_every_team_with_a_goalkeeper_who_played_has_one_in_key_players(registry):
+    """
+    Guards the fix for Iraq and Senegal: pure importance scoring left both
+    teams with no keeper in the top 8, because their backups' start counts
+    were lower than the outfield regulars'. If any goalkeeper on the squad has
+    at least one appearance, the team profile must show one.
+    """
+    missing = []
+    for team in registry:
+        squad = squad_for_team(team)
+        any_gk_played = any(p["is_goalkeeper"] and (p["games"] or 0) > 0 for p in squad)
+        if not any_gk_played:
+            continue
+        key = key_players_for_team(team)
+        if not any(p["is_goalkeeper"] for p in key):
+            missing.append(team)
+    assert not missing, f"teams with a played goalkeeper but none in key players: {missing}"
+
+
+def test_iraq_and_senegal_now_include_their_goalkeeper():
+    """The two teams that exposed the gap, checked by name."""
+    for team in ("Iraq", "Senegal"):
+        key = key_players_for_team(team)
+        keepers = [p for p in key if p["is_goalkeeper"]]
+        assert keepers, f"{team}: still no goalkeeper among key players"
+
+
+def test_goalkeeper_guarantee_picks_the_best_available_keeper():
+    """The guarantee must promote the top-ranked keeper, not an arbitrary one."""
+    for team in ("Iraq", "Senegal"):
+        squad = squad_for_team(team)
+        played_keepers = sorted(
+            (p for p in squad if p["is_goalkeeper"] and (p["games"] or 0) > 0),
+            key=lambda p: -_importance(p),
+        )
+        best = played_keepers[0]
+        key = key_players_for_team(team)
+        shown = next(p for p in key if p["is_goalkeeper"])
+        assert shown["name"] == best["name"], (
+            f"{team}: expected best-ranked keeper {best['name']!r}, got {shown['name']!r}"
+        )
+
+
+def test_goalkeeper_guarantee_keeps_the_list_length_and_captain_first(registry):
+    """The swap must not change the list's size or displace the captain."""
+    for team in registry:
+        before_len = min(KEY_PLAYER_COUNT, len([
+            p for p in squad_for_team(team) if (p["games"] or 0) > 0
+        ]))
+        key = key_players_for_team(team)
+        captain = captain_for_team(team)
+        assert len(key) == before_len
+        if captain:
+            assert key[0]["name"] == captain["name"]
+
+
+def test_a_team_with_no_goalkeeper_appearances_shows_none_and_is_not_forced(monkeypatch):
+    """
+    The guarantee must never invent a keeper who never took the field.
+
+    No WC2026 team currently has an unplayed-goalkeeper-only squad (checked:
+    all 48 have at least one keeper with games > 0), so this exercises the
+    branch directly with a synthetic squad rather than asserting on a real
+    team name that might stop covering it as the data changes.
+    """
+    import app.data.players as players_mod
+
+    unplayed_gk = {
+        "name": "Reserve Keeper", "team": "Nowhere", "position": "GK",
+        "is_goalkeeper": True, "games": 0, "games_starts": 0,
+        "goals": None, "assists": None, "gk_saves": None, "gk_clean_sheets": None,
+    }
+    outfield = [
+        {
+            "name": f"Player {i}", "team": "Nowhere", "position": "MF",
+            "is_goalkeeper": False, "games": 5, "games_starts": 5,
+            "goals": i, "assists": 0, "gk_saves": None, "gk_clean_sheets": None,
+        }
+        for i in range(9)
+    ]
+    synthetic_squad = [unplayed_gk] + outfield
+
+    monkeypatch.setattr(players_mod, "squad_for_team", lambda team: synthetic_squad)
+    monkeypatch.setattr(players_mod, "captain_for_team", lambda team: None)
+
+    key = players_mod.key_players_for_team("Nowhere")
+    assert not any(p["is_goalkeeper"] for p in key), (
+        "an unplayed goalkeeper must never be promoted into key players"
+    )
+
+
 def test_importance_is_zero_for_a_player_who_never_played():
     unplayed = next(p for p in load_players() if not p["games"])
     assert _importance(unplayed) == 0.0

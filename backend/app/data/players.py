@@ -245,6 +245,17 @@ def key_players_for_team(team_name: str, limit: int = KEY_PLAYER_COUNT) -> list[
     put an empty card on the page purely to reach a target count. That means a
     team with very few players used returns fewer than ``limit`` entries, which
     is the honest outcome.
+
+    A team's goalkeeper is guaranteed a place if one played at all. Pure
+    importance scoring left two of the 48 teams (Iraq, Senegal) with no keeper
+    in the top 8 — their backups' start counts were simply lower than the
+    outfield regulars', not because either team lacked a keeper who played. A
+    football team profile without its own goalkeeper reads as broken regardless
+    of how the ranking arithmetic landed, so the highest-``_importance`` keeper
+    who actually played replaces the single weakest non-captain slot, and the
+    remaining players stay sorted by the same score. This never invents a
+    keeper: a team where no goalkeeper played at all (games == 0 for all of
+    them) still has none here, which is the honest result of that data.
     """
     squad = squad_for_team(team_name)
     if not squad:
@@ -259,7 +270,18 @@ def key_players_for_team(team_name: str, limit: int = KEY_PLAYER_COUNT) -> list[
     )
 
     chosen = ([captain] if captain else []) + ranked
-    return chosen[:limit]
+    chosen = chosen[:limit]
+
+    if not any(p["is_goalkeeper"] for p in chosen):
+        goalkeepers = [p for p in ranked if p["is_goalkeeper"]]
+        if goalkeepers:
+            best_gk = goalkeepers[0]  # `ranked` is already sorted by -_importance
+            head = chosen[:1] if captain else []
+            tail = chosen[1:] if captain else chosen
+            tail = sorted(tail[:-1] + [best_gk], key=lambda p: (-_importance(p), p["name"]))
+            chosen = head + tail
+
+    return chosen
 
 
 def team_squad_summary(team_name: str) -> dict[str, Any]:
