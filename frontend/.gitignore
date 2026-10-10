@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# player-photograph staging — raw, unprocessed source images.
+# `npm run ingest:player-images` reads from here and writes the optimised
+# WebP into public/teams, which IS committed. The originals are not.
+/_incoming

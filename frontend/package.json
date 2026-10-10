@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build:flags": "node scripts/build-flags.mjs"
+    "build:flags": "node scripts/build-flags.mjs",
+    "build:player-images": "node scripts/build-player-images.mjs",
+    "audit:player-images": "node scripts/audit-player-images.mjs",
+    "ingest:player-images": "node scripts/ingest-player-images.mjs",
+    "worklist:player-images": "node scripts/player-image-worklist.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -53,6 +57,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "flag-icons": "^7.5.0",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
