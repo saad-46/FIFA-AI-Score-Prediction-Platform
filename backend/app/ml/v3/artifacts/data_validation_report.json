@@ -1,0 +1,188 @@
+{
+  "rows_in": 49945,
+  "rows_out": 49945,
+  "issues": {
+    "score_above_20_kept_flagged": 9,
+    "neutral_flag_but_team_a_in_own_country": 2,
+    "home_flag_but_venue_country_differs": 988,
+    "same_day_same_fixture_pairs_kept": 1,
+    "shootout_rows_unmatched_to_a_result": 1,
+    "shootout_recorded_but_score_not_level": 37
+  },
+  "notes": [
+    "scores are after extra time and exclude penalty shoot-outs (upstream definition)",
+    "kick-off times are not in the source; ordering within a day follows upstream row order"
+  ],
+  "date_range": [
+    "1872-11-30",
+    "2026-10-06"
+  ],
+  "teams": 337,
+  "tournaments": 225,
+  "by_tier": {
+    "1": 18444,
+    "2": 9800,
+    "3": 17239,
+    "4": 3394,
+    "5": 1068
+  },
+  "non_fifa_competition_rows": 764,
+  "result_shares": {
+    "A": 0.49,
+    "B": 0.2829,
+    "D": 0.2271
+  },
+  "corpus_fingerprint": "b38434f8f74cd9fa",
+  "source": {
+    "dataset": "International football results from 1872 (men's senior full internationals)",
+    "upstream": "https://github.com/martj42/international_results",
+    "license": "CC0 1.0 Universal (public domain dedication)",
+    "upstream_commit": "b7a3a8ee5d37780c6a03101c188658fd439e241d",
+    "upstream_commit_date": "2026-10-07T14:09:01Z",
+    "downloaded_on": "2026-10-10",
+    "files": {
+      "results.csv": {
+        "rows": 49945,
+        "sha256": "b38434f8f74cd9faacb269eb1c97760fc2dfac43fcb211779e0bd2cbb48f89e3"
+      },
+      "shootouts.csv": {
+        "rows": 700,
+        "sha256": "072b445adf5183fbe981087857e5b64c8f17abfdbf257b1822ceacb4a37919fa"
+      },
+      "former_names.csv": {
+        "rows": 36,
+        "sha256": "2d57f59a3ac13b24c2fcf208ced5a38710529d122da38929838d0980b002677e"
+      }
+    },
+    "score_definition": "Full-time score including extra time, excluding penalty shoot-outs.",
+    "notes": "Files are stored byte-for-byte as downloaded. To refresh, follow docs/ml/ML_PIPELINE_V3.md (replace the files, update this record, re-run the training workflow); a refresh changes the corpus fingerprint recorded in every model manifest."
+  },
+  "feature_registry": [
+    {
+      "name": "elo_diff_venue",
+      "definition": "Elo(A) - Elo(B) + home advantage x venue",
+      "source": "RatingEngine Elo",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "new team starts at 1500",
+      "leakage_risk": "none: rating is read before the update",
+      "antisymmetric": true
+    },
+    {
+      "name": "elo_diff",
+      "definition": "Elo(A) - Elo(B), no venue term",
+      "source": "RatingEngine Elo",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "new team starts at 1500",
+      "leakage_risk": "none",
+      "antisymmetric": true
+    },
+    {
+      "name": "venue",
+      "definition": "+1 A at home, 0 neutral, -1 B at home",
+      "source": "fixture metadata",
+      "available": "known when the fixture is set",
+      "missing_policy": "never missing",
+      "leakage_risk": "none: fixture property",
+      "antisymmetric": true
+    },
+    {
+      "name": "log_xg_ratio",
+      "definition": "log(expected goals A / expected goals B) from online Poisson",
+      "source": "RatingEngine attack/defence",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "new team has attack=defence=0",
+      "leakage_risk": "none",
+      "antisymmetric": true
+    },
+    {
+      "name": "log_xg_total",
+      "definition": "log(expected goals A + B)",
+      "source": "RatingEngine attack/defence",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "league-average for new teams",
+      "leakage_risk": "none",
+      "antisymmetric": false
+    },
+    {
+      "name": "form_pts_diff",
+      "definition": "exp-weighted points per match, A - B (half-life 8 matches)",
+      "source": "RatingEngine form",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "prior 1.35 pts/match",
+      "leakage_risk": "none",
+      "antisymmetric": true
+    },
+    {
+      "name": "form_gd_diff",
+      "definition": "exp-weighted goal difference per match, A - B",
+      "source": "RatingEngine form",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "prior 0",
+      "leakage_risk": "none",
+      "antisymmetric": true
+    },
+    {
+      "name": "momentum_diff",
+      "definition": "Elo change over each team's last 10 matches, A - B",
+      "source": "RatingEngine Elo history",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "0 with no history",
+      "leakage_risk": "none",
+      "antisymmetric": true
+    },
+    {
+      "name": "rest_days_diff",
+      "definition": "days since last match (capped 365), A - B",
+      "source": "match dates",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "365 when no previous match",
+      "leakage_risk": "none",
+      "antisymmetric": true
+    },
+    {
+      "name": "activity_diff",
+      "definition": "matches played in the previous 365 days, A - B",
+      "source": "match dates",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "0",
+      "leakage_risk": "none",
+      "antisymmetric": true
+    },
+    {
+      "name": "h2h_gd_shrunk",
+      "definition": "past head-to-head goal difference / (meetings + 4)",
+      "source": "RatingEngine h2h",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "0 with no meetings",
+      "leakage_risk": "none: only earlier meetings",
+      "antisymmetric": true
+    },
+    {
+      "name": "exp_min",
+      "definition": "min(log1p matches played A, B): how well-rated the weaker-known side is",
+      "source": "match counts",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "0",
+      "leakage_risk": "none",
+      "antisymmetric": false
+    },
+    {
+      "name": "abs_elo_diff",
+      "definition": "|elo_diff_venue|: mismatch size (drives the draw rate)",
+      "source": "RatingEngine Elo",
+      "available": "before kick-off (uses matches strictly earlier in the chronological walk)",
+      "missing_policy": "0",
+      "leakage_risk": "none",
+      "antisymmetric": false
+    },
+    {
+      "name": "tier",
+      "definition": "competition tier 1 (friendly) .. 5 (World Cup finals)",
+      "source": "fixture metadata",
+      "available": "known when the fixture is set",
+      "missing_policy": "never missing",
+      "leakage_risk": "none",
+      "antisymmetric": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "dataset": "International football results from 1872 (men's senior full internationals)",
+  "upstream": "https://github.com/martj42/international_results",
+  "license": "CC0 1.0 Universal (public domain dedication)",
+  "upstream_commit": "b7a3a8ee5d37780c6a03101c188658fd439e241d",
+  "upstream_commit_date": "2026-10-07T14:09:01Z",
+  "downloaded_on": "2026-10-10",
+  "files": {
+    "results.csv":      {"rows": 49945, "sha256": "b38434f8f74cd9faacb269eb1c97760fc2dfac43fcb211779e0bd2cbb48f89e3"},
+    "shootouts.csv":    {"rows": 700,   "sha256": "072b445adf5183fbe981087857e5b64c8f17abfdbf257b1822ceacb4a37919fa"},
+    "former_names.csv": {"rows": 36,    "sha256": "2d57f59a3ac13b24c2fcf208ced5a38710529d122da38929838d0980b002677e"}
+  },
+  "score_definition": "Full-time score including extra time, excluding penalty shoot-outs.",
+  "notes": "Files are stored byte-for-byte as downloaded. To refresh, follow docs/ml/ML_PIPELINE_V3.md (replace the files, update this record, re-run the training workflow); a refresh changes the corpus fingerprint recorded in every model manifest."
+}

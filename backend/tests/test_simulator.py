@@ -173,8 +173,10 @@ async def test_simulate_endpoint_rejects_n_simulations_too_high():
 
 
 @pytest.mark.asyncio
-async def test_simulate_endpoint_accepts_n_simulations_at_lower_bound():
-    """n_simulations=100 (the schema's ge=100 boundary) should pass schema
+async def test_simulate_endpoint_accepts_n_simulations_at_lower_bound(legacy_engine):
+    """Legacy engine (rollback path); V3 equivalents are in tests/test_v3_api.py.
+
+    n_simulations=100 (the schema's ge=100 boundary) should pass schema
     validation and reach the endpoint body / actually run a simulation.
     Mocks out the predictor+dataframe dependency (no live DB in this test
     environment) so we can assert a real 200 rather than just "not a 422"."""
@@ -223,8 +225,10 @@ async def test_simulate_endpoint_accepts_n_simulations_at_lower_bound():
 # ─── Predictor unavailable / simulation failure -> graceful HTTP errors ──────
 
 @pytest.mark.asyncio
-async def test_simulate_endpoint_returns_503_when_predictor_not_loaded():
-    """If the model bundle failed to load (missing/corrupted model file —
+async def test_simulate_endpoint_returns_503_when_predictor_not_loaded(legacy_engine):
+    """Legacy engine (rollback path).
+
+    If the model bundle failed to load (missing/corrupted model file —
     see test_predictor.py for the predictor-level fallback behavior), the
     endpoint must return a clear 503 rather than attempting a simulation
     with a None model and crashing with a 500."""
@@ -250,8 +254,10 @@ async def test_simulate_endpoint_returns_503_when_predictor_not_loaded():
 
 
 @pytest.mark.asyncio
-async def test_simulate_endpoint_returns_503_when_simulation_error_raised():
-    """TournamentSimulationError (raised when too many simulation batches
+async def test_simulate_endpoint_returns_503_when_simulation_error_raised(legacy_engine):
+    """Legacy engine (rollback path).
+
+    TournamentSimulationError (raised when too many simulation batches
     fail — the fixed failure mode of the original silent-crash bug) must be
     translated into a 503, not an unhandled 500."""
     from app.ml.tournament_simulator import TournamentSimulationError

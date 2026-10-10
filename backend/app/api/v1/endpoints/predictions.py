@@ -14,6 +14,7 @@ from app.schemas.prediction import (
     AccuracyStats,
 )
 from app.services.prediction_service import run_prediction, get_cached_prediction
+from app.ml.v3.inference import ModelUnavailable, UnknownTeam
 from app.models.match import SavedPrediction
 from sqlalchemy import select, func
 from sqlalchemy.exc import SQLAlchemyError
@@ -49,6 +50,16 @@ async def predict_match(
             neutral_venue=payload.neutral_venue,
         )
         return result
+    except UnknownTeam as e:
+        # A team with no recorded matches: there is nothing to forecast from,
+        # and inventing a rating for it would be a fabricated prediction.
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=f"Prediction unavailable: {e}.")
+    except ModelUnavailable as e:
+        logger.error("Prediction unavailable: %s", e)
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Prediction is unavailable: the model bundle could not be validated.",
+        )
     except Exception as e:
         logger.error(f"Prediction failed for {payload.home_team} vs {payload.away_team}: {e}", exc_info=True)
         raise HTTPException(

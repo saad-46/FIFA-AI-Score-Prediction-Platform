@@ -1,0 +1,249 @@
+{
+  "sample": "FIFA World Cup 2026, 104 matches",
+  "outcome_definition": "result after extra time; shoot-outs count as draws",
+  "outcome_counts": {
+    "team_a_win": 49,
+    "draw": 24,
+    "team_b_win": 31
+  },
+  "challenger": "v3.0.0-wc2026_pretournament",
+  "information_cutoffs": {
+    "v3_and_plain_elo_frozen": "model and ratings: matches before 2026-06-11",
+    "v3_and_plain_elo_rolling": "model: matches before 2026-06-11; ratings: matches before each fixture",
+    "v2_1_0_ledger": "model and match accumulators: end of 2022; team Elo / FIFA rank: undated, no recorded source",
+    "v1_0_0": "model fitted on a file ending 2026-06-30 (includes 76 of these matches); history cut before each fixture"
+  },
+  "v3_frozen_ratings": {
+    "log_loss": 0.8384,
+    "brier": 0.4913,
+    "rps": 0.1556,
+    "accuracy": 0.6635,
+    "mean_top_probability": 0.5784,
+    "draws_predicted": 0
+  },
+  "v3_rolling_ratings": {
+    "log_loss": 0.8487,
+    "brier": 0.4969,
+    "rps": 0.159,
+    "accuracy": 0.6538,
+    "mean_top_probability": 0.584,
+    "draws_predicted": 0
+  },
+  "plain_elo_frozen_ratings": {
+    "log_loss": 0.8445,
+    "brier": 0.4942,
+    "rps": 0.1567,
+    "accuracy": 0.6827,
+    "mean_top_probability": 0.581,
+    "draws_predicted": 0
+  },
+  "plain_elo_rolling_ratings": {
+    "log_loss": 0.8519,
+    "brier": 0.4988,
+    "rps": 0.1596,
+    "accuracy": 0.6442,
+    "mean_top_probability": 0.5796,
+    "draws_predicted": 0
+  },
+  "v3_minus_plain_elo_frozen": {
+    "mean_diff": -0.00607,
+    "ci95": [
+      -0.02942,
+      0.01636
+    ],
+    "significant": false
+  },
+  "v3_minus_plain_elo_rolling": {
+    "mean_diff": -0.00321,
+    "ci95": [
+      -0.02611,
+      0.01856
+    ],
+    "significant": false
+  },
+  "plain_elo_train_rows": 32351,
+  "uniform": {
+    "log_loss": 1.0986,
+    "brier": 0.6667,
+    "rps": 0.2393,
+    "accuracy": 0.4712,
+    "mean_top_probability": 0.3333,
+    "draws_predicted": 0
+  },
+  "v2_1_0_frozen_ledger": {
+    "log_loss": 0.8145,
+    "brier": 0.4715,
+    "rps": 0.1562,
+    "accuracy": 0.7019,
+    "mean_top_probability": 0.5083,
+    "draws_predicted": 8,
+    "ledger_model_version": [
+      "v2.1.0-historical-optimized"
+    ],
+    "v3_frozen_minus_v2": {
+      "mean_diff": 0.02389,
+      "ci95": [
+        -0.04623,
+        0.10159
+      ],
+      "significant": false
+    },
+    "plain_elo_frozen_minus_v2": {
+      "mean_diff": 0.02997,
+      "ci95": [
+        -0.04427,
+        0.11133
+      ],
+      "significant": false
+    },
+    "v3_rolling_minus_v2": {
+      "mean_diff": 0.03414,
+      "ci95": [
+        -0.03682,
+        0.11421
+      ],
+      "significant": false
+    },
+    "caveat": "The ledger's team-strength inputs (canonical_teams.csv Elo and FIFA rank) are round numbers with no recorded source, first committed on 2026-07-04, after the group stage had finished. Its pre-tournament status cannot be verified from the repository."
+  },
+  "v1_0_0_production": {
+    "model_version": "1.0.0",
+    "training_file_rows": 406,
+    "training_file_last_match": "2026-06-30",
+    "world_cup_2026_matches_in_training_file": 76,
+    "team_order_asymmetry": {
+      "definition": "|P(A wins) with A listed first - P(A wins) with A listed second|, same fixture and venue flag",
+      "mean": 0.1256,
+      "max": 0.3447
+    },
+    "all_104": {
+      "n": 104,
+      "v1": {
+        "log_loss": 0.9839,
+        "brier": 0.5859,
+        "rps": 0.2039,
+        "accuracy": 0.5481,
+        "mean_top_probability": 0.4766,
+        "draws_predicted": 0
+      },
+      "v3_rolling": {
+        "log_loss": 0.8487,
+        "brier": 0.4969,
+        "rps": 0.159,
+        "accuracy": 0.6538,
+        "mean_top_probability": 0.584,
+        "draws_predicted": 0
+      },
+      "plain_elo_rolling": {
+        "log_loss": 0.8519,
+        "brier": 0.4988,
+        "rps": 0.1596,
+        "accuracy": 0.6442,
+        "mean_top_probability": 0.5796,
+        "draws_predicted": 0
+      },
+      "v3_minus_v1": {
+        "mean_diff": -0.13527,
+        "ci95": [
+          -0.20784,
+          -0.05389
+        ],
+        "significant": true
+      },
+      "plain_elo_minus_v1": {
+        "mean_diff": -0.13205,
+        "ci95": [
+          -0.20839,
+          -0.04826
+        ],
+        "significant": true
+      }
+    },
+    "the_76_it_trained_on": {
+      "n": 76,
+      "v1": {
+        "log_loss": 0.9778,
+        "brier": 0.5865,
+        "rps": 0.1912,
+        "accuracy": 0.5395,
+        "mean_top_probability": 0.475,
+        "draws_predicted": 0
+      },
+      "v3_rolling": {
+        "log_loss": 0.9054,
+        "brier": 0.5394,
+        "rps": 0.1638,
+        "accuracy": 0.5921,
+        "mean_top_probability": 0.5965,
+        "draws_predicted": 0
+      },
+      "plain_elo_rolling": {
+        "log_loss": 0.9073,
+        "brier": 0.5398,
+        "rps": 0.1646,
+        "accuracy": 0.5921,
+        "mean_top_probability": 0.5901,
+        "draws_predicted": 0
+      },
+      "v3_minus_v1": {
+        "mean_diff": -0.07235,
+        "ci95": [
+          -0.16641,
+          0.01881
+        ],
+        "significant": false
+      },
+      "plain_elo_minus_v1": {
+        "mean_diff": -0.07048,
+        "ci95": [
+          -0.16766,
+          0.02913
+        ],
+        "significant": false
+      }
+    },
+    "the_28_it_never_saw": {
+      "n": 28,
+      "v1": {
+        "log_loss": 1.0007,
+        "brier": 0.5842,
+        "rps": 0.2387,
+        "accuracy": 0.5714,
+        "mean_top_probability": 0.4811,
+        "draws_predicted": 0
+      },
+      "v3_rolling": {
+        "log_loss": 0.6946,
+        "brier": 0.3816,
+        "rps": 0.1458,
+        "accuracy": 0.8214,
+        "mean_top_probability": 0.55,
+        "draws_predicted": 0
+      },
+      "plain_elo_rolling": {
+        "log_loss": 0.7015,
+        "brier": 0.3873,
+        "rps": 0.1459,
+        "accuracy": 0.7857,
+        "mean_top_probability": 0.5511,
+        "draws_predicted": 0
+      },
+      "v3_minus_v1": {
+        "mean_diff": -0.30606,
+        "ci95": [
+          -0.39393,
+          -0.21673
+        ],
+        "significant": true
+      },
+      "plain_elo_minus_v1": {
+        "mean_diff": -0.29918,
+        "ci95": [
+          -0.38743,
+          -0.21291
+        ],
+        "significant": true
+      }
+    }
+  }
+}

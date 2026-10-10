@@ -653,10 +653,22 @@ class TournamentSimulator:
         logger.info("Pre-computing predictions for %d potential matchups...", len(pairs))
         match_date = pd.Timestamp.now()
 
+        # The simulator works in FIFA codes ("BRA"); the predictor's match
+        # history is keyed by team name ("Brazil"). Asking the predictor about
+        # a code it has never seen returns a no-history default, and "USA" is
+        # the only code that is also a name -- which made it the only real team
+        # in the tournament. Translate for the predictor; keep the simulator's
+        # own labels everywhere else. Labels that are not FIFA codes (custom
+        # groups) pass through unchanged.
+        code_to_name = {code: name for name, code in _load_name_to_code_map().items()}
+
+        def history_name(team: str) -> str:
+            return code_to_name.get(team, team)
+
         try:
             batch_results = self.predictor.predict_batch(
                 df=self.df,
-                pairs=pairs,
+                pairs=[(history_name(t1), history_name(t2)) for t1, t2 in pairs],
                 tournament="World Cup",
                 neutral_venue=True,
                 match_date=match_date,
@@ -670,8 +682,8 @@ class TournamentSimulator:
             for (t1, t2), pred in zip(pairs, batch_results):
                 key = self._get_matchup_key(t1, t2)
                 self.matchup_cache[key] = {
-                    "home_team": pred["home_team"],
-                    "away_team": pred["away_team"],
+                    "home_team": t1,
+                    "away_team": t2,
                     "expected_home_goals": pred["expected_home_goals"],
                     "expected_away_goals": pred["expected_away_goals"],
                     "home_win_probability": pred["home_win_probability"],
@@ -692,8 +704,8 @@ class TournamentSimulator:
             try:
                 pred = self.predictor.predict(
                     df=self.df,
-                    home_team=t1,
-                    away_team=t2,
+                    home_team=history_name(t1),
+                    away_team=history_name(t2),
                     tournament="World Cup",
                     neutral_venue=True,
                     match_date=match_date
@@ -702,8 +714,8 @@ class TournamentSimulator:
                 # Make sure the prediction dict is fully JSON serializable and decoupled from models
 
                 self.matchup_cache[key] = {
-                    "home_team": pred["home_team"],
-                    "away_team": pred["away_team"],
+                    "home_team": t1,
+                    "away_team": t2,
                     "expected_home_goals": pred["expected_home_goals"],
                     "expected_away_goals": pred["expected_away_goals"],
                     "home_win_probability": pred["home_win_probability"],

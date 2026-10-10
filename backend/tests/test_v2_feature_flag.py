@@ -2,8 +2,10 @@
 Feature-flag selection, legacy-safety, API smoke tests, and legacy-vs-V2
 comparison for the V2 backend integration.
 
-USE_V2_MODEL defaults to false. Every test that flips it restores the
-original setting and clears both caches (`get_settings` is `@lru_cache`d,
+These tests cover the legacy path, so the fixture pins PREDICTION_ENGINE=legacy
+(USE_V2_MODEL is only consulted there; the default engine is V3 -- see
+tests/test_v3_api.py). USE_V2_MODEL defaults to false. Every test that flips
+it restores the original setting and clears both caches (`get_settings` is `@lru_cache`d,
 and `ModelLoader` caches its resolved adapters) so flag state never leaks
 between tests.
 """
@@ -44,11 +46,13 @@ def use_v2(monkeypatch):
     pay the cost of a Supabase read per adapter construction.
     """
     def _set(value: bool):
+        monkeypatch.setenv("PREDICTION_ENGINE", "legacy")
         monkeypatch.setenv("USE_V2_MODEL", "true" if value else "false")
         monkeypatch.setenv("V2_DATA_SOURCE", "csv")
         get_settings.cache_clear()
         reset_model_loader()
     yield _set
+    monkeypatch.delenv("PREDICTION_ENGINE", raising=False)
     monkeypatch.delenv("USE_V2_MODEL", raising=False)
     monkeypatch.delenv("V2_DATA_SOURCE", raising=False)
     get_settings.cache_clear()
@@ -80,6 +84,7 @@ def test_default_flag_is_false():
 
 
 def test_default_active_adapter_is_legacy(use_v2):
+    """On the legacy path, that is: with PREDICTION_ENGINE=legacy the default is v1, not V2."""
     use_v2(False)
     adapter = get_model_loader().get_active()
     assert isinstance(adapter, LegacyPredictionAdapter)

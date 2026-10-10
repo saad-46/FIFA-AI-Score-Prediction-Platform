@@ -170,8 +170,12 @@ def _small_history_df() -> pd.DataFrame:
 
 
 @pytest.mark.asyncio
-async def test_run_prediction_with_unknown_team_does_not_raise():
-    """A team name with zero historical matches (e.g. a typo, or a team not
+async def test_run_prediction_with_unknown_team_does_not_raise(legacy_engine):
+    """Legacy engine only (PREDICTION_ENGINE=legacy). The V3 engine refuses a
+    team it has no matches for -- see tests/test_v3_api.py -- because this
+    fallback is what let 47 of 48 World Cup teams be simulated as blanks.
+
+    A team name with zero historical matches (e.g. a typo, or a team not
     yet in the reference data) must not crash the prediction pipeline end to
     end — feature engineering falls back to defaults for unknown teams (see
     test_feature_engineering.py's 'Unknown FC' case and
@@ -204,8 +208,10 @@ async def test_run_prediction_with_unknown_team_does_not_raise():
 
 
 @pytest.mark.asyncio
-async def test_predict_endpoint_with_unknown_teams_returns_200():
-    """End-to-end through the HTTP endpoint: unrecognized (but validly
+async def test_predict_endpoint_with_unknown_teams_returns_200(legacy_engine):
+    """Legacy engine only; the V3 engine answers 422 (tests/test_v3_api.py).
+
+    End-to-end through the HTTP endpoint: unrecognized (but validly
     formatted) team names should not be rejected by validation and should
     not 500 — the predictor's fallback path handles them."""
     df = _small_history_df()

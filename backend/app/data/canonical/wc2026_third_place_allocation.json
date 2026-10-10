@@ -1,0 +1,6462 @@
+{
+ "description": "FIFA World Cup 2026 regulations, Annex C: which third-placed team each group winner meets in the Round of 32, for every one of the 495 possible sets of eight qualifying third-placed groups.",
+ "source": "Annex C of the tournament regulations as reproduced at en.wikipedia.org/wiki/Template:2026_FIFA_World_Cup_third-place_table (retrieved 2026-10-10)",
+ "key": "the eight qualifying groups, letters sorted and concatenated",
+ "winner_slots": [
+  "A",
+  "B",
+  "D",
+  "E",
+  "G",
+  "I",
+  "K",
+  "L"
+ ],
+ "eligible_third_groups": {
+  "A": "CEFHI",
+  "B": "EFGIJ",
+  "D": "BEFIJ",
+  "E": "ABCDF",
+  "G": "AEHIJ",
+  "I": "CDFGH",
+  "K": "DEIJL",
+  "L": "EHIJK"
+ },
+ "combinations": {
+  "EFGHIJKL": {
+   "option": 1,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "F",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "DFGHIJKL": {
+   "option": 2,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "I",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "DEGHIJKL": {
+   "option": 3,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "D",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "DEFHIJKL": {
+   "option": 4,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "DEFGIJKL": {
+   "option": 5,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "DEFGHJKL": {
+   "option": 6,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "DEFGHIKL": {
+   "option": 7,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "DEFGHIJL": {
+   "option": 8,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "DEFGHIJK": {
+   "option": 9,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "CFGHIJKL": {
+   "option": 10,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CEGHIJKL": {
+   "option": 11,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "C",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CEFHIJKL": {
+   "option": 12,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CEFGIJKL": {
+   "option": 13,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CEFGHJKL": {
+   "option": 14,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CEFGHIKL": {
+   "option": 15,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CEFGHIJL": {
+   "option": 16,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "CEFGHIJK": {
+   "option": 17,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "CDGHIJKL": {
+   "option": 18,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDFHIJKL": {
+   "option": 19,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "I",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDFGIJKL": {
+   "option": 20,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "I",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDFGHJKL": {
+   "option": 21,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDFGHIKL": {
+   "option": 22,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "I",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDFGHIJL": {
+   "option": 23,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "CDFGHIJK": {
+   "option": 24,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "CDEHIJKL": {
+   "option": 25,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDEGIJKL": {
+   "option": 26,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDEGHJKL": {
+   "option": 27,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDEGHIKL": {
+   "option": 28,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDEGHIJL": {
+   "option": 29,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "CDEGHIJK": {
+   "option": 30,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "CDEFIJKL": {
+   "option": 31,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "E",
+    "E": "D",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDEFHJKL": {
+   "option": 32,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "E",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDEFHIKL": {
+   "option": 33,
+   "opponents": {
+    "A": "C",
+    "B": "E",
+    "D": "I",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDEFHIJL": {
+   "option": 34,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "E",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "CDEFHIJK": {
+   "option": 35,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "E",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "CDEFGJKL": {
+   "option": 36,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDEFGIKL": {
+   "option": 37,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDEFGIJL": {
+   "option": 38,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "CDEFGIJK": {
+   "option": 39,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "CDEFGHKL": {
+   "option": 40,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "CDEFGHJL": {
+   "option": 41,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "CDEFGHJK": {
+   "option": 42,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "CDEFGHIL": {
+   "option": 43,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "CDEFGHIK": {
+   "option": 44,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "CDEFGHIJ": {
+   "option": 45,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "BFGHIJKL": {
+   "option": 46,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "I",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BEGHIJKL": {
+   "option": 47,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "B",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BEFHIJKL": {
+   "option": 48,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "I",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BEFGIJKL": {
+   "option": 49,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "I",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BEFGHJKL": {
+   "option": 50,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BEFGHIKL": {
+   "option": 51,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "F",
+    "G": "I",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BEFGHIJL": {
+   "option": 52,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BEFGHIJK": {
+   "option": 53,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "H",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BDGHIJKL": {
+   "option": 54,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDFHIJKL": {
+   "option": 55,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDFGIJKL": {
+   "option": 56,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDFGHJKL": {
+   "option": 57,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDFGHIKL": {
+   "option": 58,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDFGHIJL": {
+   "option": 59,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BDFGHIJK": {
+   "option": 60,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BDEHIJKL": {
+   "option": 61,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDEGIJKL": {
+   "option": 62,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDEGHJKL": {
+   "option": 63,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDEGHIKL": {
+   "option": 64,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDEGHIJL": {
+   "option": 65,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BDEGHIJK": {
+   "option": 66,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BDEFIJKL": {
+   "option": 67,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDEFHJKL": {
+   "option": 68,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDEFHIKL": {
+   "option": 69,
+   "opponents": {
+    "A": "E",
+    "B": "I",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDEFHIJL": {
+   "option": 70,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BDEFHIJK": {
+   "option": 71,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BDEFGJKL": {
+   "option": 72,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDEFGIKL": {
+   "option": 73,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDEFGIJL": {
+   "option": 74,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BDEFGIJK": {
+   "option": 75,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BDEFGHKL": {
+   "option": 76,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BDEFGHJL": {
+   "option": 77,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "BDEFGHJK": {
+   "option": 78,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "BDEFGHIL": {
+   "option": 79,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BDEFGHIK": {
+   "option": 80,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BDEFGHIJ": {
+   "option": 81,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "BCGHIJKL": {
+   "option": 82,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCFHIJKL": {
+   "option": 83,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCFGIJKL": {
+   "option": 84,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCFGHJKL": {
+   "option": 85,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCFGHIKL": {
+   "option": 86,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCFGHIJL": {
+   "option": 87,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCFGHIJK": {
+   "option": 88,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCEHIJKL": {
+   "option": 89,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCEGIJKL": {
+   "option": 90,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCEGHJKL": {
+   "option": 91,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCEGHIKL": {
+   "option": 92,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCEGHIJL": {
+   "option": 93,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCEGHIJK": {
+   "option": 94,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCEFIJKL": {
+   "option": 95,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCEFHJKL": {
+   "option": 96,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCEFHIKL": {
+   "option": 97,
+   "opponents": {
+    "A": "E",
+    "B": "I",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCEFHIJL": {
+   "option": 98,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCEFHIJK": {
+   "option": 99,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCEFGJKL": {
+   "option": 100,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCEFGIKL": {
+   "option": 101,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCEFGIJL": {
+   "option": 102,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCEFGIJK": {
+   "option": 103,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCEFGHKL": {
+   "option": 104,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCEFGHJL": {
+   "option": 105,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "BCEFGHJK": {
+   "option": 106,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "BCEFGHIL": {
+   "option": 107,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCEFGHIK": {
+   "option": 108,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCEFGHIJ": {
+   "option": 109,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "BCDHIJKL": {
+   "option": 110,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDGIJKL": {
+   "option": 111,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDGHJKL": {
+   "option": 112,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDGHIKL": {
+   "option": 113,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDGHIJL": {
+   "option": 114,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCDGHIJK": {
+   "option": 115,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCDFIJKL": {
+   "option": 116,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDFHJKL": {
+   "option": 117,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDFHIKL": {
+   "option": 118,
+   "opponents": {
+    "A": "C",
+    "B": "I",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDFHIJL": {
+   "option": 119,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCDFHIJK": {
+   "option": 120,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCDFGJKL": {
+   "option": 121,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDFGIKL": {
+   "option": 122,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDFGIJL": {
+   "option": 123,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCDFGIJK": {
+   "option": 124,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCDFGHKL": {
+   "option": 125,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDFGHJL": {
+   "option": 126,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "J"
+   }
+  },
+  "BCDFGHJK": {
+   "option": 127,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "D",
+    "L": "K"
+   }
+  },
+  "BCDFGHIL": {
+   "option": 128,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCDFGHIK": {
+   "option": 129,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCDFGHIJ": {
+   "option": 130,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "D",
+    "L": "I"
+   }
+  },
+  "BCDEIJKL": {
+   "option": 131,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDEHJKL": {
+   "option": 132,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDEHIKL": {
+   "option": 133,
+   "opponents": {
+    "A": "E",
+    "B": "I",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDEHIJL": {
+   "option": 134,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCDEHIJK": {
+   "option": 135,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCDEGJKL": {
+   "option": 136,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDEGIKL": {
+   "option": 137,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "I",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDEGIJL": {
+   "option": 138,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCDEGIJK": {
+   "option": 139,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCDEGHKL": {
+   "option": 140,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDEGHJL": {
+   "option": 141,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "BCDEGHJK": {
+   "option": 142,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "BCDEGHIL": {
+   "option": 143,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCDEGHIK": {
+   "option": 144,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "H",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCDEGHIJ": {
+   "option": 145,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "D",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "BCDEFJKL": {
+   "option": 146,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "E",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDEFIKL": {
+   "option": 147,
+   "opponents": {
+    "A": "C",
+    "B": "E",
+    "D": "B",
+    "E": "D",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDEFIJL": {
+   "option": 148,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "E",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCDEFIJK": {
+   "option": 149,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "E",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCDEFHKL": {
+   "option": 150,
+   "opponents": {
+    "A": "C",
+    "B": "E",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDEFHJL": {
+   "option": 151,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "BCDEFHJK": {
+   "option": 152,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "BCDEFHIL": {
+   "option": 153,
+   "opponents": {
+    "A": "C",
+    "B": "E",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCDEFHIK": {
+   "option": 154,
+   "opponents": {
+    "A": "C",
+    "B": "E",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCDEFHIJ": {
+   "option": 155,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "BCDEFGKL": {
+   "option": 156,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "E",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "BCDEFGJL": {
+   "option": 157,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "BCDEFGJK": {
+   "option": 158,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "BCDEFGIL": {
+   "option": 159,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "E",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "BCDEFGIK": {
+   "option": 160,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "E",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "BCDEFGIJ": {
+   "option": 161,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "J",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "BCDEFGHL": {
+   "option": 162,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "BCDEFGHK": {
+   "option": 163,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "BCDEFGHJ": {
+   "option": 164,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "J",
+    "I": "F",
+    "K": "D",
+    "L": "E"
+   }
+  },
+  "BCDEFGHI": {
+   "option": 165,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "H",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "AFGHIJKL": {
+   "option": 166,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "I",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "AEGHIJKL": {
+   "option": 167,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "A",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "AEFHIJKL": {
+   "option": 168,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "AEFGIJKL": {
+   "option": 169,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "AEFGHJKL": {
+   "option": 170,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "AEFGHIKL": {
+   "option": 171,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "AEFGHIJL": {
+   "option": 172,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "AEFGHIJK": {
+   "option": 173,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ADGHIJKL": {
+   "option": 174,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADFHIJKL": {
+   "option": 175,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADFGIJKL": {
+   "option": 176,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADFGHJKL": {
+   "option": 177,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADFGHIKL": {
+   "option": 178,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADFGHIJL": {
+   "option": 179,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ADFGHIJK": {
+   "option": 180,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ADEHIJKL": {
+   "option": 181,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADEGIJKL": {
+   "option": 182,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADEGHJKL": {
+   "option": 183,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADEGHIKL": {
+   "option": 184,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADEGHIJL": {
+   "option": 185,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ADEGHIJK": {
+   "option": 186,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ADEFIJKL": {
+   "option": 187,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADEFHJKL": {
+   "option": 188,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADEFHIKL": {
+   "option": 189,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADEFHIJL": {
+   "option": 190,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ADEFHIJK": {
+   "option": 191,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ADEFGJKL": {
+   "option": 192,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADEFGIKL": {
+   "option": 193,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADEFGIJL": {
+   "option": 194,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ADEFGIJK": {
+   "option": 195,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ADEFGHKL": {
+   "option": 196,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ADEFGHJL": {
+   "option": 197,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ADEFGHJK": {
+   "option": 198,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ADEFGHIL": {
+   "option": 199,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ADEFGHIK": {
+   "option": 200,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ADEFGHIJ": {
+   "option": 201,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ACGHIJKL": {
+   "option": 202,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACFHIJKL": {
+   "option": 203,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACFGIJKL": {
+   "option": 204,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACFGHJKL": {
+   "option": 205,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACFGHIKL": {
+   "option": 206,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACFGHIJL": {
+   "option": 207,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACFGHIJK": {
+   "option": 208,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACEHIJKL": {
+   "option": 209,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACEGIJKL": {
+   "option": 210,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACEGHJKL": {
+   "option": 211,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACEGHIKL": {
+   "option": 212,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACEGHIJL": {
+   "option": 213,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACEGHIJK": {
+   "option": 214,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACEFIJKL": {
+   "option": 215,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACEFHJKL": {
+   "option": 216,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACEFHIKL": {
+   "option": 217,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACEFHIJL": {
+   "option": 218,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACEFHIJK": {
+   "option": 219,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACEFGJKL": {
+   "option": 220,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACEFGIKL": {
+   "option": 221,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACEFGIJL": {
+   "option": 222,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACEFGIJK": {
+   "option": 223,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACEFGHKL": {
+   "option": 224,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACEFGHJL": {
+   "option": 225,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ACEFGHJK": {
+   "option": 226,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ACEFGHIL": {
+   "option": 227,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACEFGHIK": {
+   "option": 228,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACEFGHIJ": {
+   "option": 229,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ACDHIJKL": {
+   "option": 230,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDGIJKL": {
+   "option": 231,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDGHJKL": {
+   "option": 232,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDGHIKL": {
+   "option": 233,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDGHIJL": {
+   "option": 234,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACDGHIJK": {
+   "option": 235,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACDFIJKL": {
+   "option": 236,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDFHJKL": {
+   "option": 237,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDFHIKL": {
+   "option": 238,
+   "opponents": {
+    "A": "H",
+    "B": "F",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDFHIJL": {
+   "option": 239,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACDFHIJK": {
+   "option": 240,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACDFGJKL": {
+   "option": 241,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDFGIKL": {
+   "option": 242,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDFGIJL": {
+   "option": 243,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACDFGIJK": {
+   "option": 244,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACDFGHKL": {
+   "option": 245,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDFGHJL": {
+   "option": 246,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "H"
+   }
+  },
+  "ACDFGHJK": {
+   "option": 247,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "K"
+   }
+  },
+  "ACDFGHIL": {
+   "option": 248,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACDFGHIK": {
+   "option": 249,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACDFGHIJ": {
+   "option": 250,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "I"
+   }
+  },
+  "ACDEIJKL": {
+   "option": 251,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDEHJKL": {
+   "option": 252,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDEHIKL": {
+   "option": 253,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDEHIJL": {
+   "option": 254,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACDEHIJK": {
+   "option": 255,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACDEGJKL": {
+   "option": 256,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDEGIKL": {
+   "option": 257,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "I",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDEGIJL": {
+   "option": 258,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACDEGIJK": {
+   "option": 259,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACDEGHKL": {
+   "option": 260,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDEGHJL": {
+   "option": 261,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ACDEGHJK": {
+   "option": 262,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ACDEGHIL": {
+   "option": 263,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACDEGHIK": {
+   "option": 264,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACDEGHIJ": {
+   "option": 265,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ACDEFJKL": {
+   "option": 266,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDEFIKL": {
+   "option": 267,
+   "opponents": {
+    "A": "C",
+    "B": "E",
+    "D": "I",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDEFIJL": {
+   "option": 268,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACDEFIJK": {
+   "option": 269,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACDEFHKL": {
+   "option": 270,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDEFHJL": {
+   "option": 271,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ACDEFHJK": {
+   "option": 272,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "K"
+   }
+  },
+  "ACDEFHIL": {
+   "option": 273,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACDEFHIK": {
+   "option": 274,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACDEFHIJ": {
+   "option": 275,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "I"
+   }
+  },
+  "ACDEFGKL": {
+   "option": 276,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ACDEFGJL": {
+   "option": 277,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ACDEFGJK": {
+   "option": 278,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ACDEFGIL": {
+   "option": 279,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ACDEFGIK": {
+   "option": 280,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "E",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ACDEFGIJ": {
+   "option": 281,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "J",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ACDEFGHL": {
+   "option": 282,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "F",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ACDEFGHK": {
+   "option": 283,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "K"
+   }
+  },
+  "ACDEFGHJ": {
+   "option": 284,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "J",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "E"
+   }
+  },
+  "ACDEFGHI": {
+   "option": 285,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "E",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "I"
+   }
+  },
+  "ABGHIJKL": {
+   "option": 286,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABFHIJKL": {
+   "option": 287,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABFGIJKL": {
+   "option": 288,
+   "opponents": {
+    "A": "I",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABFGHJKL": {
+   "option": 289,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABFGHIKL": {
+   "option": 290,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABFGHIJL": {
+   "option": 291,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABFGHIJK": {
+   "option": 292,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABEHIJKL": {
+   "option": 293,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABEGIJKL": {
+   "option": 294,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABEGHJKL": {
+   "option": 295,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "A",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABEGHIKL": {
+   "option": 296,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABEGHIJL": {
+   "option": 297,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "A",
+    "G": "H",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABEGHIJK": {
+   "option": 298,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "A",
+    "G": "H",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABEFIJKL": {
+   "option": 299,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABEFHJKL": {
+   "option": 300,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABEFHIKL": {
+   "option": 301,
+   "opponents": {
+    "A": "E",
+    "B": "I",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABEFHIJL": {
+   "option": 302,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABEFHIJK": {
+   "option": 303,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABEFGJKL": {
+   "option": 304,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABEFGIKL": {
+   "option": 305,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABEFGIJL": {
+   "option": 306,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABEFGIJK": {
+   "option": 307,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABEFGHKL": {
+   "option": 308,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABEFGHJL": {
+   "option": 309,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABEFGHJK": {
+   "option": 310,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABEFGHIL": {
+   "option": 311,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABEFGHIK": {
+   "option": 312,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "H",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABEFGHIJ": {
+   "option": 313,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABDHIJKL": {
+   "option": 314,
+   "opponents": {
+    "A": "I",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDGIJKL": {
+   "option": 315,
+   "opponents": {
+    "A": "I",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDGHJKL": {
+   "option": 316,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDGHIKL": {
+   "option": 317,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDGHIJL": {
+   "option": 318,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABDGHIJK": {
+   "option": 319,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABDFIJKL": {
+   "option": 320,
+   "opponents": {
+    "A": "I",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDFHJKL": {
+   "option": 321,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDFHIKL": {
+   "option": 322,
+   "opponents": {
+    "A": "H",
+    "B": "I",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDFHIJL": {
+   "option": 323,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABDFHIJK": {
+   "option": 324,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABDFGJKL": {
+   "option": 325,
+   "opponents": {
+    "A": "F",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDFGIKL": {
+   "option": 326,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDFGIJL": {
+   "option": 327,
+   "opponents": {
+    "A": "F",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABDFGIJK": {
+   "option": 328,
+   "opponents": {
+    "A": "F",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABDFGHKL": {
+   "option": 329,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDFGHJL": {
+   "option": 330,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "J"
+   }
+  },
+  "ABDFGHJK": {
+   "option": 331,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "J",
+    "L": "K"
+   }
+  },
+  "ABDFGHIL": {
+   "option": 332,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABDFGHIK": {
+   "option": 333,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABDFGHIJ": {
+   "option": 334,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "J"
+   }
+  },
+  "ABDEIJKL": {
+   "option": 335,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDEHJKL": {
+   "option": 336,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDEHIKL": {
+   "option": 337,
+   "opponents": {
+    "A": "E",
+    "B": "I",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDEHIJL": {
+   "option": 338,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABDEHIJK": {
+   "option": 339,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABDEGJKL": {
+   "option": 340,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDEGIKL": {
+   "option": 341,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDEGIJL": {
+   "option": 342,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABDEGIJK": {
+   "option": 343,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABDEGHKL": {
+   "option": 344,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDEGHJL": {
+   "option": 345,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABDEGHJK": {
+   "option": 346,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABDEGHIL": {
+   "option": 347,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABDEGHIK": {
+   "option": 348,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "H",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABDEGHIJ": {
+   "option": 349,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABDEFJKL": {
+   "option": 350,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDEFIKL": {
+   "option": 351,
+   "opponents": {
+    "A": "E",
+    "B": "I",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDEFIJL": {
+   "option": 352,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABDEFIJK": {
+   "option": 353,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABDEFHKL": {
+   "option": 354,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDEFHJL": {
+   "option": 355,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABDEFHJK": {
+   "option": 356,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABDEFHIL": {
+   "option": 357,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABDEFHIK": {
+   "option": 358,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABDEFHIJ": {
+   "option": 359,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABDEFGKL": {
+   "option": 360,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABDEFGJL": {
+   "option": 361,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "J"
+   }
+  },
+  "ABDEFGJK": {
+   "option": 362,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "J",
+    "L": "K"
+   }
+  },
+  "ABDEFGIL": {
+   "option": 363,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABDEFGIK": {
+   "option": 364,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABDEFGIJ": {
+   "option": 365,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "J"
+   }
+  },
+  "ABDEFGHL": {
+   "option": 366,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABDEFGHK": {
+   "option": 367,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABDEFGHJ": {
+   "option": 368,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "J"
+   }
+  },
+  "ABDEFGHI": {
+   "option": 369,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABCHIJKL": {
+   "option": 370,
+   "opponents": {
+    "A": "I",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCGIJKL": {
+   "option": 371,
+   "opponents": {
+    "A": "I",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCGHJKL": {
+   "option": 372,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCGHIKL": {
+   "option": 373,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCGHIJL": {
+   "option": 374,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCGHIJK": {
+   "option": 375,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCFIJKL": {
+   "option": 376,
+   "opponents": {
+    "A": "I",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCFHJKL": {
+   "option": 377,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCFHIKL": {
+   "option": 378,
+   "opponents": {
+    "A": "H",
+    "B": "I",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCFHIJL": {
+   "option": 379,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCFHIJK": {
+   "option": 380,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCFGJKL": {
+   "option": 381,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCFGIKL": {
+   "option": 382,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCFGIJL": {
+   "option": 383,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCFGIJK": {
+   "option": 384,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "F",
+    "G": "A",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCFGHKL": {
+   "option": 385,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCFGHJL": {
+   "option": 386,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "J"
+   }
+  },
+  "ABCFGHJK": {
+   "option": 387,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "J",
+    "L": "K"
+   }
+  },
+  "ABCFGHIL": {
+   "option": 388,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCFGHIK": {
+   "option": 389,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCFGHIJ": {
+   "option": 390,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "J"
+   }
+  },
+  "ABCEIJKL": {
+   "option": 391,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "C",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCEHJKL": {
+   "option": 392,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCEHIKL": {
+   "option": 393,
+   "opponents": {
+    "A": "E",
+    "B": "I",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCEHIJL": {
+   "option": 394,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCEHIJK": {
+   "option": 395,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCEGJKL": {
+   "option": 396,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCEGIKL": {
+   "option": 397,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "A",
+    "G": "I",
+    "I": "C",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCEGIJL": {
+   "option": 398,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCEGIJK": {
+   "option": 399,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCEGHKL": {
+   "option": 400,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCEGHJL": {
+   "option": 401,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABCEGHJK": {
+   "option": 402,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABCEGHIL": {
+   "option": 403,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCEGHIK": {
+   "option": 404,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "H",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCEGHIJ": {
+   "option": 405,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "G",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABCEFJKL": {
+   "option": 406,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCEFIKL": {
+   "option": 407,
+   "opponents": {
+    "A": "E",
+    "B": "I",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCEFIJL": {
+   "option": 408,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCEFIJK": {
+   "option": 409,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCEFHKL": {
+   "option": 410,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCEFHJL": {
+   "option": 411,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABCEFHJK": {
+   "option": 412,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABCEFHIL": {
+   "option": 413,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCEFHIK": {
+   "option": 414,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCEFHIJ": {
+   "option": 415,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABCEFGKL": {
+   "option": 416,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCEFGJL": {
+   "option": 417,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "J"
+   }
+  },
+  "ABCEFGJK": {
+   "option": 418,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "J",
+    "L": "K"
+   }
+  },
+  "ABCEFGIL": {
+   "option": 419,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCEFGIK": {
+   "option": 420,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCEFGIJ": {
+   "option": 421,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "J"
+   }
+  },
+  "ABCEFGHL": {
+   "option": 422,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABCEFGHK": {
+   "option": 423,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABCEFGHJ": {
+   "option": 424,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "J"
+   }
+  },
+  "ABCEFGHI": {
+   "option": 425,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABCDIJKL": {
+   "option": 426,
+   "opponents": {
+    "A": "I",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDHJKL": {
+   "option": 427,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDHIKL": {
+   "option": 428,
+   "opponents": {
+    "A": "H",
+    "B": "I",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDHIJL": {
+   "option": 429,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCDHIJK": {
+   "option": 430,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCDGJKL": {
+   "option": 431,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDGIKL": {
+   "option": 432,
+   "opponents": {
+    "A": "I",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDGIJL": {
+   "option": 433,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCDGIJK": {
+   "option": 434,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "G",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCDGHKL": {
+   "option": 435,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDGHJL": {
+   "option": 436,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "J"
+   }
+  },
+  "ABCDGHJK": {
+   "option": 437,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "J",
+    "L": "K"
+   }
+  },
+  "ABCDGHIL": {
+   "option": 438,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCDGHIK": {
+   "option": 439,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCDGHIJ": {
+   "option": 440,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "J"
+   }
+  },
+  "ABCDFJKL": {
+   "option": 441,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDFIKL": {
+   "option": 442,
+   "opponents": {
+    "A": "C",
+    "B": "I",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDFIJL": {
+   "option": 443,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCDFIJK": {
+   "option": 444,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCDFHKL": {
+   "option": 445,
+   "opponents": {
+    "A": "H",
+    "B": "F",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDFHJL": {
+   "option": 446,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "H"
+   }
+  },
+  "ABCDFHJK": {
+   "option": 447,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "K"
+   }
+  },
+  "ABCDFHIL": {
+   "option": 448,
+   "opponents": {
+    "A": "H",
+    "B": "F",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCDFHIK": {
+   "option": 449,
+   "opponents": {
+    "A": "H",
+    "B": "F",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCDFHIJ": {
+   "option": 450,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "I"
+   }
+  },
+  "ABCDFGKL": {
+   "option": 451,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDFGJL": {
+   "option": 452,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "J"
+   }
+  },
+  "ABCDFGJK": {
+   "option": 453,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "J",
+    "L": "K"
+   }
+  },
+  "ABCDFGIL": {
+   "option": 454,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCDFGIK": {
+   "option": 455,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCDFGIJ": {
+   "option": 456,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "J"
+   }
+  },
+  "ABCDFGHL": {
+   "option": 457,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "H"
+   }
+  },
+  "ABCDFGHK": {
+   "option": 458,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "K"
+   }
+  },
+  "ABCDFGHJ": {
+   "option": 459,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "J"
+   }
+  },
+  "ABCDFGHI": {
+   "option": 460,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "I"
+   }
+  },
+  "ABCDEJKL": {
+   "option": 461,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDEIKL": {
+   "option": 462,
+   "opponents": {
+    "A": "E",
+    "B": "I",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDEIJL": {
+   "option": 463,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCDEIJK": {
+   "option": 464,
+   "opponents": {
+    "A": "E",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCDEHKL": {
+   "option": 465,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDEHJL": {
+   "option": 466,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABCDEHJK": {
+   "option": 467,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABCDEHIL": {
+   "option": 468,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCDEHIK": {
+   "option": 469,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCDEHIJ": {
+   "option": 470,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABCDEGKL": {
+   "option": 471,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDEGJL": {
+   "option": 472,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "J"
+   }
+  },
+  "ABCDEGJK": {
+   "option": 473,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "J",
+    "L": "K"
+   }
+  },
+  "ABCDEGIL": {
+   "option": 474,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCDEGIK": {
+   "option": 475,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCDEGIJ": {
+   "option": 476,
+   "opponents": {
+    "A": "E",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "I",
+    "L": "J"
+   }
+  },
+  "ABCDEGHL": {
+   "option": 477,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABCDEGHK": {
+   "option": 478,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABCDEGHJ": {
+   "option": 479,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "E",
+    "L": "J"
+   }
+  },
+  "ABCDEGHI": {
+   "option": 480,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABCDEFKL": {
+   "option": 481,
+   "opponents": {
+    "A": "C",
+    "B": "E",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "K"
+   }
+  },
+  "ABCDEFJL": {
+   "option": 482,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABCDEFJK": {
+   "option": 483,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABCDEFIL": {
+   "option": 484,
+   "opponents": {
+    "A": "C",
+    "B": "E",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "I"
+   }
+  },
+  "ABCDEFIK": {
+   "option": 485,
+   "opponents": {
+    "A": "C",
+    "B": "E",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "I",
+    "L": "K"
+   }
+  },
+  "ABCDEFIJ": {
+   "option": 486,
+   "opponents": {
+    "A": "C",
+    "B": "J",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABCDEFHL": {
+   "option": 487,
+   "opponents": {
+    "A": "H",
+    "B": "F",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "D",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABCDEFHK": {
+   "option": 488,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "K"
+   }
+  },
+  "ABCDEFHJ": {
+   "option": 489,
+   "opponents": {
+    "A": "H",
+    "B": "J",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "E"
+   }
+  },
+  "ABCDEFHI": {
+   "option": 490,
+   "opponents": {
+    "A": "H",
+    "B": "E",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "I"
+   }
+  },
+  "ABCDEFGL": {
+   "option": 491,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "L",
+    "L": "E"
+   }
+  },
+  "ABCDEFGK": {
+   "option": 492,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "K"
+   }
+  },
+  "ABCDEFGJ": {
+   "option": 493,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "J"
+   }
+  },
+  "ABCDEFGI": {
+   "option": 494,
+   "opponents": {
+    "A": "C",
+    "B": "G",
+    "D": "B",
+    "E": "D",
+    "G": "A",
+    "I": "F",
+    "K": "E",
+    "L": "I"
+   }
+  },
+  "ABCDEFGH": {
+   "option": 495,
+   "opponents": {
+    "A": "H",
+    "B": "G",
+    "D": "B",
+    "E": "C",
+    "G": "A",
+    "I": "F",
+    "K": "D",
+    "L": "E"
+   }
+  }
+ }
+}

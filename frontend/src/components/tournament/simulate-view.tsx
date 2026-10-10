@@ -15,11 +15,66 @@ import { SimulationProgress } from "@/components/football/simulation-progress";
 import { StageProbabilityTable } from "@/components/football/stage-probability-table";
 import { ErrorState } from "@/components/ui/error-state";
 import { toast } from "@/hooks/use-toast";
+import type { TournamentSimulationMeta } from "@/types";
 
 const SIM_OPTIONS = [1000, 5000, 10000, 25000, 50000, 100000];
 
+/** Headline for a result, chosen from what the server says it simulated —
+ * never from what the client asked for. */
+const MODE_TITLES: Record<string, string> = {
+  pre_tournament: "Pre-tournament forecast",
+  after_group_stage: "Knockout forecast after the real group stage",
+  custom_groups: "Hypothetical tournament",
+  legacy: "Simulation results",
+};
+
+function formatDate(iso: string | null | undefined) {
+  if (!iso) return null;
+  const d = new Date(`${iso}T00:00:00Z`);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+}
+
+function SimulationProvenance({ meta }: { meta: TournamentSimulationMeta }) {
+  const through = formatDate(meta.data_through);
+  const se = meta.max_champion_standard_error;
+  return (
+    <div className="space-y-2 border-b border-border/60 pb-4">
+      {meta.note && <p className="text-sm leading-relaxed text-fg-muted">{meta.note}</p>}
+      <dl className="flex flex-wrap gap-x-6 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-zinc-500">
+        <div className="flex gap-1.5">
+          <dt>Model</dt>
+          <dd className="normal-case tracking-normal text-fg-muted">{meta.model_version}</dd>
+        </div>
+        {through && (
+          <div className="flex gap-1.5">
+            <dt>Uses matches through</dt>
+            <dd className="normal-case tracking-normal text-fg-muted">{through}</dd>
+          </div>
+        )}
+        <div className="flex gap-1.5">
+          <dt>Simulations</dt>
+          <dd className="normal-case tracking-normal text-fg-muted">{meta.n_simulations.toLocaleString()}</dd>
+        </div>
+        {typeof se === "number" && (
+          <div className="flex gap-1.5">
+            <dt>Sampling error</dt>
+            <dd className="normal-case tracking-normal text-fg-muted">
+              up to ±{(se * 196).toFixed(1)} pts on a title chance
+            </dd>
+          </div>
+        )}
+      </dl>
+    </div>
+  );
+}
+
 export function SimulateView() {
   const [nSimulations, setNSimulations] = useState(10000);
+  // What "real results" means depends on the engine the server runs, which
+  // the client only learns from a response's `meta`. So the control keeps a
+  // label that is true for both, and the result card states exactly what was
+  // simulated.
   const [useRealResults, setUseRealResults] = useState(true);
 
   const { data: groups } = useSWR("tournament-groups", tournamentApi.getGroups);
@@ -48,6 +103,9 @@ export function SimulateView() {
       toast({ title: "Simulation failed", description: getApiErrorMessage(err), variant: "destructive" });
     }
   };
+
+  const meta = data?.meta ?? null;
+  const title = meta ? MODE_TITLES[meta.mode] ?? "Simulation results" : "Simulation results";
 
   return (
     <div className="space-y-6">
@@ -84,22 +142,22 @@ export function SimulateView() {
             {isMutating ? "Simulating…" : "Run simulation"}
           </Button>
         </CardContent>
-        {/* Without this the tab looks broken: the Bracket shows 2026 finished
-            with Spain champion, while this table gives Spain ~2%. Both are
-            right, because each run builds its own knockout path. Say so. */}
+        {/* The 2026 World Cup is over, so this tab cannot be a prediction of
+            it. Only what holds for every engine is said here; the result card
+            carries the server's own description of what it simulated. */}
         <CardContent className="pt-0">
           <p className="text-xs leading-relaxed text-fg-muted">
-            Each run redraws the knockout stage from its own simulated group tables, so these are
-            probabilities across {nSimulations.toLocaleString()} hypothetical tournaments — not a
-            replay of 2026. A team can win the real bracket and still show a low chance here; the
-            two tabs answer different questions. The switch only stops an already-played fixture
-            being re-simulated when a simulated draw happens to reproduce it. Real results are on
-            the Bracket tab.
+            The 2026 World Cup has been played; real results are on the Bracket tab. These are chances
+            across {nSimulations.toLocaleString()} simulated tournaments, not a replay — a team that won
+            the real thing can show a modest chance here. With the switch off, nothing from the real
+            tournament is used; each result states exactly what was simulated and from which data.
           </p>
         </CardContent>
       </Card>
 
-      {isMutating && <SimulationProgress simulations={nSimulations} />}
+      {isMutating && (
+        <SimulationProgress simulations={nSimulations} expectedDurationMs={1500 + nSimulations / 8} />
+      )}
 
       {error && !isMutating && (
         <ErrorState title="Simulation failed" description={getApiErrorMessage(error)} onRetry={handleRun} />
@@ -108,9 +166,10 @@ export function SimulateView() {
       {data && !isMutating && (
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle>Results</CardTitle>
+            <CardTitle>{title}</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
+            {meta && <SimulationProvenance meta={meta} />}
             <StageProbabilityTable probabilities={data.probabilities} teamNames={teamNames} />
           </CardContent>
         </Card>

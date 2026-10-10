@@ -46,8 +46,17 @@ class Settings(BaseSettings):
     # unchanged and continues to take precedence in production regardless.
     MODEL_VERSION: str = "1.0.0"
 
-    # V2 model feature flag — see app/ml/model_loader.py. Default MUST stay
-    # False: production behavior is unchanged unless explicitly opted in.
+    # Which prediction pipeline serves /predictions/predict and
+    # /tournament/simulate — see app/ml/model_loader.py and docs/ml/.
+    #   "legacy" -> (default) the existing predictors: v1.0.0, or V2 when
+    #               USE_V2_MODEL is true.
+    #   "v3"     -> opt-in: app.ml.v3 (Elo + Poisson/Dixon-Coles + XGBoost
+    #               blend, trained on the full international results corpus).
+    # Any other value is treated as "legacy".
+    PREDICTION_ENGINE: str = "legacy"
+
+    # V2 model feature flag — see app/ml/model_loader.py. Only consulted when
+    # PREDICTION_ENGINE is not "v3". Default MUST stay False.
     USE_V2_MODEL: bool = False
     # Which V2 bundle to serve when USE_V2_MODEL is on:
     #   True  -> v2_production_calibrated (trained through 2026, for predicting

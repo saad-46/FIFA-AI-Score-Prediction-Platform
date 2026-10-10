@@ -27,13 +27,16 @@ class TournamentSimulationRequest(BaseModel):
     use_real_results: bool = Field(
         True,
         description=(
-            "If true (default), matchups already played in the real, in-progress 2026 tournament "
-            "(per matches_historical.csv) use their real recorded score instead of being simulated; "
-            "matches not yet played are always genuinely Monte Carlo simulated regardless of this "
-            "flag. Only meaningful when use_fifa_2026_groups is true (custom team labels can never "
-            "match a real fixture); set false to simulate the full FIFA 2026 bracket hypothetically "
-            "from a blank slate."
+            "Only meaningful with use_fifa_2026_groups. False: a pre-tournament forecast -- all 104 "
+            "matches simulated from information available before 11 June 2026. True (default): the "
+            "real group-stage results are taken as given and the knockout rounds are simulated on the "
+            "bracket they produced, with ratings as of the end of the group stage. Knockout results "
+            "are never fed in; the finished tournament itself is served by the bracket endpoints."
         ),
+    )
+    seed: Optional[int] = Field(
+        None, ge=0, le=2**32 - 1,
+        description="Random seed. The same request with the same seed returns the same numbers. Omit for the default seed.",
     )
 
     @model_validator(mode="after")
@@ -72,8 +75,33 @@ class TeamTournamentStats(BaseModel):
     winner: float = Field(..., description="Probability of winning the tournament")
 
 
+class TournamentSimulationMeta(BaseModel):
+    """What was simulated, with which model, from which information."""
+    model_config = {"protected_namespaces": ()}
+
+    engine: str = Field(..., description="'v3' or 'legacy'")
+    mode: str = Field(..., description="pre_tournament | after_group_stage | custom_groups | legacy")
+    model_version: str
+    information_cutoff: Optional[str] = Field(None, description="No match on or after this date informs the forecast")
+    data_through: Optional[str] = Field(None, description="Date of the most recent match used")
+    n_simulations: int
+    seed: Optional[int] = None
+    fixed_matches: int = Field(0, description="Matches whose real result was taken as given")
+    champion_probability_sum: Optional[float] = None
+    max_champion_standard_error: Optional[float] = Field(
+        None, description="Largest Monte Carlo standard error among the champion probabilities")
+    knockout_resolution: Optional[Dict[str, int]] = Field(
+        None, description="Simulated knockout ties decided in 90 minutes / extra time / penalties")
+    tournament_status: Optional[str] = Field(
+        None, description="'completed' for the 2026 World Cup, 'hypothetical' for custom groups")
+    group_letters: Optional[Dict[str, str]] = Field(
+        None, description="Custom group name -> bracket letter, when they differ")
+    note: Optional[str] = None
+
+
 class TournamentSimulationResponse(BaseModel):
     probabilities: Dict[str, TeamTournamentStats] = Field(..., description="Dictionary mapping team names to their tournament probabilities")
+    meta: Optional[TournamentSimulationMeta] = Field(None, description="Provenance of this simulation")
 
 
 class Fifa2026Team(BaseModel):

@@ -1,0 +1,4814 @@
+{
+  "pipeline_version": "3.0.0",
+  "feature_schema": "v3-features-1",
+  "features": [
+    "elo_diff_venue",
+    "elo_diff",
+    "venue",
+    "log_xg_ratio",
+    "log_xg_total",
+    "form_pts_diff",
+    "form_gd_diff",
+    "momentum_diff",
+    "rest_days_diff",
+    "activity_diff",
+    "h2h_gd_shrunk",
+    "exp_min",
+    "abs_elo_diff",
+    "tier"
+  ],
+  "corpus_fingerprint": "b38434f8f74cd9fa",
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "scikit_learn": "1.5.2",
+    "xgboost": "2.1.3",
+    "scipy": "1.14.1"
+  },
+  "seed": 42,
+  "protocol": {
+    "train_start": "1990-01-01",
+    "folds": [
+      {
+        "name": "2010-2013",
+        "val_start": "2006-01-01",
+        "test_start": "2010-01-01",
+        "test_end": "2014-01-01",
+        "final": false
+      },
+      {
+        "name": "2014-2017",
+        "val_start": "2010-01-01",
+        "test_start": "2014-01-01",
+        "test_end": "2018-01-01",
+        "final": false
+      },
+      {
+        "name": "2018-2021",
+        "val_start": "2014-01-01",
+        "test_start": "2018-01-01",
+        "test_end": "2022-01-01",
+        "final": false
+      },
+      {
+        "name": "2022-2025",
+        "val_start": "2018-01-01",
+        "test_start": "2022-01-01",
+        "test_end": "2026-01-01",
+        "final": false
+      },
+      {
+        "name": "2026-final",
+        "val_start": "2022-01-01",
+        "test_start": "2026-01-01",
+        "test_end": "2027-01-01",
+        "final": true
+      }
+    ],
+    "note": "features are pre-match snapshots from one chronological walk; each fold fits on train, early-stops on the first half of validation, calibrates on the second half, and is scored on test. The 2026 fold played no part in any choice."
+  },
+  "development": {
+    "dev_folds": [
+      {
+        "fold": "2010-2013",
+        "n_train": 12626,
+        "n_cal": 1899,
+        "n_test": 3970,
+        "models": {
+          "prior": {
+            "n": 3970,
+            "log_loss": 1.05065,
+            "brier": 0.63317,
+            "rps": 0.2268,
+            "accuracy": 0.4831,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2395,
+            "ece": 0.0188,
+            "classwise_ece": 0.0192
+          },
+          "elo_ordered_logit": {
+            "n": 3970,
+            "log_loss": 0.90305,
+            "brier": 0.53378,
+            "rps": 0.17934,
+            "accuracy": 0.5806,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2368,
+            "ece": 0.0093,
+            "classwise_ece": 0.0168
+          },
+          "poisson": {
+            "n": 3970,
+            "log_loss": 0.89293,
+            "brier": 0.52752,
+            "rps": 0.17659,
+            "accuracy": 0.5824,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.217,
+            "ece": 0.0174,
+            "classwise_ece": 0.0189,
+            "goal_mae": 0.959,
+            "goal_rmse": 1.3793
+          },
+          "poisson_dc": {
+            "n": 3970,
+            "log_loss": 0.892,
+            "brier": 0.52705,
+            "rps": 0.17651,
+            "accuracy": 0.5824,
+            "draw_recall": 0.0011,
+            "draw_precision": 1.0,
+            "mean_p_draw": 0.2312,
+            "ece": 0.0111,
+            "classwise_ece": 0.0138,
+            "goal_mae": 0.959,
+            "goal_rmse": 1.3793
+          },
+          "multinomial_logit": {
+            "n": 3970,
+            "log_loss": 0.89149,
+            "brier": 0.52613,
+            "rps": 0.17612,
+            "accuracy": 0.5809,
+            "draw_recall": 0.0849,
+            "draw_precision": 0.3347,
+            "mean_p_draw": 0.2533,
+            "ece": 0.0177,
+            "classwise_ece": 0.0181
+          },
+          "xgboost": {
+            "n": 3970,
+            "log_loss": 0.89275,
+            "brier": 0.52745,
+            "rps": 0.17639,
+            "accuracy": 0.5811,
+            "draw_recall": 0.0398,
+            "draw_precision": 0.3217,
+            "mean_p_draw": 0.2522,
+            "ece": 0.0164,
+            "classwise_ece": 0.0199
+          }
+        },
+        "calibration": {
+          "prior": {
+            "none": {
+              "n": 3970,
+              "log_loss": 1.05065,
+              "brier": 0.63317,
+              "rps": 0.2268,
+              "accuracy": 0.4831,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2395,
+              "ece": 0.0188,
+              "classwise_ece": 0.0192,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3970,
+              "log_loss": 1.05202,
+              "brier": 0.6341,
+              "rps": 0.22726,
+              "accuracy": 0.4831,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2284,
+              "ece": 0.0325,
+              "classwise_ece": 0.0271,
+              "params": {
+                "method": "temperature",
+                "T": 0.8915
+              }
+            },
+            "sigmoid": {
+              "n": 3970,
+              "log_loss": 1.05288,
+              "brier": 0.63475,
+              "rps": 0.22751,
+              "accuracy": 0.4476,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2241,
+              "ece": 0.0429,
+              "classwise_ece": 0.0286,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  1.1525,
+                  1.4326,
+                  1.1721
+                ],
+                "intercept": [
+                  0.0752,
+                  0.4132,
+                  0.1574
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3970,
+              "log_loss": 1.05288,
+              "brier": 0.63475,
+              "rps": 0.22751,
+              "accuracy": 0.4476,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2241,
+              "ece": 0.043,
+              "classwise_ece": 0.0286,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "elo_ordered_logit": {
+            "none": {
+              "n": 3970,
+              "log_loss": 0.90305,
+              "brier": 0.53378,
+              "rps": 0.17934,
+              "accuracy": 0.5806,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2368,
+              "ece": 0.0093,
+              "classwise_ece": 0.0168,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3970,
+              "log_loss": 0.90304,
+              "brier": 0.53378,
+              "rps": 0.17934,
+              "accuracy": 0.5806,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2369,
+              "ece": 0.0089,
+              "classwise_ece": 0.017,
+              "params": {
+                "method": "temperature",
+                "T": 1.0011
+              }
+            },
+            "sigmoid": {
+              "n": 3970,
+              "log_loss": 0.90142,
+              "brier": 0.53264,
+              "rps": 0.17878,
+              "accuracy": 0.5768,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2286,
+              "ece": 0.0164,
+              "classwise_ece": 0.0124,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9672,
+                  1.0403,
+                  0.9341
+                ],
+                "intercept": [
+                  0.1258,
+                  -0.0015,
+                  -0.1469
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3970,
+              "log_loss": 0.92681,
+              "brier": 0.53394,
+              "rps": 0.17925,
+              "accuracy": 0.5791,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2286,
+              "ece": 0.0107,
+              "classwise_ece": 0.016,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "poisson": {
+            "none": {
+              "n": 3970,
+              "log_loss": 0.89293,
+              "brier": 0.52752,
+              "rps": 0.17659,
+              "accuracy": 0.5824,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.217,
+              "ece": 0.0174,
+              "classwise_ece": 0.0189,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3970,
+              "log_loss": 0.89283,
+              "brier": 0.52742,
+              "rps": 0.17657,
+              "accuracy": 0.5824,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2195,
+              "ece": 0.0152,
+              "classwise_ece": 0.0185,
+              "params": {
+                "method": "temperature",
+                "T": 1.0227
+              }
+            },
+            "sigmoid": {
+              "n": 3970,
+              "log_loss": 0.89177,
+              "brier": 0.52676,
+              "rps": 0.17634,
+              "accuracy": 0.5824,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2271,
+              "ece": 0.0134,
+              "classwise_ece": 0.0134,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9894,
+                  1.045,
+                  0.9397
+                ],
+                "intercept": [
+                  0.0349,
+                  0.1143,
+                  -0.143
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3970,
+              "log_loss": 0.93698,
+              "brier": 0.52819,
+              "rps": 0.17694,
+              "accuracy": 0.5809,
+              "draw_recall": 0.0161,
+              "draw_precision": 0.283,
+              "mean_p_draw": 0.2272,
+              "ece": 0.0207,
+              "classwise_ece": 0.0179,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "poisson_dc": {
+            "none": {
+              "n": 3970,
+              "log_loss": 0.892,
+              "brier": 0.52705,
+              "rps": 0.17651,
+              "accuracy": 0.5824,
+              "draw_recall": 0.0011,
+              "draw_precision": 1.0,
+              "mean_p_draw": 0.2312,
+              "ece": 0.0111,
+              "classwise_ece": 0.0138,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3970,
+              "log_loss": 0.89198,
+              "brier": 0.52704,
+              "rps": 0.17651,
+              "accuracy": 0.5824,
+              "draw_recall": 0.0011,
+              "draw_precision": 1.0,
+              "mean_p_draw": 0.2322,
+              "ece": 0.0091,
+              "classwise_ece": 0.0141,
+              "params": {
+                "method": "temperature",
+                "T": 1.0094
+              }
+            },
+            "sigmoid": {
+              "n": 3970,
+              "log_loss": 0.89171,
+              "brier": 0.52675,
+              "rps": 0.17633,
+              "accuracy": 0.5821,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.227,
+              "ece": 0.0136,
+              "classwise_ece": 0.0135,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9801,
+                  1.0294,
+                  0.9276
+                ],
+                "intercept": [
+                  0.0706,
+                  0.0092,
+                  -0.1101
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3970,
+              "log_loss": 0.93669,
+              "brier": 0.52804,
+              "rps": 0.17689,
+              "accuracy": 0.5778,
+              "draw_recall": 0.0258,
+              "draw_precision": 0.2667,
+              "mean_p_draw": 0.2272,
+              "ece": 0.023,
+              "classwise_ece": 0.0177,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "multinomial_logit": {
+            "none": {
+              "n": 3970,
+              "log_loss": 0.89149,
+              "brier": 0.52613,
+              "rps": 0.17612,
+              "accuracy": 0.5809,
+              "draw_recall": 0.0849,
+              "draw_precision": 0.3347,
+              "mean_p_draw": 0.2533,
+              "ece": 0.0177,
+              "classwise_ece": 0.0181,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3970,
+              "log_loss": 0.89148,
+              "brier": 0.52611,
+              "rps": 0.17613,
+              "accuracy": 0.5809,
+              "draw_recall": 0.0849,
+              "draw_precision": 0.3347,
+              "mean_p_draw": 0.252,
+              "ece": 0.0191,
+              "classwise_ece": 0.0189,
+              "params": {
+                "method": "temperature",
+                "T": 0.9846
+              }
+            },
+            "sigmoid": {
+              "n": 3970,
+              "log_loss": 0.89039,
+              "brier": 0.5255,
+              "rps": 0.176,
+              "accuracy": 0.5804,
+              "draw_recall": 0.0247,
+              "draw_precision": 0.2771,
+              "mean_p_draw": 0.2307,
+              "ece": 0.0184,
+              "classwise_ece": 0.0166,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  1.0193,
+                  1.008,
+                  0.9473
+                ],
+                "intercept": [
+                  0.084,
+                  -0.121,
+                  0.0032
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3970,
+              "log_loss": 0.91874,
+              "brier": 0.52838,
+              "rps": 0.17707,
+              "accuracy": 0.5761,
+              "draw_recall": 0.071,
+              "draw_precision": 0.3041,
+              "mean_p_draw": 0.2308,
+              "ece": 0.0263,
+              "classwise_ece": 0.018,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "xgboost": {
+            "none": {
+              "n": 3970,
+              "log_loss": 0.89275,
+              "brier": 0.52745,
+              "rps": 0.17639,
+              "accuracy": 0.5811,
+              "draw_recall": 0.0398,
+              "draw_precision": 0.3217,
+              "mean_p_draw": 0.2522,
+              "ece": 0.0164,
+              "classwise_ece": 0.0199,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3970,
+              "log_loss": 0.89267,
+              "brier": 0.52731,
+              "rps": 0.17636,
+              "accuracy": 0.5811,
+              "draw_recall": 0.0398,
+              "draw_precision": 0.3217,
+              "mean_p_draw": 0.2476,
+              "ece": 0.0211,
+              "classwise_ece": 0.0199,
+              "params": {
+                "method": "temperature",
+                "T": 0.9469
+              }
+            },
+            "sigmoid": {
+              "n": 3970,
+              "log_loss": 0.8916,
+              "brier": 0.52659,
+              "rps": 0.17619,
+              "accuracy": 0.5804,
+              "draw_recall": 0.0043,
+              "draw_precision": 0.1739,
+              "mean_p_draw": 0.2306,
+              "ece": 0.023,
+              "classwise_ece": 0.0174,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  1.0571,
+                  0.8993,
+                  1.0129
+                ],
+                "intercept": [
+                  0.1077,
+                  -0.2295,
+                  0.0264
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3970,
+              "log_loss": 0.90044,
+              "brier": 0.52782,
+              "rps": 0.17658,
+              "accuracy": 0.5743,
+              "draw_recall": 0.0151,
+              "draw_precision": 0.2188,
+              "mean_p_draw": 0.23,
+              "ece": 0.0195,
+              "classwise_ece": 0.0201,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          }
+        },
+        "ensembles": {
+          "ens_elo+poisson[equal]": {
+            "n": 3970,
+            "log_loss": 0.89426,
+            "brier": 0.52835,
+            "rps": 0.17705,
+            "accuracy": 0.5804,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2315,
+            "ece": 0.0157,
+            "classwise_ece": 0.0128,
+            "weights": {
+              "elo_ordered_logit": 0.5,
+              "poisson_dc": 0.5
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9759
+            }
+          },
+          "ens_elo+poisson[fitted]": {
+            "n": 3970,
+            "log_loss": 0.89385,
+            "brier": 0.5281,
+            "rps": 0.17694,
+            "accuracy": 0.5801,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2313,
+            "ece": 0.0152,
+            "classwise_ece": 0.0136,
+            "weights": {
+              "elo_ordered_logit": 0.462,
+              "poisson_dc": 0.538
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9762
+            }
+          },
+          "ens_poisson+xgb[equal]": {
+            "n": 3970,
+            "log_loss": 0.88964,
+            "brier": 0.52553,
+            "rps": 0.17589,
+            "accuracy": 0.5796,
+            "draw_recall": 0.0032,
+            "draw_precision": 0.2727,
+            "mean_p_draw": 0.2373,
+            "ece": 0.0163,
+            "classwise_ece": 0.0134,
+            "weights": {
+              "poisson_dc": 0.5,
+              "xgboost": 0.5
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9542
+            }
+          },
+          "ens_poisson+xgb[fitted]": {
+            "n": 3970,
+            "log_loss": 0.89103,
+            "brier": 0.52632,
+            "rps": 0.17607,
+            "accuracy": 0.5798,
+            "draw_recall": 0.0215,
+            "draw_precision": 0.274,
+            "mean_p_draw": 0.2436,
+            "ece": 0.0193,
+            "classwise_ece": 0.0162,
+            "weights": {
+              "poisson_dc": 0.17,
+              "xgboost": 0.83
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9449
+            }
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "n": 3970,
+            "log_loss": 0.8893,
+            "brier": 0.52523,
+            "rps": 0.17582,
+            "accuracy": 0.5788,
+            "draw_recall": 0.0129,
+            "draw_precision": 0.2667,
+            "mean_p_draw": 0.2416,
+            "ece": 0.015,
+            "classwise_ece": 0.0114,
+            "weights": {
+              "poisson_dc": 0.333,
+              "multinomial_logit": 0.333,
+              "xgboost": 0.333
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9583
+            }
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "n": 3970,
+            "log_loss": 0.89103,
+            "brier": 0.52632,
+            "rps": 0.17607,
+            "accuracy": 0.5798,
+            "draw_recall": 0.0215,
+            "draw_precision": 0.274,
+            "mean_p_draw": 0.2436,
+            "ece": 0.0193,
+            "classwise_ece": 0.0162,
+            "weights": {
+              "poisson_dc": 0.17,
+              "multinomial_logit": 0.0,
+              "xgboost": 0.83
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9449
+            }
+          }
+        },
+        "xgb_trials": [
+          {
+            "max_depth": 2,
+            "min_child_weight": 20,
+            "learning_rate": 0.05,
+            "best_iteration": 410,
+            "val_log_loss": 0.88758
+          },
+          {
+            "max_depth": 3,
+            "min_child_weight": 20,
+            "learning_rate": 0.05,
+            "best_iteration": 277,
+            "val_log_loss": 0.8869
+          },
+          {
+            "max_depth": 3,
+            "min_child_weight": 60,
+            "learning_rate": 0.03,
+            "best_iteration": 430,
+            "val_log_loss": 0.88751
+          },
+          {
+            "max_depth": 4,
+            "min_child_weight": 40,
+            "learning_rate": 0.03,
+            "best_iteration": 306,
+            "val_log_loss": 0.88725
+          }
+        ],
+        "xgb_goal_mae": 0.9433,
+        "xgb_goal_rmse": 1.3292,
+        "naive_goal_mae": 1.1413,
+        "vs_prior": {
+          "elo_ordered_logit": {
+            "mean_diff": -0.14897,
+            "ci95": [
+              -0.1652,
+              -0.1326
+            ],
+            "significant": true
+          },
+          "poisson": {
+            "mean_diff": -0.15919,
+            "ci95": [
+              -0.17437,
+              -0.14386
+            ],
+            "significant": true
+          },
+          "poisson_dc": {
+            "mean_diff": -0.16004,
+            "ci95": [
+              -0.17545,
+              -0.14408
+            ],
+            "significant": true
+          },
+          "multinomial_logit": {
+            "mean_diff": -0.16053,
+            "ci95": [
+              -0.17629,
+              -0.14455
+            ],
+            "significant": true
+          },
+          "xgboost": {
+            "mean_diff": -0.15934,
+            "ci95": [
+              -0.17495,
+              -0.14315
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[equal]": {
+            "mean_diff": -0.15775,
+            "ci95": [
+              -0.17361,
+              -0.14151
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[fitted]": {
+            "mean_diff": -0.15817,
+            "ci95": [
+              -0.17399,
+              -0.142
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[equal]": {
+            "mean_diff": -0.16238,
+            "ci95": [
+              -0.17797,
+              -0.14635
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[fitted]": {
+            "mean_diff": -0.16099,
+            "ci95": [
+              -0.17667,
+              -0.14488
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "mean_diff": -0.16272,
+            "ci95": [
+              -0.17832,
+              -0.14684
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "mean_diff": -0.16099,
+            "ci95": [
+              -0.17667,
+              -0.14488
+            ],
+            "significant": true
+          }
+        },
+        "vs_elo": {
+          "poisson": {
+            "mean_diff": -0.01022,
+            "ci95": [
+              -0.01549,
+              -0.00521
+            ],
+            "significant": true
+          },
+          "poisson_dc": {
+            "mean_diff": -0.01107,
+            "ci95": [
+              -0.01607,
+              -0.00619
+            ],
+            "significant": true
+          },
+          "multinomial_logit": {
+            "mean_diff": -0.01156,
+            "ci95": [
+              -0.01646,
+              -0.00659
+            ],
+            "significant": true
+          },
+          "xgboost": {
+            "mean_diff": -0.01037,
+            "ci95": [
+              -0.01591,
+              -0.00486
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[equal]": {
+            "mean_diff": -0.00878,
+            "ci95": [
+              -0.01134,
+              -0.00635
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[fitted]": {
+            "mean_diff": -0.0092,
+            "ci95": [
+              -0.01194,
+              -0.00657
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[equal]": {
+            "mean_diff": -0.0134,
+            "ci95": [
+              -0.01815,
+              -0.00869
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[fitted]": {
+            "mean_diff": -0.01201,
+            "ci95": [
+              -0.01708,
+              -0.0068
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "mean_diff": -0.01374,
+            "ci95": [
+              -0.01846,
+              -0.00909
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "mean_diff": -0.01201,
+            "ci95": [
+              -0.01708,
+              -0.0068
+            ],
+            "significant": true
+          }
+        }
+      },
+      {
+        "fold": "2014-2017",
+        "n_train": 16482,
+        "n_cal": 1984,
+        "n_test": 3739,
+        "models": {
+          "prior": {
+            "n": 3739,
+            "log_loss": 1.04834,
+            "brier": 0.63139,
+            "rps": 0.22629,
+            "accuracy": 0.4747,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2375,
+            "ece": 0.0024,
+            "classwise_ece": 0.0095
+          },
+          "elo_ordered_logit": {
+            "n": 3739,
+            "log_loss": 0.89957,
+            "brier": 0.52908,
+            "rps": 0.17785,
+            "accuracy": 0.5871,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.23,
+            "ece": 0.0175,
+            "classwise_ece": 0.0131
+          },
+          "poisson": {
+            "n": 3739,
+            "log_loss": 0.88999,
+            "brier": 0.52302,
+            "rps": 0.17515,
+            "accuracy": 0.5897,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2128,
+            "ece": 0.0239,
+            "classwise_ece": 0.0186,
+            "goal_mae": 0.9376,
+            "goal_rmse": 1.2817
+          },
+          "poisson_dc": {
+            "n": 3739,
+            "log_loss": 0.88922,
+            "brier": 0.5224,
+            "rps": 0.17505,
+            "accuracy": 0.5903,
+            "draw_recall": 0.0023,
+            "draw_precision": 1.0,
+            "mean_p_draw": 0.2263,
+            "ece": 0.0197,
+            "classwise_ece": 0.0137,
+            "goal_mae": 0.9376,
+            "goal_rmse": 1.2817
+          },
+          "multinomial_logit": {
+            "n": 3739,
+            "log_loss": 0.88821,
+            "brier": 0.52197,
+            "rps": 0.17498,
+            "accuracy": 0.5892,
+            "draw_recall": 0.0598,
+            "draw_precision": 0.321,
+            "mean_p_draw": 0.241,
+            "ece": 0.0152,
+            "classwise_ece": 0.0157
+          },
+          "xgboost": {
+            "n": 3739,
+            "log_loss": 0.89219,
+            "brier": 0.5249,
+            "rps": 0.1762,
+            "accuracy": 0.5865,
+            "draw_recall": 0.0149,
+            "draw_precision": 0.2549,
+            "mean_p_draw": 0.2398,
+            "ece": 0.0115,
+            "classwise_ece": 0.0124
+          }
+        },
+        "calibration": {
+          "prior": {
+            "none": {
+              "n": 3739,
+              "log_loss": 1.04834,
+              "brier": 0.63139,
+              "rps": 0.22629,
+              "accuracy": 0.4747,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2375,
+              "ece": 0.0024,
+              "classwise_ece": 0.0095,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3739,
+              "log_loss": 1.04835,
+              "brier": 0.6314,
+              "rps": 0.2263,
+              "accuracy": 0.4747,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2373,
+              "ece": 0.0027,
+              "classwise_ece": 0.0096,
+              "params": {
+                "method": "temperature",
+                "T": 0.9976
+              }
+            },
+            "sigmoid": {
+              "n": 3739,
+              "log_loss": 1.0488,
+              "brier": 0.632,
+              "rps": 0.22667,
+              "accuracy": 0.4747,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2299,
+              "ece": 0.0171,
+              "classwise_ece": 0.0114,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.4962,
+                  0.597,
+                  0.4875
+                ],
+                "intercept": [
+                  0.02,
+                  -0.5118,
+                  -0.509
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3739,
+              "log_loss": 1.04862,
+              "brier": 0.63189,
+              "rps": 0.22665,
+              "accuracy": 0.4747,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2299,
+              "ece": 0.0172,
+              "classwise_ece": 0.0115,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "elo_ordered_logit": {
+            "none": {
+              "n": 3739,
+              "log_loss": 0.89957,
+              "brier": 0.52908,
+              "rps": 0.17785,
+              "accuracy": 0.5871,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.23,
+              "ece": 0.0175,
+              "classwise_ece": 0.0131,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3739,
+              "log_loss": 0.89913,
+              "brier": 0.5289,
+              "rps": 0.17776,
+              "accuracy": 0.5871,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2328,
+              "ece": 0.0151,
+              "classwise_ece": 0.0138,
+              "params": {
+                "method": "temperature",
+                "T": 1.0271
+              }
+            },
+            "sigmoid": {
+              "n": 3739,
+              "log_loss": 0.89985,
+              "brier": 0.52928,
+              "rps": 0.17787,
+              "accuracy": 0.5887,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2241,
+              "ece": 0.0143,
+              "classwise_ece": 0.0145,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9044,
+                  0.7933,
+                  0.9545
+                ],
+                "intercept": [
+                  0.1022,
+                  -0.2734,
+                  -0.1232
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3739,
+              "log_loss": 0.95523,
+              "brier": 0.53153,
+              "rps": 0.1787,
+              "accuracy": 0.5884,
+              "draw_recall": 0.0034,
+              "draw_precision": 0.2143,
+              "mean_p_draw": 0.2238,
+              "ece": 0.0159,
+              "classwise_ece": 0.0228,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "poisson": {
+            "none": {
+              "n": 3739,
+              "log_loss": 0.88999,
+              "brier": 0.52302,
+              "rps": 0.17515,
+              "accuracy": 0.5897,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2128,
+              "ece": 0.0239,
+              "classwise_ece": 0.0186,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3739,
+              "log_loss": 0.88975,
+              "brier": 0.52292,
+              "rps": 0.17512,
+              "accuracy": 0.5897,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2141,
+              "ece": 0.0233,
+              "classwise_ece": 0.0182,
+              "params": {
+                "method": "temperature",
+                "T": 1.0117
+              }
+            },
+            "sigmoid": {
+              "n": 3739,
+              "log_loss": 0.88951,
+              "brier": 0.5227,
+              "rps": 0.17517,
+              "accuracy": 0.5905,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2236,
+              "ece": 0.0154,
+              "classwise_ece": 0.016,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9607,
+                  1.0139,
+                  1.0107
+                ],
+                "intercept": [
+                  0.0177,
+                  0.0832,
+                  -0.0858
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3739,
+              "log_loss": 0.97985,
+              "brier": 0.52738,
+              "rps": 0.1769,
+              "accuracy": 0.5943,
+              "draw_recall": 0.0322,
+              "draw_precision": 0.3684,
+              "mean_p_draw": 0.2238,
+              "ece": 0.0404,
+              "classwise_ece": 0.0258,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "poisson_dc": {
+            "none": {
+              "n": 3739,
+              "log_loss": 0.88922,
+              "brier": 0.5224,
+              "rps": 0.17505,
+              "accuracy": 0.5903,
+              "draw_recall": 0.0023,
+              "draw_precision": 1.0,
+              "mean_p_draw": 0.2263,
+              "ece": 0.0197,
+              "classwise_ece": 0.0137,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3739,
+              "log_loss": 0.88928,
+              "brier": 0.52242,
+              "rps": 0.17506,
+              "accuracy": 0.5903,
+              "draw_recall": 0.0023,
+              "draw_precision": 1.0,
+              "mean_p_draw": 0.2259,
+              "ece": 0.021,
+              "classwise_ece": 0.0136,
+              "params": {
+                "method": "temperature",
+                "T": 0.9965
+              }
+            },
+            "sigmoid": {
+              "n": 3739,
+              "log_loss": 0.88956,
+              "brier": 0.5227,
+              "rps": 0.17517,
+              "accuracy": 0.5905,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2235,
+              "ece": 0.0157,
+              "classwise_ece": 0.0161,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9532,
+                  1.0031,
+                  0.9977
+                ],
+                "intercept": [
+                  0.0513,
+                  -0.0116,
+                  -0.0524
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3739,
+              "log_loss": 0.98067,
+              "brier": 0.52782,
+              "rps": 0.17709,
+              "accuracy": 0.5919,
+              "draw_recall": 0.031,
+              "draw_precision": 0.36,
+              "mean_p_draw": 0.2238,
+              "ece": 0.0394,
+              "classwise_ece": 0.0257,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "multinomial_logit": {
+            "none": {
+              "n": 3739,
+              "log_loss": 0.88821,
+              "brier": 0.52197,
+              "rps": 0.17498,
+              "accuracy": 0.5892,
+              "draw_recall": 0.0598,
+              "draw_precision": 0.321,
+              "mean_p_draw": 0.241,
+              "ece": 0.0152,
+              "classwise_ece": 0.0157,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3739,
+              "log_loss": 0.88838,
+              "brier": 0.52203,
+              "rps": 0.17501,
+              "accuracy": 0.5892,
+              "draw_recall": 0.0598,
+              "draw_precision": 0.321,
+              "mean_p_draw": 0.24,
+              "ece": 0.0156,
+              "classwise_ece": 0.0154,
+              "params": {
+                "method": "temperature",
+                "T": 0.9897
+              }
+            },
+            "sigmoid": {
+              "n": 3739,
+              "log_loss": 0.88812,
+              "brier": 0.52216,
+              "rps": 0.17505,
+              "accuracy": 0.5921,
+              "draw_recall": 0.0241,
+              "draw_precision": 0.3889,
+              "mean_p_draw": 0.2218,
+              "ece": 0.0145,
+              "classwise_ece": 0.0176,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9768,
+                  0.9492,
+                  0.989
+                ],
+                "intercept": [
+                  0.0601,
+                  -0.1664,
+                  0.0428
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3739,
+              "log_loss": 0.98534,
+              "brier": 0.52454,
+              "rps": 0.17602,
+              "accuracy": 0.5908,
+              "draw_recall": 0.0437,
+              "draw_precision": 0.3551,
+              "mean_p_draw": 0.2214,
+              "ece": 0.0206,
+              "classwise_ece": 0.0211,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "xgboost": {
+            "none": {
+              "n": 3739,
+              "log_loss": 0.89219,
+              "brier": 0.5249,
+              "rps": 0.1762,
+              "accuracy": 0.5865,
+              "draw_recall": 0.0149,
+              "draw_precision": 0.2549,
+              "mean_p_draw": 0.2398,
+              "ece": 0.0115,
+              "classwise_ece": 0.0124,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3739,
+              "log_loss": 0.89316,
+              "brier": 0.52517,
+              "rps": 0.17633,
+              "accuracy": 0.5865,
+              "draw_recall": 0.0149,
+              "draw_precision": 0.2549,
+              "mean_p_draw": 0.2345,
+              "ece": 0.0165,
+              "classwise_ece": 0.0142,
+              "params": {
+                "method": "temperature",
+                "T": 0.9449
+              }
+            },
+            "sigmoid": {
+              "n": 3739,
+              "log_loss": 0.89295,
+              "brier": 0.52531,
+              "rps": 0.17637,
+              "accuracy": 0.59,
+              "draw_recall": 0.0034,
+              "draw_precision": 0.3,
+              "mean_p_draw": 0.2217,
+              "ece": 0.0207,
+              "classwise_ece": 0.0145,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  1.0174,
+                  1.0539,
+                  1.0317
+                ],
+                "intercept": [
+                  0.0864,
+                  -0.049,
+                  0.0358
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3739,
+              "log_loss": 0.98774,
+              "brier": 0.52886,
+              "rps": 0.17783,
+              "accuracy": 0.5868,
+              "draw_recall": 0.0034,
+              "draw_precision": 0.375,
+              "mean_p_draw": 0.2208,
+              "ece": 0.0382,
+              "classwise_ece": 0.0254,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          }
+        },
+        "ensembles": {
+          "ens_elo+poisson[equal]": {
+            "n": 3739,
+            "log_loss": 0.89091,
+            "brier": 0.52375,
+            "rps": 0.17562,
+            "accuracy": 0.5908,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2273,
+            "ece": 0.0121,
+            "classwise_ece": 0.0122,
+            "weights": {
+              "elo_ordered_logit": 0.5,
+              "poisson_dc": 0.5
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9921
+            }
+          },
+          "ens_elo+poisson[fitted]": {
+            "n": 3739,
+            "log_loss": 0.88928,
+            "brier": 0.52242,
+            "rps": 0.17506,
+            "accuracy": 0.5903,
+            "draw_recall": 0.0023,
+            "draw_precision": 1.0,
+            "mean_p_draw": 0.2259,
+            "ece": 0.021,
+            "classwise_ece": 0.0136,
+            "weights": {
+              "elo_ordered_logit": 0.0,
+              "poisson_dc": 1.0
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9965
+            }
+          },
+          "ens_poisson+xgb[equal]": {
+            "n": 3739,
+            "log_loss": 0.88909,
+            "brier": 0.52263,
+            "rps": 0.1753,
+            "accuracy": 0.5903,
+            "draw_recall": 0.0011,
+            "draw_precision": 0.25,
+            "mean_p_draw": 0.2285,
+            "ece": 0.0159,
+            "classwise_ece": 0.0136,
+            "weights": {
+              "poisson_dc": 0.5,
+              "xgboost": 0.5
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.956
+            }
+          },
+          "ens_poisson+xgb[fitted]": {
+            "n": 3739,
+            "log_loss": 0.89108,
+            "brier": 0.52391,
+            "rps": 0.17584,
+            "accuracy": 0.5895,
+            "draw_recall": 0.0092,
+            "draw_precision": 0.32,
+            "mean_p_draw": 0.2318,
+            "ece": 0.0169,
+            "classwise_ece": 0.0113,
+            "weights": {
+              "poisson_dc": 0.192,
+              "xgboost": 0.808
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9458
+            }
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "n": 3739,
+            "log_loss": 0.88804,
+            "brier": 0.52202,
+            "rps": 0.17507,
+            "accuracy": 0.5927,
+            "draw_recall": 0.0195,
+            "draw_precision": 0.4722,
+            "mean_p_draw": 0.2319,
+            "ece": 0.0182,
+            "classwise_ece": 0.0124,
+            "weights": {
+              "poisson_dc": 0.333,
+              "multinomial_logit": 0.333,
+              "xgboost": 0.333
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.962
+            }
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "n": 3739,
+            "log_loss": 0.89108,
+            "brier": 0.52391,
+            "rps": 0.17584,
+            "accuracy": 0.5895,
+            "draw_recall": 0.0092,
+            "draw_precision": 0.32,
+            "mean_p_draw": 0.2318,
+            "ece": 0.0169,
+            "classwise_ece": 0.0113,
+            "weights": {
+              "poisson_dc": 0.192,
+              "multinomial_logit": 0.0,
+              "xgboost": 0.808
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9458
+            }
+          }
+        },
+        "xgb_trials": [
+          {
+            "max_depth": 2,
+            "min_child_weight": 20,
+            "learning_rate": 0.05,
+            "best_iteration": 335,
+            "val_log_loss": 0.89014
+          },
+          {
+            "max_depth": 3,
+            "min_child_weight": 20,
+            "learning_rate": 0.05,
+            "best_iteration": 258,
+            "val_log_loss": 0.89082
+          },
+          {
+            "max_depth": 3,
+            "min_child_weight": 60,
+            "learning_rate": 0.03,
+            "best_iteration": 380,
+            "val_log_loss": 0.89107
+          },
+          {
+            "max_depth": 4,
+            "min_child_weight": 40,
+            "learning_rate": 0.03,
+            "best_iteration": 156,
+            "val_log_loss": 0.89159
+          }
+        ],
+        "xgb_goal_mae": 0.9313,
+        "xgb_goal_rmse": 1.2645,
+        "naive_goal_mae": 1.1295,
+        "vs_prior": {
+          "elo_ordered_logit": {
+            "mean_diff": -0.14922,
+            "ci95": [
+              -0.16587,
+              -0.13184
+            ],
+            "significant": true
+          },
+          "poisson": {
+            "mean_diff": -0.1586,
+            "ci95": [
+              -0.17511,
+              -0.14197
+            ],
+            "significant": true
+          },
+          "poisson_dc": {
+            "mean_diff": -0.15907,
+            "ci95": [
+              -0.17615,
+              -0.14187
+            ],
+            "significant": true
+          },
+          "multinomial_logit": {
+            "mean_diff": -0.15998,
+            "ci95": [
+              -0.17707,
+              -0.14231
+            ],
+            "significant": true
+          },
+          "xgboost": {
+            "mean_diff": -0.1552,
+            "ci95": [
+              -0.17181,
+              -0.13739
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[equal]": {
+            "mean_diff": -0.15745,
+            "ci95": [
+              -0.17462,
+              -0.14014
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[fitted]": {
+            "mean_diff": -0.15907,
+            "ci95": [
+              -0.17615,
+              -0.14187
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[equal]": {
+            "mean_diff": -0.15927,
+            "ci95": [
+              -0.17606,
+              -0.1418
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[fitted]": {
+            "mean_diff": -0.15728,
+            "ci95": [
+              -0.17388,
+              -0.1398
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "mean_diff": -0.16031,
+            "ci95": [
+              -0.17721,
+              -0.14285
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "mean_diff": -0.15728,
+            "ci95": [
+              -0.17388,
+              -0.1398
+            ],
+            "significant": true
+          }
+        },
+        "vs_elo": {
+          "poisson": {
+            "mean_diff": -0.00938,
+            "ci95": [
+              -0.01496,
+              -0.00362
+            ],
+            "significant": true
+          },
+          "poisson_dc": {
+            "mean_diff": -0.00985,
+            "ci95": [
+              -0.01536,
+              -0.00419
+            ],
+            "significant": true
+          },
+          "multinomial_logit": {
+            "mean_diff": -0.01076,
+            "ci95": [
+              -0.01563,
+              -0.006
+            ],
+            "significant": true
+          },
+          "xgboost": {
+            "mean_diff": -0.00597,
+            "ci95": [
+              -0.01093,
+              -0.00074
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[equal]": {
+            "mean_diff": -0.00822,
+            "ci95": [
+              -0.01092,
+              -0.0055
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[fitted]": {
+            "mean_diff": -0.00985,
+            "ci95": [
+              -0.01536,
+              -0.00419
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[equal]": {
+            "mean_diff": -0.01004,
+            "ci95": [
+              -0.01482,
+              -0.00515
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[fitted]": {
+            "mean_diff": -0.00805,
+            "ci95": [
+              -0.01281,
+              -0.00312
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "mean_diff": -0.01109,
+            "ci95": [
+              -0.0157,
+              -0.00643
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "mean_diff": -0.00805,
+            "ci95": [
+              -0.01281,
+              -0.00312
+            ],
+            "significant": true
+          }
+        }
+      },
+      {
+        "fold": "2018-2021",
+        "n_train": 20452,
+        "n_cal": 1868,
+        "n_test": 3562,
+        "models": {
+          "prior": {
+            "n": 3562,
+            "log_loss": 1.0465,
+            "brier": 0.63031,
+            "rps": 0.22618,
+            "accuracy": 0.4773,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2368,
+            "ece": 0.0058,
+            "classwise_ece": 0.0093
+          },
+          "elo_ordered_logit": {
+            "n": 3562,
+            "log_loss": 0.86072,
+            "brier": 0.50576,
+            "rps": 0.16701,
+            "accuracy": 0.6058,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2253,
+            "ece": 0.0106,
+            "classwise_ece": 0.0125
+          },
+          "poisson": {
+            "n": 3562,
+            "log_loss": 0.85532,
+            "brier": 0.50287,
+            "rps": 0.16589,
+            "accuracy": 0.6039,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2075,
+            "ece": 0.0167,
+            "classwise_ece": 0.0204,
+            "goal_mae": 0.9396,
+            "goal_rmse": 1.2724
+          },
+          "poisson_dc": {
+            "n": 3562,
+            "log_loss": 0.85378,
+            "brier": 0.50208,
+            "rps": 0.16576,
+            "accuracy": 0.6039,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.22,
+            "ece": 0.0169,
+            "classwise_ece": 0.0168,
+            "goal_mae": 0.9396,
+            "goal_rmse": 1.2724
+          },
+          "multinomial_logit": {
+            "n": 3562,
+            "log_loss": 0.85356,
+            "brier": 0.50194,
+            "rps": 0.16576,
+            "accuracy": 0.6039,
+            "draw_recall": 0.051,
+            "draw_precision": 0.3256,
+            "mean_p_draw": 0.2344,
+            "ece": 0.0081,
+            "classwise_ece": 0.0111
+          },
+          "xgboost": {
+            "n": 3562,
+            "log_loss": 0.85231,
+            "brier": 0.50127,
+            "rps": 0.16545,
+            "accuracy": 0.6058,
+            "draw_recall": 0.0024,
+            "draw_precision": 0.2857,
+            "mean_p_draw": 0.2311,
+            "ece": 0.0137,
+            "classwise_ece": 0.0149
+          }
+        },
+        "calibration": {
+          "prior": {
+            "none": {
+              "n": 3562,
+              "log_loss": 1.0465,
+              "brier": 0.63031,
+              "rps": 0.22618,
+              "accuracy": 0.4773,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2368,
+              "ece": 0.0058,
+              "classwise_ece": 0.0093,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3562,
+              "log_loss": 1.04651,
+              "brier": 0.63033,
+              "rps": 0.22618,
+              "accuracy": 0.4773,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2394,
+              "ece": 0.0097,
+              "classwise_ece": 0.0108,
+              "params": {
+                "method": "temperature",
+                "T": 1.0285
+              }
+            },
+            "sigmoid": {
+              "n": 3562,
+              "log_loss": 1.04605,
+              "brier": 0.62999,
+              "rps": 0.22603,
+              "accuracy": 0.4773,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2429,
+              "ece": 0.0019,
+              "classwise_ece": 0.0079,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9117,
+                  -1.341,
+                  0.7221
+                ],
+                "intercept": [
+                  0.0078,
+                  -2.7065,
+                  -0.2952
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3562,
+              "log_loss": 1.04605,
+              "brier": 0.62998,
+              "rps": 0.22602,
+              "accuracy": 0.4773,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2426,
+              "ece": 0.0016,
+              "classwise_ece": 0.0075,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "elo_ordered_logit": {
+            "none": {
+              "n": 3562,
+              "log_loss": 0.86072,
+              "brier": 0.50576,
+              "rps": 0.16701,
+              "accuracy": 0.6058,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2253,
+              "ece": 0.0106,
+              "classwise_ece": 0.0125,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3562,
+              "log_loss": 0.86111,
+              "brier": 0.50588,
+              "rps": 0.16708,
+              "accuracy": 0.6058,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2292,
+              "ece": 0.0112,
+              "classwise_ece": 0.0142,
+              "params": {
+                "method": "temperature",
+                "T": 1.0377
+              }
+            },
+            "sigmoid": {
+              "n": 3562,
+              "log_loss": 0.86095,
+              "brier": 0.50578,
+              "rps": 0.16702,
+              "accuracy": 0.603,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2361,
+              "ece": 0.0109,
+              "classwise_ece": 0.0133,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9307,
+                  1.1189,
+                  0.9864
+                ],
+                "intercept": [
+                  -0.0071,
+                  0.2047,
+                  -0.0829
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3562,
+              "log_loss": 0.87933,
+              "brier": 0.50711,
+              "rps": 0.16737,
+              "accuracy": 0.605,
+              "draw_recall": 0.0061,
+              "draw_precision": 0.3571,
+              "mean_p_draw": 0.2347,
+              "ece": 0.021,
+              "classwise_ece": 0.0166,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "poisson": {
+            "none": {
+              "n": 3562,
+              "log_loss": 0.85532,
+              "brier": 0.50287,
+              "rps": 0.16589,
+              "accuracy": 0.6039,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2075,
+              "ece": 0.0167,
+              "classwise_ece": 0.0204,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3562,
+              "log_loss": 0.85526,
+              "brier": 0.50275,
+              "rps": 0.1659,
+              "accuracy": 0.6039,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2119,
+              "ece": 0.018,
+              "classwise_ece": 0.02,
+              "params": {
+                "method": "temperature",
+                "T": 1.0399
+              }
+            },
+            "sigmoid": {
+              "n": 3562,
+              "log_loss": 0.8536,
+              "brier": 0.50197,
+              "rps": 0.16577,
+              "accuracy": 0.6053,
+              "draw_recall": 0.0158,
+              "draw_precision": 0.3333,
+              "mean_p_draw": 0.2341,
+              "ece": 0.0178,
+              "classwise_ece": 0.0143,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9756,
+                  1.2082,
+                  1.0244
+                ],
+                "intercept": [
+                  -0.0657,
+                  0.4227,
+                  -0.0881
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3562,
+              "log_loss": 0.87806,
+              "brier": 0.50409,
+              "rps": 0.16663,
+              "accuracy": 0.6098,
+              "draw_recall": 0.1153,
+              "draw_precision": 0.3598,
+              "mean_p_draw": 0.2353,
+              "ece": 0.0202,
+              "classwise_ece": 0.0179,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "poisson_dc": {
+            "none": {
+              "n": 3562,
+              "log_loss": 0.85378,
+              "brier": 0.50208,
+              "rps": 0.16576,
+              "accuracy": 0.6039,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.22,
+              "ece": 0.0169,
+              "classwise_ece": 0.0168,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3562,
+              "log_loss": 0.85379,
+              "brier": 0.50208,
+              "rps": 0.16577,
+              "accuracy": 0.6039,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2224,
+              "ece": 0.018,
+              "classwise_ece": 0.0173,
+              "params": {
+                "method": "temperature",
+                "T": 1.0222
+              }
+            },
+            "sigmoid": {
+              "n": 3562,
+              "log_loss": 0.85355,
+              "brier": 0.50194,
+              "rps": 0.16576,
+              "accuracy": 0.6053,
+              "draw_recall": 0.0158,
+              "draw_precision": 0.3333,
+              "mean_p_draw": 0.234,
+              "ece": 0.0178,
+              "classwise_ece": 0.0139,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9678,
+                  1.1922,
+                  1.0117
+                ],
+                "intercept": [
+                  -0.0328,
+                  0.3107,
+                  -0.0554
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3562,
+              "log_loss": 0.87178,
+              "brier": 0.50405,
+              "rps": 0.16656,
+              "accuracy": 0.6101,
+              "draw_recall": 0.1189,
+              "draw_precision": 0.3525,
+              "mean_p_draw": 0.2354,
+              "ece": 0.021,
+              "classwise_ece": 0.0176,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "multinomial_logit": {
+            "none": {
+              "n": 3562,
+              "log_loss": 0.85356,
+              "brier": 0.50194,
+              "rps": 0.16576,
+              "accuracy": 0.6039,
+              "draw_recall": 0.051,
+              "draw_precision": 0.3256,
+              "mean_p_draw": 0.2344,
+              "ece": 0.0081,
+              "classwise_ece": 0.0111,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3562,
+              "log_loss": 0.85358,
+              "brier": 0.50194,
+              "rps": 0.16576,
+              "accuracy": 0.6039,
+              "draw_recall": 0.051,
+              "draw_precision": 0.3256,
+              "mean_p_draw": 0.2348,
+              "ece": 0.0104,
+              "classwise_ece": 0.0122,
+              "params": {
+                "method": "temperature",
+                "T": 1.0046
+              }
+            },
+            "sigmoid": {
+              "n": 3562,
+              "log_loss": 0.85354,
+              "brier": 0.502,
+              "rps": 0.16573,
+              "accuracy": 0.6022,
+              "draw_recall": 0.0777,
+              "draw_precision": 0.3216,
+              "mean_p_draw": 0.2359,
+              "ece": 0.0095,
+              "classwise_ece": 0.0152,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9996,
+                  1.1563,
+                  1.0175
+                ],
+                "intercept": [
+                  -0.0448,
+                  0.1838,
+                  0.0507
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3562,
+              "log_loss": 0.8782,
+              "brier": 0.50394,
+              "rps": 0.16637,
+              "accuracy": 0.6028,
+              "draw_recall": 0.0947,
+              "draw_precision": 0.3223,
+              "mean_p_draw": 0.2359,
+              "ece": 0.0098,
+              "classwise_ece": 0.0146,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "xgboost": {
+            "none": {
+              "n": 3562,
+              "log_loss": 0.85231,
+              "brier": 0.50127,
+              "rps": 0.16545,
+              "accuracy": 0.6058,
+              "draw_recall": 0.0024,
+              "draw_precision": 0.2857,
+              "mean_p_draw": 0.2311,
+              "ece": 0.0137,
+              "classwise_ece": 0.0149,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 3562,
+              "log_loss": 0.85176,
+              "brier": 0.50109,
+              "rps": 0.16536,
+              "accuracy": 0.6058,
+              "draw_recall": 0.0024,
+              "draw_precision": 0.2857,
+              "mean_p_draw": 0.2274,
+              "ece": 0.0193,
+              "classwise_ece": 0.0169,
+              "params": {
+                "method": "temperature",
+                "T": 0.9635
+              }
+            },
+            "sigmoid": {
+              "n": 3562,
+              "log_loss": 0.8516,
+              "brier": 0.50106,
+              "rps": 0.16534,
+              "accuracy": 0.607,
+              "draw_recall": 0.0109,
+              "draw_precision": 0.3333,
+              "mean_p_draw": 0.2354,
+              "ece": 0.0174,
+              "classwise_ece": 0.0162,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  1.0377,
+                  1.1566,
+                  1.0663
+                ],
+                "intercept": [
+                  0.0018,
+                  0.2006,
+                  0.0162
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 3562,
+              "log_loss": 0.85368,
+              "brier": 0.5018,
+              "rps": 0.16555,
+              "accuracy": 0.605,
+              "draw_recall": 0.0437,
+              "draw_precision": 0.383,
+              "mean_p_draw": 0.234,
+              "ece": 0.0115,
+              "classwise_ece": 0.0151,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          }
+        },
+        "ensembles": {
+          "ens_elo+poisson[equal]": {
+            "n": 3562,
+            "log_loss": 0.85421,
+            "brier": 0.50198,
+            "rps": 0.16558,
+            "accuracy": 0.607,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2233,
+            "ece": 0.0127,
+            "classwise_ece": 0.0164,
+            "weights": {
+              "elo_ordered_logit": 0.5,
+              "poisson_dc": 0.5
+            },
+            "params": {
+              "method": "temperature",
+              "T": 1.0055
+            }
+          },
+          "ens_elo+poisson[fitted]": {
+            "n": 3562,
+            "log_loss": 0.85327,
+            "brier": 0.5017,
+            "rps": 0.16557,
+            "accuracy": 0.605,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.222,
+            "ece": 0.0177,
+            "classwise_ece": 0.0159,
+            "weights": {
+              "elo_ordered_logit": 0.123,
+              "poisson_dc": 0.877
+            },
+            "params": {
+              "method": "temperature",
+              "T": 1.0128
+            }
+          },
+          "ens_poisson+xgb[equal]": {
+            "n": 3562,
+            "log_loss": 0.85092,
+            "brier": 0.5007,
+            "rps": 0.16522,
+            "accuracy": 0.6064,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2235,
+            "ece": 0.0097,
+            "classwise_ece": 0.0172,
+            "weights": {
+              "poisson_dc": 0.5,
+              "xgboost": 0.5
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9804
+            }
+          },
+          "ens_poisson+xgb[fitted]": {
+            "n": 3562,
+            "log_loss": 0.85134,
+            "brier": 0.50094,
+            "rps": 0.16532,
+            "accuracy": 0.6058,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2229,
+            "ece": 0.0103,
+            "classwise_ece": 0.0147,
+            "weights": {
+              "poisson_dc": 0.651,
+              "xgboost": 0.349
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9901
+            }
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "n": 3562,
+            "log_loss": 0.85097,
+            "brier": 0.50068,
+            "rps": 0.16526,
+            "accuracy": 0.6086,
+            "draw_recall": 0.0073,
+            "draw_precision": 0.5455,
+            "mean_p_draw": 0.2268,
+            "ece": 0.0082,
+            "classwise_ece": 0.0142,
+            "weights": {
+              "poisson_dc": 0.333,
+              "multinomial_logit": 0.333,
+              "xgboost": 0.333
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9831
+            }
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "n": 3562,
+            "log_loss": 0.85273,
+            "brier": 0.50148,
+            "rps": 0.16561,
+            "accuracy": 0.6044,
+            "draw_recall": 0.0352,
+            "draw_precision": 0.3537,
+            "mean_p_draw": 0.2315,
+            "ece": 0.0086,
+            "classwise_ece": 0.0114,
+            "weights": {
+              "poisson_dc": 0.212,
+              "multinomial_logit": 0.788,
+              "xgboost": 0.0
+            },
+            "params": {
+              "method": "temperature",
+              "T": 1.0016
+            }
+          }
+        },
+        "xgb_trials": [
+          {
+            "max_depth": 2,
+            "min_child_weight": 20,
+            "learning_rate": 0.05,
+            "best_iteration": 223,
+            "val_log_loss": 0.89707
+          },
+          {
+            "max_depth": 3,
+            "min_child_weight": 20,
+            "learning_rate": 0.05,
+            "best_iteration": 123,
+            "val_log_loss": 0.89705
+          },
+          {
+            "max_depth": 3,
+            "min_child_weight": 60,
+            "learning_rate": 0.03,
+            "best_iteration": 159,
+            "val_log_loss": 0.89749
+          },
+          {
+            "max_depth": 4,
+            "min_child_weight": 40,
+            "learning_rate": 0.03,
+            "best_iteration": 135,
+            "val_log_loss": 0.89711
+          }
+        ],
+        "xgb_goal_mae": 0.9294,
+        "xgb_goal_rmse": 1.2552,
+        "naive_goal_mae": 1.1613,
+        "vs_prior": {
+          "elo_ordered_logit": {
+            "mean_diff": -0.1854,
+            "ci95": [
+              -0.20167,
+              -0.16927
+            ],
+            "significant": true
+          },
+          "poisson": {
+            "mean_diff": -0.19125,
+            "ci95": [
+              -0.20768,
+              -0.17498
+            ],
+            "significant": true
+          },
+          "poisson_dc": {
+            "mean_diff": -0.19272,
+            "ci95": [
+              -0.20959,
+              -0.1764
+            ],
+            "significant": true
+          },
+          "multinomial_logit": {
+            "mean_diff": -0.19294,
+            "ci95": [
+              -0.2096,
+              -0.17641
+            ],
+            "significant": true
+          },
+          "xgboost": {
+            "mean_diff": -0.19476,
+            "ci95": [
+              -0.21136,
+              -0.17874
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[equal]": {
+            "mean_diff": -0.1923,
+            "ci95": [
+              -0.20879,
+              -0.17613
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[fitted]": {
+            "mean_diff": -0.19324,
+            "ci95": [
+              -0.21001,
+              -0.17693
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[equal]": {
+            "mean_diff": -0.19559,
+            "ci95": [
+              -0.21231,
+              -0.17953
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[fitted]": {
+            "mean_diff": -0.19518,
+            "ci95": [
+              -0.2119,
+              -0.17924
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "mean_diff": -0.19554,
+            "ci95": [
+              -0.21219,
+              -0.17939
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "mean_diff": -0.19379,
+            "ci95": [
+              -0.21052,
+              -0.17738
+            ],
+            "significant": true
+          }
+        },
+        "vs_elo": {
+          "poisson": {
+            "mean_diff": -0.00585,
+            "ci95": [
+              -0.01116,
+              -0.00087
+            ],
+            "significant": true
+          },
+          "poisson_dc": {
+            "mean_diff": -0.00732,
+            "ci95": [
+              -0.01256,
+              -0.00239
+            ],
+            "significant": true
+          },
+          "multinomial_logit": {
+            "mean_diff": -0.00753,
+            "ci95": [
+              -0.01228,
+              -0.00289
+            ],
+            "significant": true
+          },
+          "xgboost": {
+            "mean_diff": -0.00935,
+            "ci95": [
+              -0.01299,
+              -0.00579
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[equal]": {
+            "mean_diff": -0.0069,
+            "ci95": [
+              -0.00959,
+              -0.00439
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[fitted]": {
+            "mean_diff": -0.00784,
+            "ci95": [
+              -0.01242,
+              -0.0035
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[equal]": {
+            "mean_diff": -0.01019,
+            "ci95": [
+              -0.01423,
+              -0.00631
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[fitted]": {
+            "mean_diff": -0.00977,
+            "ci95": [
+              -0.0142,
+              -0.00567
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "mean_diff": -0.01014,
+            "ci95": [
+              -0.01439,
+              -0.00617
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "mean_diff": -0.00838,
+            "ci95": [
+              -0.01316,
+              -0.00389
+            ],
+            "significant": true
+          }
+        }
+      },
+      {
+        "fold": "2022-2025",
+        "n_train": 24191,
+        "n_cal": 1770,
+        "n_test": 4267,
+        "models": {
+          "prior": {
+            "n": 4267,
+            "log_loss": 1.04827,
+            "brier": 0.63154,
+            "rps": 0.22766,
+            "accuracy": 0.4769,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.236,
+            "ece": 0.012,
+            "classwise_ece": 0.0157
+          },
+          "elo_ordered_logit": {
+            "n": 4267,
+            "log_loss": 0.87212,
+            "brier": 0.51307,
+            "rps": 0.17113,
+            "accuracy": 0.6032,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2218,
+            "ece": 0.018,
+            "classwise_ece": 0.0133
+          },
+          "poisson": {
+            "n": 4267,
+            "log_loss": 0.86613,
+            "brier": 0.5087,
+            "rps": 0.16958,
+            "accuracy": 0.6051,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2066,
+            "ece": 0.0224,
+            "classwise_ece": 0.0195,
+            "goal_mae": 0.9252,
+            "goal_rmse": 1.2239
+          },
+          "poisson_dc": {
+            "n": 4267,
+            "log_loss": 0.86516,
+            "brier": 0.50803,
+            "rps": 0.16947,
+            "accuracy": 0.6051,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2188,
+            "ece": 0.0192,
+            "classwise_ece": 0.0161,
+            "goal_mae": 0.9252,
+            "goal_rmse": 1.2239
+          },
+          "multinomial_logit": {
+            "n": 4267,
+            "log_loss": 0.86548,
+            "brier": 0.50858,
+            "rps": 0.16955,
+            "accuracy": 0.6058,
+            "draw_recall": 0.0432,
+            "draw_precision": 0.3387,
+            "mean_p_draw": 0.2314,
+            "ece": 0.0202,
+            "classwise_ece": 0.0168
+          },
+          "xgboost": {
+            "n": 4267,
+            "log_loss": 0.86472,
+            "brier": 0.50851,
+            "rps": 0.16936,
+            "accuracy": 0.6035,
+            "draw_recall": 0.001,
+            "draw_precision": 0.3333,
+            "mean_p_draw": 0.2272,
+            "ece": 0.0119,
+            "classwise_ece": 0.012
+          }
+        },
+        "calibration": {
+          "prior": {
+            "none": {
+              "n": 4267,
+              "log_loss": 1.04827,
+              "brier": 0.63154,
+              "rps": 0.22766,
+              "accuracy": 0.4769,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.236,
+              "ece": 0.012,
+              "classwise_ece": 0.0157,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 4267,
+              "log_loss": 1.04828,
+              "brier": 0.63154,
+              "rps": 0.22767,
+              "accuracy": 0.4769,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.235,
+              "ece": 0.0107,
+              "classwise_ece": 0.0152,
+              "params": {
+                "method": "temperature",
+                "T": 0.9902
+              }
+            },
+            "sigmoid": {
+              "n": 4267,
+              "log_loss": 1.0479,
+              "brier": 0.63139,
+              "rps": 0.22764,
+              "accuracy": 0.4525,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2273,
+              "ece": 0.0208,
+              "classwise_ece": 0.0115,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  0.9646,
+                  0.6033,
+                  0.954
+                ],
+                "intercept": [
+                  -0.0029,
+                  -0.5147,
+                  0.0018
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 4267,
+              "log_loss": 1.048,
+              "brier": 0.63144,
+              "rps": 0.22765,
+              "accuracy": 0.4525,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2271,
+              "ece": 0.0213,
+              "classwise_ece": 0.0116,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "elo_ordered_logit": {
+            "none": {
+              "n": 4267,
+              "log_loss": 0.87212,
+              "brier": 0.51307,
+              "rps": 0.17113,
+              "accuracy": 0.6032,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2218,
+              "ece": 0.018,
+              "classwise_ece": 0.0133,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 4267,
+              "log_loss": 0.87316,
+              "brier": 0.51375,
+              "rps": 0.1714,
+              "accuracy": 0.6032,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2168,
+              "ece": 0.0244,
+              "classwise_ece": 0.0175,
+              "params": {
+                "method": "temperature",
+                "T": 0.9559
+              }
+            },
+            "sigmoid": {
+              "n": 4267,
+              "log_loss": 0.8747,
+              "brier": 0.51429,
+              "rps": 0.17171,
+              "accuracy": 0.6023,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2322,
+              "ece": 0.0236,
+              "classwise_ece": 0.0231,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  1.0738,
+                  0.9346,
+                  1.1368
+                ],
+                "intercept": [
+                  -0.0699,
+                  -0.0199,
+                  0.1087
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 4267,
+              "log_loss": 0.94389,
+              "brier": 0.5175,
+              "rps": 0.17291,
+              "accuracy": 0.5955,
+              "draw_recall": 0.1048,
+              "draw_precision": 0.2982,
+              "mean_p_draw": 0.2308,
+              "ece": 0.0333,
+              "classwise_ece": 0.0254,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "poisson": {
+            "none": {
+              "n": 4267,
+              "log_loss": 0.86613,
+              "brier": 0.5087,
+              "rps": 0.16958,
+              "accuracy": 0.6051,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2066,
+              "ece": 0.0224,
+              "classwise_ece": 0.0195,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 4267,
+              "log_loss": 0.86719,
+              "brier": 0.50931,
+              "rps": 0.1698,
+              "accuracy": 0.6051,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2023,
+              "ece": 0.0259,
+              "classwise_ece": 0.0233,
+              "params": {
+                "method": "temperature",
+                "T": 0.9636
+              }
+            },
+            "sigmoid": {
+              "n": 4267,
+              "log_loss": 0.86927,
+              "brier": 0.50984,
+              "rps": 0.17038,
+              "accuracy": 0.6021,
+              "draw_recall": 0.0051,
+              "draw_precision": 0.3571,
+              "mean_p_draw": 0.2292,
+              "ece": 0.0268,
+              "classwise_ece": 0.0223,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  1.1115,
+                  1.0487,
+                  1.1673
+                ],
+                "intercept": [
+                  -0.135,
+                  0.1967,
+                  0.1166
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 4267,
+              "log_loss": 0.95388,
+              "brier": 0.51223,
+              "rps": 0.17138,
+              "accuracy": 0.5995,
+              "draw_recall": 0.0791,
+              "draw_precision": 0.3333,
+              "mean_p_draw": 0.2277,
+              "ece": 0.0379,
+              "classwise_ece": 0.0301,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "poisson_dc": {
+            "none": {
+              "n": 4267,
+              "log_loss": 0.86516,
+              "brier": 0.50803,
+              "rps": 0.16947,
+              "accuracy": 0.6051,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2188,
+              "ece": 0.0192,
+              "classwise_ece": 0.0161,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 4267,
+              "log_loss": 0.86665,
+              "brier": 0.50878,
+              "rps": 0.16978,
+              "accuracy": 0.6051,
+              "draw_recall": 0.0,
+              "draw_precision": 0.0,
+              "mean_p_draw": 0.2128,
+              "ece": 0.0258,
+              "classwise_ece": 0.0205,
+              "params": {
+                "method": "temperature",
+                "T": 0.9466
+              }
+            },
+            "sigmoid": {
+              "n": 4267,
+              "log_loss": 0.86933,
+              "brier": 0.50983,
+              "rps": 0.17039,
+              "accuracy": 0.6021,
+              "draw_recall": 0.0051,
+              "draw_precision": 0.3571,
+              "mean_p_draw": 0.2291,
+              "ece": 0.0265,
+              "classwise_ece": 0.0221,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  1.1034,
+                  1.0373,
+                  1.1528
+                ],
+                "intercept": [
+                  -0.0979,
+                  0.1041,
+                  0.1532
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 4267,
+              "log_loss": 0.95383,
+              "brier": 0.51217,
+              "rps": 0.17132,
+              "accuracy": 0.6016,
+              "draw_recall": 0.0719,
+              "draw_precision": 0.3271,
+              "mean_p_draw": 0.228,
+              "ece": 0.033,
+              "classwise_ece": 0.03,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "multinomial_logit": {
+            "none": {
+              "n": 4267,
+              "log_loss": 0.86548,
+              "brier": 0.50858,
+              "rps": 0.16955,
+              "accuracy": 0.6058,
+              "draw_recall": 0.0432,
+              "draw_precision": 0.3387,
+              "mean_p_draw": 0.2314,
+              "ece": 0.0202,
+              "classwise_ece": 0.0168,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 4267,
+              "log_loss": 0.86683,
+              "brier": 0.50935,
+              "rps": 0.16989,
+              "accuracy": 0.6058,
+              "draw_recall": 0.0432,
+              "draw_precision": 0.3387,
+              "mean_p_draw": 0.2257,
+              "ece": 0.0252,
+              "classwise_ece": 0.021,
+              "params": {
+                "method": "temperature",
+                "T": 0.9458
+              }
+            },
+            "sigmoid": {
+              "n": 4267,
+              "log_loss": 0.86938,
+              "brier": 0.51079,
+              "rps": 0.17058,
+              "accuracy": 0.6037,
+              "draw_recall": 0.0493,
+              "draw_precision": 0.3529,
+              "mean_p_draw": 0.23,
+              "ece": 0.0276,
+              "classwise_ece": 0.0286,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  1.1105,
+                  0.9869,
+                  1.139
+                ],
+                "intercept": [
+                  -0.1063,
+                  -0.0261,
+                  0.2466
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 4267,
+              "log_loss": 0.94315,
+              "brier": 0.51189,
+              "rps": 0.17105,
+              "accuracy": 0.6049,
+              "draw_recall": 0.0493,
+              "draw_precision": 0.3582,
+              "mean_p_draw": 0.2307,
+              "ece": 0.0321,
+              "classwise_ece": 0.0315,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          },
+          "xgboost": {
+            "none": {
+              "n": 4267,
+              "log_loss": 0.86472,
+              "brier": 0.50851,
+              "rps": 0.16936,
+              "accuracy": 0.6035,
+              "draw_recall": 0.001,
+              "draw_precision": 0.3333,
+              "mean_p_draw": 0.2272,
+              "ece": 0.0119,
+              "classwise_ece": 0.012,
+              "params": {
+                "method": "none"
+              }
+            },
+            "temperature": {
+              "n": 4267,
+              "log_loss": 0.86638,
+              "brier": 0.50961,
+              "rps": 0.1698,
+              "accuracy": 0.6035,
+              "draw_recall": 0.001,
+              "draw_precision": 0.3333,
+              "mean_p_draw": 0.2171,
+              "ece": 0.0258,
+              "classwise_ece": 0.0202,
+              "params": {
+                "method": "temperature",
+                "T": 0.9086
+              }
+            },
+            "sigmoid": {
+              "n": 4267,
+              "log_loss": 0.86822,
+              "brier": 0.51055,
+              "rps": 0.1703,
+              "accuracy": 0.6053,
+              "draw_recall": 0.0051,
+              "draw_precision": 0.5,
+              "mean_p_draw": 0.228,
+              "ece": 0.0206,
+              "classwise_ece": 0.0231,
+              "params": {
+                "method": "sigmoid_ovr",
+                "coef": [
+                  1.1524,
+                  1.0075,
+                  1.1987
+                ],
+                "intercept": [
+                  -0.066,
+                  0.0099,
+                  0.2259
+                ]
+              }
+            },
+            "isotonic": {
+              "n": 4267,
+              "log_loss": 0.9325,
+              "brier": 0.51271,
+              "rps": 0.17093,
+              "accuracy": 0.5981,
+              "draw_recall": 0.0791,
+              "draw_precision": 0.3235,
+              "mean_p_draw": 0.2275,
+              "ece": 0.0376,
+              "classwise_ece": 0.029,
+              "params": {
+                "method": "isotonic_ovr"
+              }
+            }
+          }
+        },
+        "ensembles": {
+          "ens_elo+poisson[equal]": {
+            "n": 4267,
+            "log_loss": 0.86666,
+            "brier": 0.50951,
+            "rps": 0.16986,
+            "accuracy": 0.603,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2127,
+            "ece": 0.0263,
+            "classwise_ece": 0.0194,
+            "weights": {
+              "elo_ordered_logit": 0.5,
+              "poisson_dc": 0.5
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.934
+            }
+          },
+          "ens_elo+poisson[fitted]": {
+            "n": 4267,
+            "log_loss": 0.86602,
+            "brier": 0.50864,
+            "rps": 0.16967,
+            "accuracy": 0.6044,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2124,
+            "ece": 0.0247,
+            "classwise_ece": 0.0204,
+            "weights": {
+              "elo_ordered_logit": 0.109,
+              "poisson_dc": 0.891
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9406
+            }
+          },
+          "ens_poisson+xgb[equal]": {
+            "n": 4267,
+            "log_loss": 0.86478,
+            "brier": 0.5085,
+            "rps": 0.16954,
+            "accuracy": 0.6051,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2139,
+            "ece": 0.0276,
+            "classwise_ece": 0.0207,
+            "weights": {
+              "poisson_dc": 0.5,
+              "xgboost": 0.5
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9195
+            }
+          },
+          "ens_poisson+xgb[fitted]": {
+            "n": 4267,
+            "log_loss": 0.86521,
+            "brier": 0.50848,
+            "rps": 0.16961,
+            "accuracy": 0.6046,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.213,
+            "ece": 0.0271,
+            "classwise_ece": 0.0205,
+            "weights": {
+              "poisson_dc": 0.767,
+              "xgboost": 0.233
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9318
+            }
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "n": 4267,
+            "log_loss": 0.86482,
+            "brier": 0.50847,
+            "rps": 0.16956,
+            "accuracy": 0.6044,
+            "draw_recall": 0.0051,
+            "draw_precision": 0.3571,
+            "mean_p_draw": 0.2174,
+            "ece": 0.0279,
+            "classwise_ece": 0.0192,
+            "weights": {
+              "poisson_dc": 0.333,
+              "multinomial_logit": 0.333,
+              "xgboost": 0.333
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9247
+            }
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "n": 4267,
+            "log_loss": 0.86523,
+            "brier": 0.5084,
+            "rps": 0.16962,
+            "accuracy": 0.6049,
+            "draw_recall": 0.0021,
+            "draw_precision": 0.2857,
+            "mean_p_draw": 0.2153,
+            "ece": 0.0281,
+            "classwise_ece": 0.0195,
+            "weights": {
+              "poisson_dc": 0.659,
+              "multinomial_logit": 0.229,
+              "xgboost": 0.112
+            },
+            "params": {
+              "method": "temperature",
+              "T": 0.9352
+            }
+          }
+        },
+        "xgb_trials": [
+          {
+            "max_depth": 2,
+            "min_child_weight": 20,
+            "learning_rate": 0.05,
+            "best_iteration": 319,
+            "val_log_loss": 0.8802
+          },
+          {
+            "max_depth": 3,
+            "min_child_weight": 20,
+            "learning_rate": 0.05,
+            "best_iteration": 135,
+            "val_log_loss": 0.87991
+          },
+          {
+            "max_depth": 3,
+            "min_child_weight": 60,
+            "learning_rate": 0.03,
+            "best_iteration": 236,
+            "val_log_loss": 0.88015
+          },
+          {
+            "max_depth": 4,
+            "min_child_weight": 40,
+            "learning_rate": 0.03,
+            "best_iteration": 225,
+            "val_log_loss": 0.8809
+          }
+        ],
+        "xgb_goal_mae": 0.9146,
+        "xgb_goal_rmse": 1.2088,
+        "naive_goal_mae": 1.1141,
+        "vs_prior": {
+          "elo_ordered_logit": {
+            "mean_diff": -0.17512,
+            "ci95": [
+              -0.1917,
+              -0.15881
+            ],
+            "significant": true
+          },
+          "poisson": {
+            "mean_diff": -0.18109,
+            "ci95": [
+              -0.19796,
+              -0.16448
+            ],
+            "significant": true
+          },
+          "poisson_dc": {
+            "mean_diff": -0.18163,
+            "ci95": [
+              -0.19903,
+              -0.16462
+            ],
+            "significant": true
+          },
+          "multinomial_logit": {
+            "mean_diff": -0.18146,
+            "ci95": [
+              -0.19832,
+              -0.16458
+            ],
+            "significant": true
+          },
+          "xgboost": {
+            "mean_diff": -0.1819,
+            "ci95": [
+              -0.19848,
+              -0.16518
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[equal]": {
+            "mean_diff": -0.18162,
+            "ci95": [
+              -0.19838,
+              -0.16471
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[fitted]": {
+            "mean_diff": -0.18226,
+            "ci95": [
+              -0.19957,
+              -0.16533
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[equal]": {
+            "mean_diff": -0.1835,
+            "ci95": [
+              -0.20059,
+              -0.1667
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[fitted]": {
+            "mean_diff": -0.18307,
+            "ci95": [
+              -0.20034,
+              -0.16624
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "mean_diff": -0.18346,
+            "ci95": [
+              -0.20076,
+              -0.16667
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "mean_diff": -0.18305,
+            "ci95": [
+              -0.20049,
+              -0.16614
+            ],
+            "significant": true
+          }
+        },
+        "vs_elo": {
+          "poisson": {
+            "mean_diff": -0.00597,
+            "ci95": [
+              -0.01123,
+              -0.00068
+            ],
+            "significant": true
+          },
+          "poisson_dc": {
+            "mean_diff": -0.00651,
+            "ci95": [
+              -0.01194,
+              -0.0012
+            ],
+            "significant": true
+          },
+          "multinomial_logit": {
+            "mean_diff": -0.00634,
+            "ci95": [
+              -0.01097,
+              -0.00181
+            ],
+            "significant": true
+          },
+          "xgboost": {
+            "mean_diff": -0.00678,
+            "ci95": [
+              -0.01066,
+              -0.00287
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[equal]": {
+            "mean_diff": -0.0065,
+            "ci95": [
+              -0.00915,
+              -0.00388
+            ],
+            "significant": true
+          },
+          "ens_elo+poisson[fitted]": {
+            "mean_diff": -0.00714,
+            "ci95": [
+              -0.01192,
+              -0.00244
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[equal]": {
+            "mean_diff": -0.00839,
+            "ci95": [
+              -0.01269,
+              -0.00407
+            ],
+            "significant": true
+          },
+          "ens_poisson+xgb[fitted]": {
+            "mean_diff": -0.00796,
+            "ci95": [
+              -0.01283,
+              -0.0032
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[equal]": {
+            "mean_diff": -0.00835,
+            "ci95": [
+              -0.01255,
+              -0.00412
+            ],
+            "significant": true
+          },
+          "ens_poisson+mlr+xgb[fitted]": {
+            "mean_diff": -0.00794,
+            "ci95": [
+              -0.01273,
+              -0.00323
+            ],
+            "significant": true
+          }
+        }
+      }
+    ],
+    "dev_mean_log_loss": {
+      "prior": 1.04879,
+      "elo_ordered_logit": 0.88411,
+      "poisson": 0.87626,
+      "poisson_dc": 0.87543,
+      "multinomial_logit": 0.87507,
+      "xgboost": 0.87599,
+      "ens_elo+poisson[equal]": 0.87651,
+      "ens_elo+poisson[fitted]": 0.8756,
+      "ens_poisson+xgb[equal]": 0.87361,
+      "ens_poisson+xgb[fitted]": 0.87467,
+      "ens_poisson+mlr+xgb[equal]": 0.87328,
+      "ens_poisson+mlr+xgb[fitted]": 0.87502
+    },
+    "calibration_dev_mean_log_loss": {
+      "none": 0.87704,
+      "temperature": 0.87737,
+      "sigmoid": 0.87755,
+      "isotonic": 0.92984
+    },
+    "xgb_params_selected": {
+      "max_depth": 3,
+      "min_child_weight": 20,
+      "learning_rate": 0.05
+    },
+    "seconds": 77.0
+  },
+  "selection": {
+    "selected": "ens_poisson+xgb[equal]",
+    "best_dev_log_loss": 0.87328,
+    "within_tie_margin": [
+      "ens_poisson+mlr+xgb[equal]",
+      "ens_poisson+xgb[equal]"
+    ],
+    "tie_margin": 0.001,
+    "rule": "lowest mean dev-fold log loss after temperature scaling; candidates within the tie margin are treated as equal and the simplest is chosen"
+  },
+  "final_2026": {
+    "candidates": {
+      "fold": "2026-final",
+      "n_train": 27753,
+      "n_cal": 2127,
+      "n_test": 801,
+      "models": {
+        "prior": {
+          "n": 801,
+          "log_loss": 1.04986,
+          "brier": 0.63325,
+          "rps": 0.22945,
+          "accuracy": 0.4782,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.2352,
+          "ece": 0.0238,
+          "classwise_ece": 0.0215
+        },
+        "elo_ordered_logit": {
+          "n": 801,
+          "log_loss": 0.88095,
+          "brier": 0.51673,
+          "rps": 0.17382,
+          "accuracy": 0.6017,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.2324,
+          "ece": 0.0336,
+          "classwise_ece": 0.0279
+        },
+        "poisson": {
+          "n": 801,
+          "log_loss": 0.87583,
+          "brier": 0.51327,
+          "rps": 0.1725,
+          "accuracy": 0.6155,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.2102,
+          "ece": 0.0187,
+          "classwise_ece": 0.0331,
+          "goal_mae": 0.9477,
+          "goal_rmse": 1.2571
+        },
+        "poisson_dc": {
+          "n": 801,
+          "log_loss": 0.87516,
+          "brier": 0.51281,
+          "rps": 0.17243,
+          "accuracy": 0.6155,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.222,
+          "ece": 0.0201,
+          "classwise_ece": 0.0299,
+          "goal_mae": 0.9477,
+          "goal_rmse": 1.2571
+        },
+        "multinomial_logit": {
+          "n": 801,
+          "log_loss": 0.87714,
+          "brier": 0.51321,
+          "rps": 0.17314,
+          "accuracy": 0.603,
+          "draw_recall": 0.0167,
+          "draw_precision": 0.1765,
+          "mean_p_draw": 0.2386,
+          "ece": 0.0352,
+          "classwise_ece": 0.032
+        },
+        "xgboost": {
+          "n": 801,
+          "log_loss": 0.87443,
+          "brier": 0.51257,
+          "rps": 0.17277,
+          "accuracy": 0.6067,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.2367,
+          "ece": 0.0258,
+          "classwise_ece": 0.0316
+        }
+      },
+      "calibration": {
+        "prior": {
+          "none": {
+            "n": 801,
+            "log_loss": 1.04986,
+            "brier": 0.63325,
+            "rps": 0.22945,
+            "accuracy": 0.4782,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2352,
+            "ece": 0.0238,
+            "classwise_ece": 0.0215,
+            "params": {
+              "method": "none"
+            }
+          },
+          "temperature": {
+            "n": 801,
+            "log_loss": 1.04996,
+            "brier": 0.6333,
+            "rps": 0.22943,
+            "accuracy": 0.4782,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2389,
+            "ece": 0.0257,
+            "classwise_ece": 0.0225,
+            "params": {
+              "method": "temperature",
+              "T": 1.0411
+            }
+          },
+          "sigmoid": {
+            "n": 801,
+            "log_loss": 1.04769,
+            "brier": 0.63152,
+            "rps": 0.22842,
+            "accuracy": 0.4782,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2366,
+            "ece": 0.013,
+            "classwise_ece": 0.009,
+            "params": {
+              "method": "sigmoid_ovr",
+              "coef": [
+                0.7736,
+                -9.1095,
+                0.4522
+              ],
+              "intercept": [
+                0.0021,
+                -11.9152,
+                -0.4941
+              ]
+            }
+          },
+          "isotonic": {
+            "n": 801,
+            "log_loss": 1.04673,
+            "brier": 0.63095,
+            "rps": 0.22832,
+            "accuracy": 0.4782,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2341,
+            "ece": 0.0101,
+            "classwise_ece": 0.0077,
+            "params": {
+              "method": "isotonic_ovr"
+            }
+          }
+        },
+        "elo_ordered_logit": {
+          "none": {
+            "n": 801,
+            "log_loss": 0.88095,
+            "brier": 0.51673,
+            "rps": 0.17382,
+            "accuracy": 0.6017,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2324,
+            "ece": 0.0336,
+            "classwise_ece": 0.0279,
+            "params": {
+              "method": "none"
+            }
+          },
+          "temperature": {
+            "n": 801,
+            "log_loss": 0.8814,
+            "brier": 0.51704,
+            "rps": 0.17393,
+            "accuracy": 0.6017,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2363,
+            "ece": 0.0315,
+            "classwise_ece": 0.0266,
+            "params": {
+              "method": "temperature",
+              "T": 1.0395
+            }
+          },
+          "sigmoid": {
+            "n": 801,
+            "log_loss": 0.88292,
+            "brier": 0.518,
+            "rps": 0.17423,
+            "accuracy": 0.6017,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2473,
+            "ece": 0.0316,
+            "classwise_ece": 0.0312,
+            "params": {
+              "method": "sigmoid_ovr",
+              "coef": [
+                0.9608,
+                0.9278,
+                0.9862
+              ],
+              "intercept": [
+                -0.0249,
+                0.0009,
+                -0.0782
+              ]
+            }
+          },
+          "isotonic": {
+            "n": 801,
+            "log_loss": 0.88799,
+            "brier": 0.52042,
+            "rps": 0.17469,
+            "accuracy": 0.6005,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.247,
+            "ece": 0.0345,
+            "classwise_ece": 0.0346,
+            "params": {
+              "method": "isotonic_ovr"
+            }
+          }
+        },
+        "poisson": {
+          "none": {
+            "n": 801,
+            "log_loss": 0.87583,
+            "brier": 0.51327,
+            "rps": 0.1725,
+            "accuracy": 0.6155,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2102,
+            "ece": 0.0187,
+            "classwise_ece": 0.0331,
+            "params": {
+              "method": "none"
+            }
+          },
+          "temperature": {
+            "n": 801,
+            "log_loss": 0.87607,
+            "brier": 0.51343,
+            "rps": 0.17261,
+            "accuracy": 0.6155,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2154,
+            "ece": 0.0225,
+            "classwise_ece": 0.0302,
+            "params": {
+              "method": "temperature",
+              "T": 1.046
+            }
+          },
+          "sigmoid": {
+            "n": 801,
+            "log_loss": 0.87649,
+            "brier": 0.51369,
+            "rps": 0.17278,
+            "accuracy": 0.613,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2398,
+            "ece": 0.0291,
+            "classwise_ece": 0.0291,
+            "params": {
+              "method": "sigmoid_ovr",
+              "coef": [
+                0.9859,
+                1.0008,
+                0.9951
+              ],
+              "intercept": [
+                -0.0497,
+                0.1746,
+                -0.1338
+              ]
+            }
+          },
+          "isotonic": {
+            "n": 801,
+            "log_loss": 0.88468,
+            "brier": 0.51606,
+            "rps": 0.17408,
+            "accuracy": 0.6105,
+            "draw_recall": 0.0056,
+            "draw_precision": 0.5,
+            "mean_p_draw": 0.2391,
+            "ece": 0.0386,
+            "classwise_ece": 0.0443,
+            "params": {
+              "method": "isotonic_ovr"
+            }
+          }
+        },
+        "poisson_dc": {
+          "none": {
+            "n": 801,
+            "log_loss": 0.87516,
+            "brier": 0.51281,
+            "rps": 0.17243,
+            "accuracy": 0.6155,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.222,
+            "ece": 0.0201,
+            "classwise_ece": 0.0299,
+            "params": {
+              "method": "none"
+            }
+          },
+          "temperature": {
+            "n": 801,
+            "log_loss": 0.87539,
+            "brier": 0.51302,
+            "rps": 0.17251,
+            "accuracy": 0.6155,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2254,
+            "ece": 0.0215,
+            "classwise_ece": 0.0255,
+            "params": {
+              "method": "temperature",
+              "T": 1.0318
+            }
+          },
+          "sigmoid": {
+            "n": 801,
+            "log_loss": 0.87651,
+            "brier": 0.51369,
+            "rps": 0.17279,
+            "accuracy": 0.613,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2397,
+            "ece": 0.0313,
+            "classwise_ece": 0.0289,
+            "params": {
+              "method": "sigmoid_ovr",
+              "coef": [
+                0.9779,
+                0.9924,
+                0.9843
+              ],
+              "intercept": [
+                -0.0186,
+                0.0933,
+                -0.103
+              ]
+            }
+          },
+          "isotonic": {
+            "n": 801,
+            "log_loss": 0.88576,
+            "brier": 0.51672,
+            "rps": 0.1743,
+            "accuracy": 0.6092,
+            "draw_recall": 0.0167,
+            "draw_precision": 0.5,
+            "mean_p_draw": 0.2388,
+            "ece": 0.042,
+            "classwise_ece": 0.042,
+            "params": {
+              "method": "isotonic_ovr"
+            }
+          }
+        },
+        "multinomial_logit": {
+          "none": {
+            "n": 801,
+            "log_loss": 0.87714,
+            "brier": 0.51321,
+            "rps": 0.17314,
+            "accuracy": 0.603,
+            "draw_recall": 0.0167,
+            "draw_precision": 0.1765,
+            "mean_p_draw": 0.2386,
+            "ece": 0.0352,
+            "classwise_ece": 0.032,
+            "params": {
+              "method": "none"
+            }
+          },
+          "temperature": {
+            "n": 801,
+            "log_loss": 0.87734,
+            "brier": 0.5134,
+            "rps": 0.17319,
+            "accuracy": 0.603,
+            "draw_recall": 0.0167,
+            "draw_precision": 0.1765,
+            "mean_p_draw": 0.2408,
+            "ece": 0.0336,
+            "classwise_ece": 0.0301,
+            "params": {
+              "method": "temperature",
+              "T": 1.0228
+            }
+          },
+          "sigmoid": {
+            "n": 801,
+            "log_loss": 0.87775,
+            "brier": 0.51349,
+            "rps": 0.17316,
+            "accuracy": 0.6067,
+            "draw_recall": 0.0278,
+            "draw_precision": 0.2381,
+            "mean_p_draw": 0.2451,
+            "ece": 0.0353,
+            "classwise_ece": 0.0347,
+            "params": {
+              "method": "sigmoid_ovr",
+              "coef": [
+                0.9914,
+                0.9616,
+                0.9826
+              ],
+              "intercept": [
+                -0.0295,
+                -0.0063,
+                -0.0192
+              ]
+            }
+          },
+          "isotonic": {
+            "n": 801,
+            "log_loss": 0.88389,
+            "brier": 0.51544,
+            "rps": 0.17373,
+            "accuracy": 0.6067,
+            "draw_recall": 0.0056,
+            "draw_precision": 0.0833,
+            "mean_p_draw": 0.2462,
+            "ece": 0.0361,
+            "classwise_ece": 0.0329,
+            "params": {
+              "method": "isotonic_ovr"
+            }
+          }
+        },
+        "xgboost": {
+          "none": {
+            "n": 801,
+            "log_loss": 0.87443,
+            "brier": 0.51257,
+            "rps": 0.17277,
+            "accuracy": 0.6067,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2367,
+            "ece": 0.0258,
+            "classwise_ece": 0.0316,
+            "params": {
+              "method": "none"
+            }
+          },
+          "temperature": {
+            "n": 801,
+            "log_loss": 0.87418,
+            "brier": 0.51243,
+            "rps": 0.17272,
+            "accuracy": 0.6067,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.2358,
+            "ece": 0.0244,
+            "classwise_ece": 0.0338,
+            "params": {
+              "method": "temperature",
+              "T": 0.9902
+            }
+          },
+          "sigmoid": {
+            "n": 801,
+            "log_loss": 0.87573,
+            "brier": 0.51319,
+            "rps": 0.17291,
+            "accuracy": 0.6042,
+            "draw_recall": 0.0056,
+            "draw_precision": 0.2,
+            "mean_p_draw": 0.247,
+            "ece": 0.0219,
+            "classwise_ece": 0.0377,
+            "params": {
+              "method": "sigmoid_ovr",
+              "coef": [
+                1.0325,
+                0.95,
+                1.0243
+              ],
+              "intercept": [
+                -0.0052,
+                -0.0021,
+                -0.0402
+              ]
+            }
+          },
+          "isotonic": {
+            "n": 801,
+            "log_loss": 0.90717,
+            "brier": 0.5148,
+            "rps": 0.17364,
+            "accuracy": 0.6067,
+            "draw_recall": 0.0,
+            "draw_precision": 0.0,
+            "mean_p_draw": 0.248,
+            "ece": 0.0428,
+            "classwise_ece": 0.0408,
+            "params": {
+              "method": "isotonic_ovr"
+            }
+          }
+        }
+      },
+      "ensembles": {
+        "ens_elo+poisson[equal]": {
+          "n": 801,
+          "log_loss": 0.87526,
+          "brier": 0.51295,
+          "rps": 0.17237,
+          "accuracy": 0.6105,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.2286,
+          "ece": 0.0317,
+          "classwise_ece": 0.0282,
+          "weights": {
+            "elo_ordered_logit": 0.5,
+            "poisson_dc": 0.5
+          },
+          "params": {
+            "method": "temperature",
+            "T": 1.0137
+          }
+        },
+        "ens_elo+poisson[fitted]": {
+          "n": 801,
+          "log_loss": 0.87457,
+          "brier": 0.51248,
+          "rps": 0.17223,
+          "accuracy": 0.6105,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.2262,
+          "ece": 0.028,
+          "classwise_ece": 0.0284,
+          "weights": {
+            "elo_ordered_logit": 0.225,
+            "poisson_dc": 0.775
+          },
+          "params": {
+            "method": "temperature",
+            "T": 1.0174
+          }
+        },
+        "ens_poisson+xgb[equal]": {
+          "n": 801,
+          "log_loss": 0.87332,
+          "brier": 0.51185,
+          "rps": 0.17229,
+          "accuracy": 0.6092,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.2293,
+          "ece": 0.0344,
+          "classwise_ece": 0.0322,
+          "weights": {
+            "poisson_dc": 0.5,
+            "xgboost": 0.5
+          },
+          "params": {
+            "method": "temperature",
+            "T": 0.9994
+          }
+        },
+        "ens_poisson+xgb[fitted]": {
+          "n": 801,
+          "log_loss": 0.87353,
+          "brier": 0.51196,
+          "rps": 0.17229,
+          "accuracy": 0.6092,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.2282,
+          "ece": 0.0386,
+          "classwise_ece": 0.0356,
+          "weights": {
+            "poisson_dc": 0.606,
+            "xgboost": 0.394
+          },
+          "params": {
+            "method": "temperature",
+            "T": 1.0038
+          }
+        },
+        "ens_poisson+mlr+xgb[equal]": {
+          "n": 801,
+          "log_loss": 0.87393,
+          "brier": 0.51196,
+          "rps": 0.17247,
+          "accuracy": 0.608,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.2328,
+          "ece": 0.0298,
+          "classwise_ece": 0.027,
+          "weights": {
+            "poisson_dc": 0.333,
+            "multinomial_logit": 0.333,
+            "xgboost": 0.333
+          },
+          "params": {
+            "method": "temperature",
+            "T": 1.0034
+          }
+        },
+        "ens_poisson+mlr+xgb[fitted]": {
+          "n": 801,
+          "log_loss": 0.87405,
+          "brier": 0.51202,
+          "rps": 0.17246,
+          "accuracy": 0.608,
+          "draw_recall": 0.0,
+          "draw_precision": 0.0,
+          "mean_p_draw": 0.2319,
+          "ece": 0.0274,
+          "classwise_ece": 0.0236,
+          "weights": {
+            "poisson_dc": 0.416,
+            "multinomial_logit": 0.331,
+            "xgboost": 0.253
+          },
+          "params": {
+            "method": "temperature",
+            "T": 1.0067
+          }
+        }
+      },
+      "xgb_trials": [],
+      "xgb_goal_mae": 0.9355,
+      "xgb_goal_rmse": 1.2474,
+      "naive_goal_mae": 1.1236,
+      "vs_prior": {
+        "elo_ordered_logit": {
+          "mean_diff": -0.16856,
+          "ci95": [
+            -0.20018,
+            -0.13594
+          ],
+          "significant": true
+        },
+        "poisson": {
+          "mean_diff": -0.17389,
+          "ci95": [
+            -0.20534,
+            -0.14152
+          ],
+          "significant": true
+        },
+        "poisson_dc": {
+          "mean_diff": -0.17457,
+          "ci95": [
+            -0.20658,
+            -0.1415
+          ],
+          "significant": true
+        },
+        "multinomial_logit": {
+          "mean_diff": -0.17262,
+          "ci95": [
+            -0.20492,
+            -0.13839
+          ],
+          "significant": true
+        },
+        "xgboost": {
+          "mean_diff": -0.17578,
+          "ci95": [
+            -0.20719,
+            -0.14415
+          ],
+          "significant": true
+        },
+        "ens_elo+poisson[equal]": {
+          "mean_diff": -0.1747,
+          "ci95": [
+            -0.20684,
+            -0.14133
+          ],
+          "significant": true
+        },
+        "ens_elo+poisson[fitted]": {
+          "mean_diff": -0.17539,
+          "ci95": [
+            -0.20788,
+            -0.14228
+          ],
+          "significant": true
+        },
+        "ens_poisson+xgb[equal]": {
+          "mean_diff": -0.17664,
+          "ci95": [
+            -0.20922,
+            -0.14435
+          ],
+          "significant": true
+        },
+        "ens_poisson+xgb[fitted]": {
+          "mean_diff": -0.17643,
+          "ci95": [
+            -0.20916,
+            -0.14345
+          ],
+          "significant": true
+        },
+        "ens_poisson+mlr+xgb[equal]": {
+          "mean_diff": -0.17603,
+          "ci95": [
+            -0.20883,
+            -0.14295
+          ],
+          "significant": true
+        },
+        "ens_poisson+mlr+xgb[fitted]": {
+          "mean_diff": -0.17591,
+          "ci95": [
+            -0.20885,
+            -0.14241
+          ],
+          "significant": true
+        }
+      },
+      "vs_elo": {
+        "poisson": {
+          "mean_diff": -0.00533,
+          "ci95": [
+            -0.01539,
+            0.00515
+          ],
+          "significant": false
+        },
+        "poisson_dc": {
+          "mean_diff": -0.00601,
+          "ci95": [
+            -0.01584,
+            0.00425
+          ],
+          "significant": false
+        },
+        "multinomial_logit": {
+          "mean_diff": -0.00406,
+          "ci95": [
+            -0.01392,
+            0.00591
+          ],
+          "significant": false
+        },
+        "xgboost": {
+          "mean_diff": -0.00722,
+          "ci95": [
+            -0.01535,
+            0.00035
+          ],
+          "significant": false
+        },
+        "ens_elo+poisson[equal]": {
+          "mean_diff": -0.00614,
+          "ci95": [
+            -0.01108,
+            -0.00097
+          ],
+          "significant": true
+        },
+        "ens_elo+poisson[fitted]": {
+          "mean_diff": -0.00683,
+          "ci95": [
+            -0.01443,
+            0.00115
+          ],
+          "significant": false
+        },
+        "ens_poisson+xgb[equal]": {
+          "mean_diff": -0.00808,
+          "ci95": [
+            -0.0163,
+            0.00043
+          ],
+          "significant": false
+        },
+        "ens_poisson+xgb[fitted]": {
+          "mean_diff": -0.00787,
+          "ci95": [
+            -0.0164,
+            0.00085
+          ],
+          "significant": false
+        },
+        "ens_poisson+mlr+xgb[equal]": {
+          "mean_diff": -0.00747,
+          "ci95": [
+            -0.01596,
+            0.00128
+          ],
+          "significant": false
+        },
+        "ens_poisson+mlr+xgb[fitted]": {
+          "mean_diff": -0.00735,
+          "ci95": [
+            -0.01601,
+            0.00171
+          ],
+          "significant": false
+        }
+      }
+    },
+    "world_cup_2026_by_candidate": {
+      "prior": {
+        "n": 104,
+        "log_loss": 1.06748,
+        "brier": 0.64558,
+        "rps": 0.23392,
+        "accuracy": 0.4712,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2367,
+        "ece": 0.0745,
+        "classwise_ece": 0.0537
+      },
+      "elo_ordered_logit": {
+        "n": 104,
+        "log_loss": 0.85413,
+        "brier": 0.50023,
+        "rps": 0.16034,
+        "accuracy": 0.6442,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2431,
+        "ece": 0.1049,
+        "classwise_ece": 0.0753
+      },
+      "poisson": {
+        "n": 104,
+        "log_loss": 0.85488,
+        "brier": 0.50034,
+        "rps": 0.16066,
+        "accuracy": 0.6827,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2217,
+        "ece": 0.1316,
+        "classwise_ece": 0.0767
+      },
+      "poisson_dc": {
+        "n": 104,
+        "log_loss": 0.85169,
+        "brier": 0.49982,
+        "rps": 0.16033,
+        "accuracy": 0.6827,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2321,
+        "ece": 0.1348,
+        "classwise_ece": 0.0823
+      },
+      "multinomial_logit": {
+        "n": 104,
+        "log_loss": 0.8485,
+        "brier": 0.49477,
+        "rps": 0.15866,
+        "accuracy": 0.6731,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2196,
+        "ece": 0.1239,
+        "classwise_ece": 0.0842
+      },
+      "xgboost": {
+        "n": 104,
+        "log_loss": 0.85562,
+        "brier": 0.50083,
+        "rps": 0.16066,
+        "accuracy": 0.6635,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2291,
+        "ece": 0.1327,
+        "classwise_ece": 0.1097
+      },
+      "ens_elo+poisson[equal]": {
+        "n": 104,
+        "log_loss": 0.84859,
+        "brier": 0.49696,
+        "rps": 0.15896,
+        "accuracy": 0.6635,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2353,
+        "ece": 0.126,
+        "classwise_ece": 0.0825
+      },
+      "ens_elo+poisson[fitted]": {
+        "n": 104,
+        "log_loss": 0.84918,
+        "brier": 0.49775,
+        "rps": 0.15935,
+        "accuracy": 0.6538,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2329,
+        "ece": 0.1308,
+        "classwise_ece": 0.0814
+      },
+      "ens_poisson+xgb[equal]": {
+        "n": 104,
+        "log_loss": 0.85193,
+        "brier": 0.49913,
+        "rps": 0.15994,
+        "accuracy": 0.6538,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2293,
+        "ece": 0.1441,
+        "classwise_ece": 0.0859
+      },
+      "ens_poisson+xgb[fitted]": {
+        "n": 104,
+        "log_loss": 0.85155,
+        "brier": 0.49905,
+        "rps": 0.15992,
+        "accuracy": 0.6538,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2296,
+        "ece": 0.1407,
+        "classwise_ece": 0.0829
+      },
+      "ens_poisson+mlr+xgb[equal]": {
+        "n": 104,
+        "log_loss": 0.85027,
+        "brier": 0.49729,
+        "rps": 0.15935,
+        "accuracy": 0.6538,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2256,
+        "ece": 0.1374,
+        "classwise_ece": 0.0861
+      },
+      "ens_poisson+mlr+xgb[fitted]": {
+        "n": 104,
+        "log_loss": 0.84999,
+        "brier": 0.49725,
+        "rps": 0.15934,
+        "accuracy": 0.6538,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2259,
+        "ece": 0.1151,
+        "classwise_ece": 0.0825
+      }
+    },
+    "selected_model": {
+      "all_2026": {
+        "n": 801,
+        "log_loss": 0.87332,
+        "brier": 0.51185,
+        "rps": 0.17229,
+        "accuracy": 0.6092,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2293,
+        "ece": 0.0344,
+        "classwise_ece": 0.0322,
+        "goal_mae": 0.9477,
+        "goal_rmse": 1.2571
+      },
+      "world_cup_2026": {
+        "n": 104,
+        "log_loss": 0.85193,
+        "brier": 0.49913,
+        "rps": 0.15994,
+        "accuracy": 0.6538,
+        "draw_recall": 0.0,
+        "draw_precision": 0.0,
+        "mean_p_draw": 0.2293,
+        "ece": 0.1441,
+        "classwise_ece": 0.0859,
+        "goal_mae": 0.9087,
+        "goal_rmse": 1.2192
+      },
+      "class_report_all_2026": {
+        "A": {
+          "precision": 0.6189,
+          "recall": 0.8903,
+          "f1": 0.7302,
+          "support": 383,
+          "predicted": 551
+        },
+        "D": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 180,
+          "predicted": 0
+        },
+        "B": {
+          "precision": 0.588,
+          "recall": 0.6176,
+          "f1": 0.6025,
+          "support": 238,
+          "predicted": 250
+        }
+      },
+      "reliability": [
+        {
+          "class": "A",
+          "bin": "0.0-0.1",
+          "n": 47,
+          "predicted": 0.0539,
+          "observed": 0.1064
+        },
+        {
+          "class": "A",
+          "bin": "0.1-0.2",
+          "n": 50,
+          "predicted": 0.1466,
+          "observed": 0.16
+        },
+        {
+          "class": "A",
+          "bin": "0.2-0.3",
+          "n": 105,
+          "predicted": 0.2495,
+          "observed": 0.2095
+        },
+        {
+          "class": "A",
+          "bin": "0.3-0.4",
+          "n": 85,
+          "predicted": 0.3515,
+          "observed": 0.2
+        },
+        {
+          "class": "A",
+          "bin": "0.4-0.5",
+          "n": 131,
+          "predicted": 0.4492,
+          "observed": 0.5115
+        },
+        {
+          "class": "A",
+          "bin": "0.5-0.6",
+          "n": 119,
+          "predicted": 0.5517,
+          "observed": 0.5126
+        },
+        {
+          "class": "A",
+          "bin": "0.6-0.7",
+          "n": 100,
+          "predicted": 0.6531,
+          "observed": 0.68
+        },
+        {
+          "class": "A",
+          "bin": "0.7-0.8",
+          "n": 79,
+          "predicted": 0.748,
+          "observed": 0.7215
+        },
+        {
+          "class": "A",
+          "bin": "0.8-0.9",
+          "n": 61,
+          "predicted": 0.8474,
+          "observed": 0.8852
+        },
+        {
+          "class": "A",
+          "bin": "0.9-1.0",
+          "n": 24,
+          "predicted": 0.9356,
+          "observed": 1.0
+        },
+        {
+          "class": "D",
+          "bin": "0.0-0.1",
+          "n": 54,
+          "predicted": 0.0622,
+          "observed": 0.0741
+        },
+        {
+          "class": "D",
+          "bin": "0.1-0.2",
+          "n": 166,
+          "predicted": 0.1562,
+          "observed": 0.1265
+        },
+        {
+          "class": "D",
+          "bin": "0.2-0.3",
+          "n": 517,
+          "predicted": 0.2603,
+          "observed": 0.2689
+        },
+        {
+          "class": "D",
+          "bin": "0.3-0.4",
+          "n": 64,
+          "predicted": 0.3097,
+          "observed": 0.25
+        },
+        {
+          "class": "B",
+          "bin": "0.0-0.1",
+          "n": 166,
+          "predicted": 0.0552,
+          "observed": 0.0602
+        },
+        {
+          "class": "B",
+          "bin": "0.1-0.2",
+          "n": 182,
+          "predicted": 0.1485,
+          "observed": 0.1374
+        },
+        {
+          "class": "B",
+          "bin": "0.2-0.3",
+          "n": 153,
+          "predicted": 0.2473,
+          "observed": 0.2353
+        },
+        {
+          "class": "B",
+          "bin": "0.3-0.4",
+          "n": 94,
+          "predicted": 0.3526,
+          "observed": 0.383
+        },
+        {
+          "class": "B",
+          "bin": "0.4-0.5",
+          "n": 78,
+          "predicted": 0.4521,
+          "observed": 0.5
+        },
+        {
+          "class": "B",
+          "bin": "0.5-0.6",
+          "n": 50,
+          "predicted": 0.5447,
+          "observed": 0.66
+        },
+        {
+          "class": "B",
+          "bin": "0.6-0.7",
+          "n": 32,
+          "predicted": 0.6545,
+          "observed": 0.7188
+        },
+        {
+          "class": "B",
+          "bin": "0.7-0.8",
+          "n": 22,
+          "predicted": 0.7452,
+          "observed": 0.7273
+        }
+      ],
+      "slices": {
+        "tier5_world_cup": {
+          "n": 104,
+          "log_loss": 0.8519,
+          "rps": 0.1599,
+          "accuracy": 0.6538
+        },
+        "tier3_qualifiers": {
+          "n": 253,
+          "log_loss": 0.889,
+          "rps": 0.18,
+          "accuracy": 0.6126
+        },
+        "tier2_minor_tournaments": {
+          "n": 152,
+          "log_loss": 0.8902,
+          "rps": 0.1802,
+          "accuracy": 0.5921
+        },
+        "tier1_friendlies": {
+          "n": 276,
+          "log_loss": 0.8629,
+          "rps": 0.1668,
+          "accuracy": 0.5942
+        },
+        "venue_home": {
+          "n": 480,
+          "log_loss": 0.8539,
+          "rps": 0.1677,
+          "accuracy": 0.6208
+        },
+        "venue_neutral": {
+          "n": 321,
+          "log_loss": 0.9023,
+          "rps": 0.1792,
+          "accuracy": 0.5919
+        },
+        "elo_gap_lt_100": {
+          "n": 235,
+          "log_loss": 1.0563,
+          "rps": 0.2147,
+          "accuracy": 0.4426
+        },
+        "elo_gap_100_300": {
+          "n": 360,
+          "log_loss": 0.9409,
+          "rps": 0.1893,
+          "accuracy": 0.5972
+        },
+        "elo_gap_ge_300": {
+          "n": 206,
+          "log_loss": 0.5465,
+          "rps": 0.0943,
+          "accuracy": 0.8204
+        }
+      },
+      "vs_prior": {
+        "mean_diff": -0.17664,
+        "ci95": [
+          -0.20922,
+          -0.14435
+        ],
+        "significant": true
+      },
+      "vs_elo": {
+        "mean_diff": -0.00808,
+        "ci95": [
+          -0.0163,
+          0.00043
+        ],
+        "significant": false
+      },
+      "world_cup_vs_prior": {
+        "mean_diff": -0.21555,
+        "ci95": [
+          -0.28633,
+          -0.13492
+        ],
+        "significant": true
+      },
+      "world_cup_vs_elo": {
+        "mean_diff": -0.0022,
+        "ci95": [
+          -0.02496,
+          0.01981
+        ],
+        "significant": false
+      },
+      "model_meta": {
+        "fit": "split",
+        "n_train": 27753,
+        "n_val_es": 2140,
+        "n_val_cal": 2127,
+        "xgb_best_iteration": 122,
+        "xgb_params": {
+          "max_depth": 3,
+          "min_child_weight": 20,
+          "learning_rate": 0.05
+        },
+        "shootout": {
+          "n_shootouts": 518,
+          "beta": 0.5985,
+          "lr_statistic_vs_coin_flip": 6.796,
+          "significant_at_5pct": true,
+          "higher_rated_side_win_rate": 0.5521,
+          "used": "fitted beta"
+        },
+        "temperature": 0.9993862350480803,
+        "rho": -0.06058628475968982
+      }
+    }
+  }
+}

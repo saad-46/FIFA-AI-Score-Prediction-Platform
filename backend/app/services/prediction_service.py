@@ -295,6 +295,10 @@ def _generate_insights(
         home_home = df[df["home_team"] == home_team].dropna(
             subset=["home_score", "away_score"]
         )
+        # First-listed is not the same as at home: where the frame says a match
+        # was on neutral ground, it is not evidence about home form.
+        if "neutral_venue" in home_home.columns:
+            home_home = home_home[~home_home["neutral_venue"].fillna(False).astype(bool)]
         if len(home_home) >= 5:
             home_win_rate = (
                 home_home["home_score"] > home_home["away_score"]

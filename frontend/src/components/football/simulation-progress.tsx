@@ -21,7 +21,8 @@ interface SimulationProgressProps {
   simulations?: number;
 }
 
-/** The designed wait state for /tournament/simulate's real 5-9s latency —
+/** The designed wait state for /tournament/simulate (about 1-12s depending
+ * on the simulation count) —
  * replaces a generic spinner with staged, legible status text. */
 export function SimulationProgress({ expectedDurationMs = 7000, simulations }: SimulationProgressProps) {
   const [stageIndex, setStageIndex] = useState(0);
@@ -41,8 +42,7 @@ export function SimulationProgress({ expectedDurationMs = 7000, simulations }: S
           <Loader2 className="h-6 w-6 animate-spin text-primary" aria-hidden="true" />
         </div>
         <div className="space-y-1.5">
-          {/* The API takes no seed, so there is nothing to "calibrate" —
-              this line now names the endpoint's actual job. */}
+          {/* Names the endpoint's actual job; nothing is being "calibrated" here. */}
           <p className="text-[10px] tracking-widest text-zinc-500 uppercase">
             MONTE CARLO TOURNAMENT SIMULATION
           </p>

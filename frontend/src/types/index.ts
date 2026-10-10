@@ -490,7 +490,28 @@ export interface TournamentSimulationRequest {
   use_fifa_2026_groups?: boolean;
   groups?: Record<string, string[]>;
   n_simulations: number;
+  /** false: pre-tournament forecast. true: knockout rounds given the real group stage. */
   use_real_results?: boolean;
+  /** Same request + same seed = same numbers. Omit for the server default. */
+  seed?: number;
+}
+
+/** What a simulation was run on. Always read `mode` before describing the numbers. */
+export interface TournamentSimulationMeta {
+  engine: string;
+  mode: "pre_tournament" | "after_group_stage" | "custom_groups" | "legacy" | string;
+  model_version: string;
+  /** No match on or after this date informs the forecast. */
+  information_cutoff: string | null;
+  data_through: string | null;
+  n_simulations: number;
+  seed: number | null;
+  fixed_matches: number;
+  champion_probability_sum: number | null;
+  max_champion_standard_error: number | null;
+  knockout_resolution: Record<string, number> | null;
+  tournament_status: string | null;
+  note: string | null;
 }
 
 export interface TeamTournamentProbabilities {
@@ -507,6 +528,7 @@ export interface TeamTournamentProbabilities {
 export interface TournamentSimulationResponse {
   // Keyed by 3-letter FIFA team code.
   probabilities: Record<string, TeamTournamentProbabilities>;
+  meta?: TournamentSimulationMeta | null;
 }
 
 // ─── API Responses ────────────────────────────────────────────────────────────

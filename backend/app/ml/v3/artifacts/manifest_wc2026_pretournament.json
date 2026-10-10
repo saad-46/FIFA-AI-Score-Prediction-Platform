@@ -1,0 +1,107 @@
+{
+  "name": "wc2026_pretournament",
+  "pipeline_version": "3.0.0",
+  "feature_schema": "v3-features-1",
+  "features": [
+    "elo_diff_venue",
+    "elo_diff",
+    "venue",
+    "log_xg_ratio",
+    "log_xg_total",
+    "form_pts_diff",
+    "form_gd_diff",
+    "momentum_diff",
+    "rest_days_diff",
+    "activity_diff",
+    "h2h_gd_shrunk",
+    "exp_min",
+    "abs_elo_diff",
+    "tier"
+  ],
+  "information_cutoff": "2026-06-11",
+  "corpus_fingerprint": "b38434f8f74cd9fa",
+  "source": {
+    "dataset": "International football results from 1872 (men's senior full internationals)",
+    "upstream": "https://github.com/martj42/international_results",
+    "license": "CC0 1.0 Universal (public domain dedication)",
+    "upstream_commit": "b7a3a8ee5d37780c6a03101c188658fd439e241d",
+    "upstream_commit_date": "2026-10-07T14:09:01Z",
+    "downloaded_on": "2026-10-10",
+    "files": {
+      "results.csv": {
+        "rows": 49945,
+        "sha256": "b38434f8f74cd9faacb269eb1c97760fc2dfac43fcb211779e0bd2cbb48f89e3"
+      },
+      "shootouts.csv": {
+        "rows": 700,
+        "sha256": "072b445adf5183fbe981087857e5b64c8f17abfdbf257b1822ceacb4a37919fa"
+      },
+      "former_names.csv": {
+        "rows": 36,
+        "sha256": "2d57f59a3ac13b24c2fcf208ced5a38710529d122da38929838d0980b002677e"
+      }
+    },
+    "score_definition": "Full-time score including extra time, excluding penalty shoot-outs.",
+    "notes": "Files are stored byte-for-byte as downloaded. To refresh, follow docs/ml/ML_PIPELINE_V3.md (replace the files, update this record, re-run the training workflow); a refresh changes the corpus fingerprint recorded in every model manifest."
+  },
+  "rating_config": {
+    "initial": 1500.0,
+    "k_scale": 1.0,
+    "home_advantage": 100.0,
+    "use_margin": true,
+    "provisional_matches": 30,
+    "provisional_boost": 0.5,
+    "ad_lr": 0.05,
+    "ad_home": 0.25,
+    "ad_mu": 0.2,
+    "ad_shrink": 0.0005,
+    "form_halflife": 12.0
+  },
+  "model": {
+    "fit": "production",
+    "cutoff": "2026-06-11",
+    "train_start": "1990-01-01",
+    "n_train": 32351,
+    "train_last_match": "2026-06-10",
+    "calibration_window": [
+      "2022-06-11",
+      "2026-06-11"
+    ],
+    "n_calibration": 2039,
+    "xgb_n_estimators": 126,
+    "xgb_params": {
+      "max_depth": 3,
+      "min_child_weight": 20,
+      "learning_rate": 0.05
+    },
+    "temperature": 0.9741477714234302,
+    "rho": -0.05752677310214439,
+    "blend_weights": {
+      "poisson_dc": 0.5,
+      "xgboost": 0.5
+    },
+    "shootout": {
+      "n_shootouts": 533,
+      "beta": 0.5673,
+      "lr_statistic_vs_coin_flip": 6.207,
+      "significant_at_5pct": true,
+      "higher_rated_side_win_rate": 0.5497,
+      "used": "fitted beta"
+    },
+    "seed": 42
+  },
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "scikit_learn": "1.5.2",
+    "xgboost": "2.1.3",
+    "scipy": "1.14.1"
+  },
+  "artifact": "model_wc2026_pretournament.joblib",
+  "artifact_sha256": "d1491177cdd39e232e73245352913b1c72fb88a2c8460049d4a260d785a37557",
+  "created": "2026-10-10T09:18:41.096624+00:00",
+  "selected_candidate": "ens_poisson+xgb[equal]",
+  "benchmark": "benchmark_report.json",
+  "purpose": "historical pre-tournament forecast of the 2026 World Cup"
+}

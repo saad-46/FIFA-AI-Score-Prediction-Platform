@@ -32,10 +32,12 @@ export const tournamentApi = {
   },
 
   /**
-   * Run a Monte Carlo simulation of the tournament. Expensive — takes
-   * roughly 5-9 seconds regardless of n_simulations (fixed pool-spawn
-   * overhead dominates), so callers must design a real loading state, not a
-   * generic spinner.
+   * Run a Monte Carlo simulation of the tournament. Roughly 1-2 seconds for
+   * 10,000 simulations and ~12 seconds for 100,000 on the V3 engine (plus a
+   * few seconds the first time a mode is requested after a restart), so
+   * callers still need a real loading state. The response's `meta` says what
+   * was simulated — a pre-tournament forecast or the knockout rounds given
+   * the real group stage — and must be shown with the numbers.
    */
   async simulate(
     payload: TournamentSimulationRequest = {

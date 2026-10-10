@@ -4,6 +4,7 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import get_settings
 from app.core.rate_limit import check_rate_limit, simulation_rule
 from app.core.security import get_optional_user
 from app.db.database import get_db
@@ -11,6 +12,7 @@ from app.schemas.tournament import (
     TournamentSimulationRequest,
     TournamentSimulationResponse,
     TeamTournamentStats,
+    TournamentSimulationMeta,
     Fifa2026GroupsResponse,
     Fifa2026Group,
     Fifa2026ScheduleResponse,
@@ -129,6 +131,45 @@ async def get_fifa_2026_backtest():
     return wc2026_data.build_backtest()
 
 
+async def _simulate_v3(payload: TournamentSimulationRequest) -> TournamentSimulationResponse:
+    """Simulation on the V3 pipeline. See app/services/tournament_forecast.py."""
+    from app.ml.v3.inference import ModelUnavailable
+    from app.services import tournament_forecast
+
+    groups = None if payload.use_fifa_2026_groups else {g.name: g.teams for g in (payload.groups or [])}
+    try:
+        probabilities, meta = await asyncio.to_thread(
+            tournament_forecast.simulate_tournament,
+            official=payload.use_fifa_2026_groups,
+            use_real_results=payload.use_real_results,
+            groups=groups,
+            n_simulations=payload.n_simulations,
+            seed=payload.seed,
+        )
+    except tournament_forecast.InvalidGroups as e:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(e))
+    except ModelUnavailable as e:
+        # No fallback forecast: an unvalidated model must not produce numbers.
+        logger.error("v3 simulation unavailable: %s", e)
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Tournament forecast is unavailable: the model bundle could not be validated.",
+        )
+    except Exception as e:
+        logger.error(f"Tournament simulation failed: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Simulation failed. Please try again later.",
+        )
+    return TournamentSimulationResponse(
+        probabilities={
+            team: TeamTournamentStats(**{k: stats[k] for k in TeamTournamentStats.model_fields})
+            for team, stats in probabilities.items()
+        },
+        meta=TournamentSimulationMeta(**meta),
+    )
+
+
 @router.post("/simulate", response_model=TournamentSimulationResponse, status_code=status.HTTP_200_OK)
 async def simulate_tournament(
     payload: TournamentSimulationRequest,
@@ -137,14 +178,22 @@ async def simulate_tournament(
     user: Optional[dict] = Depends(get_optional_user),
 ):
     """
-    Run Monte Carlo simulations for a FIFA 2026 World Cup tournament.
-    Supports 48 teams in 12 groups with Round of 32 knockout.
-    Public endpoint, rate limited far more strictly than /predictions/predict —
-    a single call is several seconds of multi-process CPU (see
-    app/core/rate_limit.py::simulation_rule).
+    Run Monte Carlo simulations of the 48-team, 12-group World Cup format.
+
+    The 2026 tournament has been played. With the official groups this returns
+    either a pre-tournament forecast (`use_real_results=false`) or a forecast
+    of the knockout rounds given the real group stage (`use_real_results=true`);
+    `meta` states which, with the model version and information cutoff.
+
+    Public endpoint, rate limited far more strictly than /predictions/predict
+    (see app/core/rate_limit.py::simulation_rule).
     """
     await check_rate_limit(db, simulation_rule(), request, user)
 
+    if get_settings().PREDICTION_ENGINE.strip().lower() == "v3":
+        return await _simulate_v3(payload)
+
+    # ── Legacy engine (PREDICTION_ENGINE=legacy): the rollback path, unchanged ──
     predictor, df = await _get_simulator_dependencies()
     
     if not predictor.is_loaded:
@@ -200,5 +249,19 @@ async def simulate_tournament(
             winner=stats.get("winner", 0.0),
         )
 
-    return TournamentSimulationResponse(probabilities=formatted_probs)
+    return TournamentSimulationResponse(
+        probabilities=formatted_probs,
+        meta=TournamentSimulationMeta(
+            engine="legacy", mode="legacy", model_version=str(getattr(predictor, "model_version", "legacy")),
+            n_simulations=payload.n_simulations,
+            fixed_matches=0,
+            tournament_status="completed" if payload.use_fifa_2026_groups else "hypothetical",
+            note=(
+                "Legacy simulator: each run redraws the tournament from its own simulated group tables. "
+                + ("Fixtures already played in the stored 2026 results are not re-simulated when a run reproduces them. "
+                   if use_real_results else "")
+                + "The 2026 World Cup has been played; this is not a replay of it."
+            ),
+        ),
+    )
 
