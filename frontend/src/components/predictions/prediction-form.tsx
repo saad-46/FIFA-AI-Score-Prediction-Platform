@@ -1,33 +1,26 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import { Brain, ArrowRight, RefreshCw, Cpu, ShieldAlert } from "lucide-react";
+import React, { useId, useMemo, useState } from "react";
+import { ArrowLeftRight, RotateCcw } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import useSWR from "swr";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { Combobox, type ComboboxOption } from "@/components/ui/combobox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { predictionsApi } from "@/lib/api/predictions";
-import { getApiErrorMessage } from "@/lib/api/client";
-import type { PredictionResult, Team } from "@/types";
-import { toast } from "@/hooks/use-toast";
-import useSWR from "swr";
 import { teamsApi } from "@/lib/api/teams";
+import { getApiErrorMessage } from "@/lib/api/client";
+import { toast } from "@/hooks/use-toast";
 import { TeamFlag } from "@/components/football/team-flag";
+import { cn } from "@/lib/utils";
+import type { PredictionResult, Team } from "@/types";
 
 const schema = z.object({
-  home_team: z.string().min(1, "Select a home team"),
-  away_team: z.string().min(1, "Select an away team"),
+  home_team: z.string().min(1, "Choose the first team"),
+  away_team: z.string().min(1, "Choose the second team"),
   tournament: z.string().optional(),
   neutral_venue: z.boolean(),
 });
@@ -53,6 +46,9 @@ const TOURNAMENTS = [
   "UEFA World Cup Qualifying",
 ];
 
+/** Sentinel for "no competition chosen": Radix Select items cannot have an empty value. */
+const ANY_COMPETITION = "__any__";
+
 interface PredictionFormProps {
   onResult: (result: PredictionResult) => void;
   onStartPredict: () => void;
@@ -60,19 +56,16 @@ interface PredictionFormProps {
 }
 
 /** Builds a Combobox option for a WC2026 team: flag, name, code + group, and
- * rank/Elo on the right. Defined once here rather than inline at both call
- * sites so the two selectors cannot drift apart. */
+ * rank/Elo on the right. Defined once so the two selectors cannot drift apart. */
 function teamOption(t: Team): ComboboxOption {
-  const meta = [t.fifa_code, t.wc2026_group ? `Group ${t.wc2026_group}` : null]
-    .filter(Boolean)
-    .join(" · ");
+  const meta = [t.fifa_code, t.wc2026_group ? `Group ${t.wc2026_group}` : null].filter(Boolean).join(" · ");
   return {
     value: t.name,
     label: t.name,
     description: meta || t.country,
     leading: <TeamFlag name={t.name} fifaCode={t.fifa_code} size="sm" />,
     trailing: (
-      <span className="font-mono text-[10px] tabular-nums text-fg-muted">
+      <span className="tabular text-[11px] text-fg-muted">
         {t.fifa_ranking != null ? `#${t.fifa_ranking}` : "—"}
         {t.elo_rating != null ? ` · ${t.elo_rating}` : ""}
       </span>
@@ -80,20 +73,35 @@ function teamOption(t: Team): ComboboxOption {
   };
 }
 
+/**
+ * The fixture builder.
+ *
+ * Laid out as a fixture — one side, "v", the other side — because that is what
+ * the user is describing. The previous form boxed each side as "NODE_01 // HOME"
+ * and "NODE_02 // AWAY" under a "Simulation Parameters" heading: a football
+ * match dressed as a server rack.
+ *
+ * Venue is a two-option choice rather than a "neutral" toggle. The toggle hid
+ * the consequence of its off state: the first team silently received home
+ * advantage. Naming both options makes the default visible.
+ */
 export function PredictionForm({ onResult, onStartPredict, onPredictError }: PredictionFormProps) {
   const [loading, setLoading] = useState(false);
   const [homeSearch, setHomeSearch] = useState("");
   const [awaySearch, setAwaySearch] = useState("");
+  const uid = useId();
+
   // The 48 WC2026 qualifiers, not /teams/search. That endpoint queries all 335
   // rows in the teams table, which still contains non-national entities from
   // the legacy seed ("Central Spain", "Asturias", "Ticino") — they must never
   // be selectable as a 2026 fixture. Filtering happens client-side over a
   // fixed 48-item list, so there is no per-keystroke request either.
-  const { data: rosterData, isLoading: rosterLoading } = useSWR(
-    "wc2026-team-directory",
-    teamsApi.getWc2026Teams,
-    { revalidateOnFocus: false }
-  );
+  const {
+    data: rosterData,
+    isLoading: rosterLoading,
+    error: rosterError,
+    mutate: retryRoster,
+  } = useSWR("wc2026-team-directory", teamsApi.getWc2026Teams, { revalidateOnFocus: false });
   const roster = useMemo(() => rosterData ?? [], [rosterData]);
 
   const filterRoster = (query: string, exclude?: string) => {
@@ -101,14 +109,9 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
     return roster.filter((t) => {
       if (exclude && t.name === exclude) return false;
       if (!q) return true;
-      return (
-        t.name.toLowerCase().includes(q) || (t.fifa_code ?? "").toLowerCase().includes(q)
-      );
+      return t.name.toLowerCase().includes(q) || (t.fifa_code ?? "").toLowerCase().includes(q);
     });
   };
-
-  const [selectedHome, setSelectedHome] = useState<Team | null>(null);
-  const [selectedAway, setSelectedAway] = useState<Team | null>(null);
 
   const {
     handleSubmit,
@@ -118,7 +121,7 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { neutral_venue: false },
+    defaultValues: { home_team: "", away_team: "", neutral_venue: true },
   });
 
   const homeTeamValue = watch("home_team");
@@ -126,227 +129,311 @@ export function PredictionForm({ onResult, onStartPredict, onPredictError }: Pre
   const neutralVenue = watch("neutral_venue");
   const tournamentValue = watch("tournament");
 
-  // Declared after watch(): each side's list excludes the other side's pick so
-  // a team cannot be selected against itself.
+  const selectedHome = roster.find((t) => t.name === homeTeamValue) ?? null;
+  const selectedAway = roster.find((t) => t.name === awayTeamValue) ?? null;
+
+  // Each side's list excludes the other side's pick, so a team cannot be
+  // selected against itself.
   const homeTeams = filterRoster(homeSearch, awayTeamValue);
   const awayTeams = filterRoster(awaySearch, homeTeamValue);
-  const homeSearching = rosterLoading;
-  const awaySearching = rosterLoading;
 
   const onSubmit = async (values: FormValues) => {
+    // `loading` also disables the button, but a second Enter keypress can land
+    // before React re-renders; this guard is what actually prevents a duplicate.
+    if (loading) return;
     if (values.home_team === values.away_team) {
-      toast({
-        title: "Simulation Conflict",
-        description: "Select two distinct teams to run the prediction model.",
-        variant: "destructive",
-      });
+      toast({ title: "Pick two different teams", description: "A team cannot play itself.", variant: "destructive" });
       return;
     }
     setLoading(true);
     onStartPredict();
     try {
-      const result = await predictionsApi.predict(values);
+      const result = await predictionsApi.predict({
+        ...values,
+        tournament: values.tournament && values.tournament !== ANY_COMPETITION ? values.tournament : undefined,
+      });
       onResult(result);
     } catch (err: unknown) {
-      toast({ title: "Simulation Failed", description: getApiErrorMessage(err), variant: "destructive" });
+      toast({ title: "Prediction unavailable", description: getApiErrorMessage(err), variant: "destructive" });
       onPredictError();
     } finally {
       setLoading(false);
     }
   };
 
-  // Everything inside this form sizes off @container, not viewport breakpoints.
-  // The card's width comes from the parent layout, not the screen: once a result
-  // renders, PredictView drops the form into a 3-of-12 column, so at a 1920px
-  // viewport the card is ~280px wide while `md:` (768px viewport) still reported
-  // "large" and forced home/away side by side. Each side got ~130px, which
-  // truncated the selected teams to "Ar…"/"Sa…", wrapped "Team Identifier" onto
-  // two lines and "Neutral Pitch Venue" onto three. Container queries ask the
-  // only question that matters here — how wide is this card.
+  const swap = () => {
+    setValue("home_team", awayTeamValue, { shouldValidate: Boolean(awayTeamValue) });
+    setValue("away_team", homeTeamValue, { shouldValidate: Boolean(homeTeamValue) });
+  };
+
+  const homeError = `${uid}-home-error`;
+  const awayError = `${uid}-away-error`;
+  const venueName = `${uid}-venue`;
+
   return (
-    <Card className="@container border border-border bg-surface/40 backdrop-blur-md shadow-2xl">
-      <CardHeader className="border-b border-border/40 pb-4">
-        <CardTitle className="flex items-center gap-2.5 font-mono text-sm tracking-widest uppercase text-foreground">
-          <Cpu className="h-4.5 w-4.5 text-primary" aria-hidden="true" />
-          Simulation Parameters
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="pt-6">
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Dual Node Selectors */}
-          <div className="grid grid-cols-1 @md:grid-cols-2 gap-6 relative">
-            {/* Left Node: Home */}
-            <div className="space-y-4 rounded-lg border border-border/40 bg-zinc-950/20 p-4">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">NODE_01 // HOME</span>
-                {selectedHome && (
-                  <span className="text-[10px] font-mono text-primary font-bold">
-                    {selectedHome.confederation}
-                  </span>
-                )}
-              </div>
-              
-              <div className="space-y-1.5">
-                {/* "Home Team", not "Team Identifier". Both selectors carried
-                    the identical label, and since <button> is labelable the
-                    <label> won the accessible-name computation over the
-                    Combobox's aria-label (which only reaches the popover's
-                    search input) — a screen reader announced two controls named
-                    "Team Identifier" with no way to tell home from away. */}
-                <Label htmlFor="home_team_combobox" className="text-xs font-mono tracking-wider text-zinc-400">Home Team</Label>
-                <Combobox
-                  id="home_team_combobox"
-                  aria-label="Search for a home team"
-                  value={homeTeamValue}
-                  onValueChange={(v) => {
-                    setValue("home_team", v, { shouldValidate: true });
-                    const team = roster.find((t) => t.name === v);
-                    if (team) setSelectedHome(team);
-                  }}
-                  onSearchChange={setHomeSearch}
-                  loading={homeSearching}
-                  placeholder="Select home team…"
-                  searchPlaceholder="Type team name…"
-                  emptyMessage="No 2026 team matches that."
-                  options={homeTeams.map((t) => teamOption(t))}
-                />
-                {errors.home_team && <p className="text-xs text-loss font-mono">{errors.home_team.message}</p>}
-              </div>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+      aria-label="Match to predict"
+      className="@container rounded-lg border border-border bg-surface"
+    >
+      {rosterError && (
+        <p role="alert" className="border-b border-border px-5 py-3 text-sm text-fg-muted">
+          The team list could not be loaded: {getApiErrorMessage(rosterError)}{" "}
+          <button type="button" onClick={() => retryRoster()} className="font-semibold text-primary hover:underline">
+            Retry
+          </button>
+        </p>
+      )}
 
-              {/* Dynamic Preview */}
-              {selectedHome && (
-                <div className="pt-2 border-t border-border/20 grid grid-cols-3 gap-2 text-center">
-                  <div className="bg-surface/30 p-2 rounded">
-                    <span className="block text-[9px] font-mono text-fg-muted uppercase">Flag</span>
-                    <TeamFlag name={selectedHome.name} fifaCode={selectedHome.fifa_code} size="md" className="mt-0.5" />
-                  </div>
-                  <div className="bg-surface/30 p-2 rounded">
-                    <span className="block text-[9px] font-mono text-fg-muted uppercase">FIFA Rank</span>
-                    <span className="block font-mono text-xs font-bold text-foreground mt-1">
-                      #{selectedHome.fifa_ranking ?? "N/A"}
-                    </span>
-                  </div>
-                  <div className="bg-surface/30 p-2 rounded">
-                    <span className="block text-[9px] font-mono text-fg-muted uppercase">ELO Rating</span>
-                    <span className="block font-mono text-xs font-bold text-cyan-400 mt-1">
-                      {selectedHome.elo_rating ?? "N/A"}
-                    </span>
-                  </div>
-                </div>
-              )}
-            </div>
+      {/* ── The fixture ──────────────────────────────────────────────────── */}
+      <div className="grid grid-cols-1 items-start gap-4 p-5 @2xl:grid-cols-[1fr_auto_1fr] @2xl:gap-6">
+        <TeamSlot
+          side="first"
+          label={neutralVenue ? "Team A" : "Home team"}
+          inputId={`${uid}-home`}
+          errorId={homeError}
+          error={errors.home_team?.message}
+          team={selectedHome}
+          value={homeTeamValue}
+          options={homeTeams.map(teamOption)}
+          loading={rosterLoading}
+          onSearchChange={setHomeSearch}
+          onValueChange={(v) => setValue("home_team", v, { shouldValidate: true })}
+        />
 
-            {/* Right Node: Away */}
-            <div className="space-y-4 rounded-lg border border-border/40 bg-zinc-950/20 p-4">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">NODE_02 // AWAY</span>
-                {selectedAway && (
-                  <span className="text-[10px] font-mono text-primary font-bold">
-                    {selectedAway.confederation}
-                  </span>
-                )}
-              </div>
+        <div className="flex items-center justify-center gap-3 @2xl:mt-7 @2xl:flex-col @2xl:gap-2">
+          <span className="font-display text-2xl font-semibold uppercase text-fg-subtle" aria-hidden="true">
+            v
+          </span>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={swap}
+            disabled={!homeTeamValue && !awayTeamValue}
+            aria-label="Swap the two teams"
+            title="Swap the two teams"
+          >
+            <ArrowLeftRight aria-hidden="true" />
+          </Button>
+        </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="away_team_combobox" className="text-xs font-mono tracking-wider text-zinc-400">Away Team</Label>
-                <Combobox
-                  id="away_team_combobox"
-                  aria-label="Search for an away team"
-                  value={awayTeamValue}
-                  onValueChange={(v) => {
-                    setValue("away_team", v, { shouldValidate: true });
-                    const team = roster.find((t) => t.name === v);
-                    if (team) setSelectedAway(team);
-                  }}
-                  onSearchChange={setAwaySearch}
-                  loading={awaySearching}
-                  placeholder="Select away team…"
-                  searchPlaceholder="Type team name…"
-                  emptyMessage="No 2026 team matches that."
-                  options={awayTeams.map((t) => teamOption(t))}
-                />
-                {errors.away_team && <p className="text-xs text-loss font-mono">{errors.away_team.message}</p>}
-              </div>
+        <TeamSlot
+          side="second"
+          label={neutralVenue ? "Team B" : "Away team"}
+          inputId={`${uid}-away`}
+          errorId={awayError}
+          error={errors.away_team?.message}
+          team={selectedAway}
+          value={awayTeamValue}
+          options={awayTeams.map(teamOption)}
+          loading={rosterLoading}
+          onSearchChange={setAwaySearch}
+          onValueChange={(v) => setValue("away_team", v, { shouldValidate: true })}
+        />
+      </div>
 
-              {/* Dynamic Preview */}
-              {selectedAway && (
-                <div className="pt-2 border-t border-border/20 grid grid-cols-3 gap-2 text-center">
-                  <div className="bg-surface/30 p-2 rounded">
-                    <span className="block text-[9px] font-mono text-fg-muted uppercase">Flag</span>
-                    <TeamFlag name={selectedAway.name} fifaCode={selectedAway.fifa_code} size="md" className="mt-0.5" />
-                  </div>
-                  <div className="bg-surface/30 p-2 rounded">
-                    <span className="block text-[9px] font-mono text-fg-muted uppercase">FIFA Rank</span>
-                    <span className="block font-mono text-xs font-bold text-foreground mt-1">
-                      #{selectedAway.fifa_ranking ?? "N/A"}
-                    </span>
-                  </div>
-                  <div className="bg-surface/30 p-2 rounded">
-                    <span className="block text-[9px] font-mono text-fg-muted uppercase">ELO Rating</span>
-                    <span className="block font-mono text-xs font-bold text-cyan-400 mt-1">
-                      {selectedAway.elo_rating ?? "N/A"}
-                    </span>
-                  </div>
-                </div>
-              )}
-            </div>
+      {/* ── Context ──────────────────────────────────────────────────────── */}
+      <div className="grid grid-cols-1 gap-5 border-t border-border p-5 @2xl:grid-cols-2">
+        <fieldset>
+          <legend className="eyebrow mb-2">Venue</legend>
+          <div className="grid grid-cols-2 gap-2">
+            <VenueOption
+              name={venueName}
+              checked={neutralVenue}
+              onChange={() => setValue("neutral_venue", true)}
+              title="Neutral ground"
+              description="No home advantage. The order of the teams does not matter."
+            />
+            <VenueOption
+              name={venueName}
+              checked={!neutralVenue}
+              onChange={() => setValue("neutral_venue", false)}
+              title={selectedHome ? `${selectedHome.name} at home` : "First team at home"}
+              description="The first team gets home advantage."
+            />
           </div>
+        </fieldset>
 
-          {/* Tournament Parameters */}
-          <div className="grid grid-cols-1 @md:grid-cols-2 gap-6 pt-2">
-            <div className="space-y-1.5">
-              <Label className="text-xs font-mono tracking-wider text-zinc-400">Context Competition</Label>
-              <Select value={tournamentValue ?? ""} onValueChange={(v) => setValue("tournament", v)}>
-                <SelectTrigger className="border-border/40 font-mono text-xs h-10">
-                  <SelectValue placeholder="Neutral Context (Optional)" />
-                </SelectTrigger>
-                <SelectContent>
-                  {TOURNAMENTS.map((t) => (
-                    <SelectItem key={t} value={t} className="font-mono text-xs">
-                      {t}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+        <div>
+          <Label htmlFor={`${uid}-competition`} className="eyebrow mb-2 block">
+            Competition <span className="font-normal normal-case tracking-normal">(optional)</span>
+          </Label>
+          <Select
+            value={tournamentValue ?? ANY_COMPETITION}
+            onValueChange={(v) => setValue("tournament", v === ANY_COMPETITION ? undefined : v)}
+          >
+            <SelectTrigger id={`${uid}-competition`} className="h-11">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value={ANY_COMPETITION}>Not specified</SelectItem>
+              {TOURNAMENTS.map((t) => (
+                <SelectItem key={t} value={t}>
+                  {t}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <p className="mt-1.5 text-xs text-fg-subtle">The level of competition the match is played in.</p>
+        </div>
+      </div>
+
+      {/* ── Actions ──────────────────────────────────────────────────────── */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-4">
+        <p className="text-xs text-fg-subtle">Teams are the 48 World Cup 2026 qualifiers.</p>
+        <div className="flex gap-2">
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => {
+              reset({ home_team: "", away_team: "", tournament: undefined, neutral_venue: true });
+              setHomeSearch("");
+              setAwaySearch("");
+            }}
+          >
+            <RotateCcw aria-hidden="true" />
+            Reset
+          </Button>
+          <Button type="submit" size="lg" loading={loading} className="min-w-40">
+            {loading ? "Predicting…" : "Predict match"}
+          </Button>
+        </div>
+      </div>
+    </form>
+  );
+}
+
+interface TeamSlotProps {
+  side: "first" | "second";
+  label: string;
+  inputId: string;
+  errorId: string;
+  error?: string;
+  team: Team | null;
+  value: string;
+  options: ComboboxOption[];
+  loading: boolean;
+  onSearchChange: (q: string) => void;
+  onValueChange: (v: string) => void;
+}
+
+function TeamSlot({
+  side,
+  label,
+  inputId,
+  errorId,
+  error,
+  team,
+  value,
+  options,
+  loading,
+  onSearchChange,
+  onValueChange,
+}: TeamSlotProps) {
+  return (
+    <div className="min-w-0 space-y-3">
+      <div className="space-y-1.5">
+        {/* The visible label names the control: <button> is labelable, so this
+            <label> wins the accessible-name computation over the Combobox's
+            aria-label (which only reaches the popover's search input). */}
+        <Label htmlFor={inputId} className="eyebrow block">
+          {label}
+        </Label>
+        <Combobox
+          id={inputId}
+          aria-label={`Search for the ${side} team`}
+          aria-invalid={Boolean(error) || undefined}
+          aria-describedby={error ? errorId : undefined}
+          value={value}
+          onValueChange={onValueChange}
+          onSearchChange={onSearchChange}
+          loading={loading}
+          placeholder="Choose a team…"
+          searchPlaceholder="Type a team name or code…"
+          emptyMessage="No 2026 team matches that."
+          options={options}
+        />
+        {error && (
+          <p id={errorId} role="alert" className="text-xs font-medium text-loss">
+            {error}
+          </p>
+        )}
+      </div>
+
+      {/* The chosen team's identity. The frame keeps its height when empty so
+          picking a team does not push the rest of the form down. */}
+      <div
+        className={cn(
+          "flex min-h-[4.5rem] items-center gap-3 rounded-md border px-3 py-2.5",
+          team ? "border-border bg-surface-2" : "border-dashed border-border"
+        )}
+      >
+        {team ? (
+          <>
+            <TeamFlag name={team.name} fifaCode={team.fifa_code} size="lg" />
+            <div className="min-w-0 flex-1">
+              <p className="truncate font-display text-2xl font-semibold uppercase leading-none tracking-wide text-foreground">
+                {team.name}
+              </p>
+              <p className="mt-1 truncate text-xs text-fg-muted">
+                {[team.confederation, team.wc2026_group ? `Group ${team.wc2026_group}` : null].filter(Boolean).join(" · ")}
+              </p>
             </div>
+            <dl className="flex shrink-0 gap-4 text-right">
+              <div>
+                <dt className="eyebrow">Rank</dt>
+                <dd className="tabular text-sm font-semibold text-foreground">
+                  {team.fifa_ranking != null ? `#${team.fifa_ranking}` : "—"}
+                </dd>
+              </div>
+              <div>
+                <dt className="eyebrow">Elo</dt>
+                <dd className="tabular text-sm font-semibold text-foreground">{team.elo_rating ?? "—"}</dd>
+              </div>
+            </dl>
+          </>
+        ) : (
+          <p className="text-sm text-fg-subtle">No team chosen yet</p>
+        )}
+      </div>
+    </div>
+  );
+}
 
-            <div className="flex items-center justify-between rounded-lg border border-border/40 bg-zinc-950/20 px-4 h-10">
-              <Label htmlFor="neutral_venue" className="cursor-pointer font-mono text-xs text-zinc-400">
-                Neutral Pitch Venue
-              </Label>
-              <Switch
-                id="neutral_venue"
-                checked={neutralVenue}
-                onCheckedChange={(checked) => setValue("neutral_venue", checked)}
-              />
-            </div>
-          </div>
-
-          {/* Submission and Control Actions */}
-          <div className="flex gap-4 pt-4 border-t border-border/40">
-            <Button type="submit" loading={loading} className="flex-1 bg-primary hover:bg-primary-hover text-slate-950 font-mono uppercase tracking-wider text-xs h-11 shadow-lg shadow-cyan-500/10 cursor-pointer">
-              {!loading && <Brain className="h-4 w-4" />}
-              {loading ? "Running Model Simulation..." : "Execute Simulation"}
-              {!loading && <ArrowRight className="h-4 w-4" />}
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="border-border text-foreground hover:bg-surface-2 h-11 px-4 cursor-pointer"
-              onClick={() => {
-                reset();
-                setHomeSearch("");
-                setAwaySearch("");
-                setSelectedHome(null);
-                setSelectedAway(null);
-              }}
-              aria-label="Reset simulation parameters"
-            >
-              <RefreshCw className="h-4 w-4" />
-            </Button>
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+function VenueOption({
+  name,
+  checked,
+  onChange,
+  title,
+  description,
+}: {
+  name: string;
+  checked: boolean;
+  onChange: () => void;
+  title: string;
+  description: string;
+}) {
+  return (
+    <label
+      className={cn(
+        "flex cursor-pointer gap-2.5 rounded-md border p-3 transition-colors",
+        "has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring",
+        checked ? "border-primary bg-primary/5" : "border-border hover:border-border-strong"
+      )}
+    >
+      <input
+        type="radio"
+        name={name}
+        checked={checked}
+        onChange={onChange}
+        className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--primary)] focus:outline-none"
+      />
+      <span className="min-w-0">
+        <span className="block text-sm font-semibold leading-tight text-foreground">{title}</span>
+        <span className="mt-0.5 block text-xs leading-snug text-fg-muted">{description}</span>
+      </span>
+    </label>
   );
 }

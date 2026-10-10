@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Menu, X, LogOut, User, Search, Trophy } from "lucide-react";
+import { Menu, X, LogOut, User, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -35,6 +35,15 @@ export function Navbar({ user }: NavbarProps) {
   // content while scrolling but stays light at rest. Passive listener, and only
   // a boolean is tracked, so this never re-renders per pixel.
   React.useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
+
+  React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -42,36 +51,37 @@ export function Navbar({ user }: NavbarProps) {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full px-3 pt-3 sm:px-4">
-      <div
-        className={cn(
-          "mx-auto max-w-7xl rounded-xl border px-4 sm:px-5",
-          "bg-surface/60 backdrop-blur-xl transition-all duration-300",
-          scrolled
-            ? "border-border/80 bg-surface/80 shadow-lg shadow-black/20 backdrop-blur-2xl"
-            : "border-border/50 shadow-md shadow-black/10"
-        )}
-      >
+    <header
+      className={cn(
+        // A full-width bar pinned to the top edge. The floating glass pill it
+        // replaces spent blur and shadow on chrome; this one only gains a
+        // hairline and a solid backdrop once content scrolls beneath it.
+        "sticky top-0 z-50 w-full border-b transition-colors duration-200",
+        scrolled || mobileOpen
+          ? "border-border bg-background/95 backdrop-blur-md"
+          : "border-transparent bg-background/60 backdrop-blur-sm"
+      )}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}
-          <Link href="/dashboard" className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded border border-border bg-surface-2/80 shadow-lg shadow-cyan-500/5">
-              <svg className="h-4.5 w-4.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                <path d="M2 12h20" />
-              </svg>
-            </div>
-            <span className="text-sm font-bold tracking-[0.15em] text-foreground font-mono uppercase">
-              FIFA // <span className="text-primary">INTELLIGENCE</span>
+          <Link href="/dashboard" className="flex shrink-0 items-center gap-2.5 rounded" aria-label="FIFA AI — overview">
+            {/* Centre circle and halfway line: the one mark every pitch shares. */}
+            <svg className="h-7 w-7 text-primary" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
+              <rect x="1.5" y="4.5" width="25" height="19" rx="2.5" />
+              <path d="M14 4.5v19" />
+              <circle cx="14" cy="14" r="4.25" />
+            </svg>
+            <span className="font-display text-xl font-bold uppercase leading-none tracking-wider text-foreground">
+              FIFA <span className="text-primary">AI</span>
             </span>
           </Link>
 
           {/* Desktop nav */}
-          {/* xl:, not md: — the seven nav items plus the search and theme
-              controls need ~1140px. Showing them from 768px pushed the header
-              past the viewport and gave the whole page a horizontal scrollbar. */}
-          <nav className="hidden xl:flex items-center gap-1">
+          {/* lg:, not md: — six items plus the search and theme controls need
+              ~900px. From 768px they overflowed the header and gave the whole
+              page a horizontal scrollbar. */}
+          <nav aria-label="Primary" className="hidden h-full items-stretch gap-1 lg:flex">
             {navItems.map((item) => {
               const Icon = item.icon;
               const active = pathname.startsWith(item.href);
@@ -81,17 +91,17 @@ export function Navbar({ user }: NavbarProps) {
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium",
-                    "transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                    "relative flex items-center gap-1.5 px-3 text-sm font-medium transition-colors duration-150",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+                    // Active is an underline on the bar's bottom edge plus a
+                    // weight and colour change: not colour alone, and
+                    // aria-current carries it for assistive tech.
                     active
-                      // Active is a cyan-tinted glass pill with a border, not
-                      // colour alone: aria-current carries it for assistive
-                      // tech and the border carries it visually.
-                      ? "border-primary/30 bg-primary/10 text-primary"
-                      : "border-transparent text-fg-muted hover:border-border/60 hover:bg-surface-2/60 hover:text-foreground"
+                      ? "font-semibold text-foreground after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:bg-primary"
+                      : "text-fg-muted hover:text-foreground"
                   )}
                 >
-                  <Icon className="h-4 w-4" aria-hidden="true" />
+                  <Icon className={cn("h-4 w-4", active && "text-primary")} aria-hidden="true" />
                   {item.label}
                 </Link>
               );
@@ -99,22 +109,24 @@ export function Navbar({ user }: NavbarProps) {
           </nav>
 
           {/* Right side */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="sm"
-              className="hidden xl:inline-flex text-fg-muted font-normal"
+              className="hidden font-normal text-fg-muted lg:inline-flex"
               onClick={() => setPaletteOpen(true)}
+              aria-label="Search pages"
+              aria-keyshortcuts="Control+K Meta+K"
             >
               <Search className="h-3.5 w-3.5" />
-              Search
-              <kbd className="ml-2 rounded border border-border px-1.5 text-[10px]">⌘K</kbd>
+              <span className="hidden xl:inline">Search</span>
+              <kbd className="ml-1 hidden rounded border border-border px-1.5 font-code text-[10px] xl:inline">Ctrl K</kbd>
             </Button>
             <ThemeToggle />
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="hidden xl:flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-foreground hover:bg-surface-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                  <button className="hidden lg:flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-foreground hover:bg-surface-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                     <Avatar className="h-7 w-7">
                       <AvatarFallback>
                         {(user.full_name || user.email)[0].toUpperCase()}
@@ -151,10 +163,11 @@ export function Navbar({ user }: NavbarProps) {
 
             {/* Mobile menu toggle */}
             <button
-              className="xl:hidden rounded-lg border border-transparent p-2 text-fg-muted transition-colors hover:border-border/60 hover:bg-surface-2/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="flex h-11 w-11 items-center justify-center rounded-md text-fg-muted transition-colors hover:bg-surface-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle menu"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
             >
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -170,9 +183,9 @@ export function Navbar({ user }: NavbarProps) {
               initial={reduceMotion ? false : { opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={reduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
-              className="overflow-hidden xl:hidden"
+              className="overflow-hidden lg:hidden"
             >
-              <nav className="flex flex-col gap-1 border-t border-border/50 py-3">
+              <nav id="mobile-nav" aria-label="Primary" className="flex flex-col gap-1 border-t border-border py-3">
                 {navItems.map((item) => {
                   const Icon = item.icon;
                   const active = pathname.startsWith(item.href);
@@ -183,11 +196,11 @@ export function Navbar({ user }: NavbarProps) {
                       onClick={() => setMobileOpen(false)}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm font-medium transition-all",
+                        "flex min-h-11 items-center gap-3 rounded-md border-l-2 px-3 text-sm font-medium transition-colors",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                         active
-                          ? "border-primary/30 bg-primary/10 text-primary"
-                          : "border-transparent text-fg-muted hover:border-border/60 hover:bg-surface-2/60 hover:text-foreground"
+                          ? "border-primary bg-surface-2 font-semibold text-foreground"
+                          : "border-transparent text-fg-muted hover:bg-surface-2 hover:text-foreground"
                       )}
                     >
                       <Icon className="h-4 w-4" aria-hidden="true" />

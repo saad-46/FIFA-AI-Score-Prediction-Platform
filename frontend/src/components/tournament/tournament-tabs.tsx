@@ -1,5 +1,7 @@
 "use client";
 
+import { useCallback } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GroupsView } from "@/components/tournament/groups-view";
 import { ScheduleView } from "@/components/tournament/schedule-view";
@@ -19,17 +21,39 @@ import { BacktestView } from "@/components/wc2026/backtest-view";
  * The tab strip scrolls horizontally on narrow screens rather than wrapping
  * into a second row, which would push the content below the fold on mobile.
  */
+const TABS = ["bracket", "standings", "groups", "schedule", "simulator", "backtest"] as const;
+type TabId = (typeof TABS)[number];
+
 export function TournamentTabs() {
+  // The open tab lives in ?tab= so it survives a reload, can be linked to from
+  // the overview, and the browser's back button steps through tabs.
+  const router = useRouter();
+  const pathname = usePathname();
+  const params = useSearchParams();
+  const requested = params.get("tab");
+  const active: TabId = (TABS as readonly string[]).includes(requested ?? "") ? (requested as TabId) : "bracket";
+
+  const onChange = useCallback(
+    (value: string) => {
+      const next = new URLSearchParams(params.toString());
+      if (value === "bracket") next.delete("tab");
+      else next.set("tab", value);
+      const query = next.toString();
+      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    },
+    [params, pathname, router]
+  );
+
   return (
-    <Tabs defaultValue="bracket">
-      <div className="-mx-1 overflow-x-auto px-1 pb-1">
-        <TabsList className="font-mono text-xs uppercase tracking-wider">
+    <Tabs value={active} onValueChange={onChange}>
+      <div>
+        <TabsList aria-label="World Cup 2026 sections">
           <TabsTrigger value="bracket">Bracket</TabsTrigger>
           <TabsTrigger value="standings">Standings</TabsTrigger>
           <TabsTrigger value="groups">Groups</TabsTrigger>
           <TabsTrigger value="schedule">Schedule</TabsTrigger>
-          <TabsTrigger value="simulator">Simulation Matrix</TabsTrigger>
-          <TabsTrigger value="backtest">Model vs Reality</TabsTrigger>
+          <TabsTrigger value="simulator">Simulator</TabsTrigger>
+          <TabsTrigger value="backtest">Model vs reality</TabsTrigger>
         </TabsList>
       </div>
 

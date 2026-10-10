@@ -1,11 +1,11 @@
 "use client";
 
 import useSWR from "swr";
-import { Activity, BarChart3, Target, TrendingUp } from "lucide-react";
+import { BarChart3, Target, TrendingUp } from "lucide-react";
 import { analyticsApi } from "@/lib/api/analytics";
 import { matchesApi } from "@/lib/api/matches";
 import { getApiErrorMessage } from "@/lib/api/client";
-import { StatsCard } from "@/components/analytics/stats-card";
+import { StatsCard, StatsRow } from "@/components/analytics/stats-card";
 import { GoalDistributionChart } from "@/components/analytics/goal-distribution-chart";
 import { ScorelineFrequencyChart } from "@/components/analytics/scoreline-frequency-chart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -50,12 +50,12 @@ export function AnalyticsView() {
   return (
     <div className="space-y-8">
       {global && (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatsCard title="Total Matches" value={global.total_matches.toLocaleString()} icon={Activity} color="primary" delay={0} />
-          <StatsCard title="Avg Goals/Match" value={global.avg_goals_per_match.toFixed(2)} icon={Target} color="accent" delay={0.05} />
-          <StatsCard title="Home Win Rate" value={`${(global.home_win_rate * 100).toFixed(1)}%`} icon={TrendingUp} color="accent" delay={0.1} />
-          <StatsCard title="Draw Rate" value={`${(global.draw_rate * 100).toFixed(1)}%`} icon={BarChart3} color="draw" delay={0.15} />
-        </div>
+        <StatsRow>
+          <StatsCard title="Matches" value={global.total_matches.toLocaleString()} subtitle={`${global.total_goals.toLocaleString()} goals`} />
+          <StatsCard title="Goals per match" value={global.avg_goals_per_match.toFixed(2)} subtitle="Both teams combined" />
+          <StatsCard title="First-listed team wins" value={`${(global.home_win_rate * 100).toFixed(1)}%`} subtitle="The side listed as home" />
+          <StatsCard title="Draws" value={`${(global.draw_rate * 100).toFixed(1)}%`} subtitle="Level after the recorded score" />
+        </StatsRow>
       )}
       {/* This line used to claim the opposite — "the full historical dataset
           across all competitions, not only World Cup matches". That was stale:
@@ -64,45 +64,69 @@ export function AnalyticsView() {
           ml/data/loader.py). The endpoint's own top_tournaments confirms it —
           seven entries, all FIFA World Cups. Browsing the wider ~49k-row table
           is what /matches does; these figures are not that. */}
-      <p className="-mt-4 text-xs text-fg-muted">
+      <p className="-mt-4 max-w-3xl text-xs leading-relaxed text-fg-subtle">
         Figures cover World Cup matches only ({global?.total_matches.toLocaleString() ?? "—"} matches,
         2002–2026) — the same corpus the model is trained and served on. The full historical record is
         browsable under Matches.
       </p>
 
       <Tabs defaultValue="overview">
-        <TabsList>
+        <TabsList aria-label="Analytics sections">
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="goals">Goals</TabsTrigger>
-          <TabsTrigger value="results">Results</TabsTrigger>
-          <TabsTrigger value="model">Model</TabsTrigger>
+          <TabsTrigger value="goals">Goal timing</TabsTrigger>
+          <TabsTrigger value="results">Scorelines</TabsTrigger>
+          <TabsTrigger value="model">Model accuracy</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Top Tournaments</CardTitle>
+                <CardTitle>Goals per match, by year</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
-                {global?.top_tournaments.slice(0, 6).map((t) => (
-                  <div key={t.tournament} className="flex justify-between text-sm">
-                    <span className="text-foreground">{t.tournament}</span>
-                    <span className="font-mono text-fg-muted">{t.matches.toLocaleString()}</span>
-                  </div>
-                ))}
+              <CardContent>
+                {/* Real aggregates from the same response as the tiles above.
+                    Bars start at zero; the figure beside each is the value. */}
+                {global && global.goals_by_year.length > 0 ? (
+                  <ul className="space-y-2" aria-label="Average goals per match for each year in the dataset">
+                    {(() => {
+                      const rows = global.goals_by_year
+                        .filter((y) => y.matches > 0)
+                        .map((y) => ({ ...y, avg: y.goals / y.matches }));
+                      const max = Math.max(...rows.map((r) => r.avg), 0.01);
+                      return rows.map((r) => (
+                        <li key={r.year} className="grid grid-cols-[3rem_1fr_6.5rem] items-center gap-3 text-sm">
+                          <span className="tabular font-semibold text-foreground">{r.year}</span>
+                          <span className="h-2 overflow-hidden rounded-full bg-surface-3" aria-hidden="true">
+                            <span className="block h-full rounded-full bg-primary" style={{ width: `${(r.avg / max) * 100}%` }} />
+                          </span>
+                          <span className="tabular text-right text-fg-muted">
+                            <span className="font-semibold text-foreground">{r.avg.toFixed(2)}</span>
+                            <span className="ml-1.5 text-xs text-fg-subtle">{r.matches} m</span>
+                          </span>
+                        </li>
+                      ));
+                    })()}
+                  </ul>
+                ) : (
+                  <p className="text-sm text-fg-muted">No yearly breakdown is available.</p>
+                )}
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle>Result Distribution</CardTitle>
+                <CardTitle>How matches ended</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {global && (
                   <>
-                    <ProbabilityBar label="Home Win" value={global.home_win_rate} tone="win" />
+                    <ProbabilityBar label="First-listed team won" value={global.home_win_rate} tone="primary" />
                     <ProbabilityBar label="Draw" value={global.draw_rate} tone="draw" />
-                    <ProbabilityBar label="Away Win" value={global.away_win_rate} tone="loss" />
+                    <ProbabilityBar label="Second-listed team won" value={global.away_win_rate} tone="primary" />
+                    <p className="pt-1 text-xs leading-relaxed text-fg-subtle">
+                      Most World Cup matches are on neutral ground, so &ldquo;home&rdquo; here means the team
+                      listed first, not a team playing in its own country.
+                    </p>
                   </>
                 )}
               </CardContent>
@@ -116,7 +140,7 @@ export function AnalyticsView() {
           ) : goalDist && goalDist.length > 0 ? (
             <GoalDistributionChart data={goalDist} />
           ) : (
-            <EmptyState icon={Target} title="No goal distribution data available" />
+            <EmptyState icon={Target} title="No goal-timing data is available" />
           )}
         </TabsContent>
 
@@ -126,7 +150,7 @@ export function AnalyticsView() {
           ) : scorelines && scorelines.length > 0 ? (
             <ScorelineFrequencyChart data={scorelines} />
           ) : (
-            <EmptyState icon={BarChart3} title="No scoreline data available" />
+            <EmptyState icon={BarChart3} title="No scoreline data is available" />
           )}
         </TabsContent>
 
@@ -135,7 +159,7 @@ export function AnalyticsView() {
             <StatsGridSkeleton count={3} />
           ) : evaluation ? (
             <div className="space-y-5">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
                 <ModelStat
                   label={`${evaluation.evaluation_name} Accuracy`}
                   value={
@@ -159,7 +183,7 @@ export function AnalyticsView() {
                   value={evaluation.model_version.replace(/^v/, "v")}
                   desc="Frozen before the tournament"
                 />
-              </div>
+              </dl>
 
               <p className="text-sm text-fg-muted">{evaluation.evaluation_description}</p>
 
@@ -167,13 +191,13 @@ export function AnalyticsView() {
                   labelled. Silently dropping it would hide that the number
                   users saw yesterday came from a different model entirely. */}
               {evaluation.legacy && (
-                <details className="rounded-lg border border-border bg-surface-2/40 px-4 py-3">
-                  <summary className="cursor-pointer font-mono text-[11px] uppercase tracking-wider text-fg-muted">
+                <details className="rounded-lg border border-border bg-surface px-4 py-3">
+                  <summary className="cursor-pointer rounded text-sm font-semibold text-fg-muted hover:text-foreground">
                     {evaluation.legacy.label ?? "Legacy model metrics"}
                   </summary>
                   <div className="pt-3 space-y-1.5 text-xs text-fg-muted">
                     <p>{evaluation.legacy.note}</p>
-                    <dl className="grid grid-cols-2 gap-x-4 gap-y-1 pt-1 font-mono text-[11px] sm:grid-cols-4">
+                    <dl className="grid grid-cols-2 gap-x-4 gap-y-2 pt-1 text-xs sm:grid-cols-4">
                       <LegacyStat
                         label="Raw accuracy"
                         value={pct(evaluation.legacy.classifier_raw_accuracy)}
@@ -214,20 +238,18 @@ function pct(value: number | null | undefined): string {
 function LegacyStat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-fg-muted">{label}</dt>
-      <dd className="text-foreground/80 tabular-nums">{value}</dd>
+      <dt className="text-fg-subtle">{label}</dt>
+      <dd className="tabular font-semibold text-foreground">{value}</dd>
     </div>
   );
 }
 
 function ModelStat({ label, value, desc }: { label: string; value: string; desc: string }) {
   return (
-    <Card>
-      <CardContent className="p-5 text-center">
-        <p className="font-mono text-3xl font-black text-primary">{value}</p>
-        <p className="mt-1 font-medium text-foreground">{label}</p>
-        <p className="mt-0.5 text-xs text-fg-muted">{desc}</p>
-      </CardContent>
-    </Card>
+    <div className="bg-surface px-5 py-4">
+      <dt className="eyebrow">{label}</dt>
+      <dd className="scoreline mt-2 break-words text-3xl text-foreground">{value}</dd>
+      <dd className="mt-1.5 text-xs text-fg-subtle">{desc}</dd>
+    </div>
   );
 }

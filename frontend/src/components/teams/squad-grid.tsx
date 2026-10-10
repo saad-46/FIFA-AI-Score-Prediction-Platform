@@ -1,127 +1,198 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { ShieldCheck } from "lucide-react";
 import { PlayerAvatar } from "@/components/teams/player-avatar";
 import { PlayerDialog } from "@/components/teams/player-dialog";
-import { cn } from "@/lib/utils";
 import type { Player } from "@/types";
 
 /**
- * The 26-player squad grid.
+ * The full squad, as a roster.
  *
- * Each card is a real <button> so it is reachable and activatable by keyboard,
- * and opens the same dialog a click does. Hover is deliberately restrained —
- * the lift, border and surface shift already used by the team and match cards —
- * because this is a roster, not a landing page.
+ * Grouped by position and set as tables rather than as 26 cards. A roster is
+ * read down a column — who has the most minutes, who scored — and a card grid
+ * makes that comparison impossible while repeating "Apps / Mins / Goals /
+ * Assists" twenty-six times. The key players above already get the portrait
+ * treatment; this is the reference list beneath them.
  *
- * Which four statistics a card shows depends on the player: a keeper who has
- * kept goal gets saves and clean sheets instead of goals and assists, and a
- * squad member with no appearances gets a plain "No appearances" line rather
- * than four zeroes that would imply he played and did nothing.
+ * Each name is a real <button>, so every player is reachable by keyboard and
+ * opens the same dialog a click does.
+ *
+ * Goalkeepers get saves and clean sheets where outfield players get goals and
+ * assists. A player with no appearances shows a dash in every statistic column
+ * rather than a row of zeroes that would imply he played and did nothing.
  */
 
-function fmt(value: number | null): string {
-  return value === null || value === undefined ? "—" : String(value);
+const POSITION_GROUPS = [
+  { key: "GK", title: "Goalkeepers" },
+  { key: "DF", title: "Defenders" },
+  { key: "MF", title: "Midfielders" },
+  { key: "FW", title: "Forwards" },
+] as const;
+
+type GroupKey = (typeof POSITION_GROUPS)[number]["key"] | "OTHER";
+
+/** "MF,FW" files under the first listed position; an unknown one under "Other". */
+function groupOf(player: Player): GroupKey {
+  if (player.is_goalkeeper) return "GK";
+  const first = (player.position ?? "").split(/[,/ ]/)[0]?.toUpperCase();
+  return first === "GK" || first === "DF" || first === "MF" || first === "FW" ? first : "OTHER";
 }
 
-function CardStat({ label, value }: { label: string; value: string }) {
+function Figure({ value, played }: { value: number | null; played: boolean }) {
+  if (!played || value === null || value === undefined) {
+    return <span className="text-fg-subtle">—</span>;
+  }
+  return <>{value}</>;
+}
+
+function PositionTable({
+  title,
+  players,
+  keeper,
+  captainName,
+  onSelect,
+}: {
+  title: string;
+  players: Player[];
+  keeper: boolean;
+  captainName: string | null;
+  onSelect: (p: Player) => void;
+}) {
+  const headingId = `squad-${title.toLowerCase()}`;
   return (
-    <div className="min-w-0">
-      <p className="font-mono text-[9px] uppercase tracking-wider text-fg-muted">{label}</p>
-      <p className="truncate font-mono text-sm font-semibold tabular-nums text-foreground">
-        {value}
-      </p>
+    <div>
+      <h3 id={headingId} className="eyebrow mb-1.5 flex items-center gap-2">
+        {title}
+        <span className="font-normal tracking-normal text-fg-subtle">{players.length}</span>
+      </h3>
+      <div className="overflow-hidden rounded-lg border border-border">
+        {/* Fixed layout: the five position tables share column widths, so
+            figures line up down the whole squad rather than per table. */}
+        <table aria-labelledby={headingId} className="w-full table-fixed text-sm">
+          <thead className="border-b border-border bg-surface-2">
+            <tr>
+              <th scope="col" className="eyebrow py-2 pl-3 pr-2 text-left">Player</th>
+              <th scope="col" className="eyebrow hidden w-[30%] px-2 py-2 text-left sm:table-cell">Club</th>
+              <th scope="col" className="eyebrow hidden w-12 px-2 py-2 text-right md:table-cell">Age</th>
+              <th scope="col" className="eyebrow w-12 px-2 py-2 text-right">
+                <abbr title="Appearances" className="no-underline">Apps</abbr>
+              </th>
+              <th scope="col" className="eyebrow hidden w-14 px-2 py-2 text-right sm:table-cell">
+                <abbr title="Minutes played" className="no-underline">Mins</abbr>
+              </th>
+              <th scope="col" className="eyebrow w-14 px-2 py-2 text-right">{keeper ? "Saves" : "Goals"}</th>
+              <th scope="col" className="eyebrow w-16 py-2 pl-2 pr-3 text-right">
+                {keeper ? (
+                  <abbr title="Clean sheets" className="no-underline">Clean</abbr>
+                ) : (
+                  <abbr title="Assists" className="no-underline">Ast</abbr>
+                )}
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border">
+            {players.map((p) => {
+              const played = (p.games ?? 0) > 0;
+              // Keeper columns only for a keeper who actually kept goal.
+              const keeperStats = keeper && p.gk_saves !== null;
+              const isCaptain = p.name === captainName;
+              return (
+                <tr key={`${p.team}-${p.name}`} className="group relative bg-surface transition-colors hover:bg-surface-2 has-[button:focus-visible]:bg-surface-2">
+                  <th scope="row" className="py-2 pl-3 pr-2 text-left font-normal">
+                    <button
+                      type="button"
+                      onClick={() => onSelect(p)}
+                      aria-label={`${p.name}${isCaptain ? ", captain" : ""}. View full statistics`}
+                      className="flex min-h-10 w-full min-w-0 items-center gap-3 text-left after:absolute after:inset-0 focus-visible:outline-none"
+                    >
+                      <PlayerAvatar name={p.name} team={p.team} size="sm" />
+                      <span className="min-w-0">
+                        <span className="flex items-center gap-1.5 font-semibold text-foreground">
+                          <span className="leading-tight">{p.name}</span>
+                          {isCaptain && <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />}
+                        </span>
+                        <span className="block text-xs leading-tight text-fg-subtle sm:hidden">{p.club ?? "Club not available"}</span>
+                      </span>
+                    </button>
+                  </th>
+                  <td className="hidden truncate px-2 py-2 text-fg-muted sm:table-cell">{p.club ?? "—"}</td>
+                  <td className="hidden px-2 py-2 text-right text-fg-muted md:table-cell">{p.age ?? "—"}</td>
+                  <td className="px-2 py-2 text-right font-semibold text-foreground">
+                    {played ? p.games : <span className="font-normal text-fg-subtle">—</span>}
+                  </td>
+                  <td className="hidden px-2 py-2 text-right text-fg-muted sm:table-cell">
+                    <Figure value={p.minutes} played={played} />
+                  </td>
+                  <td className="px-2 py-2 text-right text-foreground">
+                    <Figure value={keeperStats ? p.gk_saves : keeper ? null : p.goals} played={played} />
+                  </td>
+                  <td className="py-2 pl-2 pr-3 text-right text-foreground">
+                    <Figure value={keeperStats ? p.gk_clean_sheets : keeper ? null : p.assists} played={played} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
 
-function PlayerCard({ player, onSelect }: { player: Player; onSelect: () => void }) {
-  const played = (player.games ?? 0) > 0;
-  // A keeper only gets keeper stats if he actually kept goal; otherwise he
-  // falls through to the outfield block, which will itself be suppressed when
-  // he has no appearances.
-  const keeperStats = player.is_goalkeeper && player.gk_saves !== null;
-
-  return (
-    <button
-      type="button"
-      onClick={onSelect}
-      aria-label={`${player.name}, ${player.position ?? "position not available"}. View full statistics`}
-      className={cn(
-        "group flex w-full flex-col gap-3 rounded-lg border border-border bg-surface p-4 text-left",
-        "transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-surface-2/40",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      )}
-    >
-      <div className="flex items-start gap-3">
-        <PlayerAvatar
-          name={player.name}
-          className="transition-transform duration-200 group-hover:scale-105"
-        />
-        <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold text-foreground">{player.name}</p>
-          <p className="truncate text-xs text-fg-muted">
-            {player.club ?? "Club not available"}
-          </p>
-          <div className="flex items-center gap-2 pt-1">
-            <span className="rounded border border-border/60 bg-surface-2/60 px-1.5 font-mono text-[9px] uppercase tracking-wider text-fg-muted">
-              {player.position ?? "—"}
-            </span>
-            {player.age !== null && (
-              <span className="font-mono text-[10px] text-fg-muted">{player.age}y</span>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {played ? (
-        <div className="grid grid-cols-4 gap-2 border-t border-border/30 pt-2.5">
-          <CardStat label="Apps" value={fmt(player.games)} />
-          <CardStat label="Mins" value={fmt(player.minutes)} />
-          {keeperStats ? (
-            <>
-              <CardStat label="Saves" value={fmt(player.gk_saves)} />
-              <CardStat label="Clean" value={fmt(player.gk_clean_sheets)} />
-            </>
-          ) : (
-            <>
-              <CardStat label="Goals" value={fmt(player.goals)} />
-              <CardStat label="Assists" value={fmt(player.assists)} />
-            </>
-          )}
-        </div>
-      ) : (
-        // Not "0 goals, 0 assists" — he has not played, which is a different
-        // fact and the only one we actually know.
-        <p className="border-t border-border/30 pt-2.5 text-xs text-fg-muted">
-          No appearances on record
-        </p>
-      )}
-    </button>
-  );
-}
-
-export function SquadGrid({ players }: { players: Player[] }) {
+export function SquadGrid({
+  players,
+  captainName = null,
+}: {
+  players: Player[];
+  /** So the roster marks the captain exactly as the key-player cards do — the
+   *  same player must not be captain in one view and not the other. */
+  captainName?: string | null;
+}) {
   const [selected, setSelected] = useState<Player | null>(null);
+  // See PlayerDialog#restoreFocusRef — ESC must return the user to the row
+  // they opened, not to the top of the document.
+  const openerRef = useRef<HTMLElement | null>(null);
+
+  const select = (p: Player) => {
+    openerRef.current = document.activeElement as HTMLElement | null;
+    setSelected(p);
+  };
+
+  const byGroup = new Map<GroupKey, Player[]>();
+  for (const p of players) {
+    const key = groupOf(p);
+    byGroup.set(key, [...(byGroup.get(key) ?? []), p]);
+  }
+  // Most-used players first within each position.
+  for (const list of byGroup.values()) {
+    list.sort((a, b) => (b.minutes ?? 0) - (a.minutes ?? 0) || a.name.localeCompare(b.name));
+  }
+  const other = byGroup.get("OTHER") ?? [];
 
   return (
-    <section aria-labelledby="squad-heading" className="space-y-4">
-      <div className="flex items-baseline justify-between gap-3">
-        <h2 id="squad-heading" className="font-mono text-sm uppercase tracking-widest text-foreground">
-          Squad
-        </h2>
-        <p className="font-mono text-[11px] uppercase tracking-wider text-fg-muted">
-          {players.length} players
-        </p>
-      </div>
+    <div className="space-y-6">
+      {POSITION_GROUPS.map(({ key, title }) => {
+        const list = byGroup.get(key) ?? [];
+        if (list.length === 0) return null;
+        return (
+          <PositionTable key={key} title={title} players={list} keeper={key === "GK"} captainName={captainName} onSelect={select} />
+        );
+      })}
+      {other.length > 0 && (
+        <PositionTable title="Position not recorded" players={other} keeper={false} captainName={captainName} onSelect={select} />
+      )}
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        {players.map((p) => (
-          <PlayerCard key={`${p.team}-${p.name}`} player={p} onSelect={() => setSelected(p)} />
-        ))}
-      </div>
+      <p className="text-xs text-fg-subtle">
+        A dash means no appearance on record, or a figure the dataset does not hold. It is never a zero.
+      </p>
 
-      <PlayerDialog player={selected} onOpenChange={(open) => !open && setSelected(null)} />
-    </section>
+      <PlayerDialog
+        player={selected}
+        isCaptain={selected !== null && selected.name === captainName}
+        restoreFocusRef={openerRef}
+        onOpenChange={(open) => !open && setSelected(null)}
+      />
+    </div>
   );
 }

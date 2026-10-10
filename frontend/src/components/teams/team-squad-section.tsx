@@ -1,117 +1,118 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useSWR from "swr";
-import Link from "next/link";
-import { ArrowLeft, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { squadApi } from "@/lib/api/squad";
 import { getApiErrorMessage } from "@/lib/api/client";
-import { PlayerAvatar } from "@/components/teams/player-avatar";
+import { hasPlayerImage } from "@/lib/player-images";
+import { PlayerPortrait } from "@/components/teams/player-portrait";
 import { KeyPlayerCard } from "@/components/teams/key-player-card";
 import { PlayerDialog } from "@/components/teams/player-dialog";
 import { SquadGrid } from "@/components/teams/squad-grid";
+import { Button } from "@/components/ui/button";
 import { ErrorState } from "@/components/ui/error-state";
-import { CardGridSkeleton } from "@/components/ui/page-skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
+import { SectionHeader } from "@/components/ui/section";
 import type { Player } from "@/types";
 
 /**
- * Squad half of the team detail page: hero, captain feature, and the 26-card
- * grid.
+ * Squad half of the team profile: the captain, the key players and the full
+ * roster.
  *
- * One request for the whole thing (`/teams/{id}/squad`) — the grid never fetches
- * per card. The squad dataset is static per deploy, so revalidation is off for
- * the same reason the WC2026 tournament hooks turn it off.
+ * One request for the whole thing (`/teams/{id}/squad`) — nothing fetches per
+ * card. The squad dataset is static per deploy, so revalidation is off for the
+ * same reason the WC2026 tournament hooks turn it off.
  */
 
-function stat(value: number | null | undefined): string {
-  return value === null || value === undefined ? "Not available" : String(value);
-}
-
-function CaptainStat({ label, value }: { label: string; value: string }) {
-  const missing = value === "Not available";
-  return (
-    <div>
-      <p className="font-mono text-[9px] uppercase tracking-widest text-fg-muted">{label}</p>
-      <p
-        className={
-          missing
-            ? "pt-0.5 text-xs text-fg-muted/70"
-            : "pt-0.5 font-mono text-lg font-bold tabular-nums text-foreground"
-        }
-      >
-        {value}
-      </p>
-    </div>
-  );
+/**
+ * The captain's headline numbers, by position, with empty slots dropped.
+ *
+ * Appearances and minutes always earn their place — they are why he is on the
+ * page. Goals, assists, saves and clean sheets appear only when they happened,
+ * on the same reasoning as the key-player cards: a defender captain reading
+ * "0 goals · 0 assists" is a fact about the column list, not about him. Every
+ * one of those zeroes is still there in the dialog.
+ */
+function captainStats(captain: Player): { label: string; value: string }[] {
+  const keeper = captain.is_goalkeeper && captain.gk_saves !== null;
+  const rows: { label: string; raw: number | null }[] = [
+    { label: "Appearances", raw: captain.games },
+    { label: "Minutes", raw: captain.minutes },
+    ...(keeper
+      ? [
+          { label: "Saves", raw: captain.gk_saves },
+          { label: "Clean sheets", raw: captain.gk_clean_sheets },
+        ]
+      : [
+          { label: "Goals", raw: captain.goals },
+          { label: "Assists", raw: captain.assists },
+        ]),
+  ];
+  return rows
+    .filter((r, i) => r.raw !== null && (i < 2 || r.raw !== 0))
+    .map((r) => ({ label: r.label, value: String(r.raw) }));
 }
 
 /**
- * The captain, given the weight a team profile gives its captain.
- *
- * Deliberately the largest thing on the page after the team name: an oversized
- * monogram, his name at display size, and four headline numbers — rather than
- * one more card in a grid. Keeper captains get saves and clean sheets in place
- * of goals and assists.
+ * The captain, given the weight a team profile gives its captain: a portrait
+ * plate on one side, his name at display size and his headline numbers on the
+ * other, rather than one more card in a grid.
  */
-function CaptainFeature({
-  captain,
-  onOpen,
-}: {
-  captain: Player;
-  onOpen: () => void;
-}) {
-  const keeper = captain.is_goalkeeper && captain.gk_saves !== null;
+function CaptainFeature({ captain, onOpen }: { captain: Player; onOpen: () => void }) {
+  const headline = captainStats(captain);
   return (
-    <section
-      aria-labelledby="captain-heading"
-      className="relative overflow-hidden rounded-2xl border border-border/60 bg-surface/40 p-6 backdrop-blur-sm sm:p-8"
-    >
-      {/* One soft cyan wash, matching the prediction result card. No blob. */}
-      <div
-        className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/5 blur-3xl"
-        aria-hidden="true"
-      />
-      <div className="relative flex flex-col items-center gap-6 text-center sm:flex-row sm:items-center sm:gap-8 sm:text-left">
-        <PlayerAvatar name={captain.name} size="xl" />
-        <div className="min-w-0 flex-1">
-          <p className="flex items-center justify-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-primary sm:justify-start">
-            <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+    <section aria-labelledby="captain-heading" className="overflow-hidden rounded-lg border border-border bg-surface">
+      <div className="grid md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)]">
+        {/* The plate runs to the card's edge and bleeds off its foot; the
+            portrait is the subject, not a thumbnail inside a frame. */}
+        <div className="relative mx-auto w-full max-w-[17rem] md:max-w-none">
+          <PlayerPortrait
+            name={captain.name}
+            team={captain.team}
+            eager
+            className="aspect-[4/5] w-full md:aspect-auto md:h-full md:min-h-[21rem]"
+            monogramClassName="text-6xl"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-surface to-transparent md:inset-y-0 md:left-auto md:right-0 md:h-auto md:w-1/4 md:bg-gradient-to-l"
+          />
+        </div>
+
+        <div className="flex min-w-0 flex-col justify-center px-5 pb-6 pt-2 text-center sm:px-8 md:py-8 md:text-left">
+          <p className="flex items-center justify-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-primary md:justify-start">
+            <ShieldCheck className="h-4 w-4" aria-hidden="true" />
             Captain
           </p>
           <h2
             id="captain-heading"
-            className="pt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+            className="mt-2 text-balance font-display text-4xl font-bold uppercase leading-[0.95] tracking-wide text-foreground sm:text-6xl"
           >
             {captain.name}
           </h2>
-          <p className="pt-1.5 text-sm text-fg-muted">
-            {captain.position ?? "Position not available"}
-            {" · "}
-            {captain.club ?? "Club not available"}
-            {captain.age !== null && ` · ${captain.age} years`}
+          <p className="mt-3 text-sm text-fg-muted">
+            {[captain.position, captain.club, captain.age !== null ? `${captain.age} years` : null]
+              .filter(Boolean)
+              .join(" · ") || "Details not available"}
           </p>
-          <div className="grid grid-cols-2 gap-5 pt-5 sm:grid-cols-4">
-            <CaptainStat label="Apps" value={stat(captain.games)} />
-            <CaptainStat label="Minutes" value={stat(captain.minutes)} />
-            {keeper ? (
-              <>
-                <CaptainStat label="Saves" value={stat(captain.gk_saves)} />
-                <CaptainStat label="Clean sheets" value={stat(captain.gk_clean_sheets)} />
-              </>
-            ) : (
-              <>
-                <CaptainStat label="Goals" value={stat(captain.goals)} />
-                <CaptainStat label="Assists" value={stat(captain.assists)} />
-              </>
-            )}
+
+          {headline.length > 0 && (
+            <dl className="mt-6 flex flex-wrap justify-center gap-x-9 gap-y-4 md:justify-start">
+              {headline.map((s) => (
+                <div key={s.label}>
+                  <dt className="eyebrow">{s.label}</dt>
+                  <dd className="scoreline mt-1 text-3xl text-foreground">{s.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+
+          <div className="mt-6">
+            <Button variant="outline" onClick={onOpen} aria-label={`View full statistics for ${captain.name}, captain`}>
+              Full statistics
+            </Button>
           </div>
-          <button
-            type="button"
-            onClick={onOpen}
-            className="mt-5 rounded-lg border border-border/60 bg-surface-2/50 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-fg-muted transition-colors hover:border-primary/40 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            Full statistics
-          </button>
         </div>
       </div>
     </section>
@@ -122,113 +123,119 @@ export function TeamSquadSection({ teamId }: { teamId: string }) {
   // The captain feature and the key-player grid share one dialog, so opening a
   // player from either place lands in the same detail view.
   const [selected, setSelected] = useState<Player | null>(null);
-  const { data, error, isLoading, mutate } = useSWR(
-    ["team-squad", teamId],
-    () => squadApi.getSquad(teamId),
-    { revalidateOnFocus: false, revalidateIfStale: false }
-  );
+  // Whatever the user activated to open the dialog, so ESC hands focus back to
+  // it instead of to <body>. Captured in the handler, where activeElement is
+  // still the card the user was on.
+  const openerRef = useRef<HTMLElement | null>(null);
+  const openPlayer = (player: Player | null) => {
+    openerRef.current = document.activeElement as HTMLElement | null;
+    setSelected(player);
+  };
+  const { data, error, isLoading, mutate } = useSWR(["team-squad", teamId], () => squadApi.getSquad(teamId), {
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+  });
 
-  if (isLoading) return <CardGridSkeleton count={6} />;
+  if (isLoading) {
+    return (
+      <div className="space-y-6" aria-busy="true" aria-label="Loading squad">
+        <Skeleton className="h-80 w-full rounded-lg" />
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Skeleton key={i} className="aspect-[3/4] w-full rounded-lg" />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   if (error) {
-    return (
-      <ErrorState
-        title="Couldn't load the squad"
-        description={getApiErrorMessage(error)}
-        onRetry={() => mutate()}
-      />
-    );
+    return <ErrorState title="Couldn't load the squad" description={getApiErrorMessage(error)} onRetry={() => mutate()} />;
   }
 
   if (!data) return null;
 
+  const captainName = data.captain?.name ?? null;
+  // The captain already has the feature above; listing him again as the first
+  // card would spend the grid's best slot repeating it.
+  const keyPlayers = data.key_players.filter((p) => p.name !== captainName);
+
+  // How many of the players shown with a portrait frame actually have a
+  // photograph on disk. Read from the generated manifest, so the sentence
+  // below is true for whatever has been ingested, with no copy to maintain.
+  const featured = [...(data.captain ? [data.captain] : []), ...keyPlayers];
+  const withPhoto = featured.filter((p) => hasPlayerImage(p.team, p.name)).length;
+  const squadWithPhoto = data.players.filter((p) => hasPlayerImage(p.team, p.name)).length;
+
   return (
-    <div className="space-y-8">
-      <nav aria-label="Breadcrumb">
-        <Link
-          href="/teams"
-          className="inline-flex items-center gap-1.5 rounded text-xs text-fg-muted transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
-          All teams
-        </Link>
-      </nav>
-
-      {/* No team name/flag heading here on purpose: the detail page's existing
-          hero already carries the crest, name, code, rank, Elo and group. This
-          section adds only what is new — squad totals, the captain and the
-          roster — so the page gains a squad rather than growing a second
-          header. */}
-      <div className="flex flex-wrap gap-6 border-b border-border/30 pb-5">
-        <CaptainStat label="Squad" value={String(data.squad_size)} />
-        <CaptainStat label="Goals" value={String(data.total_goals)} />
-        <CaptainStat label="Assists" value={String(data.total_assists)} />
-        <CaptainStat label="Minutes" value={String(data.total_minutes)} />
-      </div>
-
+    <div className="space-y-10">
       {data.captain ? (
-        <CaptainFeature captain={data.captain} onOpen={() => setSelected(data.captain)} />
+        <CaptainFeature captain={data.captain} onOpen={() => openPlayer(data.captain)} />
       ) : (
         // Never guessed from seniority or fame.
-        <p className="rounded-xl border border-dashed border-border/60 bg-surface/20 px-6 py-5 text-sm text-fg-muted">
-          Captain not available for this team.
+        <p className="rounded-lg border border-dashed border-border px-5 py-4 text-sm text-fg-muted">
+          No captain is recorded for this team.
         </p>
       )}
 
-      {/* Key players lead. The full 26 are still reachable below, but they are
-          no longer the primary view — a profile should open on the players who
-          actually featured, not on an undifferentiated roster. */}
-      {data.key_players.length > 0 && (
+      {/* Key players lead. The full 26 follow below, but a profile should open
+          on the players who actually featured, not on an undifferentiated
+          roster. */}
+      {keyPlayers.length > 0 && (
         <section aria-labelledby="key-players-heading" className="space-y-4">
-          <div className="flex items-baseline justify-between gap-3">
-            <h2
-              id="key-players-heading"
-              className="font-mono text-sm uppercase tracking-widest text-foreground"
-            >
-              Key Players
-            </h2>
-            <p className="font-mono text-[11px] uppercase tracking-wider text-fg-muted">
-              {data.key_players.length} of {data.squad_size}
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
-            {data.key_players.map((p) => (
-              <KeyPlayerCard
-                key={`key-${p.name}`}
-                player={p}
-                isCaptain={p.name === data.captain?.name}
-                onSelect={() => setSelected(p)}
-              />
+          <SectionHeader
+            id="key-players-heading"
+            title="Key players"
+            meta="By appearances, starts and goal contribution"
+          />
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+            {keyPlayers.map((p) => (
+              <KeyPlayerCard key={`key-${p.name}`} player={p} isCaptain={false} onSelect={() => openPlayer(p)} />
             ))}
           </div>
-          <p className="text-xs leading-relaxed text-fg-muted">
-            Ranked from this squad&apos;s own record — captain first, then by appearances, starts
-            and goal contribution, with saves and clean sheets standing in for goalkeepers. Players
-            with no appearances are never listed here.
+          <p className="max-w-3xl text-xs leading-relaxed text-fg-subtle">
+            Chosen from this squad&apos;s own record: appearances, then starts and goal contribution, with saves and
+            clean sheets standing in for goalkeepers, and always including a goalkeeper. A player with no
+            appearances is never listed here.
           </p>
         </section>
       )}
 
-      {/* Full squad, secondary and collapsed by default. */}
-      <details className="group rounded-xl border border-border/50 bg-surface/20">
-        <summary className="cursor-pointer list-none rounded-xl px-5 py-4 font-mono text-xs uppercase tracking-widest text-fg-muted transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-          Full squad · {data.squad_size} players
-        </summary>
-        <div className="px-5 pb-5">
-          <SquadGrid players={data.players} />
-        </div>
-      </details>
+      <section aria-labelledby="squad-heading" className="space-y-5">
+        <SectionHeader id="squad-heading" title="Full squad" meta={`${data.squad_size} players`} />
+        <dl className="flex flex-wrap gap-x-10 gap-y-4">
+          {[
+            { label: "Goals", value: data.total_goals },
+            { label: "Assists", value: data.total_assists },
+            { label: "Minutes", value: data.total_minutes.toLocaleString() },
+            { label: "Players used", value: `${data.players_with_appearances} of ${data.squad_size}` },
+          ].map((t) => (
+            <div key={t.label}>
+              <dt className="eyebrow">{t.label}</dt>
+              <dd className="scoreline mt-1 text-2xl text-foreground">{t.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <SquadGrid players={data.players} captainName={captainName} />
+      </section>
 
-      <PlayerDialog player={selected} onOpenChange={(open) => !open && setSelected(null)} />
+      <PlayerDialog
+        player={selected}
+        isCaptain={selected !== null && selected.name === captainName}
+        restoreFocusRef={openerRef}
+        onOpenChange={(open) => !open && setSelected(null)}
+      />
 
-      {/* Say plainly where the numbers come from, and that photographs are a
-          known gap rather than something still loading. */}
-      <p className="border-t border-border/30 pt-4 text-xs leading-relaxed text-fg-muted">
-        Squad and per-player statistics come from the committed 2026 player dataset;{" "}
-        {data.players_with_appearances} of {data.squad_size} players have at least one appearance,
-        and a metric is shown only where it exists. Player photographs are not available — no
-        licensed image source is wired into this product, so cards show initials rather than a
-        stand-in picture.
+      {/* Say plainly where the numbers and the pictures come from. */}
+      <p className="max-w-3xl border-t border-border pt-4 text-xs leading-relaxed text-fg-subtle">
+        Squad and player statistics come from the 2026 player dataset held with this site; a figure is shown only
+        where it exists.{" "}
+        {squadWithPhoto === 0
+          ? "No photographs have been added for this team yet, so players are shown by their initials."
+          : `Photographs are held for ${squadWithPhoto} of ${data.squad_size} players${
+              featured.length > 0 ? ` (${withPhoto} of the ${featured.length} featured above)` : ""
+            }; the rest are shown by their initials until one is added.`}{" "}
+        Every image is served from this site, never from a third party.
       </p>
     </div>
   );

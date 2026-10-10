@@ -62,12 +62,12 @@ export function TournamentBracket() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <Trophy className="h-4 w-4 text-primary" aria-hidden="true" />
-          <h2 className="font-mono text-xs uppercase tracking-wider text-foreground">
+          <h2 className="font-display text-xl font-semibold uppercase tracking-wide text-foreground">
             Knockout Bracket
           </h2>
         </div>
         {champion && (
-          <Badge variant="default" className="font-mono text-[10px] uppercase tracking-wider">
+          <Badge variant="default" className="text-[11px] font-semibold uppercase tracking-wider">
             Champion · {champion}
           </Badge>
         )}
@@ -75,7 +75,15 @@ export function TournamentBracket() {
 
       {/* Desktop / laptop: real left-to-right progression. Scrolls horizontally
           inside its own container so the page body never scrolls sideways. */}
-      <div className="hidden overflow-x-auto pb-2 lg:block">
+      {/* relative: the screen-reader-only labels inside are position:absolute, and
+          without a positioned ancestor here they escaped this scroller and
+          widened the document by ~150px at 1024px. */}
+      <div
+        className="relative hidden overflow-x-auto pb-2 lg:block"
+        tabIndex={0}
+        role="region"
+        aria-label="Knockout bracket, scrolls sideways"
+      >
         <div
           className="flex min-w-max items-stretch gap-5"
           onMouseLeave={() => setHovered(null)}
@@ -88,7 +96,7 @@ export function TournamentBracket() {
                 className="flex w-44 shrink-0 flex-col"
                 aria-label={stageLabel(stage)}
               >
-                <h3 className="pb-2 text-center font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+                <h3 className="pb-2 text-center eyebrow">
                   {stageLabel(stage)}
                 </h3>
                 <div className="flex flex-1 flex-col justify-around gap-3">
@@ -120,14 +128,14 @@ export function TournamentBracket() {
           {/* The final's outcome, given its own column so the bracket resolves
               somewhere rather than just stopping. */}
           <section className="flex w-44 shrink-0 flex-col" aria-label="Result">
-            <h3 className="pb-2 text-center font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+            <h3 className="pb-2 text-center eyebrow">
               Champion
             </h3>
             <div className="flex flex-1 flex-col justify-center gap-3">
               <ChampionCard champion={champion} reduceMotion={Boolean(reduceMotion)} />
               {thirdPlace && (
                 <div className="space-y-1.5">
-                  <p className="text-center font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+                  <p className="text-center eyebrow">
                     {stageLabel("third_place")}
                   </p>
                   <BracketMatchCard
@@ -163,10 +171,10 @@ export function TournamentBracket() {
               aria-pressed={mobileStage === stage}
               onClick={() => setMobileStage(stage)}
               className={cn(
-                "shrink-0 rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider transition-colors",
+                "shrink-0 rounded-md border px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 mobileStage === stage
-                  ? "border-primary/50 bg-primary/15 text-primary"
+                  ? "border-primary bg-primary/15 text-foreground"
                   : "border-border bg-surface text-fg-muted hover:text-foreground"
               )}
             >
@@ -215,7 +223,7 @@ function ChampionCard({ champion, reduceMotion }: { champion: string | null; red
       className="rounded-lg border border-primary/40 bg-primary/10 px-3 py-4 text-center"
     >
       <Trophy className="mx-auto h-5 w-5 text-primary" aria-hidden="true" />
-      <p className="pt-1.5 font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+      <p className="pt-1.5 eyebrow">
         World Champion
       </p>
       <p className="pt-0.5 text-sm font-bold text-foreground">{champion}</p>

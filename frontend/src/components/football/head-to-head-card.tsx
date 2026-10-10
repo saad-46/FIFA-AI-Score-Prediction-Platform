@@ -13,10 +13,9 @@ interface HeadToHeadCardProps {
 export function HeadToHeadCard({ stats, homeTeam, awayTeam }: HeadToHeadCardProps) {
   return (
     <Card>
-      <CardHeader className="pb-2 border-b border-border/20">
-        <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
-          <Shield className="h-4.5 w-4.5 text-primary" aria-hidden="true" />
-          Head-to-Head
+      <CardHeader className="border-b border-border pb-3">
+        <CardTitle className="flex items-center gap-2 font-display text-lg font-semibold uppercase tracking-wide text-foreground">
+          Head to head
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -38,15 +37,15 @@ export function HeadToHeadCard({ stats, homeTeam, awayTeam }: HeadToHeadCardProp
           <>
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
-                <p className="text-2xl font-bold text-win">{stats.home_team_wins}</p>
+                <p className="scoreline text-3xl text-foreground">{stats.home_team_wins}</p>
                 <p className="text-xs text-fg-muted mt-1">{homeTeam} wins</p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-draw">{stats.draws}</p>
+                <p className="scoreline text-3xl text-fg-muted">{stats.draws}</p>
                 <p className="text-xs text-fg-muted mt-1">Draws</p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-loss">{stats.away_team_wins}</p>
+                <p className="scoreline text-3xl text-foreground">{stats.away_team_wins}</p>
                 <p className="text-xs text-fg-muted mt-1">{awayTeam} wins</p>
               </div>
             </div>
@@ -64,9 +63,7 @@ export function HeadToHeadCard({ stats, homeTeam, awayTeam }: HeadToHeadCardProp
               </div>
             </div>
             {stats.scope_label && (
-              <p className="pt-3 text-center font-mono text-[10px] uppercase tracking-wider text-fg-muted">
-                {stats.scope_label}
-              </p>
+              <p className="pt-3 text-center text-xs text-fg-subtle">{stats.scope_label}</p>
             )}
           </>
         )}

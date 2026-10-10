@@ -55,12 +55,12 @@ export function BacktestView() {
     <div className="space-y-6">
       <header className="space-y-2">
         <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="outline" className="font-mono text-[10px] uppercase tracking-wider">
+          <Badge variant="outline" className="text-[11px] font-semibold uppercase tracking-wider">
             <History className="mr-1 h-3 w-3" aria-hidden="true" />
             WC2026 Backtest
           </Badge>
           {data.model_version && (
-            <span className="font-mono text-[10px] text-fg-muted">{data.model_version}</span>
+            <span className="text-xs text-fg-subtle">{data.model_version}</span>
           )}
         </div>
         <p className="max-w-2xl text-sm text-fg-muted">
@@ -90,9 +90,9 @@ export function BacktestView() {
       </div>
 
       <section className="space-y-3">
-        <h3 className="font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+        <h2 className="eyebrow">
           Accuracy by stage
-        </h3>
+        </h2>
         <div className="space-y-2">
           {data.by_stage.map((stage, index) => (
             <StageBar
@@ -103,7 +103,7 @@ export function BacktestView() {
             />
           ))}
         </div>
-        <p className="font-mono text-[10px] text-fg-muted">
+        <p className="text-xs text-fg-subtle">
           Later stages carry very few matches — a single semi-final miss is 50% of that stage.
           Read the small samples with that in mind.
         </p>
@@ -111,7 +111,7 @@ export function BacktestView() {
 
       <section className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h3 className="font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+          <h3 className="eyebrow">
             Match ledger
           </h3>
           <div className="flex gap-1.5" role="group" aria-label="Filter matches">
@@ -122,10 +122,10 @@ export function BacktestView() {
                 onClick={() => setFilter(value)}
                 aria-pressed={filter === value}
                 className={cn(
-                  "rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider transition-colors",
+                  "rounded-md border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider transition-colors",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   filter === value
-                    ? "border-primary/50 bg-primary/15 text-primary"
+                    ? "border-primary bg-primary/15 text-foreground"
                     : "border-border bg-surface text-fg-muted hover:text-foreground"
                 )}
               >
@@ -135,13 +135,18 @@ export function BacktestView() {
           </div>
         </div>
 
-        <div className="overflow-x-auto rounded-lg border border-border bg-surface">
+        <div
+          className="overflow-x-auto rounded-lg border border-border bg-surface"
+          tabIndex={0}
+          role="region"
+          aria-label="Match-by-match ledger table"
+        >
           <table className="w-full min-w-[560px] text-xs">
             <caption className="sr-only">
               Every WC2026 match with the frozen model&apos;s prediction and the actual result
             </caption>
             <thead>
-              <tr className="border-b border-border font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+              <tr className="border-b border-border eyebrow">
                 <th scope="col" className="px-3 py-2 text-left font-normal">Match</th>
                 <th scope="col" className="px-2 py-2 text-left font-normal">Stage</th>
                 <th scope="col" className="px-2 py-2 text-left font-normal">Predicted</th>
@@ -157,7 +162,7 @@ export function BacktestView() {
             </tbody>
           </table>
         </div>
-        <p className="font-mono text-[10px] text-fg-muted">
+        <p className="text-xs text-fg-subtle">
           Showing {matches.length} of {data.n_matches_scored} matches
         </p>
       </section>
@@ -178,7 +183,7 @@ function SummaryStat({
 }) {
   return (
     <div className="rounded-lg border border-border bg-surface px-3 py-3">
-      <p className="font-mono text-[10px] uppercase tracking-wider text-fg-muted">{label}</p>
+      <p className="eyebrow">{label}</p>
       <p
         className={cn(
           "truncate pt-1 text-2xl font-bold tabular-nums",
@@ -239,7 +244,7 @@ function LedgerRow({ match }: { match: BacktestMatch }) {
       <th scope="row" className="px-3 py-1.5 text-left font-normal text-foreground">
         {match.match}
       </th>
-      <td className="px-2 py-1.5 font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+      <td className="px-2 py-1.5 eyebrow">
         {stageLabel(match.stage)}
       </td>
       <td className="px-2 py-1.5 text-fg-muted">{match.predicted ?? "—"}</td>
@@ -250,7 +255,7 @@ function LedgerRow({ match }: { match: BacktestMatch }) {
       <td className="px-3 py-1.5 text-right">
         <span
           className={cn(
-            "inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider",
+            "inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider",
             match.correct ? "text-win" : "text-loss"
           )}
         >

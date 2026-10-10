@@ -8,10 +8,13 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border border-border bg-surface/60 backdrop-blur-sm text-foreground shadow-lg",
-      glow && "shadow-primary/10 border-primary/20",
+      // A flat, opaque panel. Glass blur and a drop shadow on every card made
+      // the surfaces compete with the data they hold; depth now comes from the
+      // surface step and the border alone.
+      "rounded-lg border border-border bg-surface text-foreground",
+      glow && "border-primary/30",
       interactive &&
-        "transition-all duration-200 hover:border-fg-muted/40 hover:-translate-y-0.5 cursor-pointer",
+        "cursor-pointer transition-colors duration-150 hover:border-border-strong hover:bg-surface-2",
       className
     )}
     {...props}
@@ -25,7 +28,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    className={cn("flex flex-col space-y-1.5 p-5", className)}
     {...props}
   />
 ));
@@ -35,10 +38,12 @@ const CardTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
-  <h3
+  // h2: cards sit directly under the page's h1. An h3 here skipped a level on
+  // every page that had no intervening h2 (axe: heading-order).
+  <h2
     ref={ref}
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight text-foreground",
+      "text-base font-semibold leading-tight tracking-tight text-foreground",
       className
     )}
     {...props}
@@ -62,7 +67,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  <div ref={ref} className={cn("p-5 pt-0", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
@@ -72,7 +77,7 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
+    className={cn("flex items-center p-5 pt-0", className)}
     {...props}
   />
 ));

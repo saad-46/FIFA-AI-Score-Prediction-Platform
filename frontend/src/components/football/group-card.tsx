@@ -26,8 +26,8 @@ interface GroupCardProps {
 export function GroupCard({ groupLetter, teams, standings, className }: GroupCardProps) {
   return (
     <Card className={cn(className)}>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-base">Group {groupLetter}</CardTitle>
+      <CardHeader className="border-b border-border pb-3">
+        <CardTitle className="font-display text-xl font-semibold uppercase leading-none tracking-wide">Group {groupLetter}</CardTitle>
       </CardHeader>
       <CardContent>
         {standings && standings.length > 0 ? (
@@ -62,7 +62,7 @@ export function GroupCard({ groupLetter, teams, standings, className }: GroupCar
             </TableBody>
           </Table>
         ) : (
-          <ul className="space-y-2.5">
+          <ul className="space-y-2.5 pt-4">
             {teams.map((t) => (
               <li key={t.code}>
                 <TeamIdentity name={t.name} fifaCode={t.code} size="sm" />

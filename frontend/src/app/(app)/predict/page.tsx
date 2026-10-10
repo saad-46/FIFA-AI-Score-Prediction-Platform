@@ -1,20 +1,18 @@
 import type { Metadata } from "next";
-import { Brain } from "lucide-react";
 import { PredictView } from "@/components/predictions/predict-view";
 import { PageHeader } from "@/components/layout/page-header";
 
 export const metadata: Metadata = {
-  title: "Simulation Engine",
-  description: "Execute Poisson-derived match simulations and SHAP explainability matrices.",
+  title: "Match predictor",
+  description: "Pick two national teams and a venue for win, draw and loss probabilities, expected goals and the most likely scorelines.",
 };
 
 export default function PredictPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        icon={Brain}
-        title="Simulation Engine"
-        description="Configure model parameters to execute Poisson-derived predictive scoreline vectors"
+        title="Match predictor"
+        description="Set up a fixture between any two of the 48 World Cup teams. You get the probability of each result, expected goals and the likeliest scorelines."
       />
       <PredictView />
     </div>

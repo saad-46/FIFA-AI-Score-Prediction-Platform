@@ -56,6 +56,7 @@ const sizeClass = {
   sm: "h-4 w-[1.4rem]",
   md: "h-5 w-[1.7rem]",
   lg: "h-7 w-[2.4rem]",
+  xl: "h-10 w-[3.4rem] sm:h-12 sm:w-16",
 } as const;
 
 interface TeamFlagProps {
@@ -93,7 +94,7 @@ export function TeamFlag({ name, fifaCode, size = "sm", className }: TeamFlagPro
         title={name}
         className={cn(
           "inline-flex shrink-0 items-center justify-center rounded-[2px] border border-border bg-surface-2",
-          "font-mono text-[8px] uppercase leading-none tracking-tight text-fg-muted",
+          "text-[8px] font-semibold uppercase leading-none tracking-tight text-fg-muted",
           sizeClass[size],
           className
         )}

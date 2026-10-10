@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Users } from "lucide-react";
 import { TeamsView } from "@/components/teams/teams-view";
 import { PageHeader } from "@/components/layout/page-header";
 
@@ -12,9 +11,9 @@ export default function TeamsPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        icon={Users}
-        title="World Cup 2026 Teams"
-        description="All 48 teams competing at the 2026 FIFA World Cup."
+        eyebrow="FIFA World Cup 2026"
+        title="Teams"
+        description="All 48 qualifiers. Sort by group, FIFA ranking or Elo rating, and open a team for its captain, key players and full squad."
       />
       <TeamsView />
     </div>

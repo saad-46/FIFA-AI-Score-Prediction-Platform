@@ -35,6 +35,9 @@ interface ComboboxProps {
   className?: string;
   id?: string;
   "aria-label"?: string;
+  /** Forwarded to the trigger so a field error can be announced with it. */
+  "aria-invalid"?: boolean;
+  "aria-describedby"?: string;
 }
 
 /**
@@ -57,6 +60,8 @@ export function Combobox({
   className,
   id,
   "aria-label": ariaLabel,
+  "aria-invalid": ariaInvalid,
+  "aria-describedby": ariaDescribedBy,
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
@@ -74,6 +79,21 @@ export function Combobox({
     onSearchChange?.(next);
   };
 
+  // The caller filters `options` from the query it is told about, so clearing
+  // the input without telling the caller left a stale filter behind: reopening
+  // showed an empty search box above a list still narrowed to the last search.
+  const resetQuery = () => {
+    setQuery("");
+    setHighlighted(0);
+    onSearchChange?.("");
+  };
+
+  const choose = (value: string) => {
+    onValueChange(value);
+    setOpen(false);
+    resetQuery();
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -84,12 +104,10 @@ export function Combobox({
     } else if (e.key === "Enter") {
       e.preventDefault();
       const option = options[highlighted];
-      if (option) {
-        onValueChange(option.value);
-        setOpen(false);
-      }
+      if (option) choose(option.value);
     } else if (e.key === "Escape") {
       setOpen(false);
+      resetQuery();
     }
   };
 
@@ -101,7 +119,7 @@ export function Combobox({
         if (next) {
           requestAnimationFrame(() => inputRef.current?.focus());
         } else {
-          setQuery("");
+          resetQuery();
         }
       }}
     >
@@ -112,9 +130,15 @@ export function Combobox({
           disabled={disabled}
           aria-haspopup="listbox"
           aria-expanded={open}
+          // aria-invalid is not valid on role=button; the error text is tied in
+          // through aria-describedby and the state is styled from a data attribute.
+          data-invalid={ariaInvalid ? "true" : undefined}
+          aria-describedby={ariaDescribedBy}
           className={cn(
-            "flex h-9 w-full items-center justify-between rounded-lg border border-border bg-surface-2/50 px-3 text-sm text-foreground shadow-sm transition-colors",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            // 44px tall: this is a primary touch target on the predictor.
+            "flex h-11 w-full items-center justify-between rounded-md border border-border bg-surface-2 px-3 text-sm text-foreground transition-colors",
+            "hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            "data-[invalid=true]:border-loss",
             "disabled:cursor-not-allowed disabled:opacity-50",
             className
           )}
@@ -125,7 +149,7 @@ export function Combobox({
           <ChevronsUpDown className="h-4 w-4 shrink-0 text-fg-muted" aria-hidden="true" />
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
+      <PopoverContent className="w-(--radix-popover-trigger-width) min-w-64 p-0" align="start">
         <div className="flex items-center gap-2 border-b border-border px-3">
           <Search className="h-3.5 w-3.5 shrink-0 text-fg-muted" aria-hidden="true" />
           <input
@@ -139,7 +163,7 @@ export function Combobox({
             aria-controls={listboxId}
             aria-label={ariaLabel ?? searchPlaceholder}
             aria-activedescendant={
-              options[highlighted] ? `${listboxId}-${options[highlighted].value}` : undefined
+              options[highlighted] ? `${listboxId}-opt-${highlighted}` : undefined
             }
             className="flex h-9 w-full bg-transparent text-sm text-foreground placeholder:text-fg-muted outline-none"
           />
@@ -152,16 +176,13 @@ export function Combobox({
             options.map((option, i) => (
               <li
                 key={option.value}
-                id={`${listboxId}-${option.value}`}
+                id={`${listboxId}-opt-${i}`}
                 role="option"
                 aria-selected={option.value === value}
                 onMouseEnter={() => setHighlighted(i)}
-                onClick={() => {
-                  onValueChange(option.value);
-                  setOpen(false);
-                }}
+                onClick={() => choose(option.value)}
                 className={cn(
-                  "flex cursor-pointer items-center justify-between gap-2 rounded-md px-2 py-1.5 text-sm text-foreground",
+                  "flex min-h-10 cursor-pointer items-center justify-between gap-2 rounded-md px-2 py-1.5 text-sm text-foreground",
                   i === highlighted && "bg-surface-2"
                 )}
               >

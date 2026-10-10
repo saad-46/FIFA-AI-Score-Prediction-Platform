@@ -1,20 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { BookmarkPlus, CheckCircle, Loader2, AlertTriangle, Info, TrendingUp, FileText, Lock } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AlertTriangle, BookmarkPlus, Check, Info, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { predictionsApi } from "@/lib/api/predictions";
 import { getApiErrorMessage } from "@/lib/api/client";
 import { toast } from "@/hooks/use-toast";
 import { formatGoals, cn } from "@/lib/utils";
-import { WinProbabilityCard } from "@/components/football/win-probability-card";
 import { ScorelineDistribution } from "@/components/football/scoreline-distribution";
 import { ShapExplanation } from "@/components/football/shap-explanation";
 import { HeadToHeadCard } from "@/components/football/head-to-head-card";
 import { TeamFlag } from "@/components/football/team-flag";
+import { SectionHeader } from "@/components/ui/section";
 import type { PredictionResult } from "@/types";
 
 interface PredictionResultCardProps {
@@ -22,267 +19,248 @@ interface PredictionResultCardProps {
   isAuthenticated: boolean;
 }
 
-const INSIGHT_STYLE = {
-  advantage: { icon: TrendingUp, className: "text-win bg-win/5 border-win/20" },
-  warning: { icon: AlertTriangle, className: "text-draw bg-draw/5 border-draw/20" },
-  neutral: { icon: Info, className: "text-primary bg-primary/5 border-primary/20" },
-} as const;
+const INSIGHT_ICON = { advantage: TrendingUp, warning: AlertTriangle, neutral: Info } as const;
 
+const pct = (v: number) => `${(v * 100).toFixed(1)}%`;
+
+/**
+ * One match prediction.
+ *
+ * The header is a scoreboard: the two teams either side of the most likely
+ * scoreline, and directly beneath it the three outcome probabilities on one
+ * bar. Putting them together is deliberate. The most likely *scoreline* and the
+ * most likely *result* are different questions — a 1–1 can be the single most
+ * probable score while one side is still the likelier winner — and showing only
+ * a big scoreline invites reading it as a verdict.
+ *
+ * No "confidence" read-out: the API's confidence_score measures how much match
+ * history backs the prediction, not how likely it is to be right, and the
+ * frontend contract keeps it out of the UI.
+ */
 export function PredictionResultCard({ result, isAuthenticated }: PredictionResultCardProps) {
-  const reduceMotion = useReducedMotion();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const handleSave = async () => {
-    if (!isAuthenticated) {
-      toast({
-        title: "Sign In Required",
-        description: "Authenticate to persist predictions within your dashboard directory.",
-        variant: "destructive",
-      });
-      return;
-    }
+    if (saving || saved) return;
     setSaving(true);
     try {
       await predictionsApi.save(result.prediction_id);
       setSaved(true);
-      toast({ title: "Dossier Saved", description: "Prediction saved to database registry.", variant: "success" });
+      toast({ title: "Prediction saved", description: "You can find it under your saved predictions.", variant: "success" });
     } catch (err) {
-      toast({ title: "Save Failed", description: getApiErrorMessage(err), variant: "destructive" });
+      toast({ title: "Couldn't save the prediction", description: getApiErrorMessage(err), variant: "destructive" });
     } finally {
       setSaving(false);
     }
   };
 
-  // No confidence readout: V2_FRONTEND_CONTRACT §4 asks for it to stay out of
-  // the UI until validated against a second tournament. The colour-coding made
-  // it worse — it painted anything under 50% red, while the documented residual
-  // error is *under*-confidence (predictions stated near 55% came true ~72% of
-  // the time in the WC2026 backtest), so red signalled the opposite of reality.
-  // The value is still in the payload for callers that need it.
+  const { home_team: home, away_team: away } = result;
+  const pHome = result.home_win_probability;
+  const pDraw = result.draw_probability;
+  const pAway = result.away_win_probability;
 
-  // Calculate high-level summary outcome
-  const getVerdict = () => {
-    const homeProb = result.home_win_probability;
-    const awayProb = result.away_win_probability;
-    const drawProb = result.draw_probability;
-    
-    if (Math.abs(homeProb - awayProb) < 0.05) {
-      return `STOCHASTIC EQUILIBRIUM (DRAW OUTLOOK)`;
-    }
-    return homeProb > awayProb 
-      ? `${result.home_team.toUpperCase()} OUTCOME ADVANTAGE` 
-      : `${result.away_team.toUpperCase()} OUTCOME ADVANTAGE`;
-  };
+  const outcomes = [
+    { key: "home" as const, label: `${home} win`, value: pHome },
+    { key: "draw" as const, label: "Draw", value: pDraw },
+    { key: "away" as const, label: `${away} win`, value: pAway },
+  ];
+  const top = [...outcomes].sort((a, b) => b.value - a.value)[0];
+  const second = [...outcomes].sort((a, b) => b.value - a.value)[1];
+  const close = top.value - second.value < 0.05;
+
+  const topScore = result.top_scorelines.find((s) => s.score === result.most_likely_score);
+  const headline = close
+    ? `Too close to call: ${top.label.toLowerCase()} ${pct(top.value)}, ${second.label.toLowerCase()} ${pct(second.value)}`
+    : top.key === "draw"
+      ? `A draw is the likeliest result, at ${pct(top.value)}`
+      : `${top.key === "home" ? home : away} are favoured, with a ${pct(top.value)} chance of winning`;
 
   return (
-    <div className="space-y-6">
-      {/* SECTION 1: EXECUTIVE VERDICT (Immediate Reveal) */}
-      <motion.div
-        initial={reduceMotion ? false : { opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Card className="border-border/60 bg-black/40 backdrop-blur-md shadow-2xl overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-[120px] h-[120px] bg-cyan-500/5 blur-[30px] rounded-full pointer-events-none" />
-          
-          <CardHeader className="pb-3 border-b border-border/40">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-zinc-500 uppercase">
-                <FileText className="h-3.5 w-3.5 text-primary" />
-                INTELLIGENCE DOSSIER // SECURE_REPORT
+    <article aria-labelledby="prediction-heading" className="space-y-8 animate-in fade-in duration-300">
+      {/* ── Scoreboard ───────────────────────────────────────────────────── */}
+      <div className="overflow-hidden rounded-lg border border-border bg-surface">
+        <div className="px-5 pb-6 pt-5 sm:px-8">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="eyebrow">Prediction</p>
+            {isAuthenticated ? (
+              <Button size="sm" variant="outline" onClick={handleSave} loading={saving} disabled={saved}>
+                {saved ? <Check className="text-win" aria-hidden="true" /> : !saving && <BookmarkPlus aria-hidden="true" />}
+                {saved ? "Saved" : "Save"}
+              </Button>
+            ) : null}
+          </div>
+
+          <h2 id="prediction-heading" className="sr-only">
+            Prediction for {home} against {away}
+          </h2>
+
+          {/* Phones: one row per team with its goals, like the overview's
+              final. Three columns left each name too narrow to read. */}
+          <div className="mt-4 divide-y divide-border rounded-md border border-border sm:hidden">
+            {[
+              { team: home, goals: result.predicted_home_score, fav: !close && top.key === "home" },
+              { team: away, goals: result.predicted_away_score, fav: !close && top.key === "away" },
+            ].map((row) => (
+              <div key={row.team} className="flex items-center gap-3 px-4 py-3">
+                <TeamFlag name={row.team} size="lg" className="shrink-0" />
+                <span className="min-w-0 flex-1">
+                  <span className="block font-display text-2xl font-bold uppercase leading-none tracking-wide text-foreground">{row.team}</span>
+                  {row.fav && <span className="mt-1 block text-[11px] font-semibold uppercase tracking-wider text-primary">Favoured</span>}
+                </span>
+                <span className="scoreline text-4xl text-foreground" aria-label={`${row.goals} goals`}>{row.goals}</span>
               </div>
-              
-              <div className="flex items-center gap-3">
-                <Button 
-                  size="sm" 
-                  variant={saved ? "secondary" : "outline"} 
-                  onClick={handleSave} 
-                  disabled={saving || saved}
-                  className="font-mono text-[10px] uppercase tracking-wider h-8"
-                >
-                  {saving ? (
-                    <Loader2 className="h-3 w-3 animate-spin" />
-                  ) : saved ? (
-                    <CheckCircle className="h-3 w-3 text-win" />
-                  ) : (
-                    <BookmarkPlus className="h-3 w-3" />
-                  )}
-                  {saved ? "Archived" : "Archive"}
-                </Button>
-              </div>
+            ))}
+            <p className="px-4 py-2 text-xs text-fg-muted">
+              Most likely score
+              {topScore ? <span className="tabular font-semibold text-foreground"> · {pct(topScore.probability)}</span> : null}
+            </p>
+          </div>
+
+          <div className="mt-5 hidden grid-cols-[1fr_auto_1fr] items-center gap-3 sm:grid sm:gap-8">
+            <ScoreSide team={home} align="right" favoured={!close && top.key === "home"} />
+            <div className="text-center">
+              <p className="scoreline text-6xl text-foreground sm:text-7xl" aria-label={`Most likely score ${result.predicted_home_score} to ${result.predicted_away_score}`}>
+                {result.predicted_home_score}
+                <span className="mx-2 text-fg-subtle sm:mx-3" aria-hidden="true">
+                  –
+                </span>
+                {result.predicted_away_score}
+              </p>
+              <p className="mt-2 text-xs text-fg-muted">
+                Most likely score
+                {topScore ? <span className="tabular font-semibold text-foreground"> · {pct(topScore.probability)}</span> : null}
+              </p>
             </div>
-          </CardHeader>
-          
-          <CardContent className="pt-6 space-y-6">
-            {/* Target Verdict */}
-            <div className="text-center space-y-1">
-              {/* Was "Prototypal Outturn Verdict" — thesaurus filler that says
-                  nothing. This line labels the model's most likely outcome. */}
-              <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">Most Likely Outcome</span>
-              <h2 className="text-lg md:text-xl font-bold font-mono tracking-wide text-foreground">
-                {getVerdict()}
-              </h2>
-            </div>
+            <ScoreSide team={away} align="left" favoured={!close && top.key === "away"} />
+          </div>
 
-            {/* Score Projection Display */}
-            <div className="flex items-center justify-center gap-8 py-4 border-y border-border/20 bg-zinc-950/25 rounded-lg">
-              <div className="text-center w-24">
-                <TeamFlag name={result.home_team} size="lg" className="mr-1.5 inline-block align-middle" />
-                <p className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 mt-1 truncate">{result.home_team}</p>
-                <motion.span
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.2, type: "spring" }}
-                  className="block font-mono text-5xl font-black text-foreground mt-2"
-                >
-                  {result.predicted_home_score}
-                </motion.span>
-              </div>
-              <div className="text-center font-mono text-zinc-600 text-2xl font-bold">
-                :
-              </div>
-              <div className="text-center w-24">
-                <TeamFlag name={result.away_team} size="lg" className="ml-1.5 inline-block align-middle" />
-                <p className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 mt-1 truncate">{result.away_team}</p>
-                <motion.span
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.3, type: "spring" }}
-                  className="block font-mono text-5xl font-black text-foreground mt-2"
-                >
-                  {result.predicted_away_score}
-                </motion.span>
-              </div>
-            </div>
+          <p className="mt-6 text-center text-base font-semibold text-foreground sm:text-lg">{headline}</p>
+        </div>
 
-            {/* Sub-Metrics details */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="bg-surface/30 p-2.5 rounded text-center border border-border/10">
-                <span className="block text-[9px] font-mono text-fg-muted uppercase">Home xG</span>
-                <span className="block font-mono text-sm font-bold text-cyan-400 mt-0.5">{formatGoals(result.expected_home_goals)}</span>
-              </div>
-              <div className="bg-surface/30 p-2.5 rounded text-center border border-border/10">
-                <span className="block text-[9px] font-mono text-fg-muted uppercase">Away xG</span>
-                <span className="block font-mono text-sm font-bold text-cyan-400 mt-0.5">{formatGoals(result.expected_away_goals)}</span>
-              </div>
-              <div className="bg-surface/30 p-2.5 rounded text-center border border-border/10">
-                <span className="block text-[9px] font-mono text-fg-muted uppercase">Distribution</span>
-                <span className="block font-mono text-xs font-bold text-foreground mt-1.5">{result.most_likely_score}</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
+        {/* Three outcomes on one bar. Each segment carries its own text label
+            and percentage, so the split never depends on telling colours apart. */}
+        <div className="border-t border-border px-5 py-5 sm:px-8">
+          <div
+            role="img"
+            aria-label={`${home} win ${pct(pHome)}, draw ${pct(pDraw)}, ${away} win ${pct(pAway)}`}
+            className="flex h-3 w-full overflow-hidden rounded-full bg-surface-3"
+          >
+            <span className="h-full bg-primary" style={{ width: `${pHome * 100}%` }} />
+            <span className="h-full border-x-2 border-surface bg-draw" style={{ width: `${pDraw * 100}%` }} />
+            <span className="h-full bg-foreground/80" style={{ width: `${pAway * 100}%` }} />
+          </div>
+          <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
+            <OutcomeFigure swatch="bg-primary" label={`${home} win`} value={pHome} lead={top.key === "home"} align="left" />
+            <OutcomeFigure swatch="bg-draw" label="Draw" value={pDraw} lead={top.key === "draw"} align="center" />
+            <OutcomeFigure swatch="bg-foreground/80" label={`${away} win`} value={pAway} lead={top.key === "away"} align="right" />
+          </dl>
+        </div>
 
-      {/* SECTIONS 2-4: analytics. On wide screens these sit two-up rather
-          than stacking — each is a self-contained chart and the old single
-          column left most of the viewport empty. Collapses to one column
-          below xl so nothing is cramped on tablet/mobile. */}
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2 xl:items-start">
-      <motion.div
-        initial={reduceMotion ? false : { opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
-        <WinProbabilityCard
-          homeTeam={result.home_team}
-          awayTeam={result.away_team}
-          homeWinProbability={result.home_win_probability}
-          drawProbability={result.draw_probability}
-          awayWinProbability={result.away_win_probability}
-        />
-      </motion.div>
+        <dl className="grid grid-cols-2 divide-x divide-border border-t border-border text-center">
+          <div className="px-4 py-3">
+            <dt className="eyebrow">{home} expected goals</dt>
+            <dd className="scoreline mt-1 text-2xl text-foreground">{formatGoals(result.expected_home_goals)}</dd>
+          </div>
+          <div className="px-4 py-3">
+            <dt className="eyebrow">{away} expected goals</dt>
+            <dd className="scoreline mt-1 text-2xl text-foreground">{formatGoals(result.expected_away_goals)}</dd>
+          </div>
+        </dl>
 
-      {/* SECTION 3: POISSON SCORELINE DISTRIBUTION (Staggered Reveal) */}
-      {result.top_scorelines.length > 0 && (
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-        >
-          <ScorelineDistribution scorelines={result.top_scorelines} mostLikelyScore={result.most_likely_score} />
-        </motion.div>
-      )}
-
-      {/* SECTION 4: SHAP REASONING (Staggered Reveal) */}
-      {result.prediction_explanation && (
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-        >
-          <ShapExplanation explanation={result.prediction_explanation} />
-        </motion.div>
-      )}
-
+        <p className="border-t border-border bg-surface-2 px-5 py-3 text-xs leading-relaxed text-fg-muted sm:px-8">
+          <Info className="mr-1.5 inline h-3.5 w-3.5 -translate-y-px text-fg-subtle" aria-hidden="true" />
+          These are probabilities, not a forecast of what will happen.
+          {topScore
+            ? ` Even the most likely score comes up only about ${Math.round(topScore.probability * 100)} times in 100; the result and the exact score are separate questions.`
+            : " The result and the exact score are separate questions."}
+        </p>
       </div>
 
-      {/* SECTION 5: TACTICAL INSIGHTS (Staggered Reveal) */}
-      {result.insights && result.insights.length > 0 && (
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-        >
-          <Card className="border-border/60 bg-black/40">
-            <CardHeader className="pb-2 border-b border-border/20">
-              <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
-                <Info className="h-4 w-4 text-cyan-400" aria-hidden="true" />
-                Notable Factors
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3 pt-4">
-              {/* These come from the backend's rule-based checks over real
-                  match history (home win rate, recent form, H2H record, xG
-                  total, model confidence) — each only appears when its
-                  threshold is actually met. The section used to be titled
-                  "Strategic Risk Factors", which mislabelled every
-                  type="advantage" entry as a risk. */}
-              <p className="pb-1 text-[11px] text-fg-muted">
-                Derived from historical results for this matchup — shown only when the
-                underlying data supports them.
-              </p>
+      {/* ── Detail ───────────────────────────────────────────────────────── */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
+        {result.top_scorelines.length > 0 && (
+          <ScorelineDistribution scorelines={result.top_scorelines} mostLikelyScore={result.most_likely_score} />
+        )}
+        {result.prediction_explanation && <ShapExplanation explanation={result.prediction_explanation} />}
+        {result.head_to_head && <HeadToHeadCard stats={result.head_to_head} homeTeam={home} awayTeam={away} />}
+
+        {result.insights && result.insights.length > 0 && (
+          <section aria-labelledby="factors-heading" className="space-y-3">
+            <SectionHeader id="factors-heading" title="From the record" as="h3" />
+            {/* Rule-based observations from real match history; each appears
+                only when its threshold is met. */}
+            <ul className="divide-y divide-border">
               {result.insights.map((insight, i) => {
-                const { icon: Icon, className } = INSIGHT_STYLE[insight.type];
+                const Icon = INSIGHT_ICON[insight.type];
                 return (
-                  <div key={i} className={cn("flex gap-3 rounded-lg border p-3 items-start", className)}>
-                    <Icon className="h-4 w-4 mt-0.5 shrink-0" aria-hidden="true" />
-                    <div className="space-y-0.5">
-                      <p className="text-xs font-semibold font-mono tracking-wide uppercase">{insight.title}</p>
-                      <p className="text-xs text-zinc-400 leading-normal">{insight.description}</p>
+                  <li key={i} className="flex items-start gap-3 py-3">
+                    <Icon
+                      className={cn("mt-0.5 h-4 w-4 shrink-0", insight.type === "warning" ? "text-warning" : "text-primary")}
+                      aria-hidden="true"
+                    />
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-foreground">{insight.title}</p>
+                      <p className="mt-0.5 text-sm leading-relaxed text-fg-muted">{insight.description}</p>
                     </div>
-                    <Badge variant="outline" className="ml-auto shrink-0 text-[9px] font-mono uppercase tracking-wider border-current opacity-70">
-                      {insight.impact} IMPACT
-                    </Badge>
-                  </div>
+                  </li>
                 );
               })}
-            </CardContent>
-          </Card>
-        </motion.div>
-      )}
+            </ul>
+          </section>
+        )}
+      </div>
 
-      {/* SECTION 6: HISTORICAL H2H MATRIX (Staggered Reveal) */}
-      {result.head_to_head && (
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0, duration: 0.5 }}
-        >
-          <HeadToHeadCard stats={result.head_to_head} homeTeam={result.home_team} awayTeam={result.away_team} />
-        </motion.div>
-      )}
+      <p className="text-center text-xs text-fg-subtle">
+        Model <span className="font-code">{result.model_version}</span>
+        <span className="mx-1.5" aria-hidden="true">
+          ·
+        </span>
+        Reference <span className="font-code">{result.prediction_id.slice(0, 8)}</span>
+      </p>
+    </article>
+  );
+}
 
-      {/* Footer Info */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ delay: 1.2 }}
-        className="text-center font-mono text-[9px] tracking-widest text-zinc-600 uppercase"
+function ScoreSide({ team, align, favoured }: { team: string; align: "left" | "right"; favoured: boolean }) {
+  return (
+    <div className={cn("flex min-w-0 flex-col gap-2", align === "right" ? "items-end text-right" : "items-start text-left")}>
+      <TeamFlag name={team} size="xl" />
+      <p className="max-w-full break-normal font-display text-2xl font-bold uppercase leading-none tracking-wide text-foreground sm:text-3xl lg:text-4xl">
+        {team}
+      </p>
+      {/* Reserved line: keeps both sides the same height whether or not one is favoured. */}
+      <p className="h-4 text-[11px] font-semibold uppercase tracking-wider text-primary">{favoured ? "Favoured" : ""}</p>
+    </div>
+  );
+}
+
+function OutcomeFigure({
+  swatch,
+  label,
+  value,
+  lead,
+  align,
+}: {
+  swatch: string;
+  label: string;
+  value: number;
+  lead: boolean;
+  align: "left" | "center" | "right";
+}) {
+  return (
+    <div className={cn("min-w-0", align === "left" && "text-left", align === "right" && "text-right")}>
+      <dt
+        className={cn(
+          "flex items-center gap-1.5 text-xs text-fg-muted",
+          align === "center" && "justify-center",
+          align === "right" && "justify-end"
+        )}
       >
-        Calculation version {result.model_version} · RUN_ID: {result.prediction_id.slice(0, 8)}
-      </motion.p>
+        <span className={cn("h-2 w-2 shrink-0 rounded-sm", swatch)} aria-hidden="true" />
+        <span className="truncate">{label}</span>
+      </dt>
+      <dd className={cn("scoreline mt-1 text-2xl sm:text-3xl", lead ? "text-foreground" : "text-fg-muted")}>{pct(value)}</dd>
     </div>
   );
 }

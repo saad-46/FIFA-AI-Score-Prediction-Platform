@@ -11,26 +11,30 @@ export function ScorelineFrequencyChart({ data }: ScorelineFrequencyChartProps) 
 
   return (
     <Card>
-      <CardHeader className="pb-2 border-b border-border/20">
-        <CardTitle className="font-mono text-xs tracking-wider uppercase text-foreground">
-          Historical Scoreline Frequency Cluster
+      <CardHeader className="border-b border-border pb-3">
+        <CardTitle className="font-display text-lg font-semibold uppercase tracking-wide text-foreground">
+          Most common scorelines
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-2 pt-4">
-        {data.map((s) => (
-          <div key={s.scoreline} className="flex items-center gap-3">
-            <span className="w-10 shrink-0 font-mono text-sm font-semibold text-foreground">{s.scoreline}</span>
-            <div className="h-2 flex-1 overflow-hidden rounded-full bg-surface-2">
-              <div
-                className="h-full rounded-full bg-primary transition-all duration-700 ease-out"
-                style={{ width: `${(s.percentage / max) * 100}%` }}
-              />
-            </div>
-            <span className="w-20 shrink-0 text-right text-xs text-fg-muted">
-              {s.percentage.toFixed(1)}% ({s.count.toLocaleString()})
-            </span>
-          </div>
-        ))}
+      <CardContent className="pt-4">
+        <ol className="space-y-2" aria-label="Scorelines by how often they occurred">
+          {data.map((s) => (
+            <li key={s.scoreline} className="grid grid-cols-[2.5rem_1fr_7rem] items-center gap-3">
+              <span className="tabular text-sm font-semibold text-foreground">{s.scoreline}</span>
+              <span className="h-2 overflow-hidden rounded-full bg-surface-3" aria-hidden="true">
+                <span className="block h-full rounded-full bg-primary" style={{ width: `${(s.percentage / max) * 100}%` }} />
+              </span>
+              <span className="tabular text-right text-sm text-fg-muted">
+                <span className="font-semibold text-foreground">{s.percentage.toFixed(1)}%</span>
+                <span className="ml-1.5 text-xs text-fg-subtle">{s.count.toLocaleString()}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+        <p className="pt-3 text-xs leading-relaxed text-fg-subtle">
+          Share of matches in the dataset that ended with each score, first-listed team&apos;s goals first; the
+          count is beside it. Bars are scaled to the most common score.
+        </p>
       </CardContent>
     </Card>
   );

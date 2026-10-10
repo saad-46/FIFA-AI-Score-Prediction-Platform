@@ -1,19 +1,25 @@
+"use client";
+
+import { useState } from "react";
+import { playerImageSrc } from "@/lib/player-images";
 import { cn } from "@/lib/utils";
 
 /**
- * The stand-in for a player photograph.
+ * The circular player mark used in the dense 26-player roster.
  *
- * There are no player photographs in this product and that is a documented
- * gap, not an oversight: the squad dataset has no image column, FIFA's official
- * squad pages render client-side with no public API behind them, and
- * hot-linking a third party would put an uncontrolled external request on every
- * card. Inventing or scraping images would break the same data-honesty rule
- * that governs the statistics, so the card shows a monogram instead and says
- * nothing it cannot support. See PLAYER_IMAGE_POLICY in app/data/players.py.
+ * Same two-state contract as `PlayerPortrait` — a local photograph from
+ * `public/teams/<team>/<player>.webp` when one exists, a typographic monogram
+ * when one does not — so the roster and the key-player cards never disagree
+ * about a player. Photographs are added team by team through the ingest
+ * script, so a roster normally mixes both states.
  *
- * Kept deliberately plain — initials on the existing surface tokens, with the
- * position as the only accent — so a squad grid reads as a roster rather than
- * a wall of missing images.
+ * `PlayerPortrait` is the framed, portrait-format version used where the image
+ * is meant to dominate. This one stays small and circular: at roster scale a
+ * 3:4 crop would just be a thumbnail of a face with no room for the crop to
+ * mean anything.
+ *
+ * Decorative in both states — the player's name is always rendered as text
+ * beside it.
  */
 
 const SIZES = {
@@ -32,26 +38,54 @@ function initials(name: string): string {
 
 export function PlayerAvatar({
   name,
+  team,
   size = "md",
   className,
 }: {
   name: string;
+  /** Registry team name. Omitted where the caller has no team in hand — the
+   *  avatar then always renders its monogram. */
+  team?: string;
   size?: keyof typeof SIZES;
   className?: string;
 }) {
+  const src = team ? playerImageSrc(team, name) : null;
+  const [failed, setFailed] = useState(false);
+
+  if (src !== null && !failed) {
+    return (
+      // Plain <img>, matching TeamFlag and PlayerPortrait: a pre-optimised
+      // static asset already in /public.
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={src}
+        alt=""
+        aria-hidden="true"
+        width={600}
+        height={800}
+        loading="lazy"
+        decoding="async"
+        onError={() => setFailed(true)}
+        className={cn(
+          "shrink-0 rounded-full border border-border bg-surface-2 object-cover object-top",
+          SIZES[size],
+          className
+        )}
+      />
+    );
+  }
+
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-full border border-border/60",
-        "bg-surface-2/70 font-mono font-semibold tracking-wider text-fg-muted",
+        "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full",
+        "border border-border bg-surface-2 font-semibold tracking-wide text-fg-subtle",
         SIZES[size],
         className
       )}
-      // Decorative: the player's name is always rendered as text beside this,
-      // so announcing the monogram too would just repeat it.
       aria-hidden="true"
     >
-      {initials(name)}
+      <span className="relative">{initials(name)}</span>
     </span>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Target } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type { ScorelineProbability } from "@/types";
@@ -39,10 +38,9 @@ export function ScorelineDistribution({ scorelines, mostLikelyScore }: Scoreline
 
   return (
     <Card>
-      <CardHeader className="pb-2 border-b border-border/20">
-        <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
-          <Target className="h-4.5 w-4.5 text-primary" aria-hidden="true" />
-          Scoreline Distribution
+      <CardHeader className="border-b border-border pb-3">
+        <CardTitle className="flex items-center gap-2 font-display text-lg font-semibold uppercase tracking-wide text-foreground">
+          Likeliest scorelines
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-1.5 pt-4">
@@ -92,8 +90,8 @@ export function ScorelineDistribution({ scorelines, mostLikelyScore }: Scoreline
               </span>
               <span className="w-14 shrink-0 text-right">
                 {isTopPick && (
-                  <span className="font-mono text-[9px] uppercase tracking-wider text-primary">
-                    Top pick
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-primary">
+                    Likeliest
                   </span>
                 )}
               </span>
@@ -101,8 +99,9 @@ export function ScorelineDistribution({ scorelines, mostLikelyScore }: Scoreline
           );
         })}
 
-        <p className="pt-2 font-mono text-[10px] uppercase tracking-wider text-fg-muted">
-          Top {rows.length} scorelines · {(covered * 100).toFixed(0)}% of total probability
+        <p className="pt-2 text-xs leading-relaxed text-fg-subtle">
+          These {rows.length} scorelines cover {(covered * 100).toFixed(0)}% of all outcomes; the rest is spread over
+          less likely scores. Bars are scaled to the likeliest one.
         </p>
       </CardContent>
     </Card>

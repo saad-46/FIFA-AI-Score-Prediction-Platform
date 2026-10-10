@@ -1,7 +1,15 @@
 "use client";
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { PlayerAvatar } from "@/components/teams/player-avatar";
+import type { RefObject } from "react";
+import { ShieldCheck } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { PlayerPortrait } from "@/components/teams/player-portrait";
 import { cn } from "@/lib/utils";
 import type { Player } from "@/types";
 
@@ -12,6 +20,12 @@ import type { Player } from "@/types";
  * list: a section with no populated metric is not rendered at all, so a squad
  * member who never played shows appearances and nothing else rather than five
  * headings full of dashes.
+ *
+ * The accessibility contract here is Radix's and is deliberately left intact —
+ * `aria-modal`, the focus trap, ESC-to-close and restore-focus-on-close all come
+ * from `DialogContent`. The one thing this dialog was missing is a resolving
+ * `aria-describedby`: the identity line below is now a real `DialogDescription`,
+ * so the dialog announces who it is about rather than just its title.
  */
 
 /** null/undefined -> "Not available". A real 0 is a fact and is shown as 0. */
@@ -32,7 +46,7 @@ function StatRow({ label, value }: { label: string; value: string }) {
       <dd
         className={cn(
           "font-mono text-sm tabular-nums",
-          missing ? "text-fg-muted/60 text-xs" : "font-semibold text-foreground"
+          missing ? "text-xs text-fg-subtle" : "font-semibold text-foreground"
         )}
       >
         {value}
@@ -49,46 +63,85 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-lg border border-border/50 bg-surface/30 p-4">
-      <h3 className="pb-1 font-mono text-[10px] uppercase tracking-widest text-fg-muted">
-        {title}
-      </h3>
-      <dl className="divide-y divide-border/30">{children}</dl>
+    <section className="rounded-md border border-border bg-surface-2 p-4">
+      <h3 className="eyebrow pb-1">{title}</h3>
+      <dl className="divide-y divide-border">{children}</dl>
     </section>
   );
 }
 
 export function PlayerDialog({
   player,
+  isCaptain = false,
+  restoreFocusRef,
   onOpenChange,
 }: {
   player: Player | null;
+  /** Shown as an explicit badge — never inferred from ordering or colour. */
+  isCaptain?: boolean;
+  /**
+   * The card that opened the dialog, so focus can be handed back to it.
+   *
+   * This dialog is opened from state rather than from a `DialogTrigger`, so
+   * Radix has no trigger to restore focus to and ESC was dropping the user
+   * onto <body> — from there the next Tab restarts at the top of the document,
+   * which for a keyboard user means losing their place in an eight-card grid
+   * every time they close a player. The opener is captured by the caller in
+   * its click handler, where `document.activeElement` is still the card.
+   */
+  restoreFocusRef?: RefObject<HTMLElement | null>;
   onOpenChange: (open: boolean) => void;
 }) {
   // A keeper who actually kept goal is presented as a keeper. One who never
   // played falls through to the outfield layout, where the has() guards leave
   // him with just his (empty) appearance block rather than fake sections.
   const keeperView = player?.is_goalkeeper === true && player.gk_saves !== null;
-
   return (
     <Dialog open={player !== null} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl border-border/60 bg-surface/90 backdrop-blur-xl">
+      <DialogContent
+        className="max-w-2xl border-border bg-surface"
+        onCloseAutoFocus={(event) => {
+          const opener = restoreFocusRef?.current;
+          if (opener && document.contains(opener)) {
+            event.preventDefault();
+            opener.focus();
+          }
+        }}
+      >
         {player && (
           <>
             <DialogHeader>
-              <div className="flex items-center gap-4">
-                <PlayerAvatar name={player.name} size="lg" />
+              <div className="flex items-center gap-4 sm:gap-5">
+                <div className="relative shrink-0">
+                  <PlayerPortrait
+                    name={player.name}
+                    team={player.team}
+                    eager
+                    className="aspect-[3/4] w-24 rounded-md border border-border sm:w-28"
+                    monogramClassName="text-2xl sm:text-3xl"
+                  />
+                </div>
                 <div className="min-w-0">
-                  <DialogTitle className="text-xl">{player.name}</DialogTitle>
-                  <p className="pt-1 text-sm text-fg-muted">
+                  {isCaptain && (
+                    <p className="flex items-center gap-1.5 pb-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+                      <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+                      Captain
+                    </p>
+                  )}
+                  <DialogTitle className="pr-8 font-display text-3xl font-bold uppercase leading-none tracking-wide sm:text-4xl">
+                    {player.name}
+                  </DialogTitle>
+                  <p className="pt-1.5 text-sm text-fg-muted">
                     {player.position ?? "Position not available"}
                     {" · "}
                     {player.club ?? "Club not available"}
                   </p>
-                  <p className="pt-0.5 font-mono text-[11px] uppercase tracking-wider text-fg-muted">
+                  {/* Doubles as the dialog's accessible description, so
+                      aria-describedby resolves instead of dangling. */}
+                  <DialogDescription className="pt-0.5 text-xs">
                     {player.team}
                     {player.age !== null && ` · Age ${player.age}`}
-                  </p>
+                  </DialogDescription>
                 </div>
               </div>
             </DialogHeader>

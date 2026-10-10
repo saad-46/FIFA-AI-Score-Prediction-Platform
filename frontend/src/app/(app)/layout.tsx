@@ -31,9 +31,12 @@ export default async function AppLayout({
     : null;
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col">
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <Navbar user={navUser} />
-      <main className="flex-1 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <main id="main" tabIndex={-1} className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 focus:outline-none sm:px-6 sm:py-8 lg:px-8">
         {children}
       </main>
       <Footer />

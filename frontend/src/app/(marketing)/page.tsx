@@ -1,116 +1,84 @@
-"use client";
-
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MarketingHeader } from "@/components/layout/marketing-header";
 import { Footer } from "@/components/layout/footer";
+import { LandingFinal } from "@/components/dashboard/landing-final";
 
+const SECTIONS = [
+  {
+    href: "/tournaments",
+    title: "The tournament",
+    body: "All 104 matches: the knockout bracket, final group tables and the schedule with every score.",
+  },
+  {
+    href: "/predict",
+    title: "Match predictor",
+    body: "Any two of the 48 teams. Win, draw and loss chances, expected goals and the likeliest scorelines.",
+  },
+  {
+    href: "/teams",
+    title: "Teams and squads",
+    body: "Captain, key players and the full 26 for every team, with their tournament statistics.",
+  },
+  {
+    href: "/tournaments?tab=backtest",
+    title: "Model vs reality",
+    body: "Every pre-tournament pick set against what happened, misses included.",
+  },
+] as const;
+
+/**
+ * Landing page.
+ *
+ * Server-rendered: the only client code is the block that loads the real final
+ * from the API. The page says what the product is in one sentence and then
+ * shows it, rather than opening on a full-screen slogan.
+ */
 export default function LandingPage() {
-  const reduceMotion = useReducedMotion();
-
   return (
-    <div className="relative flex min-h-screen flex-col bg-background overflow-hidden bg-noise">
-      {/* Ambient background glows */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[20%] w-[600px] h-[600px] rounded-full bg-primary/10 blur-[120px]" />
-        <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[100px]" />
-      </div>
-
+    <div className="flex min-h-screen flex-col">
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <MarketingHeader />
 
-      <main className="flex-1 flex flex-col justify-center px-6 lg:px-16 max-w-7xl mx-auto w-full py-20 lg:py-32">
-        <div className="max-w-4xl space-y-12">
-          {/* Subtle Tagline */}
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 text-xs tracking-[0.2em] font-mono text-cyan-400 uppercase"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            FIFA Analytics Lab // World Cup 2026 — Complete
-          </motion.div>
-
-          {/* Huge Cinematic Left-Aligned Headline */}
-          <motion.h1
-            initial={reduceMotion ? false : { opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-6xl sm:text-7xl lg:text-9xl font-extrabold tracking-tight text-foreground leading-[0.85] font-sans uppercase"
-          >
-            Relive
-            <br />
-            The
-            <br />
-            Tournament
-            <br />
-            <span className="text-zinc-800 dark:text-zinc-700">Understand Every</span>
-            <br />
-            Prediction<span className="text-cyan-400 animate-pulse">.</span>
-          </motion.h1>
-
-          {/* Minimal Copy with perfect rhythm */}
-          <motion.p
-            initial={reduceMotion ? false : { opacity: 0 }}
-            animate={{ opacity: 0.9 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="max-w-xl text-lg sm:text-xl font-normal text-fg-muted leading-relaxed font-sans"
-          >
-            Every match of the 2026 World Cup, scored against a model frozen before a
-            ball was kicked. Poisson scorelines, calibrated probabilities and SHAP
-            explanations — with the misses shown alongside the hits.
-          </motion.p>
-
-          {/* Call to actions - subtle border glows, no generic flashy stuff */}
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex flex-wrap items-center gap-6 pt-4"
-          >
-            <Link href="/predict" className="focus-visible:outline-none">
-              <Button size="xl" className="bg-primary hover:bg-primary-hover text-slate-950 font-mono uppercase tracking-wider text-xs px-8 h-12 shadow-lg shadow-cyan-500/10 cursor-pointer">
-                Configure Simulation
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
-            </Link>
-            <Link href="/tournaments" className="focus-visible:outline-none">
-              <Button size="xl" variant="outline" className="border-border text-foreground hover:bg-surface-2 font-mono uppercase tracking-wider text-xs px-8 h-12 cursor-pointer">
-                Tournament Intelligence
-              </Button>
-            </Link>
-          </motion.div>
+      <main id="main" className="mx-auto w-full max-w-7xl flex-1 space-y-12 px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+        <div className="max-w-3xl">
+          <p className="eyebrow">FIFA World Cup 2026 · Complete</p>
+          <h1 className="mt-3 text-balance font-display text-5xl font-bold uppercase leading-[0.92] tracking-wide text-foreground sm:text-7xl">
+            The World Cup, played and measured
+          </h1>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-fg-muted sm:text-lg">
+            Every match of the 2026 tournament, the squads that played it, and a prediction model whose picks were
+            fixed before kick-off and are shown here against the real results.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Button asChild size="lg">
+              <Link href="/tournaments">
+                See the tournament
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link href="/predict">Predict a match</Link>
+            </Button>
+          </div>
         </div>
 
-        {/* Minimal Contextual Facts Footer Row */}
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7, duration: 1 }}
-          className="mt-24 lg:mt-40 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border/60 pt-10"
-        >
-          <div>
-            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">Computation Models</span>
-            <span className="block mt-1 text-lg font-bold font-mono">XGBoost + Poisson</span>
-          </div>
-          {/* Every figure here is checkable against the canonical dataset or
-              the published backtest. The old "134 Vectors" was the legacy
-              model's feature count and read as a claim about the current one. */}
-          <div>
-            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">World Cup Matches</span>
-            <span className="block mt-1 text-lg font-bold font-mono">1,069 · 1930—2026</span>
-          </div>
-          <div>
-            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">Simulation Iterations</span>
-            <span className="block mt-1 text-lg font-bold font-mono">Up to 100k Monte Carlo</span>
-          </div>
-          <div>
-            <span className="block text-xs font-mono text-fg-muted uppercase tracking-wider">WC2026 Backtest</span>
-            <span className="block mt-1 text-lg font-bold font-mono">70.2% · 73 of 104</span>
-          </div>
-        </motion.div>
+        <LandingFinal />
+
+        <nav aria-label="Sections" className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          {SECTIONS.map((s) => (
+            <Link key={s.href} href={s.href} className="group bg-surface p-5 transition-colors hover:bg-surface-2">
+              <span className="flex items-center justify-between gap-2 font-display text-xl font-semibold uppercase tracking-wide text-foreground">
+                {s.title}
+                <ArrowRight className="h-4 w-4 shrink-0 text-fg-subtle transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
+              </span>
+              <span className="mt-2 block text-sm leading-relaxed text-fg-muted">{s.body}</span>
+            </Link>
+          ))}
+        </nav>
       </main>
 
       <Footer />

@@ -1,5 +1,4 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default function PredictLoading() {
   return (
@@ -8,19 +7,14 @@ export default function PredictLoading() {
         <Skeleton className="h-7 w-64" />
         <Skeleton className="h-4 w-80" />
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <Card>
-          <CardHeader>
-            <Skeleton className="h-5 w-40" />
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <Skeleton className="h-10 w-full" />
-            <Skeleton className="h-10 w-full" />
-            <Skeleton className="h-10 w-full" />
-            <Skeleton className="h-11 w-full" />
-          </CardContent>
-        </Card>
-        <div className="rounded-xl border border-dashed border-slate-700 min-h-[400px]" />
+      {/* Same shape as the fixture form, so nothing jumps when it arrives. */}
+      <div className="space-y-5 rounded-lg border border-border bg-surface p-5">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <Skeleton className="h-32 w-full" />
+          <Skeleton className="h-32 w-full" />
+        </div>
+        <Skeleton className="h-20 w-full" />
+        <Skeleton className="ml-auto h-11 w-40" />
       </div>
     </div>
   );

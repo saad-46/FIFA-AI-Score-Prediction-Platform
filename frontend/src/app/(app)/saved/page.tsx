@@ -21,8 +21,7 @@ export default async function SavedPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        icon={BookmarkCheck}
-        title="Saved Predictions"
+        title="Saved predictions"
         description="Predictions you've kept, with how they scored against the real result"
       />
       {user ? (

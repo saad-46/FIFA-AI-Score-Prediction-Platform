@@ -36,16 +36,12 @@ export function SimulationProgress({ expectedDurationMs = 7000, simulations }: S
   }, [expectedDurationMs]);
 
   return (
-    <Card className="border border-border/80 bg-zinc-950/20 shadow-xl backdrop-blur-sm">
-      <CardContent className="flex flex-col items-center justify-center gap-5 py-14 text-center font-mono">
-        <div className="relative flex items-center justify-center h-12 w-12 rounded border border-cyan-500/30 bg-cyan-950/20 shadow-lg shadow-cyan-500/10">
-          <Loader2 className="h-6 w-6 animate-spin text-primary" aria-hidden="true" />
-        </div>
+    <Card>
+      <CardContent className="flex flex-col items-center justify-center gap-4 py-12 text-center">
+        <Loader2 className="h-6 w-6 animate-spin text-primary" aria-hidden="true" />
         <div className="space-y-1.5">
           {/* Names the endpoint's actual job; nothing is being "calibrated" here. */}
-          <p className="text-[10px] tracking-widest text-zinc-500 uppercase">
-            MONTE CARLO TOURNAMENT SIMULATION
-          </p>
+          <p className="eyebrow">Simulating the tournament</p>
           <p className="text-sm font-bold text-foreground" role="status" aria-live="polite">
             {STAGES[stageIndex]}
           </p>

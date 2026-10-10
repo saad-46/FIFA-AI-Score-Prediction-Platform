@@ -29,9 +29,9 @@ export function ProbabilityBar({
   const pct = Math.round(value * 100);
   return (
     <div className={cn("space-y-1", className)}>
-      <div className="flex justify-between text-xs font-mono uppercase tracking-wider">
-        <span className="text-foreground">{label}</span>
-        {showValue && <span className="font-semibold text-fg-muted">{pct}%</span>}
+      <div className="flex justify-between gap-3 text-sm">
+        <span className="text-fg-muted">{label}</span>
+        {showValue && <span className="tabular font-semibold text-foreground">{pct}%</span>}
       </div>
       <div
         role="progressbar"
@@ -39,7 +39,7 @@ export function ProbabilityBar({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={label}
-        className="h-1.5 w-full overflow-hidden rounded-full bg-surface-2"
+        className="h-2 w-full overflow-hidden rounded-full bg-surface-3"
       >
         <div
           className={cn("h-full rounded-full transition-all duration-700 ease-out", toneClass[tone])}

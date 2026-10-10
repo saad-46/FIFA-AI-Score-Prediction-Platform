@@ -1,8 +1,8 @@
 import {
-  Activity,
+  CalendarDays,
   Home,
   BarChart3,
-  Brain,
+  Swords,
   Trophy,
   Users,
   type LucideIcon,
@@ -29,10 +29,13 @@ export interface NavItem {
  * the account menu once signed in.
  */
 export const navItems: NavItem[] = [
-  { href: "/dashboard", label: "Intelligence", icon: Home },
-  { href: "/tournaments", label: "Tournament", icon: Trophy },
-  { href: "/predict", label: "Simulation", icon: Brain },
+  // Labels name what the page is. "Simulation" used to point at the match
+  // predictor while the tournament simulator lived under "Tournament" as
+  // "Simulation Matrix" -- two different features sharing one word.
+  { href: "/dashboard", label: "Overview", icon: Home },
+  { href: "/predict", label: "Predictor", icon: Swords },
+  { href: "/tournaments", label: "World Cup", icon: Trophy },
   { href: "/teams", label: "Teams", icon: Users },
-  { href: "/matches", label: "Matches", icon: Activity },
-  { href: "/analytics", label: "Insights", icon: BarChart3 },
+  { href: "/matches", label: "Matches", icon: CalendarDays },
+  { href: "/analytics", label: "Analytics", icon: BarChart3 },
 ];

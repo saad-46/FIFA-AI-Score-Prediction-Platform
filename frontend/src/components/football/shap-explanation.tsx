@@ -1,4 +1,3 @@
-import { Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 import type { FeatureAttribution, PredictionExplanation } from "@/types";
@@ -21,17 +20,20 @@ export function ShapExplanation({ explanation }: ShapExplanationProps) {
 
   return (
     <Card>
-      <CardHeader className="pb-2 border-b border-border/20">
-        <CardTitle className="flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-foreground">
-          <Zap className="h-4.5 w-4.5 text-primary" aria-hidden="true" />
-          SHAP Feature Attribution Influence
+      <CardHeader className="border-b border-border pb-3">
+        <CardTitle className="flex items-center gap-2 font-display text-lg font-semibold uppercase tracking-wide text-foreground">
+          What drove the prediction
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4 pt-4">
+        <p className="text-xs leading-relaxed text-fg-subtle">
+          Each bar is one input&apos;s contribution to the predicted result (SHAP values). Longer means more
+          influence; the exact value is in the tooltip.
+        </p>
         <TooltipProvider delayDuration={200}>
           {top_positive_features.length > 0 && (
             <div className="space-y-1.5">
-              <p className="text-[10px] font-mono tracking-wider text-win uppercase">Positive Feature Drivers</p>
+              <p className="eyebrow">Pushed towards the predicted result</p>
               {top_positive_features.map((f) => (
                 <FeatureRow key={f.feature} feature={f} maxImpact={maxImpact} tone="win" />
               ))}
@@ -39,7 +41,7 @@ export function ShapExplanation({ explanation }: ShapExplanationProps) {
           )}
           {top_negative_features.length > 0 && (
             <div className="space-y-1.5 pt-2">
-              <p className="text-[10px] font-mono tracking-wider text-loss uppercase">Negative Feature Constraints</p>
+              <p className="eyebrow">Pulled against it</p>
               {top_negative_features.map((f) => (
                 <FeatureRow key={f.feature} feature={f} maxImpact={maxImpact} tone="loss" />
               ))}
@@ -64,13 +66,15 @@ function FeatureRow({
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <div className="flex items-center gap-2 text-xs cursor-default">
+        <div tabIndex={0} className="flex cursor-default items-center gap-2 rounded text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           <span className="w-36 shrink-0 truncate text-right text-fg-muted">
             {feature.readable_name}
           </span>
           <div className="h-3.5 flex-1 overflow-hidden rounded bg-surface-2">
             <div
-              className={tone === "win" ? "h-full rounded bg-win/70" : "h-full rounded bg-loss/70"}
+              // Cyan for, grey against: this is model attribution, not a good or
+              // bad outcome, so win-green and loss-red would mislead.
+              className={tone === "win" ? "h-full rounded bg-primary" : "h-full rounded bg-draw"}
               style={{ width: `${widthPct}%` }}
             />
           </div>

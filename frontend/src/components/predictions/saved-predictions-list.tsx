@@ -85,20 +85,20 @@ export function SavedPredictionsList() {
   return (
     <div className="space-y-6">
       {accuracy && accuracy.total > 0 && (
-        <Card className="border-border/40 bg-zinc-950/20 shadow-md">
+        <Card>
           <CardContent className="flex items-center justify-between p-5">
             <div>
               {/* Was "Calibration Convergence Accuracy" — no calibration and no
                   convergence happens here. /predictions/accuracy is a plain
                   count: saved predictions whose was_correct is true, over those
                   already scored against a real result. Name it that. */}
-              <p className="text-[10px] font-mono tracking-widest text-fg-muted uppercase">Your Prediction Accuracy</p>
-              <p className="font-mono text-2xl font-bold text-foreground mt-1">
+              <p className="eyebrow">Your prediction accuracy</p>
+              <p className="scoreline mt-1.5 text-3xl text-foreground">
                 {formatPercent(accuracy.accuracy)}
               </p>
             </div>
-            <p className="text-xs font-mono text-fg-muted uppercase tracking-wider">
-              {accuracy.correct} / {accuracy.total} successful projections
+            <p className="text-sm text-fg-muted">
+              {accuracy.correct} of {accuracy.total} scored predictions correct
             </p>
           </CardContent>
         </Card>
@@ -106,7 +106,7 @@ export function SavedPredictionsList() {
 
       <div className="space-y-3">
         {predictions.map((pred) => (
-          <Card key={pred.id} className="border-border/40 hover:border-primary/20 bg-surface/30">
+          <Card key={pred.id}>
             <CardContent className="p-4">
               <div className="flex items-center justify-between gap-4">
                 <div className="flex flex-1 items-center gap-4 min-w-0 justify-between">
@@ -120,12 +120,12 @@ export function SavedPredictionsList() {
                   </div>
 
                   <div className="text-center shrink-0 min-w-[70px]">
-                    <p className="font-mono text-base font-bold text-foreground">
-                      {pred.predicted_home_score} – {pred.predicted_away_score}
+                    <p className="scoreline text-xl text-foreground">
+                      {pred.predicted_home_score}–{pred.predicted_away_score}
                     </p>
                     {pred.was_correct !== null && pred.was_correct !== undefined && (
-                      <Badge variant={pred.was_correct ? "win" : "loss"} className="mt-1 text-[9px] font-mono uppercase tracking-wider h-5 px-2">
-                        {pred.was_correct ? "Success" : "Deviation"}
+                      <Badge variant={pred.was_correct ? "win" : "loss"} className="mt-1">
+                        {pred.was_correct ? "Correct" : "Incorrect"}
                       </Badge>
                     )}
                   </div>
@@ -142,17 +142,17 @@ export function SavedPredictionsList() {
                 
                 <div className="flex shrink-0 items-center gap-3 pl-4 border-l border-border/20">
                   <div className="text-right font-mono">
-                    <p className="text-[10px] font-bold text-cyan-400 uppercase tracking-tight">
-                      {formatPercent(pred.home_win_probability)} Vector
+                    <p className="text-xs font-semibold text-foreground">
+                      {formatPercent(pred.home_win_probability)} <span className="font-normal text-fg-muted">home win</span>
                     </p>
-                    <p className="text-[9px] text-fg-muted mt-0.5">
+                    <p className="mt-0.5 text-xs text-fg-subtle">
                       {new Date(pred.created_at).toLocaleDateString()}
                     </p>
                   </div>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 hover:bg-surface-2"
+                    className="h-10 w-10 hover:bg-surface-2"
                     aria-label={`Delete prediction for ${pred.home_team} vs ${pred.away_team}`}
                     onClick={() => setPendingDelete(pred)}
                   >

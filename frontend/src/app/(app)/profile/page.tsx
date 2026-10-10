@@ -26,7 +26,6 @@ export default async function ProfilePage() {
     return (
       <div className="max-w-2xl space-y-8">
         <PageHeader
-          icon={User}
           title="Profile"
           description="Account details and preferences"
         />

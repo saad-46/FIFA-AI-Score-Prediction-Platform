@@ -15,6 +15,7 @@ import { SimulationProgress } from "@/components/football/simulation-progress";
 import { StageProbabilityTable } from "@/components/football/stage-probability-table";
 import { ErrorState } from "@/components/ui/error-state";
 import { toast } from "@/hooks/use-toast";
+import { TeamFlag } from "@/components/football/team-flag";
 import type { TournamentSimulationMeta } from "@/types";
 
 const SIM_OPTIONS = [1000, 5000, 10000, 25000, 50000, 100000];
@@ -41,7 +42,7 @@ function SimulationProvenance({ meta }: { meta: TournamentSimulationMeta }) {
   return (
     <div className="space-y-2 border-b border-border/60 pb-4">
       {meta.note && <p className="text-sm leading-relaxed text-fg-muted">{meta.note}</p>}
-      <dl className="flex flex-wrap gap-x-6 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-zinc-500">
+      <dl className="eyebrow flex flex-wrap gap-x-6 gap-y-1">
         <div className="flex gap-1.5">
           <dt>Model</dt>
           <dd className="normal-case tracking-normal text-fg-muted">{meta.model_version}</dd>
@@ -56,6 +57,14 @@ function SimulationProvenance({ meta }: { meta: TournamentSimulationMeta }) {
           <dt>Simulations</dt>
           <dd className="normal-case tracking-normal text-fg-muted">{meta.n_simulations.toLocaleString()}</dd>
         </div>
+        {typeof meta.seed === "number" && (
+          <div className="flex gap-1.5">
+            <dt>Seed</dt>
+            <dd className="normal-case tracking-normal text-fg-muted" title="The same settings and seed always give the same numbers">
+              {meta.seed}
+            </dd>
+          </div>
+        )}
         {typeof se === "number" && (
           <div className="flex gap-1.5">
             <dt>Sampling error</dt>
@@ -66,6 +75,57 @@ function SimulationProvenance({ meta }: { meta: TournamentSimulationMeta }) {
         )}
       </dl>
     </div>
+  );
+}
+
+/**
+ * The ten likeliest champions as bars, with the figure beside each.
+ *
+ * Bars are scaled to the favourite, not to 100%: even a favourite is usually
+ * under 30%, and at full scale every bar would be a sliver. The printed
+ * percentage is the true value.
+ */
+function TitleChances({
+  probabilities,
+  teamNames,
+  runs,
+}: {
+  probabilities: Record<string, { winner: number }>;
+  teamNames: Record<string, string>;
+  runs: number;
+}) {
+  const rows = Object.entries(probabilities)
+    .map(([code, p]) => ({ code, name: teamNames[code] ?? code, value: p.winner }))
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 10);
+  const max = Math.max(...rows.map((r) => r.value), 0.0001);
+  const shown = rows.reduce((sum, r) => sum + r.value, 0);
+
+  return (
+    <section aria-labelledby="title-chances-heading" className="space-y-3">
+      <h3 id="title-chances-heading" className="eyebrow">
+        Chance of winning the tournament, top 10
+      </h3>
+      <ol className="space-y-1.5">
+        {rows.map((r, i) => (
+          <li key={r.code} className="grid grid-cols-[1.25rem_minmax(0,9rem)_1fr_3.5rem] items-center gap-2.5 text-sm sm:grid-cols-[1.25rem_minmax(0,11rem)_1fr_3.5rem]">
+            <span className="tabular text-xs text-fg-subtle">{i + 1}</span>
+            <span className="flex min-w-0 items-center gap-2">
+              <TeamFlag name={r.name} fifaCode={r.code} size="sm" />
+              <span className={i === 0 ? "truncate font-semibold text-foreground" : "truncate text-fg-muted"}>{r.name}</span>
+            </span>
+            <span className="h-2.5 overflow-hidden rounded-full bg-surface-3" aria-hidden="true">
+              <span className={i === 0 ? "block h-full rounded-full bg-primary" : "block h-full rounded-full bg-primary/55"} style={{ width: `${(r.value / max) * 100}%` }} />
+            </span>
+            <span className="tabular text-right font-semibold text-foreground">{(r.value * 100).toFixed(1)}%</span>
+          </li>
+        ))}
+      </ol>
+      <p className="text-xs leading-relaxed text-fg-subtle">
+        These ten account for {(shown * 100).toFixed(0)}% of {runs.toLocaleString()} simulated tournaments; the other 38
+        teams share the rest. A probability is not a prediction: the favourite here still fails to win most of the time.
+      </p>
+    </section>
   );
 }
 
@@ -110,15 +170,15 @@ export function SimulateView() {
   return (
     <div className="space-y-6">
       <Card>
-        <CardHeader className="pb-2">
-          <CardTitle>Run a simulation</CardTitle>
+        <CardHeader className="pb-3">
+          <CardTitle className="font-display text-xl font-semibold uppercase tracking-wide">Run a simulation</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex flex-wrap items-end gap-4">
             <div className="space-y-1.5">
-              <Label htmlFor="n_simulations">Simulations</Label>
+              <Label htmlFor="n_simulations" className="eyebrow block">Simulated tournaments</Label>
               <Select value={String(nSimulations)} onValueChange={(v) => setNSimulations(Number(v))}>
-                <SelectTrigger id="n_simulations" className="w-36">
+                <SelectTrigger id="n_simulations" className="h-11 w-40">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -130,14 +190,14 @@ export function SimulateView() {
                 </SelectContent>
               </Select>
             </div>
-            <div className="flex items-center gap-2 pb-2">
+            <div className="flex min-h-11 items-center gap-2.5">
               <Switch id="use_real_results" checked={useRealResults} onCheckedChange={setUseRealResults} />
               <Label htmlFor="use_real_results" className="cursor-pointer">
                 Use real 2026 results
               </Label>
             </div>
           </div>
-          <Button variant="gradient" onClick={handleRun} loading={isMutating}>
+          <Button size="lg" onClick={handleRun} loading={isMutating}>
             {!isMutating && <Play className="h-4 w-4" />}
             {isMutating ? "Simulating…" : "Run simulation"}
           </Button>
@@ -146,7 +206,7 @@ export function SimulateView() {
             it. Only what holds for every engine is said here; the result card
             carries the server's own description of what it simulated. */}
         <CardContent className="pt-0">
-          <p className="text-xs leading-relaxed text-fg-muted">
+          <p className="max-w-3xl text-xs leading-relaxed text-fg-subtle">
             The 2026 World Cup has been played; real results are on the Bracket tab. These are chances
             across {nSimulations.toLocaleString()} simulated tournaments, not a replay — a team that won
             the real thing can show a modest chance here. With the switch off, nothing from the real
@@ -165,12 +225,16 @@ export function SimulateView() {
 
       {data && !isMutating && (
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle>{title}</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="font-display text-xl font-semibold uppercase tracking-wide">{title}</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-6">
             {meta && <SimulationProvenance meta={meta} />}
-            <StageProbabilityTable probabilities={data.probabilities} teamNames={teamNames} />
+            <TitleChances probabilities={data.probabilities} teamNames={teamNames} runs={meta?.n_simulations ?? nSimulations} />
+            <div className="space-y-2">
+              <h3 className="eyebrow">Chance of reaching each round, all 48 teams</h3>
+              <StageProbabilityTable probabilities={data.probabilities} teamNames={teamNames} />
+            </div>
           </CardContent>
         </Card>
       )}

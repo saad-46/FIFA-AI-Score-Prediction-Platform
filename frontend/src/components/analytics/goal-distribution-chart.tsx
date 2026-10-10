@@ -2,7 +2,6 @@
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import type { GoalDistribution } from "@/types";
 
 interface GoalDistributionChartProps {
@@ -23,17 +22,31 @@ export function GoalDistributionChart({ data }: GoalDistributionChartProps) {
   const maxGoals = Math.max(...data.map((d) => d.goals));
   const isSynthetic = data.some((d) => d.is_synthetic);
 
+  // The API marks this series as synthetic when the database holds no
+  // goal-minute events, which is the case today. A bar chart of placeholder
+  // numbers looks exactly like a real finding, and a small "sample data" badge
+  // in the corner does not undo that -- so the placeholder is not drawn at all.
+  // When real goal-minute data exists the flag clears and the chart appears.
+  if (isSynthetic) {
+    return (
+      <div className="rounded-lg border border-dashed border-border px-5 py-10 text-center">
+        <p className="font-display text-xl font-semibold uppercase tracking-wide text-fg-muted">
+          Goal timing is not available
+        </p>
+        <p className="mx-auto mt-1.5 max-w-md text-sm leading-relaxed text-fg-subtle">
+          The match record holds final scores but not the minute each goal was scored, so there is nothing real to
+          chart here yet.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 border-b border-border/20">
-        <CardTitle className="font-mono text-xs tracking-wider uppercase text-foreground">
-          Goal Distribution Vector
+      <CardHeader className="border-b border-border pb-3">
+        <CardTitle className="font-display text-lg font-semibold uppercase tracking-wide text-foreground">
+          Goals by period of the match
         </CardTitle>
-        {isSynthetic && (
-          <Badge variant="synthetic" title="No goal-minute-level data exists yet — this chart uses placeholder data.">
-            Sample data
-          </Badge>
-        )}
       </CardHeader>
       <CardContent className="pt-6">
         <ResponsiveContainer width="100%" height={260}>
@@ -42,22 +55,21 @@ export function GoalDistributionChart({ data }: GoalDistributionChartProps) {
             <XAxis
               dataKey="minute"
               tickFormatter={(v) => MINUTE_LABELS[v] ?? `${v}'`}
-              tick={{ fill: "var(--fg-muted)", fontSize: 10, fontFamily: "monospace" }}
+              tick={{ fill: "var(--fg-muted)", fontSize: 10 }}
               axisLine={{ stroke: "var(--border)" }}
               tickLine={false}
             />
-            <YAxis tick={{ fill: "var(--fg-muted)", fontSize: 10, fontFamily: "monospace" }} axisLine={false} tickLine={false} />
+            <YAxis tick={{ fill: "var(--fg-muted)", fontSize: 10 }} axisLine={false} tickLine={false} />
             <Tooltip
               contentStyle={{
                 backgroundColor: "var(--surface)",
                 border: "1px solid var(--border)",
                 borderRadius: "4px",
                 color: "var(--foreground)",
-                fontFamily: "monospace",
-                fontSize: "11px",
+                fontSize: "12px",
               }}
-              formatter={(value) => [value as number, "GOALS"]}
-              labelFormatter={(label) => `INTERVAL: ${MINUTE_LABELS[label] ?? label}`}
+              formatter={(value) => [value as number, "Goals"]}
+              labelFormatter={(label) => `Minutes ${MINUTE_LABELS[label] ?? label}`}
             />
             <Bar dataKey="goals" radius={[2, 2, 0, 0]}>
               {data.map((entry, index) => (

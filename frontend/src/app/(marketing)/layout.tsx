@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "FIFA World Cup 2026 Intelligence Platform",
+  title: "FIFA AI — World Cup 2026, played and measured",
   description:
-    "AI-powered match score predictions, ELO metrics, and Monte Carlo tournament simulations built for football analysts.",
+    "Every match of the 2026 World Cup, the squads that played it, a match predictor and a tournament simulator, with the model's picks shown against the real results.",
 };
 
 export default function MarketingLayout({

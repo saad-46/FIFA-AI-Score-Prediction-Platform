@@ -4,15 +4,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 /** A row of stat-tile skeletons, e.g. for the dashboard/analytics KPI row. */
 export function StatsGridSkeleton({ count = 4 }: { count?: number }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    // Same geometry as StatsRow, so the strip does not jump when data arrives.
+    <div className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border lg:grid-cols-4">
       {Array.from({ length: count }).map((_, i) => (
-        <Card key={i}>
-          <CardContent className="p-5 space-y-3">
-            <Skeleton className="h-8 w-8 rounded-lg" />
-            <Skeleton className="h-6 w-20" />
-            <Skeleton className="h-3 w-24" />
-          </CardContent>
-        </Card>
+        <div key={i} className="space-y-3 bg-surface px-4 py-4 sm:px-5">
+          <Skeleton className="h-3 w-24" />
+          <Skeleton className="h-9 w-20" />
+        </div>
       ))}
     </div>
   );

@@ -1,28 +1,22 @@
 import Link from "next/link";
-import { Trophy } from "lucide-react";
 import { FeedbackWidget } from "@/components/feedback/feedback-widget";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-background py-8 mt-auto">
+    <footer className="mt-auto border-t border-border py-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-primary/30 bg-primary/15">
-              <Trophy className="h-3.5 w-3.5 text-primary" />
-            </div>
-            <span className="text-sm font-semibold text-foreground">
-              FIFA<span className="text-primary">AI</span>
-            </span>
-          </div>
-          <p className="text-xs text-fg-muted">
-            AI-powered football score predictions. For entertainment purposes only.
+          <span className="font-display text-lg font-bold uppercase leading-none tracking-wider text-foreground">
+            FIFA <span className="text-primary">AI</span>
+          </span>
+          <p className="text-center text-xs text-fg-muted">
+            Model-based football forecasts. Not affiliated with FIFA. For entertainment only.
           </p>
           <div className="flex items-center gap-4 text-xs text-fg-muted">
             {/* Anonymous feedback lives here rather than in a popup: findable
                 when someone wants it, invisible otherwise. */}
             <FeedbackWidget />
-            <Link href="/about" className="hover:text-foreground transition-colors">
+            <Link href="/about" className="inline-flex min-h-11 items-center px-2 hover:text-foreground transition-colors">
               About
             </Link>
             {/* No Privacy / Terms links here. They pointed at /privacy and

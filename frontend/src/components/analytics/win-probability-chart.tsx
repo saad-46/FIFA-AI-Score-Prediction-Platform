@@ -1,17 +1,6 @@
 "use client";
 
-import React from "react";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import type { PerformanceTrendPoint } from "@/types";
 
 interface WinProbabilityChartProps {
@@ -19,104 +8,132 @@ interface WinProbabilityChartProps {
   teamName: string;
 }
 
-const CustomTooltip = ({
+/** "2026-07" -> "Jul 26" */
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+function monthLabel(value: string): string {
+  const [year, month] = value.split("-").map(Number);
+  if (!year || !month) return value;
+  return `${MONTHS[month - 1]} ${String(year).slice(2)}`;
+}
+
+function ChartTooltip({
   active,
   payload,
   label,
 }: {
   active?: boolean;
-  payload?: Array<{ name: string; value: number; color: string }>;
+  payload?: { name: string; value: number; color: string }[];
   label?: string;
-}) => {
+}) {
   if (!active || !payload?.length) return null;
+  const total = payload.reduce((sum, p) => sum + (p.value ?? 0), 0);
   return (
-    <div className="rounded border border-border bg-surface/90 backdrop-blur-md p-3 shadow-2xl text-xs font-mono">
-      <p className="font-semibold text-foreground mb-2">{label}</p>
-      {payload.map((entry, i) => (
-        <div key={i} className="flex items-center gap-2 mt-1">
-          <div
-            className="h-2 w-2 rounded-full"
-            style={{ backgroundColor: entry.color }}
-          />
-          <span className="text-fg-muted uppercase tracking-wider">{entry.name}:</span>
-          <span className="font-bold text-foreground">{entry.value}</span>
-        </div>
+    <div className="rounded-md border border-border-strong bg-surface p-3 text-xs shadow-xl">
+      <p className="mb-1.5 font-semibold text-foreground">
+        {label ? monthLabel(label) : ""} · {total} {total === 1 ? "match" : "matches"}
+      </p>
+      {payload.map((entry) => (
+        <p key={entry.name} className="flex items-center gap-2 text-fg-muted">
+          <span className="h-2 w-2 rounded-sm" style={{ backgroundColor: entry.color }} aria-hidden="true" />
+          {entry.name}
+          <span className="tabular ml-auto pl-4 font-semibold text-foreground">{entry.value}</span>
+        </p>
       ))}
     </div>
   );
-};
+}
 
-export function WinProbabilityChart({
-  data,
-  teamName,
-}: WinProbabilityChartProps) {
+/**
+ * A team's results per month: wins, draws and losses stacked.
+ *
+ * Bars, not the three overlapping smoothed areas this used to be. The data is
+ * a count of matches in each month — a handful of whole numbers — and a curve
+ * drawn through them invents values between the points (2.4 wins in a month
+ * with none played). A stacked bar shows exactly what was counted, and its
+ * height is the number of matches played.
+ *
+ * (The component keeps its historical name; it charts results, not
+ * probabilities.)
+ */
+export function WinProbabilityChart({ data, teamName }: WinProbabilityChartProps) {
+  const totals = data.reduce(
+    (acc, d) => ({ w: acc.w + d.wins, d: acc.d + d.draws, l: acc.l + d.losses }),
+    { w: 0, d: 0, l: 0 }
+  );
+  const played = totals.w + totals.d + totals.l;
+  const summary = `${teamName}: ${played} matches across ${data.length} months with at least one match — ${totals.w} won, ${totals.d} drawn, ${totals.l} lost.`;
+
   return (
-    <Card>
-      <CardHeader className="pb-2 border-b border-border/20">
-        <CardTitle className="font-mono text-xs tracking-wider uppercase text-foreground">
-          {teamName} // Historical Performance Vector
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="pt-6">
-        <ResponsiveContainer width="100%" height={280}>
-          <AreaChart data={data} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-            <defs>
-              <linearGradient id="winsGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#10b981" stopOpacity={0.2} />
-                <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
-              </linearGradient>
-              <linearGradient id="drawsGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#475569" stopOpacity={0.15} />
-                <stop offset="95%" stopColor="#475569" stopOpacity={0} />
-              </linearGradient>
-              <linearGradient id="lossesGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#f43f5e" stopOpacity={0.15} />
-                <stop offset="95%" stopColor="#f43f5e" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.4} />
+    <figure className="rounded-lg border border-border bg-surface p-4 sm:p-5">
+      <figcaption className="mb-4">
+        <p className="font-display text-lg font-semibold uppercase tracking-wide text-foreground">Results by month</p>
+        <p className="mt-1 text-xs leading-relaxed text-fg-subtle">
+          Matches played each month, split into wins, draws and losses. Months with no match are not shown.
+        </p>
+      </figcaption>
+
+      {/* The chart is a picture of the table below it; assistive technology
+          gets the summary and the table instead. */}
+      <div role="img" aria-label={summary}>
+        <ResponsiveContainer width="100%" height={260}>
+          <BarChart data={data} margin={{ top: 4, right: 4, left: -24, bottom: 0 }} barCategoryGap="22%">
+            <CartesianGrid vertical={false} stroke="var(--border)" />
             <XAxis
               dataKey="date"
-              tick={{ fill: "var(--fg-muted)", fontSize: 10, fontFamily: "monospace" }}
-              axisLine={{ stroke: "var(--border)" }}
+              tickFormatter={monthLabel}
+              tick={{ fill: "var(--fg-subtle)", fontSize: 11 }}
+              axisLine={{ stroke: "var(--border-strong)" }}
               tickLine={false}
+              minTickGap={16}
             />
             <YAxis
-              tick={{ fill: "var(--fg-muted)", fontSize: 10, fontFamily: "monospace" }}
+              allowDecimals={false}
+              tick={{ fill: "var(--fg-subtle)", fontSize: 11 }}
               axisLine={false}
               tickLine={false}
+              label={{ value: "Matches", angle: -90, position: "insideLeft", offset: 34, fill: "var(--fg-subtle)", fontSize: 11 }}
             />
-            <Tooltip content={<CustomTooltip />} />
-            <Legend
-              wrapperStyle={{ fontSize: "10px", fontFamily: "monospace", color: "var(--fg-muted)", textTransform: "uppercase", letterSpacing: "1px" }}
-            />
-            <Area
-              type="monotone"
-              dataKey="wins"
-              name="Wins"
-              stroke="#10b981"
-              strokeWidth={2}
-              fill="url(#winsGrad)"
-            />
-            <Area
-              type="monotone"
-              dataKey="draws"
-              name="Draws"
-              stroke="#475569"
-              strokeWidth={2}
-              fill="url(#drawsGrad)"
-            />
-            <Area
-              type="monotone"
-              dataKey="losses"
-              name="Losses"
-              stroke="#f43f5e"
-              strokeWidth={2}
-              fill="url(#lossesGrad)"
-            />
-          </AreaChart>
+            <Tooltip content={<ChartTooltip />} cursor={{ fill: "var(--surface-2)" }} />
+            <Legend iconType="square" iconSize={9} wrapperStyle={{ fontSize: 12, color: "var(--fg-muted)", paddingTop: 8 }} />
+            <Bar dataKey="wins" name="Won" stackId="r" fill="var(--win)" isAnimationActive={false} />
+            <Bar dataKey="draws" name="Drawn" stackId="r" fill="var(--draw)" isAnimationActive={false} />
+            <Bar dataKey="losses" name="Lost" stackId="r" fill="var(--loss)" radius={[2, 2, 0, 0]} isAnimationActive={false} />
+          </BarChart>
         </ResponsiveContainer>
-      </CardContent>
-    </Card>
+      </div>
+
+      <details className="mt-3">
+        <summary className="cursor-pointer rounded text-xs font-semibold text-fg-muted hover:text-foreground">
+          Show the figures as a table
+        </summary>
+        <div className="mt-2 max-h-64 overflow-auto rounded-md border border-border">
+          <table className="w-full text-xs">
+            <caption className="sr-only">{summary}</caption>
+            <thead className="sticky top-0 bg-surface-2">
+              <tr>
+                <th scope="col" className="eyebrow px-3 py-1.5 text-left">Month</th>
+                <th scope="col" className="eyebrow px-2 py-1.5 text-right">Won</th>
+                <th scope="col" className="eyebrow px-2 py-1.5 text-right">Drawn</th>
+                <th scope="col" className="eyebrow px-2 py-1.5 text-right">Lost</th>
+                <th scope="col" className="eyebrow px-2 py-1.5 text-right">Goals for</th>
+                <th scope="col" className="eyebrow px-3 py-1.5 text-right">Goals against</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {data.map((d) => (
+                <tr key={d.date}>
+                  <th scope="row" className="px-3 py-1.5 text-left font-normal text-fg-muted">{monthLabel(d.date)}</th>
+                  <td className="px-2 py-1.5 text-right text-foreground">{d.wins}</td>
+                  <td className="px-2 py-1.5 text-right text-foreground">{d.draws}</td>
+                  <td className="px-2 py-1.5 text-right text-foreground">{d.losses}</td>
+                  <td className="px-2 py-1.5 text-right text-fg-muted">{d.goals_scored}</td>
+                  <td className="px-3 py-1.5 text-right text-fg-muted">{d.goals_conceded}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </figure>
   );
 }
