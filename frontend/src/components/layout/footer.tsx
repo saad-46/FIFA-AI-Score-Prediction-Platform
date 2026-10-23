@@ -11,6 +11,10 @@ export function Footer() {
           </span>
           <p className="text-center text-xs text-fg-muted">
             Model-based football forecasts. Not affiliated with FIFA. For entertainment only.
+            <span className="mt-1 block">
+              Fan-made project. Characters are original stylized figures, not official likenesses. Not affiliated with
+              any football association, club or player.
+            </span>
           </p>
           <div className="flex items-center gap-4 text-xs text-fg-muted">
             {/* Anonymous feedback lives here rather than in a popup: findable

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { MarketingHeader } from "@/components/layout/marketing-header";
 import { Footer } from "@/components/layout/footer";
 import { LandingFinal } from "@/components/dashboard/landing-final";
+import { IntroGate } from "@/components/intro/intro-gate";
 
 const SECTIONS = [
   {
@@ -41,6 +42,9 @@ export default function LandingPage() {
       <a href="#main" className="skip-link">
         Skip to content
       </a>
+      {/* Scroll-driven 3D intro. Self-contained: it sits above the page and
+          releases into it; skipping or failing leaves the page exactly as it was. */}
+      <IntroGate />
       <MarketingHeader />
 
       <main id="main" className="mx-auto w-full max-w-7xl flex-1 space-y-12 px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
