@@ -21,7 +21,12 @@ class Settings(BaseSettings):
     # Dev-only default; production origins are supplied via the ALLOWED_ORIGINS
     # env var (see .env / render.yaml) as a JSON array, e.g.
     # ALLOWED_ORIGINS=["https://my-app.vercel.app"]
-    ALLOWED_ORIGINS: List[str] = ["http://localhost:3000"]
+    ALLOWED_ORIGINS: List[str] = [
+        "http://localhost:3000",
+        "http://localhost:3001",  # next dev falls back to 3001 when 3000 is taken
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:3001",
+    ]
 
     # Supabase
     SUPABASE_URL: str
