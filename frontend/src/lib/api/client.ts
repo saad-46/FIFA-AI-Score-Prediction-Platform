@@ -1,8 +1,13 @@
 import axios, { type AxiosInstance } from "axios";
 import { createClient } from "@/lib/supabase/client";
 
+// NEXT_PUBLIC_API_URL is inlined at build time. The localhost fallback is for
+// `next dev` only: a production build without it must fail loudly in the
+// browser (requests to "/api/v1" 404 on the Vercel domain) rather than quietly
+// calling the visitor's own machine.
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+  process.env.NEXT_PUBLIC_API_URL ||
+  (process.env.NODE_ENV === "production" ? "/__missing_NEXT_PUBLIC_API_URL__" : "http://localhost:8000/api/v1");
 
 export const apiClient: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
