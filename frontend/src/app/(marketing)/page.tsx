@@ -51,7 +51,7 @@ export default function LandingPage() {
         <div className="max-w-3xl">
           <p className="eyebrow">FIFA World Cup 2026 · Complete</p>
           <h1 className="mt-3 text-balance font-display text-5xl font-bold uppercase leading-[0.92] tracking-wide text-foreground sm:text-7xl">
-            The World Cup, played and measured
+            The Game, Predicted.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-fg-muted sm:text-lg">
             Every match of the 2026 tournament, the squads that played it, and a prediction model whose picks were

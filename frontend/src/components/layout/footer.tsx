@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="font-display text-lg font-bold uppercase leading-none tracking-wider text-foreground">
-            FIFA <span className="text-primary">AI</span>
+            FIFA 26 <span className="text-primary">Intelligence</span>
           </span>
           <p className="text-center text-xs text-fg-muted">
             Model-based football forecasts. Not affiliated with FIFA. For entertainment only.

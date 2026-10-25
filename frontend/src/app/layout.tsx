@@ -25,8 +25,8 @@ const barlowCondensed = Barlow_Condensed({
 
 export const metadata: Metadata = {
   title: {
-    default: "FIFA AI — Score Prediction Platform",
-    template: "%s | FIFA AI",
+    default: "FIFA 26 Intelligence — The Game, Predicted.",
+    template: "%s | FIFA 26 Intelligence",
   },
   description:
     "Football match predictions and World Cup 2026 analysis: win probabilities, expected goals, squads, the full bracket and tournament simulations.",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "FIFA AI — Score Prediction Platform",
-    description: "AI-powered FIFA match score predictions",
-    siteName: "FIFA AI",
+    title: "FIFA 26 Intelligence — The Game, Predicted.",
+    description: "AI-powered World Cup match predictions and analysis. Fan-made; not affiliated with FIFA.",
+    siteName: "FIFA 26 Intelligence",
   },
 };
 
