@@ -11,6 +11,7 @@ import { ErrorState } from "@/components/ui/error-state";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SectionHeader, Metric } from "@/components/ui/section";
 import { TeamFlag } from "@/components/football/team-flag";
+import { FootballPitchBackground } from "@/components/football/pitch-background";
 import { useUser } from "@/hooks/use-user";
 import { cn } from "@/lib/utils";
 import { formatMatchDate, scoreQualifier, sideScores, stageLabel, predictionOutcome } from "@/lib/wc2026";
@@ -261,27 +262,23 @@ export function FinalHero({ final }: { final: BracketNodeData }) {
   return (
     <section
       aria-labelledby="final-heading"
-      className="relative overflow-hidden rounded-lg border border-border bg-surface"
+      className="relative isolate overflow-hidden rounded-xl border border-black/20 text-white shadow-[0_18px_40px_-20px_rgba(6,40,18,0.65)]"
     >
-      {/* Halfway line and centre circle, drawn once, behind the scoreline. */}
-      <svg
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 h-full w-full text-border"
-        preserveAspectRatio="xMidYMid slice"
-        viewBox="0 0 800 300"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1"
-      >
-        <path d="M400 0v300" />
-      </svg>
+      <FootballPitchBackground />
 
-      <div className="relative px-5 py-7 sm:px-8 sm:py-9">
+      <div className="relative px-5 py-6 sm:px-8 sm:py-8 lg:px-12">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="eyebrow">
-            FIFA World Cup 2026 · Final{date ? ` · ${date}${year ? ` ${year}` : ""}` : ""}
+          {/* On a phone the date drops to its own line instead of breaking mid-phrase. */}
+          <p className="text-[11px] font-semibold uppercase leading-snug tracking-[0.12em] text-white/90 sm:text-xs sm:tracking-[0.14em]">
+            <span className="block sm:inline">FIFA World Cup 2026 · Final</span>
+            {date && (
+              <>
+                <span className="hidden sm:inline"> · </span>
+                <span className="block sm:inline">{`${date}${year ? ` ${year}` : ""}`}</span>
+              </>
+            )}
           </p>
-          <span className="inline-flex items-center gap-1.5 rounded border border-border-strong bg-surface-2 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-fg-muted">
+          <span className="inline-flex shrink-0 items-center rounded-md bg-white/85 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-slate-800 sm:px-2.5 sm:text-[11px]">
             Tournament complete
           </span>
         </div>
@@ -291,10 +288,8 @@ export function FinalHero({ final }: { final: BracketNodeData }) {
           {qualifier ? ` (${qualifier})` : ""}
         </h2>
 
-        {/* Phones: one row per team, name left and goals right, the way a live
-            score is read on a handset. Three columns would leave each name
-            ~85px, which broke "ARGENTINA" mid-word. */}
-        <div className="mt-6 divide-y divide-border rounded-md border border-border bg-surface/80 sm:hidden" aria-hidden="true">
+        {/* Phones: one row per team, name left and goals right, the way a live score is read on a handset. */}
+        <div className="mt-5 divide-y divide-white/15 rounded-md border border-white/20 bg-[#0b2d16]/90 shadow-[0_6px_18px_-8px_rgba(0,0,0,0.6)] sm:hidden" aria-hidden="true">
           {[
             { team: final.home_team, goals: scores.home },
             { team: final.away_team, goals: scores.away },
@@ -304,37 +299,37 @@ export function FinalHero({ final }: { final: BracketNodeData }) {
               <span
                 className={cn(
                   "min-w-0 flex-1 font-display text-2xl font-bold uppercase leading-none tracking-wide",
-                  champion === row.team ? "text-foreground" : "text-fg-muted"
+                  champion === row.team ? "text-white" : "text-white/75"
                 )}
               >
                 {row.team}
                 {champion === row.team && (
-                  <span className="ml-2 inline-flex items-center gap-1 align-middle font-sans text-[11px] font-semibold tracking-wider text-primary">
+                  <span className="ml-2 inline-flex items-center gap-1 align-middle font-sans text-[11px] font-semibold tracking-wider text-sky-200">
                     <Trophy className="h-3.5 w-3.5" />
                     Champions
                   </span>
                 )}
               </span>
-              <span className="scoreline text-4xl text-foreground">{row.goals ?? "–"}</span>
+              <span className="scoreline text-4xl text-white">{row.goals ?? "–"}</span>
             </div>
           ))}
           {qualifier && (
-            <p className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-fg-muted">
+            <p className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white/80">
               {qualifier === "aet" ? "After extra time" : qualifier}
             </p>
           )}
         </div>
 
-        <div className="mt-7 hidden grid-cols-[1fr_auto_1fr] items-start gap-3 sm:grid sm:gap-8" aria-hidden="true">
+        <div className="mt-8 hidden grid-cols-[1fr_auto_1fr] items-start gap-3 sm:grid sm:gap-8" aria-hidden="true">
           <FinalSide team={final.home_team} winner={champion === final.home_team} align="right" />
           <div className="self-center text-center">
-            <p className="scoreline text-6xl text-foreground sm:text-8xl">
+            <p className="scoreline text-6xl text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] sm:text-8xl">
               {scores.home ?? "–"}
-              <span className="mx-2 text-fg-subtle sm:mx-4">–</span>
+              <span className="mx-2 text-white/70 sm:mx-4">–</span>
               {scores.away ?? "–"}
             </p>
             {qualifier && (
-              <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-fg-muted">
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/85">
                 {qualifier === "aet" ? "After extra time" : qualifier}
               </p>
             )}
@@ -342,10 +337,8 @@ export function FinalHero({ final }: { final: BracketNodeData }) {
           <FinalSide team={final.away_team} winner={champion === final.away_team} align="left" />
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-border pt-4 text-sm">
-          <p className="text-fg-muted">
-            {final.venue && <span>{final.venue}</span>}
-          </p>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-white/25 pt-4 text-sm">
+          <p className="text-white/90">{final.venue}</p>
           <div className="flex flex-wrap gap-2">
             <Button asChild size="sm">
               <Link href="/tournaments">
@@ -353,7 +346,12 @@ export function FinalHero({ final }: { final: BracketNodeData }) {
                 <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
-            <Button asChild size="sm" variant="outline">
+            <Button
+              asChild
+              size="sm"
+              variant="outline"
+              className="border-transparent bg-white text-slate-900 hover:bg-white/90 hover:text-slate-900"
+            >
               <Link href="/predict">Predict a match</Link>
             </Button>
           </div>
@@ -367,19 +365,18 @@ function FinalSide({ team, winner, align }: { team: string | null; winner: boole
   if (!team) return <div />;
   return (
     <div className={cn("flex min-w-0 flex-col gap-2", align === "right" ? "items-end text-right" : "items-start text-left")}>
-      <TeamFlag name={team} size="xl" />
+      <TeamFlag name={team} size="xl" className="shadow-md" />
       <p
         className={cn(
-          // Wraps only at spaces ("Bosnia and Herzegovina"); a single word is
-          // never split.
-          "max-w-full break-normal font-display text-2xl font-bold uppercase leading-none tracking-wide sm:text-3xl lg:text-4xl",
-          winner ? "text-foreground" : "text-fg-muted"
+          // Wraps only at spaces ("Bosnia and Herzegovina"); a single word is never split.
+          "max-w-full break-normal font-display text-2xl font-bold uppercase leading-none tracking-wide drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] sm:text-3xl lg:text-4xl",
+          winner ? "text-white" : "text-white/85"
         )}
       >
         {team}
       </p>
       {winner ? (
-        <p className="inline-flex h-4 items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
+        <p className="inline-flex h-4 items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-sky-200">
           <Trophy className="h-3.5 w-3.5" />
           Champions
         </p>
