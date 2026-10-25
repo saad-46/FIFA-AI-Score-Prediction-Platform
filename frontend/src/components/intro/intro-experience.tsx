@@ -200,8 +200,7 @@ export default function IntroExperience({ onSkip }: { onSkip: () => void }) {
   const [store] = useState(createProgressStore);
   const [tier] = useState(detectTier);
   const [ready, setReady] = useState(false);
-  // The realistic footballer is opt-in while it is being built: add
-  // ?introCharacter=realistic to the URL. If the model fails to load, the
+  // The realistic footballer is the default (?introCharacter=procedural opts out). If the model fails to load, the
   // procedural figure takes over rather than leaving the scene empty.
   const [wantsRealistic] = useState(realisticRequested);
   const builtUntil = wantsRealistic ? BUILT_UNTIL_REALISTIC : BUILT_UNTIL;
@@ -423,7 +422,7 @@ export default function IntroExperience({ onSkip }: { onSkip: () => void }) {
 
       <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between gap-3 p-4 sm:p-6">
         <span className="font-display text-xl font-bold uppercase leading-none tracking-wider text-foreground">
-          FIFA <span className="text-primary">AI</span>
+          FIFA 26 <span className="text-primary">Intelligence</span>
         </span>
         <div className="pointer-events-auto flex items-center gap-2">
           <button
@@ -493,11 +492,11 @@ export default function IntroExperience({ onSkip }: { onSkip: () => void }) {
           Crafted frame by frame with code.
         </p>
         <div ref={brandRef} className="mt-12 text-center opacity-0">
-          <p className="font-display text-5xl font-bold uppercase leading-none tracking-wider text-foreground sm:text-7xl">
-            FIFA <span className="text-primary">AI</span>
+          <p className="font-display text-balance text-4xl font-bold uppercase leading-none tracking-wider text-foreground sm:text-7xl">
+            FIFA 26 <span className="text-primary">Intelligence</span>
           </p>
           <p className="mt-3 max-w-[22rem] text-balance text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-fg-muted sm:max-w-none sm:text-xs">
-            The World Cup, played and measured
+            The Game, Predicted.
           </p>
           <p className="mx-auto mt-6 max-w-md text-balance text-[0.6875rem] leading-relaxed text-fg-muted/80">
             Motion built on open-licensed assets: MakeHuman (CC0) bodies and CMU motion-capture data.

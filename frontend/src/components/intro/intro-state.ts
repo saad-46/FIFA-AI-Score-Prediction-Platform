@@ -14,9 +14,13 @@ export const SKIP_KEY = "fifa-ai:intro-skipped";
 /** Set on <html> while the intro is skipped; CSS hides the intro from it. */
 export const SKIP_ATTR = "data-intro-skipped";
 
-/** The realistic footballers are opt-in while they are being built. */
+/**
+ * The realistic footballers (all eight players, then the ending) are the default. The older procedural figure,
+ * which only covers the first two players, is kept as `?introCharacter=procedural`; it is also what takes over
+ * if the realistic model fails to load.
+ */
 export function realisticRequested(): boolean {
-  return typeof window !== "undefined" && new URLSearchParams(window.location.search).get("introCharacter") === "realistic";
+  return typeof window !== "undefined" && new URLSearchParams(window.location.search).get("introCharacter") !== "procedural";
 }
 
 export type IntroMode = "ssr" | "play" | "skipped" | "reduced" | "unsupported";
