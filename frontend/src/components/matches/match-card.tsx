@@ -29,12 +29,23 @@ function readableStage(stage?: string | null): string | null {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
+/** How a knockout tie was settled, in words: "After extra time" or "Penalties 3–4"; null for a normal result. */
+export function settledNote(match: Pick<Match, "result_method" | "home_penalties" | "away_penalties">): string | null {
+  if (match.result_method === "Penalties" && match.home_penalties != null && match.away_penalties != null) {
+    return `Penalties ${match.home_penalties}–${match.away_penalties}`;
+  }
+  if (match.result_method === "Extra Time") return "After extra time";
+  return null;
+}
+
 export function MatchCard({ match }: MatchCardProps) {
   const isCompleted = match.status === "completed";
   const isLive = match.status === "live";
   const hasScore = match.home_score !== null && match.away_score !== null;
-  const homeWon = isCompleted && hasScore && match.home_score! > match.away_score!;
-  const awayWon = isCompleted && hasScore && match.away_score! > match.home_score!;
+  // A shoot-out leaves the score level; the penalties say who went through.
+  const shootout = match.home_penalties != null && match.away_penalties != null && match.home_penalties !== match.away_penalties;
+  const homeWon = isCompleted && hasScore && (match.home_score! > match.away_score! || (match.home_score === match.away_score && shootout && match.home_penalties! > match.away_penalties!));
+  const awayWon = isCompleted && hasScore && (match.away_score! > match.home_score! || (match.home_score === match.away_score && shootout && match.away_penalties! > match.home_penalties!));
   // A scheduled row dated in the past is not evidence the match was not played:
   // the record simply holds no result for it (the 2026 knockout rows are in this
   // state). Say what is known -- there is no recorded score -- and keep
@@ -62,6 +73,9 @@ export function MatchCard({ match }: MatchCardProps) {
           </span>
         ) : (
           <span className="text-xs leading-tight text-fg-subtle">{noResultLabel}</span>
+        )}
+        {settledNote(match) && (
+          <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-wide text-fg-subtle">{settledNote(match)}</span>
         )}
         {isLive && (
           <span className="mt-0.5 block text-[10px] font-bold uppercase tracking-wider text-loss">Live</span>

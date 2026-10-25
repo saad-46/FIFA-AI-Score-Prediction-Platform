@@ -2,8 +2,11 @@
 Match service — queries match history and analytics.
 """
 
+import csv
 import logging
 import math
+from functools import lru_cache
+from pathlib import Path
 import uuid as uuid_module
 from datetime import date
 from typing import Optional
@@ -38,6 +41,112 @@ def _is_valid_uuid(value: str) -> bool:
     except (ValueError, AttributeError, TypeError):
         return False
 
+# ── World Cup 2026 ───────────────────────────────────────────────────────────
+# The legacy `matches` table holds an out-of-date snapshot of the 2026 tournament (89 of 104 fixtures, some with
+# other dates and no results). The validated canonical dataset is the record the bracket, schedule and standings
+# endpoints already use, so the match list for that tournament reads it too; otherwise the same match would show
+# a score on the bracket and "No result recorded" here. Nothing is estimated: a field the source leaves empty
+# stays empty.
+_CANONICAL_MATCHES = Path(__file__).resolve().parents[1] / "data" / "canonical" / "canonical_matches.csv"
+
+
+def _wants_wc2026(tournament: Optional[str], year: Optional[int]) -> bool:
+    t = (tournament or "").lower()
+    return "world cup" in t and "2026" in t and year in (None, 2026)
+
+
+def _int_or_none(value: str) -> Optional[int]:
+    return int(value) if value not in (None, "") else None
+
+
+@lru_cache(maxsize=1)
+def _canonical_wc2026_rows() -> tuple[dict, ...]:
+    with _CANONICAL_MATCHES.open(encoding="utf-8", newline="") as fh:
+        rows = [r for r in csv.DictReader(fh) if r["year"] == "2026"]
+    rows.sort(key=lambda r: (r["date"], _int_or_none(r["match_number"]) or 0), reverse=True)
+    return tuple(rows)
+
+
+def _canonical_filtered(team: Optional[str], from_date: Optional[date], to_date: Optional[date]) -> list[dict]:
+    rows = list(_canonical_wc2026_rows())
+    if team:
+        needle = team.lower()
+        rows = [r for r in rows if needle in r["home_team"].lower() or needle in r["away_team"].lower()]
+    if from_date:
+        rows = [r for r in rows if r["date"] >= from_date.isoformat()]
+    if to_date:
+        rows = [r for r in rows if r["date"] <= to_date.isoformat()]
+    return rows
+
+
+async def _canonical_responses(db: AsyncSession, chunk: list[dict]) -> list[MatchResponse]:
+    names = {n for r in chunk for n in (r["home_team"], r["away_team"]) if n}
+    teams = {}
+    if names:
+        found = await db.execute(select(Team).where(Team.name.in_(names)))
+        teams = {t.name: t for t in found.scalars().all()}
+
+    def side(name: str) -> Optional[dict]:
+        t = teams.get(name)
+        return {"id": t.id if t else name, "name": name, "country": t.country if t else name} if name else None
+
+    data = []
+    for r in chunk:
+        # The score that decided the tie: extra time when it was played, else full time (extra-time scores in the
+        # source are cumulative, which is how the bracket shows them).
+        et = r["home_score_et"] != "" and r["away_score_et"] != ""
+        home = _int_or_none(r["home_score_et"] if et else r["home_score_ft"])
+        away = _int_or_none(r["away_score_et"] if et else r["away_score_ft"])
+        done = home is not None and away is not None
+        home_team, away_team = side(r["home_team"]), side(r["away_team"])
+        data.append(MatchResponse(
+            id=r["match_id"], date=r["date"],
+            home_team_id=str(home_team["id"]) if home_team else "",
+            away_team_id=str(away_team["id"]) if away_team else None,
+            home_team=home_team, away_team=away_team,
+            home_score=home, away_score=away,
+            tournament="FIFA World Cup 2026", stage=r["stage"], tournament_year=2026,
+            neutral_venue=r["neutral_venue"].lower() in ("1", "true", "yes"),
+            city=r["city"] or None, country=r["host_country"] or None,
+            status="completed" if done else "scheduled",
+            result_method=r["result_method"] or None,
+            home_penalties=_int_or_none(r["home_penalties"]), away_penalties=_int_or_none(r["away_penalties"]),
+        ))
+    return data
+
+
+async def _get_wc2026_matches(
+    db: AsyncSession, page: int, page_size: int, team: Optional[str],
+    from_date: Optional[date], to_date: Optional[date],
+) -> PaginatedMatchResponse:
+    rows = _canonical_filtered(team, from_date, to_date)
+    total = len(rows)
+    chunk = rows[(page - 1) * page_size: page * page_size]
+    return PaginatedMatchResponse(
+        data=await _canonical_responses(db, chunk), total=total, page=page, page_size=page_size,
+        total_pages=math.ceil(total / page_size),
+    )
+
+
+# The legacy table also holds the 2026 tournament twice, both out of date: 89 rows under "FIFA World Cup 2026" and
+# the 72 group matches under plain "FIFA World Cup". The canonical dataset replaces both.
+_WC2026_START = date(2026, 6, 11)
+
+
+def _is_stale_wc2026_row():
+    return or_(
+        Match.tournament == "FIFA World Cup 2026",
+        (Match.tournament == "FIFA World Cup") & (Match.date >= _WC2026_START),
+    )
+
+
+async def count_all_matches(db: AsyncSession) -> int:
+    """How many matches the list shows when nothing is filtered: every legacy row except the stale 2026 ones,
+    plus the canonical 2026 matches. The Overview total and the Matches page use this one definition."""
+    legacy = (await db.execute(select(func.count()).select_from(Match).where(~_is_stale_wc2026_row()))).scalar() or 0
+    return legacy + len(_canonical_wc2026_rows())
+
+
 
 @async_ttl_cache(ttl_seconds=60, max_size=256, ignore_args={0})
 async def get_matches(
@@ -61,6 +170,9 @@ async def get_matches(
     paying that RTT twice per unique page/filter combo within a request
     burst, without risking meaningful staleness (match data changes
     infrequently; see load_matches_dataframe's own 6h refresh cadence).
+    if _wants_wc2026(tournament, year):
+        return await _get_wc2026_matches(db, page, page_size, team, from_date, to_date)
+
     """
     # joinedload, not selectinload. Both return identical objects, but
     # selectinload resolves each relationship with its own follow-up SELECT, so
@@ -99,6 +211,7 @@ async def get_matches(
             # drop the Canada-vs-TBD Round-of-16 fixture entirely).
             .outerjoin(away_alias, Match.away_team_id == away_alias.id)
             .where(or_(home_alias.name.ilike(f"%{team}%"), away_alias.name.ilike(f"%{team}%")))
+    stmt = stmt.where(~_is_stale_wc2026_row())
         )
     if tournament:
         stmt = stmt.where(Match.tournament.ilike(f"%{tournament}%"))
@@ -114,13 +227,16 @@ async def get_matches(
     total_result = await db.execute(count_stmt)
     total = total_result.scalar() or 0
 
+    # With no tournament chosen, the 2026 World Cup matches (all newer than every other row) lead the list.
+    canonical = _canonical_filtered(team, from_date, to_date) if not tournament and year in (None, 2026) else []
     # Paginate
     offset = (page - 1) * page_size
-    stmt = stmt.offset(offset).limit(page_size)
-    result = await db.execute(stmt)
-    matches = result.scalars().all()
+    lead = canonical[offset: offset + page_size]
+    total += len(canonical)
+    stmt = stmt.offset(max(0, offset - len(canonical))).limit(page_size - len(lead))
+    matches = (await db.execute(stmt)).scalars().all() if page_size - len(lead) > 0 else []
 
-    match_responses = []
+    match_responses = await _canonical_responses(db, lead) if lead else []
     for m in matches:
         home_team = m.home_team
         away_team = m.away_team

@@ -26,6 +26,11 @@ class MatchResponse(BaseModel):
     home_xg: Optional[float] = None
     away_xg: Optional[float] = None
     status: str
+    # How a completed knockout tie was settled ("Normal Time", "Extra Time", "Penalties"); with a shoot-out the
+    # score is level and the penalties say who went through. None when the source does not record it.
+    result_method: Optional[str] = None
+    home_penalties: Optional[int] = None
+    away_penalties: Optional[int] = None
 
     model_config = {"from_attributes": True}
 

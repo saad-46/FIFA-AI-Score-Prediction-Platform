@@ -22,7 +22,7 @@ from app.schemas.analytics import (
     TopTeamSummary,
 )
 from app.schemas.wc2026 import ModelEvaluationResponse
-from app.services.match_service import get_upcoming_matches
+from app.services.match_service import count_all_matches, get_upcoming_matches
 from app.services.prediction_service import get_recent_predictions
 from app.services.team_service import get_top_teams
 from app.data import wc2026 as wc2026_data
@@ -58,7 +58,7 @@ async def _global_dashboard_block(db: AsyncSession):
     and recent predictions stay uncached in the endpoint below, keyed to the
     signed-in user, so a freshly saved prediction is never served stale.
     """
-    total_matches = (await db.execute(select(func.count()).select_from(Match))).scalar() or 0
+    total_matches = await count_all_matches(db)
     total_teams = (await db.execute(select(func.count()).select_from(Team))).scalar() or 0
     top_teams_stats = await get_top_teams(db, limit=5)
     upcoming = await get_upcoming_matches(db, limit=5)

@@ -56,7 +56,7 @@ export function DashboardView() {
           />
         </div>
       ) : final ? (
-        <FinalHero final={final} third={third} />
+        <FinalHero final={final} />
       ) : null}
 
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
@@ -251,7 +251,7 @@ export function DashboardView() {
 
 /* ── The final: the page's single focal point ─────────────────────────────── */
 
-export function FinalHero({ final, third }: { final: BracketNodeData; third: BracketNodeData | null }) {
+export function FinalHero({ final }: { final: BracketNodeData }) {
   const scores = sideScores(final);
   const qualifier = scoreQualifier(final);
   const champion = final.winner_team;
@@ -274,9 +274,6 @@ export function FinalHero({ final, third }: { final: BracketNodeData; third: Bra
         strokeWidth="1"
       >
         <path d="M400 0v300" />
-        <circle cx="400" cy="150" r="78" />
-        <rect x="-1" y="70" width="110" height="160" />
-        <rect x="691" y="70" width="110" height="160" />
       </svg>
 
       <div className="relative px-5 py-7 sm:px-8 sm:py-9">
@@ -328,9 +325,9 @@ export function FinalHero({ final, third }: { final: BracketNodeData; third: Bra
           )}
         </div>
 
-        <div className="mt-7 hidden grid-cols-[1fr_auto_1fr] items-center gap-3 sm:grid sm:gap-8" aria-hidden="true">
+        <div className="mt-7 hidden grid-cols-[1fr_auto_1fr] items-start gap-3 sm:grid sm:gap-8" aria-hidden="true">
           <FinalSide team={final.home_team} winner={champion === final.home_team} align="right" />
-          <div className="text-center">
+          <div className="self-center text-center">
             <p className="scoreline text-6xl text-foreground sm:text-8xl">
               {scores.home ?? "–"}
               <span className="mx-2 text-fg-subtle sm:mx-4">–</span>
@@ -348,14 +345,6 @@ export function FinalHero({ final, third }: { final: BracketNodeData; third: Bra
         <div className="mt-8 flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-border pt-4 text-sm">
           <p className="text-fg-muted">
             {final.venue && <span>{final.venue}</span>}
-            {third?.winner_team && (
-              <>
-                <span className="mx-2 text-fg-subtle" aria-hidden="true">
-                  ·
-                </span>
-                Third place: <span className="font-semibold text-foreground">{third.winner_team}</span>
-              </>
-            )}
           </p>
           <div className="flex flex-wrap gap-2">
             <Button asChild size="sm">
@@ -389,11 +378,13 @@ function FinalSide({ team, winner, align }: { team: string | null; winner: boole
       >
         {team}
       </p>
-      {winner && (
-        <p className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
+      {winner ? (
+        <p className="inline-flex h-4 items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
           <Trophy className="h-3.5 w-3.5" />
           Champions
         </p>
+      ) : (
+        <span className="h-4" aria-hidden="true" />
       )}
     </div>
   );

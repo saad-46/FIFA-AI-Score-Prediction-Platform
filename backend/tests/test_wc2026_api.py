@@ -284,7 +284,8 @@ async def test_get_match_by_id_not_found_returns_404_not_500():
 
 @pytest.mark.asyncio
 async def test_list_matches_does_not_drop_match_with_null_away_team():
-    """Regression test: a match with away_team_id IS NULL (the real WC2026
+    """(Filtered to a non-2026 tournament so the DB path is what is exercised.)
+    Regression test: a match with away_team_id IS NULL (the real WC2026
     Canada Round-of-16 fixture whose opponent is still TBD) must still
     appear in the paginated /matches response instead of being silently
     filtered out, which was the pre-fix behaviour (match_service.py used to
@@ -311,7 +312,7 @@ async def test_list_matches_does_not_drop_match_with_null_away_team():
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
     ) as client:
-        response = await client.get("/api/v1/matches", params={"team": "Canada"})
+        response = await client.get("/api/v1/matches", params={"team": "Canada", "tournament": "Regression Cup"})
 
     assert response.status_code == 200
     data = response.json()
@@ -356,7 +357,7 @@ async def test_list_matches_includes_both_null_and_resolved_away_teams():
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
     ) as client:
-        response = await client.get("/api/v1/matches")
+        response = await client.get("/api/v1/matches", params={"tournament": "Regression Cup"})
 
     assert response.status_code == 200
     data = response.json()

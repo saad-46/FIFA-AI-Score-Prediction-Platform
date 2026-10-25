@@ -69,6 +69,10 @@ export interface Match {
   external_match_id?: string;
   data_source?: string;
   status: "scheduled" | "live" | "completed";
+  /** "Normal Time", "Extra Time" or "Penalties" when the source records it. */
+  result_method?: string | null;
+  home_penalties?: number | null;
+  away_penalties?: number | null;
 }
 
 export interface TeamStatistics {

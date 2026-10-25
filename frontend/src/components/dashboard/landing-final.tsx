@@ -20,6 +20,5 @@ export function LandingFinal() {
 
   const final = data.nodes.find((n) => n.stage === "final");
   if (!final) return null;
-  const third = data.nodes.find((n) => n.stage === "third_place") ?? null;
-  return <FinalHero final={final} third={third} />;
+  return <FinalHero final={final} />;
 }
