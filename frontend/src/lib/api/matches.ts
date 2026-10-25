@@ -3,7 +3,6 @@ import type {
   Match,
   MatchDetail,
   TournamentStats,
-  GoalDistribution,
   ScorelineFrequency,
   PaginatedResponse,
 } from "@/types";
@@ -55,18 +54,6 @@ export const matchesApi = {
    */
   async getTournaments(): Promise<string[]> {
     const { data } = await apiClient.get<string[]>("/matches/tournaments");
-    return data;
-  },
-
-  /**
-   * Get goal distribution by minute. Every point is currently synthetic
-   * placeholder data (is_synthetic: true) — always badge it in the UI.
-   */
-  async getGoalDistribution(tournament?: string): Promise<GoalDistribution[]> {
-    const { data } = await apiClient.get<GoalDistribution[]>(
-      "/matches/analytics/goal-distribution",
-      { params: { tournament } }
-    );
     return data;
   },
 

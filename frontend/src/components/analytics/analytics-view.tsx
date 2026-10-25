@@ -1,12 +1,11 @@
 "use client";
 
 import useSWR from "swr";
-import { BarChart3, Target, TrendingUp } from "lucide-react";
+import { BarChart3, TrendingUp } from "lucide-react";
 import { analyticsApi } from "@/lib/api/analytics";
 import { matchesApi } from "@/lib/api/matches";
 import { getApiErrorMessage } from "@/lib/api/client";
 import { StatsCard, StatsRow } from "@/components/analytics/stats-card";
-import { GoalDistributionChart } from "@/components/analytics/goal-distribution-chart";
 import { ScorelineFrequencyChart } from "@/components/analytics/scoreline-frequency-chart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -27,9 +26,6 @@ export function AnalyticsView() {
     "model-evaluation",
     analyticsApi.getModelEvaluation,
     { revalidateOnFocus: false }
-  );
-  const { data: goalDist, isLoading: goalDistLoading } = useSWR("goal-distribution", () =>
-    matchesApi.getGoalDistribution()
   );
   const { data: scorelines, isLoading: scorelinesLoading } = useSWR("scoreline-frequency", () =>
     matchesApi.getScorelineFrequency()
@@ -73,7 +69,6 @@ export function AnalyticsView() {
       <Tabs defaultValue="overview">
         <TabsList aria-label="Analytics sections">
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="goals">Goal timing</TabsTrigger>
           <TabsTrigger value="results">Scorelines</TabsTrigger>
           <TabsTrigger value="model">Model accuracy</TabsTrigger>
         </TabsList>
@@ -132,16 +127,6 @@ export function AnalyticsView() {
               </CardContent>
             </Card>
           </div>
-        </TabsContent>
-
-        <TabsContent value="goals">
-          {goalDistLoading ? (
-            <Skeleton className="h-64 w-full" />
-          ) : goalDist && goalDist.length > 0 ? (
-            <GoalDistributionChart data={goalDist} />
-          ) : (
-            <EmptyState icon={Target} title="No goal-timing data is available" />
-          )}
         </TabsContent>
 
         <TabsContent value="results">

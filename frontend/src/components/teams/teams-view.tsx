@@ -12,29 +12,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TeamFlag } from "@/components/football/team-flag";
 import { cn } from "@/lib/utils";
-import type { Team } from "@/types";
-
-type SortKey = "name" | "group" | "rank" | "elo";
-type SortDir = "asc" | "desc";
-
-const collator = new Intl.Collator("en", { sensitivity: "base" });
-
-/** Nulls always sort last, whichever direction is active. */
-function compare(a: Team, b: Team, key: SortKey, dir: SortDir): number {
-  const sign = dir === "asc" ? 1 : -1;
-  const byName = collator.compare(a.name, b.name);
-  if (key === "name") return sign * byName;
-  if (key === "group") {
-    const d = collator.compare(a.wc2026_group ?? "~", b.wc2026_group ?? "~");
-    return d !== 0 ? sign * d : byName;
-  }
-  const av = key === "rank" ? a.fifa_ranking : a.elo_rating;
-  const bv = key === "rank" ? b.fifa_ranking : b.elo_rating;
-  if (av == null && bv == null) return byName;
-  if (av == null) return 1;
-  if (bv == null) return -1;
-  return av !== bv ? sign * (av - bv) : byName;
-}
+import { compareTeams as compare, defaultSortDir, describeSort, type SortDir, type SortKey } from "@/lib/team-sort";
 
 /**
  * The World Cup 2026 team directory: all 48 teams in one sortable table.
@@ -81,7 +59,7 @@ export function TeamsView() {
         ? { key, dir: s.dir === "asc" ? "desc" : "asc" }
         // First click sorts the way people read each column: A–Z, best rank
         // first (lowest number), highest Elo first.
-        : { key, dir: key === "elo" ? "desc" : "asc" }
+        : { key, dir: defaultSortDir(key) }
     );
 
   return (
@@ -140,7 +118,7 @@ export function TeamsView() {
             <thead className="border-b border-border bg-surface-2">
               <tr>
                 <SortHeader label="Team" sortKey="name" sort={sort} onSort={toggleSort} className="pl-3 text-left sm:pl-4" />
-                <SortHeader label="Group" short="Grp" sortKey="group" sort={sort} onSort={toggleSort} className="w-16 text-left sm:w-20" />
+                <SortHeader label="Group" short="Grp" sortKey="group" sort={sort} onSort={toggleSort} className="w-16 text-left max-[379px]:hidden sm:w-20" />
                 <th scope="col" className="eyebrow hidden px-2 py-2.5 text-left md:table-cell">
                   Confederation
                 </th>
@@ -171,7 +149,7 @@ export function TeamsView() {
                       </span>
                     </Link>
                   </th>
-                  <td className="px-1.5 py-2.5 font-display text-lg font-semibold text-fg-muted sm:px-2">{team.wc2026_group ?? "—"}</td>
+                  <td className="px-1.5 py-2.5 font-display text-lg font-semibold text-fg-muted max-[379px]:hidden sm:px-2">{team.wc2026_group ?? "—"}</td>
                   <td className="hidden px-2 py-2.5 text-fg-muted md:table-cell">{team.confederation ?? "—"}</td>
                   <td className="px-1.5 py-2.5 text-right font-semibold text-foreground sm:px-2">
                     {team.fifa_ranking != null ? team.fifa_ranking : <span className="font-normal text-fg-subtle">—</span>}
@@ -194,7 +172,7 @@ export function TeamsView() {
       <p role="status" aria-live="polite" className="text-xs text-fg-subtle">
         {isLoading || error
           ? ""
-          : `Showing ${rows.length} of ${data?.length ?? 0} teams. FIFA rank and Elo are the pre-tournament values held for each team.`}
+          : `Showing ${rows.length} of ${data?.length ?? 0} teams, sorted by ${describeSort(sort.key, sort.dir)}. FIFA rank and Elo are the pre-tournament values held for each team.`}
       </p>
     </div>
   );

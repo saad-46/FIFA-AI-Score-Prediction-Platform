@@ -64,6 +64,13 @@ def test_team_and_date_filters_and_pagination():
     assert len(page2.data) == 20 and page2.total_pages == 6
 
 
+def test_goal_timing_endpoint_is_removed():
+    paths = app.openapi()["paths"]
+    assert "/api/v1/matches/analytics/goal-distribution" not in paths
+    assert "/api/v1/matches/analytics/scorelines" in paths
+    assert not hasattr(ms, "get_goal_distribution")
+
+
 def test_overview_total_uses_the_same_count_as_the_match_list():
     class _Scalar:
         def scalar(self):

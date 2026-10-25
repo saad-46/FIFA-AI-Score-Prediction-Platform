@@ -72,13 +72,6 @@ class TournamentStatsResponse(BaseModel):
     most_goals_in_match: Optional[int] = None
 
 
-class GoalDistributionPoint(BaseModel):
-    minute: int
-    goals: int
-    # True until the DB stores goal-minute events; see match_service.get_goal_distribution.
-    is_synthetic: bool = True
-
-
 class ScorelineFrequency(BaseModel):
     scoreline: str
     count: int

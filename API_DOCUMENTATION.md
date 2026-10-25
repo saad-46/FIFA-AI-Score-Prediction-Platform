@@ -66,7 +66,6 @@ parameter.
 | GET | `/matches` | none | Paginated match history. Query: `page`, `page_size` (≤100), `team`, `tournament`, `year`, `from_date`, `to_date`. Returns `PaginatedMatchResponse`. **Not WC-only scoped** — see note below. |
 | GET | `/matches/tournaments` | none | All distinct tournament names. Returns `list[str]`. |
 | GET | `/matches/tournaments/{tournament}/stats` | none | Stats for one tournament. Returns `TournamentStatsResponse`. |
-| GET | `/matches/analytics/goal-distribution?tournament=` | none | Goal counts by minute. **Synthetic** — see `GoalDistributionPoint.is_synthetic` (always `true` today; no goal-minute data exists in the schema). |
 | GET | `/matches/analytics/scorelines?tournament=` | none | Most common final scorelines with frequency/percentage. Returns `list[ScorelineFrequency]`. |
 | GET | `/matches/{match_id}` | none | Match detail by id, including per-team box-score stats (possession/shots/corners/etc.) from `team_statistics` when available. Returns `MatchDetailResponse`. 404 if not found. Registered last among GET routes so it doesn't shadow `/tournaments`, `/tournaments/{tournament}/stats`, and `/analytics/*`. |
 

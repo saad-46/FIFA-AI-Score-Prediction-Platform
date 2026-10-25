@@ -21,7 +21,6 @@ from app.schemas.match import (
     MatchDetailResponse,
     TeamStatisticsResponse,
     TournamentStatsResponse,
-    GoalDistributionPoint,
     ScorelineFrequency,
     PaginatedMatchResponse,
 )
@@ -40,6 +39,7 @@ def _is_valid_uuid(value: str) -> bool:
         return True
     except (ValueError, AttributeError, TypeError):
         return False
+
 
 # ── World Cup 2026 ───────────────────────────────────────────────────────────
 # The legacy `matches` table holds an out-of-date snapshot of the 2026 tournament (89 of 104 fixtures, some with
@@ -147,7 +147,6 @@ async def count_all_matches(db: AsyncSession) -> int:
     return legacy + len(_canonical_wc2026_rows())
 
 
-
 @async_ttl_cache(ttl_seconds=60, max_size=256, ignore_args={0})
 async def get_matches(
     db: AsyncSession,
@@ -170,10 +169,10 @@ async def get_matches(
     paying that RTT twice per unique page/filter combo within a request
     burst, without risking meaningful staleness (match data changes
     infrequently; see load_matches_dataframe's own 6h refresh cadence).
+    """
     if _wants_wc2026(tournament, year):
         return await _get_wc2026_matches(db, page, page_size, team, from_date, to_date)
 
-    """
     # joinedload, not selectinload. Both return identical objects, but
     # selectinload resolves each relationship with its own follow-up SELECT, so
     # one page cost four sequential round trips (count, page, home teams, away
@@ -211,8 +210,8 @@ async def get_matches(
             # drop the Canada-vs-TBD Round-of-16 fixture entirely).
             .outerjoin(away_alias, Match.away_team_id == away_alias.id)
             .where(or_(home_alias.name.ilike(f"%{team}%"), away_alias.name.ilike(f"%{team}%")))
-    stmt = stmt.where(~_is_stale_wc2026_row())
         )
+    stmt = stmt.where(~_is_stale_wc2026_row())
     if tournament:
         stmt = stmt.where(Match.tournament.ilike(f"%{tournament}%"))
     if year:
@@ -227,9 +226,9 @@ async def get_matches(
     total_result = await db.execute(count_stmt)
     total = total_result.scalar() or 0
 
+    # Paginate
     # With no tournament chosen, the 2026 World Cup matches (all newer than every other row) lead the list.
     canonical = _canonical_filtered(team, from_date, to_date) if not tournament and year in (None, 2026) else []
-    # Paginate
     offset = (page - 1) * page_size
     lead = canonical[offset: offset + page_size]
     total += len(canonical)
@@ -433,27 +432,6 @@ async def get_tournament_stats(tournament: str) -> TournamentStatsResponse:
         top_scoring_team=top_team,
         most_goals_in_match=int((t_df["home_score"] + t_df["away_score"]).max()),
     )
-
-
-async def get_goal_distribution(
-    tournament: Optional[str] = None,
-) -> list[GoalDistributionPoint]:
-    """
-    Goal distribution by 15-minute intervals.
-    Note: Requires goal_minute data in the database.
-    This returns a synthetic distribution based on known football patterns.
-    """
-    # KNOWN LIMITATION: matches table has no goal-minute/event-level data (see database/schema.sql) — this is a hardcoded placeholder, not derived from real data, pending a schema change owned by the DB engineer.
-    distribution = [
-        GoalDistributionPoint(minute=0, goals=850),
-        GoalDistributionPoint(minute=15, goals=1100),
-        GoalDistributionPoint(minute=30, goals=1050),
-        GoalDistributionPoint(minute=45, goals=1200),
-        GoalDistributionPoint(minute=60, goals=1150),
-        GoalDistributionPoint(minute=75, goals=1300),
-        GoalDistributionPoint(minute=90, goals=1450),
-    ]
-    return distribution
 
 
 async def get_scoreline_frequency(

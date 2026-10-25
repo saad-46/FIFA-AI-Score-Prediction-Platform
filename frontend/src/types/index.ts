@@ -211,14 +211,6 @@ export interface TournamentStats {
   most_goals_in_match: number;
 }
 
-export interface GoalDistribution {
-  minute: number;
-  goals: number;
-  // Every point is currently synthetic placeholder data (no goal-minute-level
-  // data exists in the DB yet) — always surface this in the UI, never hide it.
-  is_synthetic: boolean;
-}
-
 export interface ScorelineFrequency {
   scoreline: string;
   count: number;

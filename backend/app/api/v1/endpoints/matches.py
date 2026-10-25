@@ -8,7 +8,6 @@ from app.schemas.match import (
     PaginatedMatchResponse,
     MatchDetailResponse,
     TournamentStatsResponse,
-    GoalDistributionPoint,
     ScorelineFrequency,
 )
 from app.services.match_service import (
@@ -16,7 +15,6 @@ from app.services.match_service import (
     get_match_by_id,
     get_tournaments,
     get_tournament_stats,
-    get_goal_distribution,
     get_scoreline_frequency,
 )
 
@@ -57,12 +55,6 @@ async def list_tournaments(db: AsyncSession = Depends(get_db)):
 async def tournament_stats(tournament: str):
     """Get statistics for a specific tournament."""
     return await get_tournament_stats(tournament)
-
-
-@router.get("/analytics/goal-distribution", response_model=list[GoalDistributionPoint])
-async def goal_distribution(tournament: Optional[str] = None):
-    """Get goal distribution by minute. Currently synthetic — see GoalDistributionPoint.is_synthetic."""
-    return await get_goal_distribution(tournament)
 
 
 @router.get("/analytics/scorelines", response_model=list[ScorelineFrequency])
