@@ -1,5 +1,6 @@
 "use client";
 
+import { BrandLink } from "@/components/layout/brand-link";
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -65,7 +66,7 @@ export function Navbar({ user }: NavbarProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}
-          <Link href="/dashboard" className="flex shrink-0 items-center gap-2.5 rounded" aria-label="FIFA 26 Intelligence — overview">
+          <BrandLink label="FIFA 26 Intelligence — home" className="flex shrink-0 items-center gap-2.5 rounded">
             {/* Centre circle and halfway line: the one mark every pitch shares. */}
             <svg className="h-7 w-7 text-primary" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
               <rect x="1.5" y="4.5" width="25" height="19" rx="2.5" />
@@ -75,7 +76,7 @@ export function Navbar({ user }: NavbarProps) {
             <span className="font-display text-xl font-bold uppercase leading-none tracking-wider text-foreground">
               FIFA 26 <span className="text-primary">Intelligence</span>
             </span>
-          </Link>
+          </BrandLink>
 
           {/* Desktop nav */}
           {/* lg:, not md: — six items plus the search and theme controls need

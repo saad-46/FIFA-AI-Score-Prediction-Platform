@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLink } from "@/components/layout/brand-link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
@@ -8,7 +9,7 @@ export function MarketingHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2.5 rounded" aria-label="FIFA 26 Intelligence — home">
+        <BrandLink label="FIFA 26 Intelligence — home" className="flex items-center gap-2.5 rounded">
           <svg className="h-7 w-7 text-primary" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
             <rect x="1.5" y="4.5" width="25" height="19" rx="2.5" />
             <path d="M14 4.5v19" />
@@ -17,7 +18,7 @@ export function MarketingHeader() {
           <span className="font-display text-xl font-bold uppercase leading-none tracking-wider text-foreground">
             FIFA 26 <span className="text-primary">Intelligence</span>
           </span>
-        </Link>
+        </BrandLink>
         {/* No account CTAs — the platform is open. The primary action is to
             go straight into the tournament rather than to sign up. */}
         <div className="flex items-center gap-2">

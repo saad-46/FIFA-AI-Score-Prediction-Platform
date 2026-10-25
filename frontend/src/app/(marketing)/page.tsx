@@ -5,6 +5,7 @@ import { MarketingHeader } from "@/components/layout/marketing-header";
 import { Footer } from "@/components/layout/footer";
 import { LandingFinal } from "@/components/dashboard/landing-final";
 import { IntroGate } from "@/components/intro/intro-gate";
+import { Reveal } from "@/components/ui/reveal";
 
 const SECTIONS = [
   {
@@ -48,7 +49,7 @@ export default function LandingPage() {
       <MarketingHeader />
 
       <main id="main" className="mx-auto w-full max-w-7xl flex-1 space-y-12 px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-        <div className="max-w-3xl">
+        <Reveal className="max-w-3xl">
           <p className="eyebrow">FIFA World Cup 2026 · Complete</p>
           <h1 className="mt-3 text-balance font-display text-5xl font-bold uppercase leading-[0.92] tracking-wide text-foreground sm:text-7xl">
             The Game, Predicted.
@@ -68,9 +69,11 @@ export default function LandingPage() {
               <Link href="/predict">Predict a match</Link>
             </Button>
           </div>
-        </div>
+        </Reveal>
 
-        <LandingFinal />
+        <Reveal delay={120}>
+          <LandingFinal />
+        </Reveal>
 
         <nav aria-label="Sections" className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {SECTIONS.map((s) => (
